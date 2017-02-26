@@ -1,0 +1,21 @@
+languageCode = "en-us"
+title = "Grew documentation"
+baseURL = "http://example.org/"
+
+theme = "hyde"
+
+[params]
+  themeColor = "theme-base-0d"
+  layoutReverse = true
+
+[[menu.main]]
+  name = "New menu item"
+  url = "main"
+
+[[menu.main]]
+  name = "ZSXCE"
+  url = "xxx"
+
+[[menu.main]]
+  name = "three"
+  url = "x3"

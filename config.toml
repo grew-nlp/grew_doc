@@ -1,21 +1,10 @@
 languageCode = "en-us"
-title = "Grew documentation"
+title = "Grew Manual "
 baseURL = "http://example.org/"
+enableEmoji=true
 
 theme = "hyde"
 
 [params]
   themeColor = "theme-base-0d"
   layoutReverse = true
-
-[[menu.main]]
-  name = "New menu item"
-  url = "main"
-
-[[menu.main]]
-  name = "ZSXCE"
-  url = "xxx"
-
-[[menu.main]]
-  name = "three"
-  url = "x3"

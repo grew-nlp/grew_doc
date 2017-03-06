@@ -1,0 +1,155 @@
+% this file "uni-dep-tb-all-2.0.grs" contains the declarations of POS, CAT and relations used in universal dependency treebanks
+% May 21, 2015 -> fr + ko
+
+% ====================================================================================================
+features {
+
+  % field 2 of CONLL format is interpreted as the "phon" feature
+  phon: *;
+
+  % field 3 of CONLL format is interpreted as the "lemma" feature
+  lemma: *;
+
+  % field 4 of CONLL format is interpreted as the "cat" feature
+  cat: ADJ, ADP, ADV, AUX, CCONJ, DET, INTJ, NOUN, NUM, PART, PRON, PROPN, PUNCT, SCONJ, SYM, VERB, X, _,
+    CONJ; % V1
+
+  % field 5 of CONLL format is interpreted as the "pos" feature, unused in tiger
+  pos: *;
+
+  % In Tiger, sentence identifier are given through a identifer "id_pos", and transfomed to a feature sentid on the first node in this CONLL description.
+  sentid: *;
+
+  % Features grepped from the English Corpus
+  Case: Nom, Acc, Abs, Erg, Dat, Gen, Voc, Loc, Ins, Abl, Ine, Ade, All, Par, Ill, Ela, Ess, Abe, Com, Tra; % to be completed
+  Definite: Def, Ind;
+  Degree: Cmp, Pos, Sup;
+  Gender: Fem, Masc, Neut;
+  Mood: Imp, Ind, Cnd, Sub, Pot;
+  NumType: Card, Mult, Ord;
+  Number: Plur, Sing;
+  Person: 0, 1, 2, 3;
+  Poss: Yes;
+  PronType: Art, Dem, Int, Prs, Rel, Neg, Ind,
+    "Int,Rel", Tot, % needed for Polish treebank
+    Rcp; % needed for Finnish treebank
+  Reflex: Yes;
+  Tense: Past, Pres, Imp, Fut;
+  VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv;
+  Voice: Act, Pass;
+  Polarity: Neg, Pos;
+
+  % Polish
+  AdpType:Prep, Post;
+  Animacy: Anim, Inan, Nhum, Hum;
+  Aspect: Perf, Imp;
+  Variant: Short, Long;
+  Negative: Pos, Neg;
+  PrepCase: Npr, Pre;
+  Abbr: Yes;
+  Hyph: Yes;
+  Typo: Yes;
+
+  % Finnish
+  PartForm: Agt, Past, Pres, Neg;
+  Number__psor: Plur, Sing;
+  Person__psor: 1, 2, 3;
+  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa";
+  Style: Coll, Arch;
+  InfForm: 1,2,3;
+  Connegative: Yes;
+  Derivation: Minen, Inen, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Ttain;
+  Foreign: Yes;
+}
+
+% ====================================================================================================
+labels {
+  % list of labels taken from the corpora [cat *.conll | cut -f 8 | sort -u]
+  acl, acl:relcl,
+  advcl, advmod,
+  amod,
+  appos,
+  aux, auxpass, aux:pass, % auxpass/V1 and aux:pass/V2
+  case,
+  cc, cc:preconj,
+  ccomp,
+  compound, compound:prt,
+  conj, conj:preconj,
+  cop, cop:own,
+  csubj, csubjpass, csubj:pass,
+  dep,
+  det, det:predet,
+  discourse,
+  dislocated,
+  dobj, obj, % dobj/V1 and obj/V2
+  expl, expl:pv,
+  flat, flat:foreign, flat:name,
+  foreign,
+  goeswith,
+  iobj,
+  list,
+  mark,
+  mwe, fixed, % mwe/V1 and fixed/V2
+  name,
+  neg,
+  nmod, nmod:npmod, nmod:poss, nmod:tmod,
+  nsubj, nsubjpass, nsubj:pass, % nsubjpass/V1 and nsubj:pass/V2
+  nummod,
+  obl, obl:agent, obl:tmod, obl:npmod,
+  orphan,
+  parataxis,
+  punct,
+  remnant,
+  reparandum,
+  root,
+  vocative,
+  xcomp,
+  det:numgov, det:nummod, % Polish treebank
+  nmod:own, compound:nn, nsubj:cop, csubj:cop, nmod:gobj, xcomp:ds, nmod:gsubj, % Finnish
+
+  % Secondary dependency repations in the Finnish and English treebank
+  E:acl,
+  E:acl:relcl,
+  E:advcl,
+  E:advmod,
+  E:amod,
+  E:appos,
+  E:aux,
+  E:aux:pass,
+  E:case,
+  E:cc,
+  E:ccomp,
+  E:compound,
+  E:compound:nn,
+  E:compound:prt,
+  E:conj,
+  E:cop,
+  E:csubj,
+  E:csubj:cop,
+  E:dep,
+  E:det,
+  E:discourse,
+  E:dobj,
+  E:flat, E:flat:name,
+  E:mark,
+  E:name,
+  E:neg,
+  E:nmod,
+  E:nmod:gobj,
+  E:nmod:gsubj,
+  E:nmod:own,
+  E:nmod:poss,
+  E:nsubj,
+  E:nsubj:cop,
+  E:nsubj:pass,
+  E:nummod,
+  E:obj,
+  E:obl,
+  E:parataxis,
+  E:punct,
+  E:vocative,
+  E:xcomp,  E:xcomp:a, E:xcomp:ds,
+
+}
+
+sequences { main {} }

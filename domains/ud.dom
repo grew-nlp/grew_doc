@@ -21,26 +21,30 @@ features {
   sentid: *;
 
   % Features grepped from the English Corpus
-  Case: Nom, Acc, Abs, Erg, Dat, Gen, Voc, Loc, Ins, Abl, Ine, Ade, All, Par, Ill, Ela, Ess, Abe, Com, Tra; % to be completed
+  Case: Nom, Acc, Abs, Erg, Dat, Gen, Voc, Loc, Ins, Abl, Ine, Ade, All, Par, Ill, Ela, Ess, Abe, Com, Tra,
+    "Acc,Dat", "Acc,Nom"; % Spanish
+  % to be completed
   Definite: Def, Ind;
-  Degree: Cmp, Pos, Sup;
-  Gender: Fem, Masc, Neut;
+  Degree: Abs, Cmp, Pos, Sup;
+  Gender: Fem, Masc, Neut, Com, "Masc,Neut", "Fem,Neut", "Fem,Masc";
   Mood: Imp, Ind, Cnd, Sub, Pot;
-  NumType: Card, Mult, Ord;
-  Number: Plur, Sing;
+  NumType: Card, Mult, Ord, Range, Frac, Sets, "Mult,Sets";
+  Number: Plur, Sing, Dual,"Plur,Sing";
   Person: 0, 1, 2, 3;
   Poss: Yes;
   PronType: Art, Dem, Int, Prs, Rel, Neg, Ind,
     "Int,Rel", Tot, % needed for Polish treebank
+    Exc, % needed for Italian data
+    Emp, % Czech
     Rcp; % needed for Finnish treebank
   Reflex: Yes;
   Tense: Past, Pres, Imp, Fut;
-  VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv;
-  Voice: Act, Pass;
+  VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv, Sup;
+  Voice: Act, Pass, Mid;
   Polarity: Neg, Pos;
 
   % Polish
-  AdpType:Prep, Post;
+  AdpType:Prep, Post, Voc, Comprep;
   Animacy: Anim, Inan, Nhum, Hum;
   Aspect: Perf, Imp;
   Variant: Short, Long;
@@ -54,19 +58,33 @@ features {
   PartForm: Agt, Past, Pres, Neg;
   Number__psor: Plur, Sing;
   Person__psor: 1, 2, 3;
-  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa";
-  Style: Coll, Arch;
+  Gender__psor: Fem, Masc, "Masc,Neut";
+  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa", Yes;
+  Style: Coll, Arch, Rare, Slng, Vrnc, Expr, Vulg;
   InfForm: 1,2,3;
   Connegative: Yes;
   Derivation: Minen, Inen, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Ttain;
   Foreign: Yes;
+
+  % Spanish
+  Polite: Form;
+
+  % Czech
+  NumForm: Digit, Word, Roman;
+  NameType: Sur, Giv, Pro, Com, Geo, Oth, Nat,
+  "Com,Pro", "Giv,Sur", "Geo,Sur", "Com,Sur", "Geo,Giv", "Com,Giv", "Pro,Sur", "Com,Nat", "Giv,Pro",
+  "Com,Geo", "Geo,Oth", "Com,Oth", "Geo,Pro", "Giv,Nat", "Nat,Sur", "Oth,Sur", "Giv,Oth",
+  "Geo,Giv,Sur", "Com,Giv,Sur", "Giv,Pro,Sur";
+  NumValue: 1, "1,2,3";
+  ConjType: Oper;
 }
 
 % ====================================================================================================
 labels {
   % list of labels taken from the corpora [cat *.conll | cut -f 8 | sort -u]
   acl, acl:relcl,
-  advcl, advmod,
+  advcl,
+  advmod, advmod:emph,
   amod,
   appos,
   aux, auxpass, aux:pass, % auxpass/V1 and aux:pass/V2
@@ -78,11 +96,11 @@ labels {
   cop, cop:own,
   csubj, csubjpass, csubj:pass,
   dep,
-  det, det:predet,
+  det, det:predet, det:poss,
   discourse,
   dislocated,
   dobj, obj, % dobj/V1 and obj/V2
-  expl, expl:pv,
+  expl, expl:pv, expl:impers, expl:pass,
   flat, flat:foreign, flat:name,
   foreign,
   goeswith,
@@ -94,7 +112,7 @@ labels {
   neg,
   nmod, nmod:npmod, nmod:poss, nmod:tmod,
   nsubj, nsubjpass, nsubj:pass, % nsubjpass/V1 and nsubj:pass/V2
-  nummod,
+  nummod, nummod:gov, nummod:entity,
   obl, obl:agent, obl:tmod, obl:npmod,
   orphan,
   parataxis,
@@ -130,7 +148,10 @@ labels {
   E:det,
   E:discourse,
   E:dobj,
-  E:flat, E:flat:name,
+  E:expl,
+  E:fixed,
+  E:flat, E:flat:name, E:flat:foreign,
+  E:iobj,
   E:mark,
   E:name,
   E:neg,
@@ -142,14 +163,19 @@ labels {
   E:nsubj,
   E:nsubj:cop,
   E:nsubj:pass,
-  E:nummod,
-  E:obj,
+  E:nummod, E:nummod:gov, E:nummod:entity,
+  E:obj, E:obl:agent,
   E:obl,
+  E:orphan,
   E:parataxis,
   E:punct,
+  E:root,
   E:vocative,
   E:xcomp,  E:xcomp:a, E:xcomp:ds,
 
+  E:root, E:exroot, % UD_Russian-SynTagRus
+
+  FAIL_obj.cpl, FAIL_ats,
 }
 
 sequences { main {} }

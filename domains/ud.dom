@@ -90,7 +90,7 @@ labels {
   amod,
   appos,
   aux, auxpass, aux:pass, % auxpass/V1 and aux:pass/V2
-  aux:caus, obl:caus, obj:caus,
+  aux:caus, obl:caus, obj:caus, iobj:caus,
   case,
   cc, cc:preconj,
   ccomp,

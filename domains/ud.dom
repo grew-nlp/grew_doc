@@ -77,6 +77,8 @@ features {
   "Geo,Giv,Sur", "Com,Giv,Sur", "Giv,Pro,Sur";
   NumValue: 1, "1,2,3";
   ConjType: Oper;
+
+  Diat: Demsuj;
 }
 
 % ====================================================================================================
@@ -88,6 +90,7 @@ labels {
   amod,
   appos,
   aux, auxpass, aux:pass, % auxpass/V1 and aux:pass/V2
+  aux:caus, obl:caus, obj:caus;
   case,
   cc, cc:preconj,
   ccomp,

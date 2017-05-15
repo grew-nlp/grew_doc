@@ -78,7 +78,7 @@ features {
   NumValue: 1, "1,2,3";
   ConjType: Oper;
 
-  Diat: Demsuj;
+  Diat: Demsuj; Intrinsimp: Yes;
 }
 
 % ====================================================================================================

@@ -9,3 +9,9 @@ date = "2017-02-27T17:06:34+01:00"
 +++
 
 # Page under construction, coming soon.
+
+test of syntax highlighting
+~~~grew
+% comment
+match { N [lemma = "écouter"]; N -[suj]-> M; }
+~~~

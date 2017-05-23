@@ -1,6 +1,6 @@
 languageCode = "en-us"
 title = "Grew Manual "
-baseURL = "http://example.org/"
+baseURL = "http://grew.loria.fr/"
 enableEmoji=true
 
 theme = "hyde"

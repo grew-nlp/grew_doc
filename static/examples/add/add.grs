@@ -1,0 +1,17 @@
+module deterministic M {
+  rule adj {
+    pattern { N [cat=N]; V [cat=V]; N < V}
+    commands {
+      add_node A :> N ;
+      A.cat = A;
+      A.phon = "noir"; A.lemma = "noir";
+      add_edge N -[mod]-> A;
+
+      add_node P :< N ; P.cat = A;
+      P.phon = "petit"; P.lemma = "petit";
+      add_edge N -[mod]-> P;
+    }
+  }
+}
+
+sequences { main { M } }

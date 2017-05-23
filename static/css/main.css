@@ -11,3 +11,11 @@ li {
   margin-left: 0pt;
   font-size: 20pt;
 }
+
+pre {
+  font-family: Monaco, "Courier New", monospace;
+}
+
+.sidebar {
+  overflow-y: auto;
+}

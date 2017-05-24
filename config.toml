@@ -1,5 +1,5 @@
 languageCode = "en-us"
-title = "Grew Manual "
+title = "Grew"
 baseURL = "http://grew.loria.fr/"
 enableEmoji=true
 

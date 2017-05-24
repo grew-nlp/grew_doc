@@ -8,7 +8,7 @@ Categories = ["Development","GoLang"]
 
 +++
 
-# Grew Documentation
+# Grew: Graph Rewriting for NLP
 
 **Grew** is a Graph Rewriting tool dedicated to applications in Natural Language Processing (NLP). It can manipulate many kinds of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS) but it can be used to represent any graph-based structure.
 

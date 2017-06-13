@@ -24,7 +24,7 @@ A Grew Graph Rewriting System (GRS) is defined by:
   * the definition of sequences of modules (keyword `sequences`)
 
 ## Domain definition
-The domain is defined as a pair of a feture domain and an edge label domain.
+The domain is defined as a pair of a feature domain and an edge label domain.
 
 ### Feature domain
 In graphs and in rules, nodes contain feature structures.
@@ -50,7 +50,7 @@ features {
 
 **REM:** values of pers feature are numerals but the only way to restrict to the finite domain {1, 2, 3} is to declare it as a closed feature and possible values as strings.
 
-### edge labe domain
+### edge label domain
 An explicit set of valid labels for edges may be given after the `labels` keyword.
 
 By default, edges are drawn with a black solid line and above the figure in DEP representation.

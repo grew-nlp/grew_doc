@@ -81,6 +81,17 @@ pre[class*="language-"] {
 	color: #999;
 }
 
+/* added for grew */
+.token.command {
+	color: #905;
+}
+
+/* added for grew */
+.token.strat {
+	color: #D63;
+}
+
+
 .namespace {
 	opacity: .7;
 }

@@ -1,8 +1,10 @@
 Prism.languages.grew = {
 	'comment': /%.*/,
 
-	'keyword': /\b(?:module|rule|deterministic|pattern|without|commands|sequences|graph|features|labels|domain)\b/,
-	'number': /\b(?:del_edge|add_edge|shift|shift_in|shift_out|del_node|add_node)\b/,
+	'keyword': /\b(?:module|rule|deterministic|pattern|without|commands|sequences|graph|features|labels|domain|package|rule|strat|import|include)\b/,
+	'command': /\b(?:del_edge|add_edge|shift|shift_in|shift_out|del_node|add_node)\b/,
+	'strat': /\b(?:Iter|Pick|Alt|Seq|If|Empty|Rules|Try)\b/,
+	'constant': /\b(?:STRING|NUMERIC)\b/,
 	'string': [
 		{
 			pattern: /"(?:\\.|[^\\\r\n"])*"/,

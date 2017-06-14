@@ -182,6 +182,5 @@ strat S3 { Alt (L,R) }          % L+R
 strat S4 { Iter (S3) }          % (L+R)*
 strat S4 { Iter (Pick (S3)) }   % (L+R)!
 strat S5 { Seq (Iter (L), R) }  % (L*);R
-strat S6 { Seq (S1), Try(R)) }  % (L*); try(R)
-
+strat S6 { Seq (S1, Try(R)) }   % (L*); try(R)
 ```

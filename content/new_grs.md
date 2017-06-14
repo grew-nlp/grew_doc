@@ -76,8 +76,8 @@ labels { OBJ, SUJ, DE_OBJ, ANT, ANT_REL@red, ANT_REP@blue@bottom@dash }
 Rule declaration is introduced by the keyword `rule`. For the syntax, see [rule page](../rule).
 
 ## Strategies
-Strategies are used specify the way are applied during transformation.
-Syntax of strategies definition:
+Strategies are used specify the way rules are applied during transformation.
+The syntax of strategies definition is:
 
 ~~~grew
 strat strat_id {
@@ -122,7 +122,7 @@ In case of nested packages, an identifier may look like `P1.P2.P3.e`.
 
 Note that it is not allowed to have a domain declaration inside a package.
 
-## Multi-file managment
+## Multi-file management
 When a GRS become large and contains an high number of rules, it is sensible to define it in through a set of files.
 Two mechanisms are available for this purpose: external file import and external file inclusion.
 
@@ -156,4 +156,32 @@ has the same meaning as
 <<< content of the file "filename.grs" >>>
 ```
 
+## Complete example
 
+```grew
+labels { I, L, LR, LL, LLL, R, RR, RL }
+
+package L {
+  rule L { pattern { e:X -[I]-> Y} commands { del_edge e; add_edge X -[L]-> Y } }
+  rule LR { pattern { e:X -[L]-> Y} commands { del_edge e; add_edge X -[LR]-> Y } }
+  rule LL { pattern { e:X -[L]-> Y} commands { del_edge e; add_edge X -[LL]-> Y } }
+  rule LLL { pattern { e:X -[LL]-> Y} commands { del_edge e; add_edge X -[LLL]-> Y } }
+}
+
+package R {
+  rule R { pattern { e:X -[I]-> Y} commands { del_edge e; add_edge X -[R]-> Y } }
+  rule RR { pattern { e:X -[R]-> Y} commands { del_edge e; add_edge X -[RR]-> Y } }
+  rule RL { pattern { e:X -[R]-> Y} commands { del_edge e; add_edge X -[RL]-> Y } }
+}
+
+strat L { Rules (L) }
+strat R { Rules (R) }
+strat S1 { Iter (L) }           % L*
+strat S2 { Iter (Pick (L)) }    % L!
+strat S3 { Alt (L,R) }          % L+R
+strat S4 { Iter (S3) }          % (L+R)*
+strat S4 { Iter (Pick (S3)) }   % (L+R)!
+strat S5 { Seq (Iter (L), R) }  % (L*);R
+strat S6 { Seq (S1), Try(R)) }  % (L*); try(R)
+
+```

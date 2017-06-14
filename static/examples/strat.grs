@@ -1,0 +1,24 @@
+labels { I, L, LR, LL, LLL, R, RR, RL }
+
+package L {
+  rule L { pattern { e:X -[I]-> Y} commands { del_edge e; add_edge X -[L]-> Y } }
+  rule LR { pattern { e:X -[L]-> Y} commands { del_edge e; add_edge X -[LR]-> Y } }
+  rule LL { pattern { e:X -[L]-> Y} commands { del_edge e; add_edge X -[LL]-> Y } }
+  rule LLL { pattern { e:X -[LL]-> Y} commands { del_edge e; add_edge X -[LLL]-> Y } }
+}
+
+package R {
+  rule R { pattern { e:X -[I]-> Y} commands { del_edge e; add_edge X -[R]-> Y } }
+  rule RR { pattern { e:X -[R]-> Y} commands { del_edge e; add_edge X -[RR]-> Y } }
+  rule RL { pattern { e:X -[R]-> Y} commands { del_edge e; add_edge X -[RL]-> Y } }
+}
+
+strat L { Rules (L) }
+strat R { Rules (R) }
+strat S1 { Iter (L) }           % L*
+strat S2 { Iter (Pick (L)) }    % L!
+strat S3 { Alt (L,R) }          % L+R
+strat S4 { Iter (S3) }          % (L+R)*
+strat S4 { Iter (Pick (S3)) }   % (L+R)!
+strat S5 { Seq (Iter (L), R) }  % (L*);R
+strat S6 { Seq (S1), Try(R)) }  % (L*); try(R)

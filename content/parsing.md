@@ -8,43 +8,60 @@ Description = ""
 +++
 
 # Dependency parsing
-The parsing GRS is described in [IWPT 2015](https://hal.inria.fr/hal-01188694).
 
-It takes as input the POS-tagged representation of a French sentence and returns a surface dependency syntax tree following the FTB/Sequoia format.
+**Grew-parse-FR** is natural language parser for French.
+It is composed of a GRS (Graph Rewriting System) which can be used with the Grew software to produce dependency syntax structures from POS-tagged data.
+With a POS-tagger (MElt is a recommended), it provide a full parser with sentences as input and dependency structure as output
+The parsing GRS is described in an [IWPT 2015 publication](https://hal.inria.fr/hal-01188694).
 
-## Downloading the GRS system
-The GRS can be obtained from InriaGForge with the command:
+# How to parse a sentence?
+Prerequisite: the Grew software, the MElt software, the POStoSSQ rewriting system (see below for installation procedures).
 
-`svn co svn://scm.gforge.inria.fr/svn/semagramme/grew_resources/parsing`
-
-## Input data for the system
-The parsing system is waiting for a pos-tagged input.
-One easy way to produce such a pos-tagged French sentence is to use [MElt](https://gforge.inria.fr/frs/?group_id=481).
 We consider the sentence:
 
 - "*La souris a été mangée par le chat.*" ["*The mouse was eaten by the cat.*"].
 
-One way to tag the sentence is to use the following command:
+The parsing is done in two steps:
 
-`echo "La souris a été mangée par le chat." | MElt -L -T > test.melt`
+1. POS-tagging with melt: `echo "La souris a été mangée par le chat." | MElt -L -T > test.melt`
+2. Building the dependency syntax structure: `grew -det -grs POStoSSQ/grs/surf_synt_main.grs -seq full -i test.melt -f test.conll`
 
-This produces a file `test.melt` which contains:
+
+# Prerequisite
+
+ * **MElt**: see [MElt download page](https://gforge.inria.fr/frs/?group_id=481)
+ * **Grew**: see [Installation page](../installation)
+ * **POStoSSQ**: get it with the command: `git clone https://gitlab.inria.fr/grew/POStoSSQ.git`
+
+# More info on the parsing process
+
+## POS-tagging
+The parsing system **POStoSSQ** is waiting for a pos-tagged input.
+One easy way to produce such a pos-tagged French sentence is to use [MElt](https://gforge.inria.fr/frs/?group_id=481).
+It should be possible to use another tagger but this may require a few caterories matching to adapt the output of the tagger.
+
+With MElt, the options used `-L` and `-T` ask MElt to tokenize the input sentence and to lemmatize the output.
+For instance, the output of the following command:
+
+`echo "La souris a été mangée par le chat." | MElt -L -T`
+
+is:
 
 ```
 La/DET/le souris/NC/souris a/V/avoir été/VPP/être mangée/VPP/manger par/P/par le/DET/le chat/NC/chat ./PONCT/.
 ```
 
-## Running the GR parser in GUI
-The following command runs a GTK interface in which you can explore step by step rewriting of the input sentence:
+## Parsing with the GRS
 
-`grew -grs parsing/grs/surf_synt_main.grs -seq full -gr test.melt`
+If we supposed that the file `test.melt` contains a POS-tagged sentence like:
 
+```
+La/DET/le souris/NC/souris a/V/avoir été/VPP/être mangée/VPP/manger par/P/par le/DET/le chat/NC/chat ./PONCT/.
+```
 
-
-## Running the GR parser from command line
 The command to produced a Conll version of the parsed sentence:
 
-`grew -det -grs parsing/grs/surf_synt_main.grs -seq full -i test.melt -f test.surf.conll`
+`grew -det -grs POStoSSQ/grs/surf_synt_main.grs -seq full -i test.melt -f test.conll`
 
 The produced file contains the Conll description:
 ```
@@ -62,4 +79,8 @@ The produced file contains the Conll description:
 which encodes the syntactic structure:
 
 ![Dependency structure](/img/test.surf.svg)
+
+It is also possible to runs a GTK interface in which you can explore step by step rewriting of the input sentence:
+
+`grew -grs POStoSSQ/grs/surf_synt_main.grs -seq full -gr test.melt`
 

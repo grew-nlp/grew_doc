@@ -88,21 +88,29 @@ strat strat_id {
 Strategy descriptions are defined by the following syntax:
 
 ~~~grew
-  S ::= rule_id
-      | strat_id
-      | Pick (S)
-      | Alt (S_1, …, S_n)
-      | Seq (S_1, …, S_n)
-      | Iter (S)
-      | If (S_1, S_2, S_3)
+  S ::= rule_id               % Apply the gives rule
+      | package_id            % Apply any rule defined in the package (not in sub-packages)
+      | strat_id              % Called a strategy defined elsewhere
+      | Pick (S)              % Select arbitrary one of the graph produced by the strategy S
+      | Alt (S_1, …, S_n)     % Collect graphs produced by each sub-strategies (union)
+      | Seq (S_1, …, S_n)     % Apply sequentially S_1, then S_2 on S_1 output …
+      | Iter (S)              % Iterate the application of the strategy S until normal forms
+      | If (S, S_1, S_2)      % If S is productive then it is equivalent to S_1 else it is equivalent to S_2
 ~~~
 
-A few other contructors are available as syntactic sugar for frequently used strategies:
+It is common to compute one normal form with respect to a strategy `S`.
+For instance, when one knows that the strategy is confluent, it is a much more efficient way to compute the unique normal form.
+Some syntactic sugar is provided for this:
 ~~~grew
-  Empty ≜ Seq ()
-  Try (S) ≜ If (S, S, Empty)
-  Rules (package_id)
+  Onf (S) ≜ Pick (Iter (S))   % Onf stands for 'One normal form'
 ~~~
+
+Other constructor are provided for some strategies
+~~~grew
+  Empty ≜ Seq()               % The Empty strategy returns the input graph
+  Try (S) ≜ If (S, S, Empty)  % Equivalent to S if S is productive else it returns the input graph
+~~~
+
 
 
 ## Packages
@@ -119,6 +127,8 @@ where `declarations_list` is a list of declarations of **rules**, **packages** a
 
 The syntax for accessing to some element `e` defined in package `P` is `P.e`.
 In case of nested packages, an identifier may look like `P1.P2.P3.e`.
+When a reference is made to an element `P1.P2.e`, the system tries to find inside the current package a sub-package `P1` which contains a sub-package `P2` which contains an element `e`.
+If no such element is found, the same thing is searched recursively, first in the mother package of the current one, up to the root package.
 
 Note that it is not allowed to have a domain declaration inside a package.
 
@@ -156,31 +166,98 @@ has the same meaning as
 <<< content of the file "filename.grs" >>>
 ```
 
-## Complete example
+## A complete example
+
+We consider the same GRS defined through the multi-file mechanism and with a single files.
+All rules
+
+### Multi-file declaration
+Consider a folder with the five files:
+
+  * `d_1.dom`
 
 ```grew
-labels { I, L, LR, LL, LLL, R, RR, RL }
+labels { E_1, E_11, E_12 }
+```
+  * `p_1.grs`
 
-package L {
-  rule L { pattern { e:X -[I]-> Y} commands { del_edge e; add_edge X -[L]-> Y } }
-  rule LR { pattern { e:X -[L]-> Y} commands { del_edge e; add_edge X -[LR]-> Y } }
-  rule LL { pattern { e:X -[L]-> Y} commands { del_edge e; add_edge X -[LL]-> Y } }
-  rule LLL { pattern { e:X -[LL]-> Y} commands { del_edge e; add_edge X -[LLL]-> Y } }
+```grew
+rule r_1  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_1]-> Y  } }
+rule r_11 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_11]-> Y } }
+rule r_12 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_12]-> Y } }
+```
+
+* `d_2.dom`
+
+```grew
+labels { E_2, E_21, E_22 }
+```
+* `p_2.grs`
+
+```grew
+rule r_2  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_2]-> Y  } }
+rule r_21 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_21]-> Y } }
+rule r_22 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_22]-> Y } }
+```
+
+  * `multi.grs`
+
+```grew
+labels { E }
+
+include "d_1.dom"
+include "d_2.dom"
+
+import "p_1.grs"
+import "p_2.grs"
+
+strat p_1_nfs { Iter (p_1) }  % all normal forms with package p_1
+strat p_1_onf { Onf (p_1) }   % one normal form with package p_1
+
+strat union { Alt (p_1,p_2) } % union of the two set of rules
+strat all_nfs { Iter (union)} % all normal forms
+
+strat s_1 { Seq (Pick(p_1), Pick(p_2), all_nfs) }
+```
+### Single file declaration
+The five files above define a GRS, equivalent to the one below:
+
+  * `single.grs`
+
+```grew
+labels { E }
+
+labels { E_1, E_11, E_12 }
+labels { E_2, E_21, E_22 }
+
+package p_1 {
+  rule r_1  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_1]-> Y  } }
+  rule r_11 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_11]-> Y } }
+  rule r_12 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_12]-> Y } }
 }
 
-package R {
-  rule R { pattern { e:X -[I]-> Y} commands { del_edge e; add_edge X -[R]-> Y } }
-  rule RR { pattern { e:X -[R]-> Y} commands { del_edge e; add_edge X -[RR]-> Y } }
-  rule RL { pattern { e:X -[R]-> Y} commands { del_edge e; add_edge X -[RL]-> Y } }
+package p_2 {
+  rule r_2  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_2]-> Y  } }
+  rule r_21 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_21]-> Y } }
+  rule r_22 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_22]-> Y } }
 }
 
-strat L { Rules (L) }
-strat R { Rules (R) }
-strat S1 { Iter (L) }           % L*
-strat S2 { Iter (Pick (L)) }    % L!
-strat S3 { Alt (L,R) }          % L+R
-strat S4 { Iter (S3) }          % (L+R)*
-strat S4 { Iter (Pick (S3)) }   % (L+R)!
-strat S5 { Seq (Iter (L), R) }  % (L*);R
-strat S6 { Seq (S1, Try(R)) }   % (L*); try(R)
+strat p_1_nfs { Iter (p_1) }  % all normal forms with package p_1
+strat p_1_onf { Onf (p_1) }   % one normal form with package p_1
+
+strat union { Alt (p_1,p_2) } % union of the two set of rules
+strat all_nfs { Iter (union)} % all normal forms
+
+strat s_1 { Seq (Pick(p_1), Pick(p_2), all_nfs) }
+```
+
+### Apply the GRS to a graphs
+
+Consider the graph defined in `input.gr`:
+
+```grew
+graph {
+  A -[E]-> B;
+  B -[E]-> C;
+}
 ```

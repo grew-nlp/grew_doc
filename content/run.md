@@ -71,7 +71,7 @@ The output is a list of lines, one for each occurrence of the pattern in the cor
 With the following files:
 
  * The surface sequoia version 7.0: `sequoia.surf.conll` ([Download](https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tags/sequoia-7.0/sequoia.surf.conll)),
- * A pattern file with the code below: `subcat.pat` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/examples/grep/subcat.pat))
+ * A pattern file with the code below: `subcat.pat` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/grep/subcat.pat))
 
 ```
 match {

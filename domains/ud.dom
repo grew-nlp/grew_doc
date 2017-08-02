@@ -26,10 +26,12 @@ features {
   % to be completed
   Definite: Def, Ind;
   Degree: Abs, Cmp, Pos, Sup;
-  Gender: Fem, Masc, Neut, Com, "Masc,Neut", "Fem,Neut", "Fem,Masc";
+  Gender: Fem, Masc, Neut, Com, "Masc,Neut", "Fem,Neut", "Fem,Masc",
+    Unsp; % UD_Portuguese
   Mood: Imp, Ind, Cnd, Sub, Pot;
   NumType: Card, Mult, Ord, Range, Frac, Sets, "Mult,Sets";
-  Number: Plur, Sing, Dual,"Plur,Sing";
+  Number: Plur, Sing, Dual,"Plur,Sing",
+    Unsp; % UD_Portuguese
   Person: 0, 1, 2, 3;
   Poss: Yes;
   PronType: Art, Dem, Int, Prs, Rel, Neg, Ind,
@@ -38,13 +40,15 @@ features {
     Emp, % Czech
     Rcp; % needed for Finnish treebank
   Reflex: Yes;
-  Tense: Past, Pres, Imp, Fut;
+  Tense: Past, Pres, Imp, Fut,
+    Pqp; % UD_Portuguese
   VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv, Sup;
   Voice: Act, Pass, Mid;
   Polarity: Neg, Pos;
 
   % Polish
-  AdpType:Prep, Post, Voc, Comprep;
+  AdpType:Prep, Post, Voc, Comprep,
+    Preppron; % UD_Portuguese
   Animacy: Anim, Inan, Nhum, Hum;
   Aspect: Perf, Imp;
   Variant: Short, Long;

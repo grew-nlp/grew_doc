@@ -28,7 +28,7 @@ add_node A
 Moreover, if the node must be placed at a specific position in the linear order of the nodes, the two syntax are available: the new node `B` (resp. `C`) is placed on the immediate left (resp. right) of the node `N`.
 ~~~grew
 add_node B :< N
-add_node B :> N
+add_node C :> N
 ~~~
 
 ## Edge deletion

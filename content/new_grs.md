@@ -143,7 +143,8 @@ At any place in a list of declaration in a GRS file, one can use the syntax:
 import "filename.grs"
 ```
 
-This creates a new package with the same name as the file. Hence, the meaning is the same as the following code:
+This creates a new package with the same name as the file (without the `.grs` extension).
+Hence, the meaning is the same as the following code:
 
 ```grew
 package filename {
@@ -155,7 +156,7 @@ As a consequence, it is not allowed to import a file which contains domain decla
 To use a external domain declaration, one should use the file inclusion.
 
 ### External file inclusion
-With file inclusion, the content of the external file is interpreted as if it was placed directly in  the file at the same place.
+With file inclusion, the content of the external file is interpreted as if it was placed directly in the file at the same place.
 In other words the code:
 ```grew
 include "filename.grs"
@@ -169,7 +170,6 @@ has the same meaning as
 ## A complete example
 
 We consider the same GRS defined through the multi-file mechanism and with a single files.
-All rules
 
 ### Multi-file declaration
 Consider a folder with the five files:

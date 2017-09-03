@@ -1,0 +1,24 @@
+rule r (lex from "f.lex", "g.lex"; lex2 from "f2.lex", "g2.lex") {
+  pattern {
+    N[phon=lex#phon];
+    M.lemma=lex2#lem;
+  }
+  commands {
+    add_edge M -[new]-> N;
+    M.phon = "-" + lex3#header_1;
+  }
+}
+#BEGIN lex3
+header_1	header_2
+x1	x2
+y1	y2
+z1	z2
+t1	t2
+#END
+#BEGIN lex
+header_1	header_2
+x1	x2
+y1	y2
+z1	z2
+t1	t2
+#END

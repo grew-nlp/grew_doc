@@ -1,3 +1,0 @@
-rule r_1 { pattern { e:X -[E]-> Y} commands { del_edge e; add_edge X -[E_1]-> Y } }
-rule r_11 { pattern { e:X -[E_1]-> Y} commands { del_edge e; add_edge X -[E_11]-> Y } }
-rule r_12 { pattern { e:X -[E_1]-> Y} commands { del_edge e; add_edge X -[E_12]-> Y } }

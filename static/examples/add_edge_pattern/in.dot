@@ -1,8 +1,0 @@
-digraph G {
-  rankdir=RL
-  A [ label="A" ]
-  B [ label="B" ]
-  B -> A [label="x"]
-  B -> A [label="y"]
-  B -> A [label="z"]
-}

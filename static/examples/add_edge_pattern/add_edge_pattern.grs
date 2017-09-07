@@ -1,8 +1,0 @@
-module deterministic M {
-  rule r {
-    match { A[phon=A]; B[phon=B]; e: B -> A }
-    commands { del_edge e; add_edge e: A -> B }
-  }
-}
-
-sequences { main { M }}

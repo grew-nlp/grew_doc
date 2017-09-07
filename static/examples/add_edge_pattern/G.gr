@@ -1,7 +1,0 @@
-graph {
-   A [phon="A"];
-   B [phon="B"];
-   B -[x]-> A;
-   B -[y]-> A;
-   B -[z]-> A;
-}

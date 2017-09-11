@@ -174,12 +174,12 @@ We consider the same GRS defined through the multi-file mechanism and with a sin
 ### Multi-file declaration
 Consider a folder with the five files:
 
-  * `d_1.dom`
+  * `d_1.dom` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/d_1.dom))
 
 ```grew
 labels { E_1, E_11, E_12 }
 ```
-  * `p_1.grs`
+  * `p_1.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/p_1.grs))
 
 ```grew
 rule r_1  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_1]-> Y  } }
@@ -187,12 +187,12 @@ rule r_11 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_11]
 rule r_12 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_12]-> Y } }
 ```
 
-* `d_2.dom`
+* `d_2.dom` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/d_2.dom))
 
 ```grew
 labels { E_2, E_21, E_22 }
 ```
-* `p_2.grs`
+* `p_2.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/p_2.grs))
 
 ```grew
 rule r_2  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_2]-> Y  } }
@@ -200,7 +200,7 @@ rule r_21 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_21]
 rule r_22 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_22]-> Y } }
 ```
 
-  * `multi.grs`
+  * `multi.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/multi.grs))
 
 ```grew
 labels { E }
@@ -222,7 +222,7 @@ strat s_1 { Seq (Pick(p_1), Pick(p_2), all_nfs) }
 ### Single file declaration
 The five files above define a GRS, equivalent to the one below:
 
-  * `single.grs`
+  * `single.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/single.grs))
 
 ```grew
 labels { E }
@@ -253,7 +253,7 @@ strat s_1 { Seq (Pick(p_1), Pick(p_2), all_nfs) }
 
 ### Apply the GRS to a graphs
 
-Consider the graph defined in `input.gr`:
+Consider the graph defined in `input.gr` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/input.gr)):
 
 ```grew
 graph {

@@ -178,86 +178,30 @@ Consider a folder with the five files:
 
 ```grew
 labels { E_1, E_11, E_12 }
-```
-  * `p_1.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/p_1.grs))
+```  
+  * [`d_1.dom`](../examples/strategies/d_1.dom)
+{{< grew file="/static/examples/strategies/d_1.dom" >}}
 
-```grew
-rule r_1  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_1]-> Y  } }
-rule r_11 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_11]-> Y } }
-rule r_12 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_12]-> Y } }
-```
 
-* `d_2.dom` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/d_2.dom))
+  * [`p_1.grs`](../examples/strategies/p_1.grs)
+{{< grew file="/static/examples/strategies/p_1.grs" >}}
 
-```grew
-labels { E_2, E_21, E_22 }
-```
-* `p_2.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/p_2.grs))
+  * [`d_2.dom`](../examples/strategies/d_2.dom)
+{{< grew file="/static/examples/strategies/d_2.dom" >}}
 
-```grew
-rule r_2  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_2]-> Y  } }
-rule r_21 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_21]-> Y } }
-rule r_22 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_22]-> Y } }
-```
+  * [`p_2.grs`](../examples/strategies/p_2.grs)
+{{< grew file="/static/examples/strategies/p_2.grs" >}}
 
-  * `multi.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/multi.grs))
+  * [`multi.grs`](../examples/strategies/multi.grs)
+{{< grew file="/static/examples/strategies/multi.grs" >}}
 
-```grew
-labels { E }
-
-include "d_1.dom"
-include "d_2.dom"
-
-import "p_1.grs"
-import "p_2.grs"
-
-strat p_1_nfs { Iter (p_1) }  % all normal forms with package p_1
-strat p_1_onf { Onf (p_1) }   % one normal form with package p_1
-
-strat union { Alt (p_1,p_2) } % union of the two set of rules
-strat all_nfs { Iter (union)} % all normal forms
-
-strat s_1 { Seq (Pick(p_1), Pick(p_2), all_nfs) }
-```
 ### Single file declaration
 The five files above define a GRS, equivalent to the one below:
 
-  * `single.grs` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/single.grs))
-
-```grew
-labels { E }
-
-labels { E_1, E_11, E_12 }
-labels { E_2, E_21, E_22 }
-
-package p_1 {
-  rule r_1  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_1]-> Y  } }
-  rule r_11 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_11]-> Y } }
-  rule r_12 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_12]-> Y } }
-}
-
-package p_2 {
-  rule r_2  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_2]-> Y  } }
-  rule r_21 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_21]-> Y } }
-  rule r_22 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_22]-> Y } }
-}
-
-strat p_1_nfs { Iter (p_1) }  % all normal forms with package p_1
-strat p_1_onf { Onf (p_1) }   % one normal form with package p_1
-
-strat union { Alt (p_1,p_2) } % union of the two set of rules
-strat all_nfs { Iter (union)} % all normal forms
-
-strat s_1 { Seq (Pick(p_1), Pick(p_2), all_nfs) }
-```
+  * [`single.grs`](../examples/strategies/single.grs)
+{{< grew file="/static/examples/strategies/single.grs" >}}
 
 ### Apply the GRS to a graphs
 
-Consider the graph defined in `input.gr` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/strategies/input.gr)):
-
-```grew
-graph {
-  A -[E]-> B;
-  B -[E]-> C;
-}
-```
+Consider the graph defined in [`input.gr`](../examples/strategies/input.gr):
+{{< grew file="/static/examples/strategies/input.gr" >}}

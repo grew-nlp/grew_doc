@@ -86,7 +86,7 @@ It is also possible to runs a GTK interface in which you can explore step by ste
 
 ## Parsing a set of sentence
 No explicit linking with a sentence tokenizer is provided.
-We will suppose here that the input file is alredy split in sentences (one by line).
+We will suppose here that the input file is already split in sentences (one by line).
 
 Suppose that the file [`tdm80_ch01.txt`](/examples/tdm80_ch01.txt) contains the following data:
 

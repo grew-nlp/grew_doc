@@ -1,0 +1,14 @@
+graph {
+  g0 [phon="trèfle"];
+  g1 [phon="coeur"];
+  g2 [phon="pique"];
+  g3 [phon="carreau"];
+  g0 -[E]-> g0;
+  g0 -[A]-> g1;
+  g0 -[B]-> g1;
+  g1 -[C]-> g2;
+  g2 -[D]-> g0;
+  g2 -[A]-> g1;
+  g3 -[D]-> g1;
+  g3 -[C]-> g2;
+}

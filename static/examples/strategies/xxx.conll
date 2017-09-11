@@ -1,0 +1,10 @@
+# sentid: input.conll_00001_0
+0	_	_	_	_	label=A	_	_	_	_
+2	_	_	_	_	label=B	0	E_1	_	_
+3	_	_	_	_	label=C	2	E	_	_
+
+# sentid: input.conll_00001_1
+0	_	_	_	_	label=A	_	_	_	_
+2	_	_	_	_	label=B	0	E	_	_
+3	_	_	_	_	label=C	2	E_1	_	_
+

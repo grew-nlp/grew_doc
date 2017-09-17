@@ -8,9 +8,13 @@ menu = "main"
 
 +++
 
-# Last release: version 0.43 on May 23, 2017
-
 The symbol ":warning:" indicates changes that may break backward compatibility.
+
+# [last release] Version 0.44 on September 05, 2017
+  * :warning: new grs syntax (with package and strategies), see [grs](../grs).
+
+# Vversion 0.43 on May 23, 2017
+
 
 ## Syntax changes
 The syntax changes below make existing Grew code to be deprecated.
@@ -21,7 +25,7 @@ The old syntax is still accepted but for a limited amount of time, please update
 
 ## Command actions
   * :warning: the shift command semantics: edges with source and target nodes in the pattern are not concerned by the shifts
-  * a new syntax is available for the command `add_edge` [#2](https://gitlab.inria.fr/grew/libcaml-grew/issues/2). See [command documentation](../commands#add-a-new-edge-with-a-label-taken-in-the-pattern).
+  * a new syntax is available for the command `add_edge` (issue [#2](https://gitlab.inria.fr/grew/libcaml-grew/issues/2)). See [command documentation](../commands#add-a-new-edge-with-a-label-taken-in-the-pattern).
 
 ## Removed old stuff
   * :warning: old syntax for node addition is no longer supported:

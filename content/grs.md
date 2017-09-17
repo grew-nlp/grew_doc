@@ -1,6 +1,6 @@
 +++
-date = "2017-05-23T15:32:25+02:00"
-title = "grs"
+date = "2017-05-29T18:30:19+02:00"
+title = "new_grs"
 menu = "main"
 Categories = ["Development","GoLang"]
 Tags = ["Development","golang"]
@@ -10,23 +10,24 @@ Description = ""
 
 # GRS syntax
 
-In Grew, rewriting rules are described in a GRS file (GRS stands for Graph Rewriting System).
+The syntax descried here appeared in version 0.44.0 (2017/09/05).
+For the previous syntax, view [old_grs](../old_grs) page.
 
-A GRS file describes a set of modules, each module contains a set of [rules](../rule).
+## Global structure
+A GRS is composed by a set of declarations that may be provided in several files.
+These files are expected to used the `.grs` of the `.dom` file extension.
 
-:warning: Files using this format are expected to used the `.grs` file extension.
+Five kinds of declarations can be used:
 
+  * **Feature domain** declarations (keyword `features`)
+  * **Label domain** declarations (keyword `labels`)
+  * **Rule** declaration (keyword `rule`)
+  * **Strategy** declaration (keyword `strategy`)
+  * **Package** declaration (keyword `package`)
 
-A Grew Graph Rewriting System (GRS) is defined by:
+The first two kinds (Feature domain and label domain) can only be used at the top level and they cannot be nested (see below the multi-file handling).
 
-  * a optional domain definition
-  * a set of modules (each module is introduced by the keyword `module`)
-  * the definition of sequences of modules (keyword `sequences`)
-
-## Domain definition
-The domain is defined as a pair of a feature domain and an edge label domain.
-
-### Feature domain
+## Feature domains
 In graphs and in rules, nodes contain feature structures.
 To control these feature structures, a feature domain may be given first.
 In the feature domain declaration, feature names are identifiers and are defined as:
@@ -35,139 +36,169 @@ In the feature domain declaration, feature names are identifiers and are defined
   * **open** feature name accepts any string value (like the lemma feature value below);
   * **numerical** feature (like the position feature below).
 
-In closed feature definition, feature values can be any strings; double quotes are required for string that are not lexical identifier (like values for pers).
+In closed features definition, feature values can be any strings; double quotes are required for string that are not lexical identifier (like values for pers).
+
+:question: Explain merging of two feature domain declarations.
+
 
 ~~~grew
 features {
   cat: n, np, v, adj;
   mood: inf, ind, subj, pastp, presp;
-  lemma: *;
-  phon: *;
+  lemma: STRING;
+  phon: STRING;
   pers: "1","2","3";
-  position: #;
+  position: NUMERIC;
 }
 ~~~
 
 **REM:** values of pers feature are numerals but the only way to restrict to the finite domain {1, 2, 3} is to declare it as a closed feature and possible values as strings.
 
-### edge label domain
+## Label domains
 An explicit set of valid labels for edges may be given after the `labels` keyword.
+It is possible to give several label domain declarations; the union of the different sets is then considered (:question: what about duplicates?, see [#4](https://gitlab.inria.fr/grew/libcaml-grew/issues/4)).
 
 By default, edges are drawn with a black solid line and above the figure in DEP representation.
 
 To modify the color or the position of the edges, the user can add attributes to a label with suffixes:
 
-   `@bottom` to put the label above
-   `@red`, `@blue`, … to modify the color of the link and the label
-   `@dot` or `@dash` to modify the style of the link
+  * `@bottom` to put the label above
+  * `@red`, `@blue`, … to modify the color of the link and the label
+  * `@dot` or `@dash` to modify the style of the link
 
 Several suffixes can be used simultaneously.
 
 ~~~grew
 labels { OBJ, SUJ, DE_OBJ, ANT, ANT_REL@red, ANT_REP@blue@bottom@dash }
 ~~~
+:warning: the color, style and position management will change soon (see [#5](https://gitlab.inria.fr/grew/libcaml-grew/issues/5))
 
+## Rules
+Rule declaration is introduced by the keyword `rule`. For the syntax, see [rule page](../rule).
 
-## Modules
-
-In Grew, rules are grouped in modules.
-A module is defined by a name and a set of [rules](../rule).
-
-Example of module:
+## Strategies
+Strategies are used specify the way rules are applied during transformation.
+The syntax of strategies definition is:
 
 ~~~grew
-module name {
-  rule r_1 {
-    ...
-  }
-
-  rule r_2 {
-    ...
-  }
-
+strat strat_id {
+  <<< strategy_description >>>
 }
 ~~~
 
-A module can be declared as `deterministic`:
+Strategy descriptions are defined by the following syntax:
 
 ~~~grew
-module deterministic mod_name { ... }
+  S ::= rule_id               % Apply the gives rule
+      | package_id            % Apply any rule defined in the package (not in sub-packages)
+      | strat_id              % Called a strategy defined elsewhere
+      | Pick (S)              % Select arbitrary one of the graph produced by the strategy S
+      | Alt (S_1, …, S_n)     % Collect graphs produced by each sub-strategies (union)
+      | Seq (S_1, …, S_n)     % Apply sequentially S_1, then S_2 on S_1 output …
+      | Iter (S)              % Iterate the application of the strategy S until normal forms
+      | If (S, S_1, S_2)      % If S is productive then it is equivalent to S_1 else it is equivalent to S_2
 ~~~
 
-If a module is declared deterministic, then only one normal form is computed.
-If a non-confluent module is declared deterministic, some normal forms may be lost!
-
-## Sequences
-
-In the sequences part of a GRS file, each sequence is described by a name and a list of modules.
-The same module can be used in several sequences but it can also be used several times in the same sequence
-(mainly useful when total ordering of module is not possible).
-
-## examples of GRS
-A minimal GRS file (without any module) looks like:
-
+It is common to compute one normal form with respect to a strategy `S`.
+For instance, when one knows that the strategy is confluent, it is a much more efficient way to compute the unique normal form.
+Some syntactic sugar is provided for this:
 ~~~grew
-features {
-  cat: v, np;
-  phon: *;
-  lemma: *;
-}
-
-labels { suj, obj }
-
-sequences { dummy {} }
+  Onf (S) ≜ Pick (Iter (S))   % Onf stands for 'One normal form'
 ~~~
 
-A bigger grs file:
+Other constructor are provided for some strategies
 ~~~grew
-features { ... }
+  Empty ≜ Seq()               % The Empty strategy returns the input graph
+  Try (S) ≜ If (S, S, Empty)  % Equivalent to S if S is productive else it returns the input graph
+~~~
 
-labels { OBJ, SUBJ, DE_OBJ, ANT }
 
-module det {
 
-  rule det_1 {
-    ...
-  }
+## Packages
+Packages are used to organize the set of declarations and to define scopes of definitions.
+Syntax of packages definition:
 
-  rule det_2 {
-    ...
-  }
-}
-
-...
-
-module ana {
-  ...
-}
-
-sequences {
-  full {det; normsyn; arg; ana}  
-  dn {det; normsyn}
+~~~grew
+package package_id {
+  declarations_list
 }
 ~~~
 
+where `declarations_list` is a list of declarations of **rules**, **packages** and **strategies**.
 
-## Split a GRS description into several files
+The syntax for accessing to some element `e` defined in package `P` is `P.e`.
+In case of nested packages, an identifier may look like `P1.P2.P3.e`.
+When a reference is made to an element `P1.P2.e`, the system tries to find inside the current package a sub-package `P1` which contains a sub-package `P2` which contains an element `e`.
+If no such element is found, the same thing is searched recursively, first in the mother package of the current one, up to the root package.
 
-It is possible to describe a GRS through several text files.
+Note that it is not allowed to have a domain declaration inside a package.
 
-### External domain
+## Multi-file management
+When a GRS become large and contains an high number of rules, it is sensible to define it in through a set of files.
+Two mechanisms are available for this purpose: external file import and external file inclusion.
 
-The two declarations of features domain and of labels domain can be putted in a separate file and include in the main GRS with the keyword `domain`
+### External file import
+At any place in a list of declaration in a GRS file, one can use the syntax:
 
-### External module definition
-It is also possible to put a list of modules in a external file `modules_1_and_2.grs`:
+```grew
+import "filename.grs"
+```
 
-~~~grew
-module M1 { ... }
+This creates a new package with the same name as the file (without the `.grs` extension).
+Hence, the meaning is the same as the following code:
 
-module M2 { ... }
-~~~
+```grew
+package filename {
+  <<< content of the file "filename.grs" >>>
+}
+```
 
-and to include them in a GRS file with the syntax below:
+As a consequence, it is not allowed to import a file which contains domain declarations because it would be equivalent to a domain declaration inside a package and this is forbidden.
+To use a external domain declaration, one should use the file inclusion.
 
-~~~grew
-include "modules_1_and_2.grs";
-~~~
-The recursive use of the include directive is available.
+### External file inclusion
+With file inclusion, the content of the external file is interpreted as if it was placed directly in the file at the same place.
+In other words the code:
+```grew
+include "filename.grs"
+```
+has the same meaning as
+
+```grew
+<<< content of the file "filename.grs" >>>
+```
+
+## A complete example
+
+We consider the same GRS defined through the multi-file mechanism and with a single files.
+
+### Multi-file declaration
+Consider a folder with the five files:
+
+  * [`d_1.dom`](../examples/strategies/d_1.dom)
+{{< grew file="/static/examples/strategies/d_1.dom" >}}
+
+  * [`p_1.grs`](../examples/strategies/p_1.grs)
+{{< grew file="/static/examples/strategies/p_1.grs" >}}
+
+  * [`d_2.dom`](../examples/strategies/d_2.dom)
+{{< grew file="/static/examples/strategies/d_2.dom" >}}
+
+  * [`p_2.grs`](../examples/strategies/p_2.grs)
+{{< grew file="/static/examples/strategies/p_2.grs" >}}
+
+  * [`multi.grs`](../examples/strategies/multi.grs)
+{{< grew file="/static/examples/strategies/multi.grs" >}}
+
+### Single file declaration
+The five files above define a GRS, equivalent to the one below:
+
+  * [`single.grs`](../examples/strategies/single.grs)
+{{< grew file="/static/examples/strategies/single.grs" >}}
+
+### Apply the GRS to a graph
+
+Consider the graph defined in
+
+  * [`input.gr`](../examples/strategies/input.gr):
+{{< grew file="/static/examples/strategies/input.gr" >}}

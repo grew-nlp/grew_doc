@@ -10,7 +10,37 @@ menu = "main"
 
 The symbol ":warning:" indicates changes that may break backward compatibility.
 
-# [last release] Version 0.44 on September 05, 2017
+# **last release** Version 0.45 on October 10, 2017
+  * features structures given in column 10 of ConLL are kept in the output
+  * :warning: new grs syntax ([grs](../grs)) is required; old syntax can be used with the command line argument `-old_grs`
+  * :warning: in patterns, implicit node declaration is available only for nodes in edge (see below)
+
+### Implicit nodes in version 0.45
+In pattern, you can refer only to nodes which are explicitely declared or declared in a edge declaration.
+The following patterns used to be valid (with a implicit declaration of node `M`), but there are not anymore
+
+```grew
+pattern { N[cat=NOUN]; M < N }
+pattern { N[cat=NOUN]; M.cat = VERB }
+pattern { N[cat=NOUN]; M -[obj]-> * }
+```
+
+They have to be replaced by, respectively:
+```grew
+pattern { N[cat=NOUN]; M[]; M < N }
+pattern { N[cat=NOUN]; M[]; M.cat = VERB }
+pattern { N[cat=NOUN]; M[]; M -[obj]-> * }
+```
+
+But it is still possible to write
+```grew
+pattern { N[cat=NOUN]; N -[obj]-> M }
+```
+
+
+---
+
+# Version 0.44 on September 05, 2017
   * :warning: new grs syntax (with package and strategies), see [grs](../grs).
 
 # Vversion 0.43 on May 23, 2017

@@ -63,11 +63,11 @@ features {
   Number__psor: Plur, Sing;
   Person__psor: 1, 2, 3;
   Gender__psor: Fem, Masc, "Masc,Neut";
-  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa", Yes;
+  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa", Yes, "Han,Kin";
   Style: Coll, Arch, Rare, Slng, Vrnc, Expr, Vulg;
   InfForm: 1,2,3;
   Connegative: Yes;
-  Derivation: Minen, Inen, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Ttain;
+  Derivation: Minen, Inen, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Ttain, "Inen,Vs", "Lainen,Vs", "Llinen,Vs", "Ton,Vs", "Ja,Tar";
   Foreign: Yes;
 
   % Spanish
@@ -78,7 +78,7 @@ features {
   NameType: Sur, Giv, Pro, Com, Geo, Oth, Nat,
   "Com,Pro", "Giv,Sur", "Geo,Sur", "Com,Sur", "Geo,Giv", "Com,Giv", "Pro,Sur", "Com,Nat", "Giv,Pro",
   "Com,Geo", "Geo,Oth", "Com,Oth", "Geo,Pro", "Giv,Nat", "Nat,Sur", "Oth,Sur", "Giv,Oth",
-  "Geo,Giv,Sur", "Com,Giv,Sur", "Giv,Pro,Sur";
+  "Geo,Giv,Sur", "Com,Giv,Sur", "Giv,Pro,Sur", "Com,Pro,Sur";
   NumValue: 1, "1,2,3";
   ConjType: Oper;
 
@@ -88,7 +88,7 @@ features {
 % ====================================================================================================
 labels {
   % list of labels taken from the corpora [cat *.conll | cut -f 8 | sort -u]
-  acl, acl:relcl,
+  acl, acl:relcl, acl:cleft,
   advcl,
   advmod, advmod:emph,
   amod,
@@ -105,22 +105,22 @@ labels {
   dep,
   det, det:predet, det:poss,
   discourse,
-  dislocated,
-  dobj, obj, % dobj/V1 and obj/V2
+  dislocated, dislocated:cleft,
+  obj:agent, dobj, obj, % dobj/V1 and obj/V2
   expl, expl:pv, expl:impers, expl:pass,
   flat, flat:foreign, flat:name,
   foreign,
   goeswith,
-  iobj,
+  iobj, iobj:agent,
   list,
   mark,
   mwe, fixed, % mwe/V1 and fixed/V2
   name,
   neg,
   nmod, nmod:npmod, nmod:poss, nmod:tmod,
-  nsubj, nsubjpass, nsubj:pass, % nsubjpass/V1 and nsubj:pass/V2
+  nsubj, nsubj:caus, nsubj:expl, nsubjpass, nsubj:pass, % nsubjpass/V1 and nsubj:pass/V2
   nummod, nummod:gov, nummod:entity,
-  obl, obl:agent, obl:tmod, obl:npmod,
+  obl, obl:agent, obl:tmod, obl:npmod, obl:arg,
   orphan,
   parataxis,
   punct,
@@ -142,7 +142,7 @@ labels {
   E:aux,
   E:aux:pass,
   E:case,
-  E:cc,
+  E:cc, E:cc:preconj,
   E:ccomp,
   E:compound,
   E:compound:nn,
@@ -150,30 +150,36 @@ labels {
   E:conj,
   E:cop,
   E:csubj,
-  E:csubj:cop,
+  E:csubj:cop, E:csubj:pass,
   E:dep,
-  E:det,
+  E:det, E:det:predet,
   E:discourse,
+  E:dislocated,
   E:dobj,
   E:expl,
   E:fixed,
   E:flat, E:flat:name, E:flat:foreign,
+  E:goeswith,
   E:iobj,
-  E:mark,
+  E:list,
+  E:mark, E:mark:comparator,
   E:name,
   E:neg,
   E:nmod,
   E:nmod:gobj,
   E:nmod:gsubj,
   E:nmod:own,
+  E:nmod:npmod,
   E:nmod:poss,
+  E:nmod:tmod,
   E:nsubj,
   E:nsubj:cop,
   E:nsubj:pass,
   E:nummod, E:nummod:gov, E:nummod:entity,
   E:obj, E:obl:agent,
-  E:obl,
+  E:obl, E:obl:tmod, E:obl:npmod,
   E:orphan,
+  E:reparandum,
   E:parataxis,
   E:punct,
   E:root,

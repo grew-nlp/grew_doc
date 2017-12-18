@@ -12,8 +12,8 @@ The command to run **Grew** is: `grew <subcommand> [<args>]`
 Available subcommands are:
 
   * `transform`: **Grew** transform mode, see below
-  * `grep`: **Grew** grep mode, see below
   * `gui`: **Grew** GTK interface, see below
+  * `grep`: **Grew** grep mode, see below
   * `version`:    Print current version number
   * `help`: Print help
   * `help <sub>`:  Print help for the given subcommand
@@ -42,6 +42,19 @@ Optional argument is:
 
 ---
 
+# GTK interface
+
+The command to run the GTK interface: `grew gui <args>`.
+It supposes that you have installed the `grew_gui` opam packages (see [option 2 in Installation page](../installation#option-2-installation-of-the-gtk-interface)).
+
+Optional arguments:
+
+ * `-grs <grs_file>`: load the given file
+ * `-i <input_file>`: input data (graph or corpus) loaded in GUI
+ * `-strat <name>`: the strategy selected in the interface (default: `main`)
+ * `-main_feat <feat_name_list>` set the list of feature names used ad the *main* feat in graph visualisation
+
+---
 # Grep mode
 
 This mode corresponds to the command line version of the [Online graph matching](http://grew.loria.fr/demo) tool.
@@ -88,15 +101,3 @@ Europar.550_00496	14
 ```
 
 This means that the pattern described in the file `subcat.pat` was found 6 times in the corpus, each line gives the sentence identifier and the position of node matched by the node `V` of the pattern.
-
-# GTK interface
-
-The command to run the GTK interface: `grew gui <args>`.
-It supposes that you have installed the `grew_gui` opam packages (see [option 2 in Installation page](../installation#option-2-installation-of-the-gtk-interface)).
-
-Optional arguments:
-
- * `-grs <grs_file>`: load the given file
- * `-i <input_file>`: input data (graph or corpus) loaded in GUI
- * `-strat <name>`: the strategy selected in the interface (default: `main`)
- * `-main_feat <feat_name_list>` set the list of feature names used ad the *main* feat in graph visualisation

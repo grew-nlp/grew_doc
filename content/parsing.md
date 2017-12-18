@@ -52,8 +52,7 @@ produces the file [`test.melt`](/parsing/test.melt):
 
 With the file `test.melt` described above, the following command produces the Conll code of the parsed sentence:
 
-`grew -det -grs POStoSSQ/grs/surf_synt_main.grs -strat full -i test.melt -f test.conll`
-
+`grew transform -grs POStoSSQ/grs/surf_synt_main.grs -i test.melt -o test.conll`
 The output file is [`test.conll`](/parsing/test.conll):
 
 {{< input file="/static/parsing/test.conll" >}}
@@ -64,7 +63,7 @@ which encodes the syntactic structure:
 
 It is also possible to runs a GTK interface in which you can explore step by step rewriting of the input sentence:
 
-`grew -grs POStoSSQ/grs/surf_synt_main.grs -strat full -gr test.melt`
+`grew gui -grs POStoSSQ/grs/surf_synt_main.grs -i test.melt`
 
 ## Parsing a set of sentence
 No explicit linking with a sentence tokenizer is provided.
@@ -77,5 +76,5 @@ Suppose that the file [`tdm80_ch01.txt`](/parsing/tdm80_ch01.txt) contains the f
 The parsing can be done with the same two steps process:
 
 1. POS-tagging with melt: `cat tdm80_ch01.txt | MElt -L -T > tdm80_ch01.melt`
-2. Building the dependency syntax structure: `grew -det -grs POStoSSQ/grs/surf_synt_main.grs -strat full -i tdm80_ch01.melt -f tdm80_ch01.conll`
+2. Building the dependency syntax structure: `grew transform -grs POStoSSQ/grs/surf_synt_main.grs -i tdm80_ch01.melt -o tdm80_ch01.conll`
 

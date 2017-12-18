@@ -5,46 +5,76 @@ title = "installation"
 
 # Grew installation
 
-**Grew** is implemented with the [Ocaml](http://ocaml.org) language. The Graphical User Interface is based on [GTK](http://gtk.org), **Grew** is then easy to install on Linux or MAC OS&nbsp;X (installation on Windows should be possible, but this is untested).
+**Grew** is implemented with the [Ocaml](http://ocaml.org) language.
+**Grew** is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should be possible, but this is untested).
 
-:warning: If you run into trouble using the instruction of this page, feel free to open an issue on [GitLab](https://gitlab.inria.fr/grew/grew_doc/issues).
+A GTK interface is available (again on Linux and Mac OS&nbsp;X, untested on Windows) separately.
 
-## Step 1: Prerequisites, install non-ocaml needed packages
+:warning: If you run into trouble using the instructions of this page, feel free to open an issue on [GitLab](https://gitlab.inria.fr/grew/grew_doc/issues).
+
+
+## Option 1: Basic installation without GTK interface
 
 ### On Linux
-On Debian/Ubuntu based Linux installation, the following command installs the prerequisites.
+  * First installation
+    * `apt-get install wget opam m4 aspcud` # Prerequisite
+    * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
+    * ```eval `opam config env` ``` # Make Ocaml ready to use know
+    * `opam remote add talc "http://talc2.loria.fr/semagramme/opam"` # Add the talc OPAM repository
+    * `opam install grew` # Install Grew
 
- * If needed, install `aptitude` with the command `apt get install aptitude`
- * for all usage: `aptitude install graphviz pkg-config librsvg2-dev m4 automake librsvg2-bin  python-software-properties opam`
- * for GUI, run also: ``aptitude install libwebkitgtk-dev libglade2-dev libgtk2.0-dev`
+  * Test
+    * Try the command `grew version`
+    * In case of trouble, make sure that your PATH contains `~/.opam/4.06.0/bin` and try again
+    * In trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
+
+  * Updating when **Grew** is already installed:
+    * `apt-get update && apt-get upgrade`
+    * `opam update && opam upgrade`
 
 ### On Mac OS&nbsp;X
-  1. Install [XCode](https://developer.apple.com/xcode/)
-  2. Install [XQuartz](http://www.xquartz.org/)
-  3. Install [MacPorts](http://www.macports.org/)
+  * Prerequisite Mac applications
+    * Install [XCode](https://developer.apple.com/xcode/)
+    * Install [MacPorts](http://www.macports.org/)
 
- The following command install the prerequisites
+  * First installation
+    * `sudo port install wget opam aspcud`  # Prerequisite
+    * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
+    * ```eval `opam config env` ``` # Make Ocaml ready to use know
+    * `opam remote add talc "http://talc2.loria.fr/semagramme/opam"` # Add the talc OPAM repository
+    * `opam install grew` # Install Grew
 
-  * for all usages: `sudo port install graphviz librsvg libglade2 wget opam`
-  * for GUI, run also: `sudo port install webkit-gtk`
+  * Test
+    * Try the command `grew version`
+    * In case of trouble, make sure that your PATH contains `~/.opam/4.06.0/bin` and try again
+    * In trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 
-## Step 2: Initialize OPAM
- * `opam init --comp 4.05.0`  # Download and install the last version of Ocaml (4.05.0)
+  * Updating when **Grew** is already installed:
+    * `sudo port sync && sudo port upgrade`
+    * `opam update && opam upgrade`
 
- * `opam config setup -a`  # Update configuration file
+## Option 2: Installation of the GTK interface
 
- * ```eval `opam config env` ``` # Make Ocaml ready to use know
+We suppose that the basic version (Option 1) is already installed.
 
+### Linux
+  * Install GUI interface
+    * `apt-get install graphviz pkg-config librsvg2-dev libwebkitgtk-dev libglade2-dev libgtk2.0-dev`
+    * `opam install grew_gui`
 
-## Step 3: Add the talc local OPAM repository
- * `opam remote add talc "http://talc2.loria.fr/semagramme/opam"`
+  * Test
+    * Run `Grew gui` to run the GTk interface
+    * In case of trouble, [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 
-## Step 4: Install grew
- * **Grew** GUI: `opam install grew`
- * **Grew** daemon: `opam install grew_daemon` (see [grew daemon](https://gitlab.inria.fr/grew/grew_daemon) gitlab page)
+### On Mac OS&nbsp;X
+  * Prerequisite Mac application for running X11 GUI.
+    * Install [XQuartz](http://www.xquartz.org/)
 
-# Update to the latest versions
-  1. update prerequisites:
-    * Linux :arrow_right: `aptitude update && aptitude upgrade`
-    * Mac OS&nbsp;X :arrow_right: `sudo port sync && sudo port upgrade`
-  1. update **Grew**: `opam update && opam upgrade`
+  * Install GUI interface
+    * `sudo port install graphviz librsvg libglade2 webkit-gtk`
+    * `opam install grew_gui`
+
+  * Test
+    * Run `Grew gui` to run the GTk interface
+    * In case of trouble, [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
+

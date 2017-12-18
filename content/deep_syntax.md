@@ -29,13 +29,13 @@ The GRS used to build the mixed **deep_and_surf** structure can be obtained by:
 git clone https://gitlab.inria.fr/grew/SSQtoDSQ.git
 ```
 The input of the GRS which produced the **deep_and_surf** structure is the **surf** structure.
-We recall here the surface structure (see [Dependency parsing](../parsing) page) for our example sentence and we suppose that the file [`test.surf.melt`](/deep_syntax/test.surf.melt) contains the Conll description below:
+We recall here the surface structure (see [Dependency parsing](../parsing) page) for our example sentence and we suppose that the file [`test.surf.conll`](/deep_syntax/test.surf.conll) contains the Conll description below:
 
 {{< input file="/static/deep_syntax/test.surf.conll" >}}
 
 The mixed structure is then computed with the command:
 ```
-grew -det -grs deep_syntax/grs/deep_synt_main.grs -i test.surf.conll -f test.mix.conll
+grew transform -grs SSQtoDSQ/grs/main_dsq.grs -i test.surf.conll -o test.mix.conll
 ```
 
 which produces the file [`test.deep_and_surf.melt`](/deep_syntax/test.deep_and_surf.melt) which contains the code below corresponding the next figure

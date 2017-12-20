@@ -11,7 +11,7 @@ Description = ""
 
 **Grew-parse-FR** is natural language parser for French.
 It is composed of a GRS (Graph Rewriting System) which can be used with the Grew software to produce dependency syntax structures from POS-tagged data.
-With a POS-tagger (**MElt** is a recommended), it provides a full parser with sentences as input and dependency structures as output
+With a POS-tagger (**MElt** is recommended), it provides a full parser with sentences as input and dependency structures as output.
 The parsing GRS is described in an [IWPT 2015 publication](https://hal.inria.fr/hal-01188694).
 
 # How to parse a sentence?
@@ -22,9 +22,8 @@ We consider the sentence:
 
 The parsing is done in two steps:
 
-1. POS-tagging with **MElt**: `echo "La souris a été mangée par le chat." | MElt -L -T > test.melt`
-2. Building the dependency syntax structure: `grew -det -grs POStoSSQ/grs/surf_synt_main.grs -strat full -i test.melt -f test.conll`
-
+1. POS-tagging with **MElt**
+2. Building the dependency syntax structure by applying Graph Rewriting System
 
 # Prerequisite
 
@@ -50,12 +49,13 @@ produces the file [`test.melt`](/parsing/test.melt):
 
 ## Parsing with the GRS
 
-With the file `test.melt` described above, the following command produces the Conll code of the parsed sentence:
+With the file [`test.melt`](/parsing/test.melt) described above, the following command produces the CoNLL code of the parsed sentence:
 
-`grew transform -grs POStoSSQ/grs/surf_synt_main.grs -i test.melt -o test.conll`
-The output file is [`test.conll`](/parsing/test.conll):
+`grew transform -grs POStoSSQ/grs/surf_synt_main.grs -i test.melt -o test.surf.conll`
 
-{{< input file="/static/parsing/test.conll" >}}
+The output file is [`test.surf.conll`](/parsing/test.surf.conll):
+
+{{< input file="/static/parsing/test.surf.conll" >}}
 
 which encodes the syntactic structure:
 

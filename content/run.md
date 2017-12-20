@@ -33,8 +33,8 @@ Required arguments for this mode are:
 where:
 
  * `<grs_file>` is the main file which describes Graph Rewriting System
- * `<input_file>`: describes the input data (CONLL file of gr file)
- * `<output_file>`: is the name of the output file (CONLL file)
+ * `<input_file>`: describes the input data (CoNLL file of gr file)
+ * `<output_file>`: is the name of the output file (CoNLL file)
 
 Optional argument is:
 

@@ -26,7 +26,7 @@ More detailled informations in files `CHANGES.md` for each sub-project: [libcaml
 
 # Version 0.45 on October 10, 2017
 
-  * features structures given in column 10 of ConLL are kept in the output
+  * features structures given in column 10 of CoNLL are kept in the output
   * :warning: new grs syntax ([grs](../grs)) is required; old syntax can be used with the command line argument `-old_grs`
   * :warning: in patterns, implicit node declaration is available only for nodes in edge (see below)
 

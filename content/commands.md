@@ -76,7 +76,7 @@ graph {
 }
 ~~~
 
-With the command `grew -det -grs add_edge_pattern.grs -gr input.gr -o output.gr`, the rewriting will produce the graph `output.gr` below.
+With the command `grew transform -grs add_edge_pattern.grs -i input.gr -o output.gr`, the rewriting will produce the graph `output.gr` below.
 
 | `input.gr` | `output.gr` |
 |:---:|:---:|

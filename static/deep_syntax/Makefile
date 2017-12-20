@@ -8,9 +8,9 @@ run:
 	ln -s /Users/guillaum/gitlab/deep-sequoia/tools/sequoia.dom
 	ln -s /Users/guillaum/gitlab/deep-sequoia/tools/sequoia_proj.grs
 	echo "La souris a été mangée par le chat." | MElt -L -T > test.melt
-	grew -det -grs POStoSSQ/grs/surf_synt_main.grs -strat full -i test.melt -f test.surf.conll
-	grew -det -grs SSQtoDSQ/grs/main_dsq.grs -i test.surf.conll -f test.deep_and_surf.conll
-	grew -det -grs sequoia_proj.grs -strat deep -i test.deep_and_surf.conll -f test.deep.conll
+	grew transform -grs POStoSSQ/grs/surf_synt_main.grs -i test.melt -o test.surf.conll
+	grew transform -grs SSQtoDSQ/grs/main_dsq.grs -i test.surf.conll -o test.deep_and_surf.conll
+	grew transform -grs sequoia_proj.grs -strat deep -i test.deep_and_surf.conll -o test.deep.conll
 	rm -f POStoSSQ SSQtoDSQ sequoia.dom sequoia_proj.grs
 
 img: figures

@@ -21,121 +21,172 @@ features {
   sentid: *;
 
   % Features grepped from the English Corpus
-  Case: Nom, Acc, Abs, Erg, Dat, Gen, Voc, Loc, Ins, Abl, Ine, Ade, All, Par, Ill, Ela, Ess, Abe, Com, Tra,
-    "Acc,Dat", "Acc,Nom"; % Spanish
+  Case: Nom, Acc, Abs, Erg, Dat, Gen, Voc, Loc, Ins, Abl, Ine, Ade, All, Par, Ill, Ela, Ess, Abe, Com, Tra, Advb, Con, NomAcc, Lat, Tem, Obl, Add, Cau, Ter, Comp, Sup, Ben, Sub, Equ, Del, Dis,
+    "Acc,Erg", "Acc,Ine", "Acc,Ins", "Acc,Dat", "Acc,Nom", "Dat,Gen", "Acc,Gen", "Gen,Nom";
   % to be completed
-  Definite: Def, Ind;
-  Degree: Abs, Cmp, Pos, Sup;
-  Gender: Fem, Masc, Neut, Com, "Masc,Neut", "Fem,Neut", "Fem,Masc",
+  Definite: 2, Def, Ind, Com, Cons, "Def,Ind";
+  Degree: Abs, Cmp, Pos, Sup, Dim, "Cmp,Pos", "Cmp,Sup";
+  Gender: Fem, Masc, Neut, Com, "Masc,Neut", "Fem,Neut", "Fem,Masc", "Com,Neut",
     Unsp; % UD_Portuguese
-  Mood: Imp, Ind, Cnd, Sub, Pot;
-  NumType: Card, Mult, Ord, Range, Frac, Sets, "Mult,Sets";
-  Number: Plur, Sing, Dual,"Plur,Sing",
-    Unsp; % UD_Portuguese
-  Person: 0, 1, 2, 3;
+
+  Gender__psor: Fem, Masc, Neut, "Masc,Neut";
+  Gender__erg: Fem, Masc;
+  Gender__dat: Fem, Masc;
+
+  Mood: Int, Imp, Ind, Cnd, Sub, Pot, Opt, Jus, Qot, Des, Prsc, Inter, Gen, CndGen, Abil, AbilGen, Nec, Vol, CndPot, Prs, GenNec, GenNecPot, ImpPot, AbilCnd, GenPot, DesPot, NecPot, "Cnd,Ind", "Cnd,Pot", "Imp,Pot";
+  NumType: Card, Mult, Ord, Range, Frac, Sets, Dist, Coll, "Mult,Sets", "Card,Ord";
+  Number: Plur, Sing, Dual,"Plur,Sing",Ptan, Unsp, Count, Coll, "Dual,Plur";
+  Number__abs: Plur, Sing;
+  Number__erg: Plur, Sing;
+  Number__psed: Plur, Sing, None;
+  Number__dat: Plur, Sing;
+  Number__psor: Plur, Sing, None, Dual, "Plur,Sing";
+
+  Person: 0, 1, 2, 3, "1,3", "2,3", "1,2,3";
+  Person__abs: 0, 1, 2, 3;
+  Person__erg: 0, 1, 2, 3;
+  Person__dat: 0, 1, 2, 3;
+  Person__psor: 1, 2, 3, None;
+
   Poss: Yes;
-  PronType: Art, Dem, Int, Prs, Rel, Neg, Ind,
-    "Int,Rel", Tot, % needed for Polish treebank
+  PronType: Art, Dem, Int, Prs, Rel, Neg, Ind, Coll, Ref, Qnt,
+    "Int,Rel", "Ind,Rel", "Prs,Tot", "Neg,Prs", "Art,Prs", "Ind,Prs", Tot,
+    "Dem,Prs", "Dem,Ind", "Ind,Int", "Dem,Rel", "Ind,Neg", "Int,Neg",
     Exc, % needed for Italian data
     Emp, % Czech
     Rcp; % needed for Finnish treebank
-  Reflex: Yes;
-  Tense: Past, Pres, Imp, Fut,
-    Pqp; % UD_Portuguese
-  VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv, Sup;
-  Voice: Act, Pass, Mid;
+  Reflex: Yes, No;
+  Tense: Past, Pres, Imp, Fut, Aor, PastSimp, PastIter, PresHab, FutPast, AorPast, FutPlan, Pqp;
+  VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv, Sup, Gdv, Coverb, PartPad, Stem, Cov, Cop, PartPus, PartPres, PartPast, PartFut, "Fin,Inf";
+  Voice: Act, Pass, Mid, Necess, Rcp, Cau, CauPass, Coop, Auto, "Mid,Pass", "Act,Cau", "Cau,Pass";
   Polarity: Neg, Pos;
 
   % Polish
   AdpType:Prep, Post, Voc, Comprep,
     Preppron; % UD_Portuguese
   Animacy: Anim, Inan, Nhum, Hum;
-  Aspect: Perf, Imp;
-  Variant: Short, Long;
+  Animacy__gram: Anim, Inan, Nhum, Hum;
+  Aspect: Perf, Imp, Prog, Res, Prosp, Hab, DurPerf, Rapid, ProgRapid, "Iter", "Imp,Perf";
+  Variant: Short, Long, Full, Bound, Uncontr;
   Negative: Pos, Neg;
   PrepCase: Npr, Pre;
   Abbr: Yes;
   Hyph: Yes;
   Typo: Yes;
 
+  VerbType: Aux, Mod, Pas, Cop;
+  PartType: Neg, Inf, Gen, Vb, Cmpl, Comp, Conseq, Ad, Pat, Num, Voc, Cop, Deg, Sub;
+  AdjType: Pred, Attr;
+  Subcat: Tran, Intr, Prep;
   % Finnish
   PartForm: Agt, Past, Pres, Neg;
-  Number__psor: Plur, Sing;
-  Person__psor: 1, 2, 3;
-  Gender__psor: Fem, Masc, "Masc,Neut";
-  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa", Yes, "Han,Kin";
-  Style: Coll, Arch, Rare, Slng, Vrnc, Expr, Vulg;
-  InfForm: 1,2,3;
+  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa", Yes, "Han,Kin", "Han,Ka", "Ka,S", "Kin,Ko", "Kaan,Ko";
+  Style: Coll, Arch, Rare, Slng, Vrnc, Expr, Vulg, Form;
+  InfForm: 1,2,3, Dict, Incp;
   Connegative: Yes;
-  Derivation: Minen, Inen, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Ttain, "Inen,Vs", "Lainen,Vs", "Llinen,Vs", "Ton,Vs", "Ja,Tar";
+  Derivation: Minen, Inen, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Ttain, "Inen,Vs", "Lainen,Vs", "Llinen,Vs", "Ton,Vs", "Ja,Tar", "Inen,Ttain", "Llinen,Sti", "Sti,Ton";
   Foreign: Yes;
 
   % Spanish
-  Polite: Form;
+  Polite: Form, Infm;
+  Polite__erg: Form, Infm;
+  Polite__abs: Form, Infm;
+  Polite__dat: Form, Infm;
 
   % Czech
-  NumForm: Digit, Word, Roman;
-  NameType: Sur, Giv, Pro, Com, Geo, Oth, Nat,
+  NumForm: Digit, Word, Roman, Letter;
+  NameType: Sur, Giv, Pro, Com, Geo, Oth, Nat, Pat,
   "Com,Pro", "Giv,Sur", "Geo,Sur", "Com,Sur", "Geo,Giv", "Com,Giv", "Pro,Sur", "Com,Nat", "Giv,Pro",
   "Com,Geo", "Geo,Oth", "Com,Oth", "Geo,Pro", "Giv,Nat", "Nat,Sur", "Oth,Sur", "Giv,Oth",
   "Geo,Giv,Sur", "Com,Giv,Sur", "Giv,Pro,Sur", "Com,Pro,Sur";
-  NumValue: 1, "1,2,3";
+  NumValue: 1, 2, 3, "1,2,3";
   ConjType: Oper;
 
   Diat: Demsuj; Intrinsimp: Yes;
+  PunctType: Dash, Peri, Comm, Colo, Qest, Quot, Brck, Semi, Excl, Ndash, Hyph;
+  Form: Adn, Ecl, Len, Irr, Real, Emp, Spcf, HPref, VF;
+  AdvType: Tim, Deg, Mod;
+  Strength: Strong, Weak;
+  Evident: Fh, Nfh;
+  PunctSide: Ini, Fin, Brck;
+  HebBinyan: NIFAL, PAAL, HIFIL, PIEL, HITPAEL, PUAL, HUFAL;
+  Distance: Dist,Prox;
+  Echo: Rdp;
+  Uninflect: Yes;
+  Position: Prenom, Postnom;
+  Clusivity: Incl;
+  HebSource: ConvUncertainHead, ConvUncertainLabel;
+  Prefix: Yes;
+  Orth: Khark;
+  Register: Form;
+  PrepForm: Cmpd;
+  Dialect: Munster, Ulster, Connaught;
+  HebExistential: True;
+  NounType: Strong, Weak, Slender, NotSlender;
+  Xtra: Junk;
+  Compound: Yes;
 }
 
 % ====================================================================================================
 labels {
   % list of labels taken from the corpora [cat *.conll | cut -f 8 | sort -u]
-  acl, acl:relcl, acl:cleft,
-  advcl,
-  advmod, advmod:emph,
-  amod,
+  acl, acl:relcl, acl:cleft, acl:part, acl:inf, acl:poss,
+  advcl, advcl:coverb, advcl:cond, advcl:tcl, advcl:sp, advcl:svc,
+  advmod, advmod:emph, advmod:discourse, advmod:neg, advmod:df, advmod:quant, advmod:mode, advmod:tmod, advmod:tlocy, advmod:phrase, advmod:inf, advmod:tfrom, advmod:que, advmod:to, advmod:tto, advmod:locy, advmod:obl,
+  amod, amod:att, amod:obl, amod:mode, amod:attlvc,
   appos,
   aux, auxpass, aux:pass, % auxpass/V1 and aux:pass/V2
   aux:caus, obl:caus, obj:caus, iobj:caus,
-  case,
+  aux:neg, aux:q,
+  case, case:loc, case:suff, case:dec, case:aspect, case:pref, case:circ, case:gen, case:acc, case:voc,
   cc, cc:preconj,
-  ccomp,
-  compound, compound:prt,
-  conj, conj:preconj,
+  ccomp, ccomp:pmod, ccomp:obj, ccomp:obl, ccomp:pred,
+  compound, compound:prt, compound:vv, compound:conjv, compound:plur, compound:lvc, compound:svc, compound:dir, compound:redup, compound:ext, compound:vo, compound:preverb, compound:smixut,
+  conj, conj:preconj, conj:extend, conj:discourse, conj:svc,
   cop, cop:own,
-  csubj, csubjpass, csubj:pass,
-  dep,
-  det, det:predet, det:poss,
-  discourse,
+  csubj, csubjpass, csubj:pass, csubj:cleft,
+  dep, dep:ig,
+  det, det:predet, det:poss, det:def, det:quant,
+  discourse, discourse:sp, discourse:filler, discourse:emo,
   dislocated, dislocated:cleft,
   obj:agent, dobj, obj, % dobj/V1 and obj/V2
-  expl, expl:pv, expl:impers, expl:pass,
-  flat, flat:foreign, flat:name,
+  obj:dir, obj:cau, obj:lvc,
+  expl, expl:pv, expl:impers, expl:pass, expl:poss,
+  flat, flat:foreign, flat:name, flat:title, flat:repeat,
   foreign,
-  goeswith,
+  goeswith, goeswith:alt,
   iobj, iobj:agent,
   list,
-  mark,
+  mark, mark:rel, mark:relcl, mark:adv, mark:prt, mark:comp, mark:advb,
   mwe, fixed, % mwe/V1 and fixed/V2
   name,
   neg,
-  nmod, nmod:npmod, nmod:poss, nmod:tmod,
+  nmod, nmod:npmod, nmod:poss, nmod:tmod, nmod:gmod, nmod:comp, nmod:cau, nmod:clas, nmod:abl, nmod:part, nmod:dat, nmod:cmp, nmod:pmod, nmod:red, nmod:arg, nmod:ref, nmod:att, nmod:obl, nmod:agent, nmod:obllvc, nmod:attlvc,
   nsubj, nsubj:caus, nsubj:expl, nsubjpass, nsubj:pass, % nsubjpass/V1 and nsubj:pass/V2
+  nsubj:nc, nsubj:own, nsubj:lvc,
   nummod, nummod:gov, nummod:entity,
-  obl, obl:agent, obl:tmod, obl:npmod, obl:arg,
+  obl, obl:agent, obl:tmod, obl:npmod, obl:arg, obl:loc, obl:gmod, obl:patient, obl:cau, obl:own, obl:prep,
   orphan,
-  parataxis,
+  parataxis, parataxis:hashtag, parataxis:deletion, parataxis:restart, parataxis:discourse,parataxis:nsubj,parataxis:insert,parataxis:obj,parataxis:newsent,
   punct,
   remnant,
   reparandum,
   root,
-  vocative,
-  xcomp,
+  vocative, vocative:mention,
+  xcomp, xcomp:adj, xcomp:obj, xcomp:pred, xcomp:sp,
   det:numgov, det:nummod, % Polish treebank
   nmod:own, compound:nn, nsubj:cop, csubj:cop, nmod:gobj, xcomp:ds, nmod:gsubj, % Finnish
+
+  clf,
 
   % Secondary dependency repations in the Finnish and English treebank
   E:acl,
   E:acl:relcl,
-  E:advcl,
+  E:acl:loc,
+  E:acl:dat,
+  E:acl:acc,
+  E:acl:nom,
+  E:advcl, "E:advcl:kā", "E:advcl:nekā",
   E:advmod,
   E:amod,
   E:appos,
@@ -166,18 +217,62 @@ labels {
   E:name,
   E:neg,
   E:nmod,
+  E:nmod:dat,
+  E:nmod:acc,
+  E:nmod:ar,
+  E:nmod:gar,
+  E:nmod:ap,
+  E:nmod:gen,
   E:nmod:gobj,
   E:nmod:gsubj,
   E:nmod:own,
   E:nmod:npmod,
+  E:nmod:pie,
+  E:nmod:pirms,
+  E:nmod:bez,
   E:nmod:poss,
+  E:nmod:otrpus,
+  E:nmod:pret,
+  E:nmod:caur,
+  E:nmod:iepretim,
   E:nmod:tmod,
+  E:nmod:nom,
+  E:nmod:no,
+  E:nmod:pa,
+  E:nmod:par,
+  E:nmod:starp,
+  "E:nmod:pāri",
+  "E:nmod:viņpus",
+  E:nmod:loc,
+  E:nmod:aiz,
+  "E:nmod:līdz",
+  E:nmod:zem,
+  "E:nmod:pēc",
+  "E:nmod:apkārt",
+  "E:nmod:pār",
+  E:nmod:uz,
+  E:nmod:virs,
+  E:nmod:cauri,
+  E:nmod:lejpus,
   E:nsubj,
   E:nsubj:cop,
   E:nsubj:pass,
   E:nummod, E:nummod:gov, E:nummod:entity,
-  E:obj, E:obl:agent,
-  E:obl, E:obl:tmod, E:obl:npmod,
+  E:obj, E:obl:agent, E:obl:ap, E:obl:par,
+  E:obl, E:obl:tmod, E:obl:npmod, E:obl:loc,
+  E:obl:no, E:obl:pa, E:obl:uz, E:obl:aiz,
+  E:obl:dat, E:obl:acc, E:obl:gen, E:obl:pie,
+  E:obl:pirms, E:obl:cauri, E:obl:pret, E:obl:nom,
+  "E:obl:līdz", "E:obl:pāri", E:obl:caur,
+  E:obl:zem, "E:obl:garām", E:obl:starp, "E:obl:pēc",
+  "E:obl:pār", "E:obl:pretī", E:obl:gar, "E:obl:virsū",
+  "E:obl:klāt", "E:obl:kopš", E:obl:ar, "E:obl:ārpus",
+  "E:obl:līdztekus", E:obl:bez, "E:obl:dēļ", "E:obl:apkārt",
+  E:obl:blakus, E:obl:virs, "E:obl:-", E:obl:Bez, "E:obl:priekšā",
+  E:obl:pretim, "E:obl:tuvāk", "E:obl:priekša", "E:obl:līdzās",
+  "E:obl:līdzi", "E:obl:augšpus", "E:obl:atbilstoši",
+  "E:obl:visaplīk", E:obl:labad,
+  E:obl:tuvu,
   E:orphan,
   E:reparandum,
   E:parataxis,

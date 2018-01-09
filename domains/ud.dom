@@ -1,21 +1,20 @@
-% this file "uni-dep-tb-all-2.0.grs" contains the declarations of POS, CAT and relations used in universal dependency treebanks
-% May 21, 2015 -> fr + ko
+conll_fields { form; lemma; upos; xpos }
 
 % ====================================================================================================
 features {
 
   % field 2 of CONLL format is interpreted as the "phon" feature
-  phon: *;
+  form: *;
 
   % field 3 of CONLL format is interpreted as the "lemma" feature
   lemma: *;
 
   % field 4 of CONLL format is interpreted as the "cat" feature
-  cat: ADJ, ADP, ADV, AUX, CCONJ, DET, INTJ, NOUN, NUM, PART, PRON, PROPN, PUNCT, SCONJ, SYM, VERB, X, _,
+  upos: ADJ, ADP, ADV, AUX, CCONJ, DET, INTJ, NOUN, NUM, PART, PRON, PROPN, PUNCT, SCONJ, SYM, VERB, X, _,
     CONJ; % V1
 
   % field 5 of CONLL format is interpreted as the "pos" feature, unused in tiger
-  pos: *;
+  xpos: *;
 
   % In Tiger, sentence identifier are given through a identifer "id_pos", and transfomed to a feature sentid on the first node in this CONLL description.
   sentid: *;
@@ -285,5 +284,3 @@ labels {
 
   FAIL_obj.cpl, FAIL_ats,
 }
-
-sequences { main {} }

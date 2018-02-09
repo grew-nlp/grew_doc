@@ -21,8 +21,8 @@ Categories = ["Development","GoLang"]
 ## A first taste of Grew
 The easiest way to try and test **Grew** is to use one of the two online interfaces.
 
-  1. [Online graph matching](http://grew.loria.fr/demo) lets the user search for a given pattern in a corpus of syntactic structures (a tutorial is available to help learning pattern syntax).
-  2. [Online parsing](http://talc2.loria.fr/grew_demo) returns for a input French sentence, a set of linguistic representations (syntax and semantics) which are built using Graph Rewriting.
+  1. [Online graph matching](http://match.grew.fr) lets the user search for a given pattern in a corpus of syntactic structures (a tutorial is available to help learning pattern syntax).
+  2. [Online parsing](http://parse.grew.fr) returns for a input French sentence, a set of linguistic representations (syntax and semantics) which are built using Graph Rewriting.
 
 ## Some of the main features of Grew
 

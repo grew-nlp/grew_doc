@@ -1,6 +1,6 @@
 languageCode = "en-us"
 title = "Grew"
-baseURL = "http://grew.loria.fr/"
+baseURL = "http://grew.lchn.fr/"
 enableEmoji=true
 
 theme = "hyde"

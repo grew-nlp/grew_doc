@@ -19,17 +19,14 @@ build:
 	hugo
 
 talc2:
-	#tar cf - public | ssh $(stalc2)/www/grew_doc tar xf -
-	hugo
-	scp -r public/* $(stalc2)/www/grew_doc/
+	@echo "OBSOLETE"
+#	tar cf - public | ssh $(stalc2)/www/grew_doc tar xf -
+#	hugo
+#	scp -r public/* $(stalc2)/www/grew_doc/
 
-lchn:
+lchn: build
 	hugo
-	scp -r public/* grew.lchn.fr:/home/guillaum/www
-	ssh grew.lchn.fr 'sudo cp -r /home/guillaum/www/* /var/www/html/'
-
-test:
-	ssh grew.lchn.fr 'sudo touch /toto'
+	scp -r public/* grew.lchn.fr:/home/guillaum/www/doc/
 
 purge:
 	@make -C static/parsing purge

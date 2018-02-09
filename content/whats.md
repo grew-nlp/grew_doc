@@ -13,9 +13,9 @@ menu = "main"
 
 ---
 
-# **last release** Version 0.46 on December, 14 2017
+# **last release** Version 0.46 on December 14, 2017
 
- * GTK interface is proposed as a separate package and so Grew without GUI is much more easy to install
+ * GTK interface is proposed as a separate package and so **Grew** without GUI is much more easy to install
  * Command line arguments were revisited (see [Run Grew page](../run))
 
 More detailled informations in files `CHANGES.md` for each sub-project: [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
@@ -62,7 +62,7 @@ pattern { N[cat=NOUN]; N -[obj]-> M }
 
 
 ## Syntax changes
-The syntax changes below make existing Grew code to be deprecated.
+The syntax changes below make existing **Grew** code to be deprecated.
 The old syntax is still accepted but for a limited amount of time, please update your existing GRS system soon.
 
   * :warning: the keyword `confluent` is replaced by the keyword `deterministic` (it was confusing to use the keyword "`confluent`"  with modules which are not confluent).

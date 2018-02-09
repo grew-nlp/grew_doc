@@ -57,7 +57,7 @@ Optional arguments:
 ---
 # Grep mode
 
-This mode corresponds to the command line version of the [Online graph matching](http://grew.loria.fr/demo) tool.
+This mode corresponds to the command line version of the [Online graph matching](http://match.grew.fr) tool.
 The command is:
 
 `grew grep -pattern <pattern_file> -node_id <id> -i <corpus_file>`

@@ -164,7 +164,7 @@ labels {
   nsubj, nsubj:caus, nsubj:expl, nsubjpass, nsubj:pass, % nsubjpass/V1 and nsubj:pass/V2
   nsubj:nc, nsubj:own, nsubj:lvc,
   nummod, nummod:gov, nummod:entity,
-  obl, obl:agent, obl:tmod, obl:npmod, obl:arg, obl:loc, obl:gmod, obl:patient, obl:cau, obl:own, obl:prep,
+  obl, obl:agent, obl:tmod, obl:npmod, obl:arg, obl:loc, obl:gmod, obl:patient, obl:cau, obl:own, obl:prep, obl:mod,
   orphan,
   parataxis, parataxis:hashtag, parataxis:deletion, parataxis:restart, parataxis:discourse,parataxis:nsubj,parataxis:insert,parataxis:obj,parataxis:newsent,
   punct,

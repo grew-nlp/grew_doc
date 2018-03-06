@@ -15,7 +15,7 @@ For the previous syntax, view [old_grs](../old_grs) page.
 
 ## Global structure
 A GRS is composed by a set of declarations that may be provided in several files.
-These files are expected to used the `.grs` of the `.dom` file extension.
+These files are expected to used the `.grs` or the `.dom` file extension.
 
 Five kinds of declarations can be used:
 
@@ -99,18 +99,26 @@ Strategy descriptions are defined by the following syntax:
       | If (S, S_1, S_2)      % If S is productive then it is equivalent to S_1 else it is equivalent to S_2
 ~~~
 
-It is common to compute one normal form with respect to a strategy `S`.
-For instance, when one knows that the strategy is confluent, it is a much more efficient way to compute the unique normal form.
-Some syntactic sugar is provided for this:
-~~~grew
-  Onf (S) ≜ Pick (Iter (S))   % Onf stands for 'One normal form'
-~~~
-
 Other constructor are provided for some strategies
 ~~~grew
-  Empty ≜ Seq()               % The Empty strategy returns the input graph
+  Empty ≜ Seq()               % The Empty strategy always returns the input graph
   Try (S) ≜ If (S, S, Empty)  % Equivalent to S if S is productive else it returns the input graph
 ~~~
+
+### Computing one normal form
+To compute only one normal form with a strategy `S`, one can used the strategy: `Pick (Iter (S))`:
+the strategy `Iter (S)` computes the full set of normal forms and the `Pick` operator choses one of them.
+But this may be not efficient if the number of normal forms is high.
+
+For this case, another implementation of the rewriting is available with the operator `Onf` (the name stands for 'One normal form').
+With this operator, only one normal form is built, and so :
+
+~~~grew
+  Onf (S) = Pick (Iter (S))
+~~~
+
+:warning: But `Onf` can be safely used only if the strategy is terminating. More info about this on the [rewriting page](../rewriting).
+
 
 
 
@@ -170,7 +178,7 @@ has the same meaning as
 
 ## A complete example
 
-We consider the same GRS defined through the multi-file mechanism and with a single files.
+We consider the same GRS defined through the multi-file mechanism and with a single file.
 
 ### Multi-file declaration
 Consider a folder with the five files:

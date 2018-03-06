@@ -9,4 +9,4 @@ title = "pattern"
 
 # Pattern syntax
 
-One way to learn the syntax of patterns in grew is to follow the tutorial part of the [Online Graph Matching](http://match.grew.fr) tool.
+One way to learn the syntax of patterns in grew is to follow the tutorial part of the [Grew-match](http://match.grew.fr) tool.

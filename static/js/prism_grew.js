@@ -16,7 +16,7 @@ Prism.languages.grew = {
 		}
 	],
 	'operator': {
-			pattern: /<<|<|>|>>|-\[|\]->|==>|=\[|\]=>/,
+			pattern: /<<|<|>|>>|:<|:>|->|-\[|\]->|==>|=\[|\]=>/,
 			greedy:true
 		},
 };

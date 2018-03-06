@@ -30,8 +30,6 @@ The full command for this mode:
 
 Required arguments for this mode are:
 
-where:
-
  * `<grs_file>` is the main file which describes Graph Rewriting System
  * `<input_file>`: describes the input data (CoNLL file of gr file)
  * `<output_file>`: is the name of the output file (CoNLL file)
@@ -39,6 +37,7 @@ where:
 Optional argument is:
 
  * `-strat <name>`: the strategy used in transformation (default value: `main`)
+ * `-safe_commands`: make rewriting process fail in case of [ineffective command](../commands/#effective-commands)
 
 ---
 
@@ -57,24 +56,23 @@ Optional arguments:
 ---
 # Grep mode
 
-This mode corresponds to the command line version of the [Online graph matching](http://match.grew.fr) tool.
+This mode corresponds to the command line version of the [Grew-match](http://match.grew.fr) tool.
 The command is:
 
-`grew grep -pattern <pattern_file> -node_id <id> -i <corpus_file>`
+`grew grep -pattern <pattern_file> -i <corpus_file>`
 
 where:
 
   * `<pattern_file>` is a file which describes a pattern
-  * `<id>` is the name of a node identifier declared in the pattern
   * `<corpus_file>` is the corpus in which the search is done
 
-The output is a list of lines, one for each occurrence of the pattern in the corpus.
+The output is given in JSON format.
 
 ## Example
 
 With the following files:
 
- * The surface sequoia version 7.0: `sequoia.surf.conll` ([Download](https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tags/sequoia-7.0/sequoia.surf.conll)),
+ * The surface sequoia version 8.0: `sequoia.surf.conll` ([Download](https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tags/sequoia-8.0/sequoia.surf.conll)),
  * A pattern file with the code below: `subcat.pat` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/grep/subcat.pat))
 
 ```
@@ -87,17 +85,41 @@ pattern {
 
 The command:
 
-`grew grep -pattern subcat.pat -node_id V -i sequoia.surf.conll`
+`grew grep -pattern subcat.pat -i sequoia.surf.conll`
 
-produces the following output:
+produces the following JSON output:
 
+```json
+[
+  {
+    "sent_id": "Europar.550_00496",
+    "matching": { "V": "16", "DE": "19", "A": "14" }
+  },
+  {
+    "sent_id": "emea-fr-test_00478",
+    "matching": { "V": "33", "DE": "32", "A": "35" }
+  },
+  {
+    "sent_id": "emea-fr-test_00438",
+    "matching": { "V": "20", "DE": "21", "A": "22" }
+  },
+  {
+    "sent_id": "annodis.er_00441",
+    "matching": { "V": "16", "DE": "20", "A": "18" }
+  },
+  {
+    "sent_id": "annodis.er_00240",
+    "matching": { "V": "12", "DE": "13", "A": "11" }
+  },
+  {
+    "sent_id": "annodis.er_00040",
+    "matching": { "V": "42", "DE": "50", "A": "47" }
+  }
+]
 ```
-annodis.er_00040	41
-annodis.er_00240	12
-annodis.er_00441	14
-emea-fr-test_00438	19
-emea-fr-test_00478	31
-Europar.550_00496	14
-```
 
-This means that the pattern described in the file `subcat.pat` was found 6 times in the corpus, each line gives the sentence identifier and the position of node matched by the node `V` of the pattern.
+This means that the pattern described in the file `subcat.pat` was found 6 times in the corpus, each item gives the sentence identifier and the position of nodes matched by the pattern.
+
+Note that two other options exist (`-html` and `-dep_dir <directory>`).
+The first one produces a new `html` field in each JSON item with the sentence where words impacted by the pattern are in a special HTML span with class `highlight`.
+The second one produces a new file in the folder `directory` with the representation of the sentence with highlighted part (as in [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format (usable with [Dep2pict](http://dep2pict.loria.fr)).

@@ -26,7 +26,7 @@ A GTK interface is available (again on Linux and Mac OS&nbsp;X, untested on Wind
   * Test
     * Try the command `grew version`
     * In case of trouble, make sure that your PATH contains `~/.opam/4.06.0/bin` and try again
-    * In trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
+    * If trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 
   * Updating when **Grew** is already installed:
     * `apt-get update && apt-get upgrade`

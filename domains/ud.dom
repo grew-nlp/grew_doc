@@ -160,7 +160,7 @@ labels {
   mwe, fixed, % mwe/V1 and fixed/V2
   name,
   neg,
-  nmod, nmod:npmod, nmod:poss, nmod:tmod, nmod:gmod, nmod:comp, nmod:cau, nmod:clas, nmod:abl, nmod:part, nmod:dat, nmod:cmp, nmod:pmod, nmod:red, nmod:arg, nmod:ref, nmod:att, nmod:obl, nmod:agent, nmod:obllvc, nmod:attlvc,
+  nmod, nmod:npmod, nmod:poss, nmod:tmod, nmod:gmod, nmod:comp, nmod:cau, nmod:clas, nmod:abl, nmod:part, nmod:dat, nmod:cmp, nmod:pmod, nmod:red, nmod:arg, nmod:ref, nmod:att, nmod:obl, nmod:agent, nmod:obllvc, nmod:attlvc, nmod:range,
   nsubj, nsubj:caus, nsubj:expl, nsubjpass, nsubj:pass, % nsubjpass/V1 and nsubj:pass/V2
   nsubj:nc, nsubj:own, nsubj:lvc,
   nummod, nummod:gov, nummod:entity,
@@ -281,6 +281,4 @@ labels {
   E:xcomp,  E:xcomp:a, E:xcomp:ds,
 
   E:root, E:exroot, % UD_Russian-SynTagRus
-
-  FAIL_obj.cpl, FAIL_ats,
 }

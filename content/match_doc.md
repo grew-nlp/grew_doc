@@ -10,10 +10,10 @@ Categories = ["Development","GoLang"]
 
 # Grew-match: Online Graph Matching
 
-**Grew-match** is a one page online web application for searching graph pattern in a TreeBanks.
-In the current version, the TreeBanks available are:
+**Grew-match** is a one page online web application for searching graph patterns in treebanks.
+In the current version, the treebanks available are:
 
- * The 102 TreeBanks of the version 2.1 of [Universal Dependencies](http://universaldependencies.org)
+ * The 102 treebanks of the version 2.1 of [Universal Dependencies](http://universaldependencies.org)
  * Some other versions of French Universal Dependencies
  * The French Sequoia corpus (with and without deep syntactic annotations)
 
@@ -24,11 +24,11 @@ In the current version, the TreeBanks available are:
  1. Click on `Search`
 
 The number of items is displayed and the first 10 items can be explored.
-If you want to see more the next 10 items, click on `Get more results`.
+If you want to see the next 10 items, click on `Get more results`.
 
 To limit server usage, only the first 1000 items are computed.
-It the searched pattern is found more then 1000 times, the amount of corpora used to find the first 1000 items is reported.
-For instance, if you search for a `nsubj` relation, the output message is `More than 1000 results found in 6.01% of the corpus`.
+If the searched pattern is found more then 1000 times, the amount of corpus used to find the first 1000 items is reported.
+For instance, if you search for a `nsubj` relation in the UD_English corpus, the output message is `More than 1000 results found in 6.01% of the corpus`.
 This means that the first 1000 items were found in 6.01% of the 16,622 sentences of the UD_English corpus.
 
 ## Learning syntax
@@ -48,13 +48,37 @@ For instance, if you want to search for the word _maison_, you write:
  * in UD: `pattern { N [form="maison"] }`
  * in Sequoia: `pattern { N [phon="maison"] }`
 
-## Access to CoNNL-U specificities
-Additional information available in the CoNNL-U format can be accesses through special features:
+## Display options
+Below the textarea, a few checkboxes are available to choose the information to be displayed
 
-  * Enhanced dependencies are written with the prefix `E:`
+ * `lemma`: display lemma (CoNLL column 3)
+ * `upos`: display upos (CoNLL column 4)
+ * `xpos`: display xpos (CoNLL column 5)
+ * `features`: display other features (CoNLL column 6)
+ * `CoNNL-U`: Access to CoNNL-U specificities (see below)
+ * `shuffle`: Shuffle the set of sentences before searching the pattern (useful to search randomly for examples in a corpus)
+ * `context`: Show the previous and the following sentences (of course, this is useful only on corpora where original sentences ordering is preserved)
+
+## Access to CoNNL-U specificities
+Additional information available in the CoNNL-U format can be shown or accessed through special features:
+
   * Features of column 10 (MISC) are shown with the prefix `_MISC_`
   * Empty nodes have a feature `_UD_empty=Yes`
   * Multiword tokens are described on the first element with features `_UD_mw_fusion` and `_UD_mw_span`
 
+These special features can be used in patterns.
+For instance, searching for an empty node which is a verb:
+```grew
+pattern { N[upos=VERB, _UD_empty=Yes] }
+```
+
+Enhanced dependencies are displayed in blue below the sentence.
+In pattern, a enhanced dependency can be searched with the prefix `E:`.
+Searching for a enhanced `obl` relation in UD_English without a non-enhanced counterpart (see [output](http://match.grew.fr/?custom=5a9e6ac179d73&corpus=UD_English) in UD_English):
+```grew
+pattern { N -[E:obj]-> M }
+without { N -[obj]-> M }
+```  
+
 ## Contact
-For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@loria.fr?subjectGrew-match) or open an issue on the [GitLab project](http://gitlab.inria.fr/grew/grew_web/issues) (you will have to register).
+For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@loria.fr?subject=Grew-match) or open an issue on the [GitLab project](http://gitlab.inria.fr/grew/grew_match/issues) (you will have to register).

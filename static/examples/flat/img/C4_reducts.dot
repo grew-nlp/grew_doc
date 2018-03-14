@@ -1,0 +1,7 @@
+digraph G {
+  rankdir=LR
+  node [shape=none]
+  C4 -> {G1; G2}
+  G2 -> {G3; G4}
+  {G1; G3; G4} -> CH4
+}

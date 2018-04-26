@@ -5,23 +5,24 @@ title = "installation"
 
 # Grew installation
 
+The installation proceeds in two steps: first, installation of the native library and second, installation of the Python library
+
+Note: if you use docker, a `dockerFile` is available with everything installed in it, see [Docker page](../docker).
+
+## Step 1: native library
+
 **Grew** is implemented with the [Ocaml](http://ocaml.org) language.
-**Grew** is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should be possible, but this is untested).
+It is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should be possible, but this is untested).
 
-A GTK interface is available (again on Linux and Mac OS&nbsp;X, untested on Windows) separately.
-
-:warning: If you run into trouble using the instructions of this page, feel free to open an issue on [GitLab](https://gitlab.inria.fr/grew/grew_doc/issues).
-
-
-## Option 1: Basic installation without GTK interface
+:warning: If you run into trouble using the instructions of this page, feel free to [open an issue on GitLab](https://gitlab.inria.fr/grew/grew_doc/issues) or to [contact the developer](mailto:Bruno.Guillaume@inria.fr?subject=Install%20of%20Grew).
 
 ### On Linux
   * First installation
     * `apt-get install wget opam m4 aspcud` # Prerequisite
     * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
-    * ```eval `opam config env` ``` # Make Ocaml ready to use know
+    * ```eval `opam config env` ``` # Make Ocaml ready to use now
     * `opam remote add talc "http://talc2.loria.fr/semagramme/opam"` # Add the talc OPAM repository
-    * `opam install grew` # Install Grew
+    * `opam install grew grewpy` # Install Grew
 
   * Test
     * Try the command `grew version`
@@ -40,9 +41,9 @@ A GTK interface is available (again on Linux and Mac OS&nbsp;X, untested on Wind
   * First installation
     * `sudo port install wget opam aspcud`  # Prerequisite
     * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
-    * ```eval `opam config env` ``` # Make Ocaml ready to use know
+    * ```eval `opam config env` ``` # Make Ocaml ready to use now
     * `opam remote add talc "http://talc2.loria.fr/semagramme/opam"` # Add the talc OPAM repository
-    * `opam install grew` # Install Grew
+    * `opam install grew grewpy` # Install Grew
 
   * Test
     * Try the command `grew version`
@@ -53,28 +54,14 @@ A GTK interface is available (again on Linux and Mac OS&nbsp;X, untested on Wind
     * `sudo port sync && sudo port upgrade`
     * `opam update && opam upgrade`
 
-## Option 2: Installation of the GTK interface
+## Step 2: The Python library
 
-We suppose that the basic version (Option 1) is already installed.
+With Python 3, use the following command:
+`pip install grew`
 
-### Linux
-  * Install GUI interface
-    * `apt-get install graphviz pkg-config librsvg2-dev libwebkitgtk-dev libglade2-dev libgtk2.0-dev`
-    * `opam install grew_gui`
+Note: depending on your local installation, you may have to use `pip3` or `pip3.5`.
 
-  * Test
-    * Run `Grew gui` to run the GTk interface
-    * In case of trouble, [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
+# Other available installation
 
-### On Mac OS&nbsp;X
-  * Prerequisite Mac application for running X11 GUI.
-    * Install [XQuartz](http://www.xquartz.org/)
-
-  * Install GUI interface
-    * `sudo port install graphviz librsvg libglade2 webkit-gtk`
-    * `opam install grew_gui`
-
-  * Test
-    * Run `Grew gui` to run the GTk interface
-    * In case of trouble, [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
-
+ * A Gtk user interface is available, see [here](../gtk).
+ * A docker file with the Python library ready to be used is available [here](../docker).

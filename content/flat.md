@@ -9,9 +9,8 @@ There are two basic ways to represent *flat* structures:
 1. a single-headed structure: for instance the graph `SH6` below on the left for a 6 words flat structure
 1. a chained stucture: for instance the graph `C6` below on the right for the same 6 words flat structure
 
-|     |     |
-|:---:|:---:|
 | SH6 |  C6 |
+|:---:|:---:|
 | ![SH6](/examples/flat/img/SH6.svg) | ![alt C6](/examples/flat/img/C6.svg) |
 
 We will see how to convert from one to the other with Graph Rewriting.

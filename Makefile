@@ -24,7 +24,7 @@ talc2:
 #	hugo
 #	scp -r public/* $(stalc2)/www/grew_doc/
 
-lchn: build
+lchn:
 	hugo
 	scp -r public/* grew.lchn.fr:/home/guillaum/www/doc/
 

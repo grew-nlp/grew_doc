@@ -7,6 +7,12 @@ Categories = ["Development","GoLang"]
 Tags = ["Development","golang"]
 +++
 
+# Running Grew
+
+**Grew** can be used from Python. See [Tutorial page](../tuto) for basic usage from Python.
+The remaining of this page presents the command line program.
+
+
 The command to run **Grew** is: `grew <subcommand> [<args>]`
 
 Available subcommands are:
@@ -22,7 +28,7 @@ Available subcommands are:
 
 # Transform mode
 
-In this mode, **Grew** apply a Graph Rewrinting System to a graph of a set of graphs.
+In this mode, **Grew** apply a Graph Rewriting System to a graph or a set of graphs.
 
 The full command for this mode:
 
@@ -44,14 +50,14 @@ Optional argument is:
 # GTK interface
 
 The command to run the GTK interface: `grew gui <args>`.
-It supposes that you have installed the `grew_gui` opam packages (see [option 2 in Installation page](../installation#option-2-installation-of-the-gtk-interface)).
+It supposes that you have installed the `grew_gui` opam packages (see [GUI installation page](../gtk)).
 
 Optional arguments:
 
  * `-grs <grs_file>`: load the given file
  * `-i <input_file>`: input data (graph or corpus) loaded in GUI
  * `-strat <name>`: the strategy selected in the interface (default: `main`)
- * `-main_feat <feat_name_list>` set the list of feature names used ad the *main* feat in graph visualisation
+ * `-main_feat <feat_name_list>` set the list of feature names used ad the *main* feat in graph visualization
 
 ---
 # Grep mode

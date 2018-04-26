@@ -13,10 +13,14 @@ Categories = ["Development","GoLang"]
 **Grew** is a Graph Rewriting tool dedicated to applications in Natural Language Processing (NLP). It can manipulate many kinds of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS) but it can be used to represent any graph-based structure.
 
 ## News
-**2017/12/14:** New release of version **0.46**. Main changes are:
+**April 2018:** Publication of the book [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
+The chapter 1 is [available from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf).
 
- * GTK interface is proposed as a separate package and so Grew without GUI is much more easy to [install](../install)
- * Command line arguments were revisited (see [Run Grew page](../run))
+<center>
+<a href="https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348"><img src="https://media.wiley.com/product_data/coverImage300/66/17863009/1786300966.jpg" alt="Book cover" style="width: 200px;"/></a>
+</center>
+
+**2018/03/18:** New release of version **0.47**. See [What's new](../whats) for changes
 
 ## A first taste of Grew
 The easiest way to try and test **Grew** is to use one of the two online interfaces.

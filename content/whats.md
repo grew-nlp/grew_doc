@@ -8,12 +8,24 @@ menu = "main"
 
 +++
 
-* The version numbers `x.y.z` are synchronized such that `x`and `y`are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). `z` is linked to bug fixes and may vary.
+* The version numbers `x.y.z` are synchronized such that `x` and `y` are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). `z` is linked to bug fixes and may vary.
 * The symbol ":warning:" indicates changes that may break backward compatibility.
 
 ---
 
-# **last release** Version 0.46 on December 14, 2017
+# **last release** Version 0.47 on March 13, 2018
+ * Add `grewpy` executable for Python library
+ * `-safe_commands` option
+
+More detailled informations in files `CHANGES.md` for each sub-project:
+[libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
+[grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md),
+[grew_gui](https://gitlab.inria.fr/grew/grew_gui/blob/master/CHANGES.md)
+
+
+---
+
+# Version 0.46 on December 14, 2017
 
  * GTK interface is proposed as a separate package and so **Grew** without GUI is much more easy to install
  * Command line arguments were revisited (see [Run Grew page](../run))

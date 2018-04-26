@@ -23,7 +23,7 @@ RUN opam remote add talc "http://talc2.loria.fr/semagramme/opam" \
 		&& pip3 install grew
 ```
 
-Then, you can build the container with the command:
+Then, you can build the image with the command:
 
 `docker build -t grew .`
 
@@ -33,7 +33,7 @@ And finally, run it with:
 
 ## Test
 
-Inside the container (after the command `docker run -it grew bash`), run:
+Inside a container (after the command `docker run -it grew bash`), run:
 
  * `python3`
  * `import grew`
@@ -47,4 +47,4 @@ connected to port: 8888
 ```
 
 and **Grew** is ready to be used.
-See [tutorial page](../tuto) for simple examples.
+See [run Python library](../tuto) page for simple examples.

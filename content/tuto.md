@@ -1,7 +1,8 @@
 
-# Examples from the book "Application of Graph Rewriting to Natural Language Processing"
+# Running the Grew Python library
 
-The page below follows the first chapter which can be [downloaded in PDF from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf).
+Examples below are taken from first chapter of the book [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
+The chapter can be [downloaded in PDF from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf).
 
 In Chapter 1 of the book (since 1.5), examples given use the Grew Python library.
 Here are the necessary steps to run the book's examples.

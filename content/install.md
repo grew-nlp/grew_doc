@@ -18,9 +18,9 @@ It is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should 
 
 ### On Linux
   * First installation
-    * `apt-get install wget opam m4 aspcud` # Prerequisite
+    * `apt-get install opam m4 aspcud` # Prerequisite
     * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
-    * ```eval `opam config env` ``` # Make Ocaml ready to use now
+    * ```eval `opam config env` ``` # Make Ocaml ready to be used now
     * `opam remote add grew "http://opam.grew.fr"` # Add the grew OPAM repository
     * `opam install grew grewpy` # Install Grew
 
@@ -36,12 +36,16 @@ It is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should 
 ### On Mac OS&nbsp;X
   * Prerequisite Mac applications
     * Install [XCode](https://developer.apple.com/xcode/)
-    * Install [MacPorts](http://www.macports.org/)
+    * Install **one** of the two package manager:
+      * either [MacPorts](http://www.macports.org/)
+      * or [Brew](https://brew.sh/)
 
   * First installation
-    * `sudo port install wget opam aspcud`  # Prerequisite
+    * Prerequisite: one of the two alternatives:
+      * `sudo port install opam aspcud`  # If you choose MacPorts
+      * `sudo brew install opam aspcud`  # If you choose Brew
     * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
-    * ```eval `opam config env` ``` # Make Ocaml ready to use now
+    * ```eval `opam config env` ``` # Make Ocaml ready to be used now
     * `opam remote add talc "http://opam.grew.fr"` # Add the grew OPAM repository
     * `opam install grew grewpy` # Install Grew
 
@@ -51,7 +55,8 @@ It is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should 
     * In trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 
   * Updating when **Grew** is already installed:
-    * `sudo port sync && sudo port upgrade`
+    * If MacPorts is used: `sudo port sync && sudo port upgrade`
+    * If Brew is used: `sudo brew update && sudo brew upgrade`
     * `opam update && opam upgrade`
 
 ## Step 2: The Python library
@@ -60,6 +65,8 @@ With Python 3, use the following command:
 `pip install grew`
 
 Note: depending on your local installation, you may have to use `pip3` or `pip3.5`.
+
+For upgrading: `pip install grew --upgrade`
 
 # Other available installation
 

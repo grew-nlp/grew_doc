@@ -1,7 +1,7 @@
 selfdoc:
 	@echo " * make start --> run locally the server"
 	@echo " * make stop  --> stop the server"
-	@echo " * make talc2 --> install on the production server"
+	@echo " * make lchn  --> install on the production server"
 	@echo " * make build --> build the website	"
 
 start:
@@ -17,12 +17,6 @@ build:
 	@make -C static/deep_syntax run
 	@make -C static/deep_syntax img
 	hugo
-
-talc2:
-	@echo "OBSOLETE"
-#	tar cf - public | ssh $(stalc2)/www/grew_doc tar xf -
-#	hugo
-#	scp -r public/* $(stalc2)/www/grew_doc/
 
 lchn:
 	hugo

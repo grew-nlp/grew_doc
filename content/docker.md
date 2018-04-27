@@ -18,7 +18,7 @@ RUN sudo apt-get update \
 		&& sudo apt-get upgrade --assume-yes \
 		&& sudo apt-get install python3-pip --assume-yes
 
-RUN opam remote add talc "http://talc2.loria.fr/semagramme/opam" \
+RUN opam remote add grew "http://opam.grew.fr" \
 		&& opam install grew grewpy \
 		&& pip3 install grew
 ```

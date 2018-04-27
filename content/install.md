@@ -21,7 +21,7 @@ It is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should 
     * `apt-get install wget opam m4 aspcud` # Prerequisite
     * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
     * ```eval `opam config env` ``` # Make Ocaml ready to use now
-    * `opam remote add talc "http://talc2.loria.fr/semagramme/opam"` # Add the talc OPAM repository
+    * `opam remote add grew "http://opam.grew.fr"` # Add the grew OPAM repository
     * `opam install grew grewpy` # Install Grew
 
   * Test
@@ -42,7 +42,7 @@ It is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should 
     * `sudo port install wget opam aspcud`  # Prerequisite
     * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
     * ```eval `opam config env` ``` # Make Ocaml ready to use now
-    * `opam remote add talc "http://talc2.loria.fr/semagramme/opam"` # Add the talc OPAM repository
+    * `opam remote add talc "http://opam.grew.fr"` # Add the grew OPAM repository
     * `opam install grew grewpy` # Install Grew
 
   * Test

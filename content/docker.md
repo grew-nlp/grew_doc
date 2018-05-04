@@ -39,7 +39,7 @@ Inside a container (after the command `docker run -it grew bash`), run:
  * `import grew`
  * `grew.init()`
 
-You should have some output like:
+You should have an output like:
 
 ```
 connected to port: 8888

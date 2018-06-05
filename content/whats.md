@@ -8,19 +8,24 @@ menu = "main"
 
 +++
 
-* The version numbers `x.y.z` are synchronized such that `x` and `y` are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). `z` is linked to bug fixes and may vary.
+* The version numbers `x.y.z` are synchronized such that `x` and `y` are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). The third component `z` is linked to bug fixes and may vary across the 3 sub-projects.
 * The symbol ":warning:" indicates changes that may break backward compatibility.
-
----
-
-# **last release** Version 0.47 on March 13, 2018
- * Add `grewpy` executable for Python library
- * `-safe_commands` option
 
 More detailled informations in files `CHANGES.md` for each sub-project:
 [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md),
 [grew_gui](https://gitlab.inria.fr/grew/grew_gui/blob/master/CHANGES.md)
+
+---
+
+# [**last release**] Version 0.48 on June 5, 2018
+ * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`)
+
+---
+
+# Version 0.47 on March 13, 2018
+ * Add `grewpy` executable for Python library
+ * `-safe_commands` option
 
 
 ---

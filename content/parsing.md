@@ -45,7 +45,7 @@ For instance, the following command:
 
 produces the file [`test.melt`](/parsing/test.melt):
 
-{{< input file="/static/parsing/test.melt" >}}
+{{< input file="static/parsing/test.melt" >}}
 
 ## Parsing with the GRS
 
@@ -55,13 +55,13 @@ With the file [`test.melt`](/parsing/test.melt) described above, the following c
 
 The output file is [`test.surf.conll`](/parsing/test.surf.conll):
 
-{{< input file="/static/parsing/test.surf.conll" >}}
+{{< input file="static/parsing/test.surf.conll" >}}
 
 which encodes the syntactic structure:
 
-![Dependency structure](/parsing/test.svg)
+![Dependency structure](/parsing/test.surf.svg)
 
-It is also possible to runs a GTK interface in which you can explore step by step rewriting of the input sentence:
+It is also possible to run a GTK interface in which you can explore step by step rewriting of the input sentence:
 
 `grew gui -grs POStoSSQ/grs/surf_synt_main.grs -i test.melt`
 
@@ -71,7 +71,7 @@ We will suppose here that the input file is already split in sentences (one by l
 
 Suppose that the file [`tdm80_ch01.txt`](/parsing/tdm80_ch01.txt) contains the following data:
 
-{{< input file="/static/parsing/tdm80_ch01.txt" >}}
+{{< input file="static/parsing/tdm80_ch01.txt" >}}
 
 The parsing can be done with the same two steps process:
 

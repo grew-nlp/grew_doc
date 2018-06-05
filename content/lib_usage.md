@@ -23,7 +23,7 @@ The file with the code below: `lib_usage.ml` ([Download](/lib_usage/lib_usage.ml
 `ocamlbuild -use-ocamlfind -pkgs 'libgrew, libgrew, conll, yojson, log, containers, str, ANSITerminal' lib_usage.native`
 
 ```ocaml
-{{< input file="/static/lib_usage/lib_usage.ml" >}}
+{{< input file="static/lib_usage/lib_usage.ml" >}}
 ```
 
 
@@ -47,6 +47,6 @@ The converted version of `graph1` is `graph1__ssq_to_dsq`.
 Again, the output of `ssq_to_dsq` must be converted before being used as an input to the next GRS `dsq_to_deep` (see below).
 
 ```ocaml
-{{< input file="/static/lib_usage/lib_usage_0.46.ml" >}}
+{{< input file="static/lib_usage/lib_usage_0.46.ml" >}}
 ```
 

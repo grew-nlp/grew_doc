@@ -16,7 +16,7 @@ For the sentence:
 
 - "*La souris a été mangée par le chat.*" ["*The mouse was eaten by the cat.*"].
 
-the deep structure is: ![Deep dependency structure](/deep_syntax/test.deep.svg)
+the deep structure (following Deep-sequoia guidelines) is: ![Deep dependency structure](/deep_syntax/test.deep.svg)
 
 With **Grew**, this representation can be computed from the surface syntax in two steps:
 
@@ -54,7 +54,6 @@ wget https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tools/sequoia_proj.
 
 The deep structure is then computed with the command:
 
-`grew transform -grs sequoia_proj.grs -strat deep -i test.deep_and_surf.conll -o test.deep.conll`
 `grew transform -grs sequoia_proj.grs -strat deep -i test.deep_and_surf.conll -o test.deep.conll`
 
 The output [`test.deep.conll`](/deep_syntax/test.deep.conll) is given below (code and picture):

@@ -18,8 +18,8 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 
 ---
 
-# [**last release**] Version 0.48 on June 5, 2018
- * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`)
+# [**last release**] Version 0.48 on June 19, 2018
+ * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`). See [here](../features#note-about-backward-compatibility) for more information.
 
 ---
 

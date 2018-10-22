@@ -1,0 +1,5 @@
+lemma
+%------------
+acheter
+boire
+manger

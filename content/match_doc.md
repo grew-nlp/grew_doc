@@ -13,9 +13,12 @@ Categories = ["Development","GoLang"]
 **Grew-match** is a one page online web application for searching graph patterns in treebanks.
 In the current version, the treebanks available are:
 
- * The 102 treebanks of the version 2.1 of [Universal Dependencies](http://universaldependencies.org)
+ * The 122 treebanks of the version 2.2 of [Universal Dependencies](http://universaldependencies.org)
+ * The 122 treebanks of the version 2.1 of Universal Dependencies
  * Some other versions of French Universal Dependencies
  * The French Sequoia corpus (with and without deep syntactic annotations)
+
+If you want to use it on some other corpora, you can run your own Grew-match following the instructions on [Local installation of Grew-match](../install_match).
 
 ## Basic usage
 
@@ -36,17 +39,26 @@ A [tutorial](http://match.grew.fr/?tutorial=yes) with a progressive sequence of 
 You may also explore snippets given on the right of the text area to learn with other examples.
 
 ## About CoNLL field names
-The fields 2, 3, 4 and 5 of CoNLL structure are named differently in UD and in Sequoia
+The fields 2, 3, 4 and 5 of CoNLL structure are considered as features with the following feature names.
 
 | CoNLL field     |    2   |    3    |    4   |    5   |
 |-----------------|:------:|:-------:|:------:|:------:|
-| Name in UD      | `form` | `lemma` | `upos` | `xpos` |
-| Name in Sequoia | `phon` | `lemma` |  `cat` |  `pos` |
+| Name            | `form` | `lemma` | `upos` | `xpos` |
 
-For instance, if you want to search for the word _maison_, you write:
+For instance, if you want to search:
 
- * in UD: `pattern { N [form="maison"] }`
- * in Sequoia: `pattern { N [phon="maison"] }`
+  * for the word _is_, you write: `pattern { N [form="is"] }`
+  * for the lemma _be_, you write:  `pattern { N [lemma="be"] }`
+
+**NB** In former version of the Grew code, columns were associated to feature names according to the table below.
+
+| CoNLL field     |    2   |    3    |    4   |    5   |
+|-----------------|:------:|:-------:|:------:|:------:|
+| Name            | `phon` | `lemma` | `cat` | `pos` |
+
+In order to keep backward compatibility, the features names `phon`, `cat` and `pos` are automatically replaced by `form`, `upos` and `xpos` respectively.
+As a consequence, it is not recommended to use the 3 names `phon`, `cat` and `pos` in new GRS.
+
 
 ## Display options
 Below the textarea, a few checkboxes are available to choose the information to be displayed

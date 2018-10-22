@@ -18,7 +18,16 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 
 ---
 
-# [**last release**] Version 0.48 on June 19, 2018
+# [**last release**] Version 1.0 on September 10, 2018
+  * :warning: Change lexical rules syntax and lexicon representation (See [About new lexical rules syntax](../lexicons_change))
+  * Handling of Parseme's column 11
+  * Large code cleaning
+  * Fix [#4](https://gitlab.inria.fr/grew/grew/issues/4)
+  * Fix [#5](https://gitlab.inria.fr/grew/grew/issues/5)
+
+---
+
+# Version 0.48 on June 19, 2018
  * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`). See [here](../features#note-about-backward-compatibility) for more information.
 
 ---

@@ -1,0 +1,22 @@
+rule obl_loc {
+  pattern {
+    e: VERB -[obl]-> OBL; OBL -[case]-> ADP;
+    VERB [lemma = loc_verb.lemma];
+    ADP [lemma = loc_prep.lemma];
+  }
+  commands { del_edge e; add_edge VERB -[obl:loc]-> OBL; }
+}
+#BEGIN loc_verb
+lemma
+%--------------
+aller
+venir
+#END
+#BEGIN loc_prep
+lemma
+%--------------
+à
+dans
+sur
+vers
+#END

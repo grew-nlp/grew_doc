@@ -13,9 +13,6 @@ features {
   % field 5 of CONLL format is interpreted as the "pos" feature, unused in tiger
   xpos: *;
 
-  % In Tiger, sentence identifier are given through a identifer "id_pos", and transfomed to a feature sentid on the first node in this CONLL description.
-  sentid: *;
-
   % Features grepped from the English Corpus
   Case: Nom, Acc, Abs, Erg, Dat, Gen, Voc, Loc, Ins, Abl, Ine, Ade, All, Par, Ill, Ela, Ess, Abe, Com, Tra, Advb, Con, NomAcc, Lat, Tem, Obl, Add, Cau, Ter, Comp, Sup, Ben, Sub, Equ, Del, Dis, Prl, Mal, Egr, Per, Cns, Apr,
     "Acc,Erg", "Acc,Ine", "Acc,Ins", "Acc,Dat", "Acc,Nom", "Dat,Gen", "Acc,Gen", "Gen,Nom", "Erg,Gen";
@@ -128,6 +125,9 @@ features {
   Morph: VFin, VPar, VInf;
   Emphatic: Yes;
   Agglutination: Nagl, Agl;
+
+  % handling of MWE/NE nodes
+  kind:*; label:*; mwepos:*; criterion:*;
 }
 
 % ====================================================================================================
@@ -1174,6 +1174,8 @@ E:advcl:dess,
 "E:obl:över",
 "E:obl:förrän",
 
+E:root, E:exroot, % UD_Russian-SynTagRus
 
-  E:root, E:exroot, % UD_Russian-SynTagRus
+MWE, NE, % Parseme
+
 }

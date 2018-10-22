@@ -86,6 +86,10 @@ maison	Fem
 ### Try it!
 
 The file [`set_gender.py`](../rule/set_gender.py) below presents a self-contained example of rewriting with the lexical rule above.
+It supposes that the grew Python library is installed (see [Installarion page](../install)).
+
+:warning: The tabulation is not well interpreted when using copy/paste into interactive Python session.
+That's why tabulations are replaced by explicit `\t` in the Python code below.
 
 {{< python file="/static/rule/set_gender.py" >}}
 

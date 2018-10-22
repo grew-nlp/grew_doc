@@ -15,11 +15,11 @@ rule set_gender {
   commands { N.Gender = lex.Gender }
 }
 #BEGIN lex
-noun	Gender
+noun\tGender
 %-------------
-garçon	Masc
-maison	Fem
-maison	Masc
+garçon\tMasc
+maison\tFem
+maison\tMasc
 #END
 ''')
 

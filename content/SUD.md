@@ -70,14 +70,14 @@ Tags = ["Development","golang"]
     ![](/_ud_diff/fr-ud-train_11980.svg)
 
  * `fr-ud-train_09113`
-    {{< large file="_ud_diff/fr-ud-train_09113.svg" >}}
     {{< large file="_sud_diff/fr-ud-train_09113.svg" >}}
+    {{< large file="_ud_diff/fr-ud-train_09113.svg" >}}
 
  * `fr-ud-dev_00204`
-    {{< large file="_ud_diff/fr-ud-dev_00204.svg" >}}
     {{< large file="_sud_diff/fr-ud-dev_00204.svg" >}}
+    {{< large file="_ud_diff/fr-ud-dev_00204.svg" >}}
 
  * `fr-ud-dev_00131`
-    {{< large file="_ud_diff/fr-ud-dev_00131.svg" >}}
     {{< large file="_sud_diff/fr-ud-dev_00131.svg" >}}
+    {{< large file="_ud_diff/fr-ud-dev_00131.svg" >}}
 

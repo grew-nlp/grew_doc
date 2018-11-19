@@ -2,7 +2,7 @@
 Tags = ["Development","golang"]
 Description = ""
 date = "2018-02-08T15:07:28+01:00"
-title = "ogm doc"
+title = "grew-match doc"
 menu = "main"
 Categories = ["Development","GoLang"]
 
@@ -13,8 +13,8 @@ Categories = ["Development","GoLang"]
 **Grew-match** is a one page online web application for searching graph patterns in treebanks.
 In the current version, the treebanks available are:
 
- * The 122 treebanks of the version 2.2 of [Universal Dependencies](http://universaldependencies.org)
- * The 122 treebanks of the version 2.1 of Universal Dependencies
+ * The 129 treebanks of the version 2.3 of [Universal Dependencies](http://universaldependencies.org)
+ * The 122 treebanks of the version 2.2 of Universal Dependencies
  * Some other versions of French Universal Dependencies
  * The French Sequoia corpus (with and without deep syntactic annotations)
 
@@ -31,8 +31,8 @@ If you want to see the next 10 items, click on `Get more results`.
 
 To limit server usage, only the first 1000 items are computed.
 If the searched pattern is found more then 1000 times, the amount of corpus used to find the first 1000 items is reported.
-For instance, if you search for a `nsubj` relation in the UD_English corpus, the output message is `More than 1000 results found in 6.01% of the corpus`.
-This means that the first 1000 items were found in 6.01% of the 16,622 sentences of the UD_English corpus.
+For instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus (see [output](http://match.grew.fr/?corpus=UD_French-GSD@2.3&custom=5bf2dfc6824c1)), the message is `More than 1000 results found in 4.91% of the corpus`.
+This means that the first 1000 items were found in 4.91% of the 16,342 sentences of the **UD_French-GSD** corpus.
 
 ## Learning syntax
 A [tutorial](http://match.grew.fr/?tutorial=yes) with a progressive sequence of patterns is available.
@@ -86,7 +86,7 @@ pattern { N[upos=VERB, _UD_empty=Yes] }
 
 Enhanced dependencies are displayed in blue below the sentence.
 In pattern, a enhanced dependency can be searched with the prefix `E:`.
-Searching for a enhanced `obl` relation in UD_English without a non-enhanced counterpart (see [output](http://match.grew.fr/?custom=5a9e6ac179d73&corpus=UD_English) in UD_English):
+Searching for a enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart (see [output](http://match.grew.fr/?custom=5a9e6ac179d73&corpus=UD_English-EWT)):
 ```grew
 pattern { N -[E:obj]-> M }
 without { N -[obj]-> M }

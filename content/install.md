@@ -40,13 +40,11 @@ Note: depending on your local installation, you may have to use `pip3` or `pip3.
 
 ### Step 1: native library
   * Install [XCode](https://developer.apple.com/xcode/)
-  * Install one of the two package managers [MacPorts](http://www.macports.org/) or [Brew](https://brew.sh/)
-  * Install opam and aspcud, one of the two alternatives
-    * `sudo port install opam aspcud`  # If you choose MacPorts
-    * `sudo brew install opam aspcud`  # If you choose Brew
+  * Install the package manager [MacPorts](http://www.macports.org/) (:warning: [Brew](https://brew.sh/) is an alternative only if you do not plan to use the GUI. The package `webkit-gtk` required by the GUI is not available through Brew).
+  * `sudo port install opam aspcud`  # Install opam and aspcud
   * `opam init -a -y --comp 4.06.0` # Download and install Ocaml (4.06.0)
   * ```eval `opam config env` ``` # Make Ocaml ready to be used now
-  * `opam remote add talc "http://opam.grew.fr"` # Add the grew OPAM repository
+  * `opam remote add grew "http://opam.grew.fr"` # Add the grew OPAM repository
   * `opam install grew grewpy` # Install Grew
 
 To verify your installation
@@ -60,7 +58,7 @@ To verify your installation
 With Python 3, use the following command:
 `pip install grew`
 
-Note: depending on your local installation, you may have to use `pip3` or `pip3.5`.
+Note: depending on your local installation, you may have to use something like `pip3` or `pip3.5`.
 
 
 # Upgrade
@@ -75,13 +73,9 @@ When grew is already installed, you can upgrade to the latest version with:
 ### On Mac OSX
 When grew is already installed, you can upgrade to the latest version with:
 
-  * One of the two commands below:
-    * `sudo port sync && sudo port upgrade` # MacPorts
-    * `sudo brew update && sudo brew upgrade` # Brew
+  * `sudo port sync && sudo port upgrade` # MacPorts upgrade
   * `opam update && opam upgrade` # upgrade OCaml part
   * `pip install grew --upgrade` # upgrade Python part
-
-
 
 # Other available installations
 

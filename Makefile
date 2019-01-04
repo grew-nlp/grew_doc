@@ -6,7 +6,7 @@ selfdoc:
 
 start:
 	hugo server -w &
-	open -a firefox -g http://localhost:1313/
+	open -a "Brave Browser" -g http://localhost:1313/
 
 stop:
 	killall hugo

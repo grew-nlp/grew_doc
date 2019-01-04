@@ -7,7 +7,9 @@ hr {
 li {
   margin-left: 10pt;
 }
+
 .section {
+  border-top: 2px solid #B5CFDA;
   margin-left: 0pt;
   font-size: 20pt;
 }

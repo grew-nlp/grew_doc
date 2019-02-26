@@ -1,13 +1,16 @@
 +++
-date = "2018-04-25"
-title = "Gtk installation"
-+++
+date = "2019-02-19T18:02:29+01:00"
+title = "install_gtk"
+menu = "main"
+Categories = ["Development","GoLang"]
+Tags = ["Development","golang"]
+Description = ""
 
-A GTK interface is available (on Linux and Mac OS&nbsp;X, untested on Windows) separately.
++++
 
 # Installation of the GTK interface
 
-We suppose that the basic version ([see install page](../install)) is already installed.
+We suppose that the basic version ([see installation page](../install)) is already installed.
 
 ## Linux
   * Install GUI interface

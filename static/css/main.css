@@ -10,6 +10,8 @@ li {
 
 .section {
   border-top: 2px solid #B5CFDA;
+  margin-top: 10pt;
+  padding-top: 10pt;
   margin-left: 0pt;
   font-size: 20pt;
 }

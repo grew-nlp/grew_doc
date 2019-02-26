@@ -9,6 +9,8 @@ title = "installation"
 It is easy to install on Linux or Mac OS&nbsp;X (installation on Windows should be possible, but this is untested).
 A Python binding is also available.
 
+If you just need to upgrade your installation, please consult the [Upgrade page](../upgrade).
+
 :warning: If you run into trouble using the instructions of this page, feel free to [open an issue on GitLab](https://gitlab.inria.fr/grew/grew_doc/issues) or to [contact the developer](mailto:Bruno.Guillaume@inria.fr?subject=Install%20of%20Grew).
 
 

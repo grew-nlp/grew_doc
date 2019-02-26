@@ -9,8 +9,6 @@ Description = ""
 
 # Dependency parsing
 
-NB: the previous version of this page (with **MElt** tagger) is available [here](../parsing_melt)
-
 **Grew-parse-FR** is natural language parser for French.
 It is composed of a GRS (Graph Rewriting System) which can be used with the Grew software to produce dependency syntax structures from POS-tagged data.
 With a POS-tagger (**Talismane** is recommended), it provides a full parser with sentences as input and dependency structures as output.
@@ -50,8 +48,6 @@ Put the input text in the file `data.txt`
 ## Step 1: POS-tagging
 The parsing system **POStoSSQ** is waiting for a pos-tagged input.
 One easy way to produce such a pos-tagged French sentence is to use [Talismane](http://redac.univ-tlse2.fr/applications/talismane.html).
-It is possible to use another tagger (see [Dependency parsing with MElt](../parsing_melt) if you want to use [MElt](https://gforge.inria.fr/frs/?group_id=481)).
-
 
 Call **Talismane** for tokenisation and POS-tagging with the command:
 
@@ -98,11 +94,16 @@ It is also possible to run a GTK interface in which you can explore step by step
 
 # In case of trouble
 
+## Conversion of Talismane output
 **Talismane** outputs features with disjunction of values in case of ambiguities.
 These disjunction can not be handle with the current parsing system.
 The sed script [`tal2grew.sed`](/parsing/tal2grew.sed) rewrites or removes the disjunction we have discovered so far but this may not be exhaustive.
 
 If there is an error in the **Grew** output, you may have to adapt the Step 3.1 in the sed file (please inform [us](mailto:Bruno.Guillaume@inria.fr) if this is the case, we will update the sed file for other users!).
 
+## Use MElt instead of Talismane
+
+If you didn't manage to use **Talismane**, MElt is an alternative.
+See [Dependency parsing with MElt](../parsing_melt) if you want to use [MElt](https://gforge.inria.fr/frs/?group_id=481)).
 
 

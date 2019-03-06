@@ -44,6 +44,7 @@ s/VS	VS/_	VS/
 # NOTE: this list may not be exhaustive and should be extended if needed
 s/t=P,S/t=pst/
 s/t=J,P/m=ind/
+s/t=I,P/m=ind/
 s/g=f,m//
 s/n=p,s//
 s/p=1,3//

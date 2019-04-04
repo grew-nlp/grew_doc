@@ -18,7 +18,17 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 
 ---
 
-# [**last release**] Version 1.1 on November 23, 2018
+# [**last release**] Version 1.2 on March 26, 2019
+  * Edge label can be viewed as feature structure "x:y" <=> "1=x, 2=y"
+  * Add `global` section in pattern (is_projective, is_cyclic, is_tree, is_forest)
+  * Add `?get_url` parameter to `Graph.to_dot` (AMR handling in Grew-match)
+  * Add a notion of pivot node in pattern for Grew-match export
+  * Add `Libgrew.set_track_rules` function
+
+
+---
+
+# Version 1.1 on November 23, 2018
   * More general definition of pattern edges (String are available everywhere)
   * Update to new MWE types (with projection information)
 
@@ -33,7 +43,7 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 ---
 
 # Version 0.48 on June 19, 2018
- * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`). See [here](../features#note-about-backward-compatibility) for more information.
+ * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`). See [here](../graph#note-about-backward-compatibility) for more information.
 
 ---
 

@@ -1,0 +1,1 @@
+pattern { N[upos=NOUN]; e: N -> M; }

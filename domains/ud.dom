@@ -28,7 +28,7 @@ features {
   Gender__erg: Fem, Masc;
   Gender__dat: Fem, Masc;
 
-  Mood: Int, Imp, Ind, Cnd, Sub, Pot, Opt, Jus, Qot, Des, Prsc, Inter, Gen, CndGen, Abil, AbilGen, Nec, Vol, CndPot, Prs, GenNec, GenNecPot, ImpPot, AbilCnd, GenPot, DesPot, NecPot, "Cnd,Ind", "Cnd,Pot", "Imp,Pot", Cnj, Proh, CndCnj;
+  Mood: Int, Imp, Ind, Cnd, Sub, Pot, Opt, Jus, Qot, Des, Prsc, Inter, Gen, CndGen, Abil, AbilGen, Nec, Vol, CndPot, Prs, GenNec, GenNecPot, ImpPot, AbilCnd, GenPot, DesPot, NecPot, "Cnd,Ind", "Cnd,Pot", "Imp,Pot", Cnj, Proh, CndCnj, GenPotPot, CndGenPot, PotPot;
   NumType: Card, Mult, Ord, Range, Frac, Sets, Dist, Coll, OrdinalSets, "Mult,Sets", "Card,Ord";
   Number: Plur, Sing, Dual,"Plur,Sing",Ptan, Unsp, Count, Coll, "Dual,Plur", Assoc, Pauc;
   Number__abs: Plur, Sing;
@@ -39,7 +39,7 @@ features {
   Number__obj: Plur, Sing, Dual;
   Number__subj: Plur, Sing, Dual, "Plur,Sing";
 
-  Person: 0, 1, 2, 3, "1,3", "2,3", "1,2,3", Auto;
+  Person: 0, 1, 2, 3, 4, "1,3", "2,3", "1,2,3", Auto, Impers;
   Person__abs: 0, 1, 2, 3;
   Person__erg: 0, 1, 2, 3;
   Person__dat: 0, 1, 2, 3;
@@ -54,18 +54,19 @@ features {
     "Dem,Prs", "Dem,Ind", "Ind,Int", "Dem,Rel", "Ind,Neg", "Int,Neg", "Prs,Rel", "Dem,Neg",
     Exc, % needed for Italian data
     Emp, % Czech
-    Rcp; % needed for Finnish treebank
+    Rcp, % needed for Finnish treebank
+    Contrastive;
   Reflex: Yes, No;
   Tense: Past, Pres, Imp, Fut, Aor, PastSimp, PastIter, PresHab, FutPast, AorPast, FutPlan, Pqp, Prt1, Prt2, "Fut,Past";
-  VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv, Sup, Gdv, Coverb, PartPad, Stem, Cov, Cop, PartPus, PartPres, PartPast, PartFut, "Fin,Inf";
-  Voice: Act, Pass, Mid, Necess, Rcp, Cau, CauPass, Coop, Auto, Trans, "Mid,Pass", "Act,Cau", "Cau,Pass";
+  VerbForm: Fin, Ger, Inf, Part, Trans, Vnoun, Conv, Sup, Gdv, Coverb, PartPad, Stem, Cov, Cop, PartPus, PartPres, PartPast, PartFut, "Fin,Inf", Ser, Post, Prov, PartRes;
+  Voice: Act, Pass, Mid, Necess, Rcp, Cau, CauPass, Coop, Auto, Trans, "Mid,Pass", "Act,Cau", "Cau,Pass", CauPassRcp, CauCau, PassPass, Rfl, CauCauPass, CauRcp, PassRfl, PassRcp;
   Polarity: Neg, Pos, Int;
 
   % Polish
   AdpType:Prep, Post, Voc, Comprep, Preppron, Comadp;
   Animacy: Anim, Inan, Nhum, Hum;
   Animacy__gram: Anim, Inan, Nhum, Hum;
-  Aspect: Perf, Imp, Prog, Res, Prosp, Hab, DurPerf, Rapid, ProgRapid, "Iter", "Imp,Perf", "Imp,Iter", "Iter,Perf", Dur, Inch;
+  Aspect: Perf, Imp, Prog, Res, Prosp, Hab, DurPerf, Rapid, ProgRapid, "Iter", "Imp,Perf", "Imp,Iter", "Iter,Perf", Dur, Inch, "Dur,Iter", PerfRapid;
   Variant: Short, Long, Full, Bound, Uncontr;
   Negative: Pos, Neg;
   PrepCase: Npr, Pre;
@@ -74,17 +75,17 @@ features {
   Typo: Yes;
 
   VerbType: Aux, Mod, Pas, Cop, Quasi;
-  PartType: Neg, Inf, Gen, Vb, Cmpl, Comp, Conseq, Ad, Pat, Num, Voc, Cop, Deg, Sub, Int, Emp;
+  PartType: Neg, Inf, Gen, Vb, Cmpl, Comp, Conseq, Ad, Pat, Num, Voc, Cop, Deg, Sub, Int, Emp, Mod;
   AdjType: Pred, Attr;
-  Subcat: Tran, Intr, Prep;
+  Subcat: Tran, Intr, Prep, Int;
   % Finnish
   PartForm: Agt, Past, Pres, Neg;
-  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa", Yes, "Han,Kin", "Han,Ka", "Ka,S", "Kin,Ko", "Kaan,Ko", Gak, Aja, Ga, Ja;
+  Clitic: Kin, Ko, Han, Kaan, Pa, Ka, "Ko,S", S, "Han,Ko", "Pa,S", "Han,Pa", Yes, "Han,Kin", "Han,Ka", "Ka,S", "Kin,Ko", "Kaan,Ko", Gak, Aja, Ga, Ja, Ki, So, O;
   Style: Coll, Arch, Rare, Slng, Vrnc, Expr, Vulg, Form;
   InfForm: 1,2,3, Dict, Incp;
   Connegative: Yes;
   Derivation: Minen, Inen, Igdyrji, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Tog, Ttain, Igmoz, Ig, Omon, OkshnOms, Ozj, Ovt, NomAg, Dimin, "Inen,Vs", "Lainen,Vs", "Llinen,Vs", "Ton,Vs", "Ja,Tar", "Inen,Ttain", "Llinen,Sti", "Sti,Ton", GenAttr, Oma, Voc, DimKE, OvtOms, AdvstO, Omka, DimNe, Ill, OvOms, Shka, Ine, VGen, VerbYks, Y, PronGak, Njems, PrcPrt1, J, Kaj, An, Sa, A, Ik, Tom;
-  Foreign: Yes;
+  Foreign: No, Yes;
 
   % Spanish
   Polite: Form, Infm, Depr;
@@ -95,18 +96,18 @@ features {
   NegationType: Contrastive;
 
   % Czech
-  NumForm: Digit, Word, Roman, Letter, Armenian;
+  NumForm: Digit, Word, Roman, Letter, Armenian, Combi;
   NameType: Sur, Giv, Pro, Com, Geo, Oth, Nat, Pat, Prs,
   "Com,Pro", "Giv,Sur", "Geo,Sur", "Com,Sur", "Geo,Giv", "Com,Giv", "Pro,Sur", "Com,Nat", "Giv,Pro",
   "Com,Geo", "Geo,Oth", "Com,Oth", "Geo,Pro", "Giv,Nat", "Nat,Sur", "Oth,Sur", "Giv,Oth",
   "Geo,Giv,Sur", "Com,Giv,Sur", "Giv,Pro,Sur", "Com,Pro,Sur";
   NumValue: 1, 2, 3, "1,2,3";
-  ConjType: Oper, Comp;
+  ConjType: Oper, Comp, Cmpr, Pred;
 
   Diat: Demsuj; Intrinsimp: Yes;
-  PunctType: Dash, Peri, Comm, Colo, Qest, Quot, Brck, Semi, Excl, Ndash, Hyph, Bull;
+  PunctType: Dash, Peri, Comm, Colo, Qest, Quot, Brck, Semi, Excl, Ndash, Hyph, Bull, Slsh, Elip;
   Form: Adn, Aux, Compl, Ecl, Len, Irr, Real, Emp, Spcf, HPref, VF;
-  AdvType: Tim, Deg, Mod, Loc, Man, Sta;
+  AdvType: Tim, Deg, Mod, Loc, Man, Sta, Cau;
   Strength: Strong, Weak;
   Evident: Fh, Nfh;
   PunctSide: Ini, Fin, Brck;
@@ -116,6 +117,7 @@ features {
   Uninflect: Yes;
   Position: Prenom, Postnom;
   Clusivity: Incl, In, Ex;
+
   HebSource: ConvUncertainHead, ConvUncertainLabel;
   Prefix: Yes;
   Orth: Khark, "Alt"; % Alt is a Grew keyword!
@@ -123,7 +125,7 @@ features {
   PrepForm: Cmpd;
   Dialect: Munster, Ulster, Connaught;
   HebExistential: True;
-  NounType: Strong, Weak, Slender, NotSlender, Clf;
+  NounType: Strong, Weak, Slender, NotSlender, Clf, Class;
   Xtra: Junk;
   Compound: Yes;
   Morph: VFin, VPar, VInf;
@@ -132,6 +134,24 @@ features {
 
   % add for 2.3
   Valency: 1, 2;
+
+  % add for 2.4
+  Analyt: Yes;
+  Pun: No, Yes;
+  NounForm: Depr;
+  Mutation: SM, NM, AM;
+  Relative: Rel;
+
+  Clusivity__subj: In, Ex;
+  Clusivity__obj: In, Ex;
+
+  NounClass: Wol1, Wol2, Wol3, Wol4, Wol5, Wol6, Wol7, Wol8, Wol9, Wol10, Wol11, Wol12;
+  Deixis: Prox, Remt, Med;
+  DeixisRef: 1,2;
+  FocusType: Subj, Compl, Verb;
+
+  % Errors in 2.4: should be removed on next release:
+  ProneType: Prs;
 
   % handling of MWE/NE nodes
   kind:*; label:*; mwepos:*; criterion:*;

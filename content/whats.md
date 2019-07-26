@@ -18,7 +18,14 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 
 ---
 
-# [**last release**] Version 1.2 on March 26, 2019
+# [**last release**] Version 1.3 on June 24, 2019
+  * Add support of "@alpha" extension in edges
+  * Add a default “empty.grs”
+  * Read from `stdin` if there is no `-i`, write to `stdout` if there is no `-o`
+
+---
+
+# Version 1.2 on March 26, 2019
   * Edge label can be viewed as feature structure "x:y" <=> "1=x, 2=y"
   * Add `global` section in pattern (is_projective, is_cyclic, is_tree, is_forest)
   * Add `?get_url` parameter to `Graph.to_dot` (AMR handling in Grew-match)

@@ -85,10 +85,10 @@ features {
   InfForm: 1,2,3, Dict, Incp;
   Connegative: Yes;
   Derivation: Minen, Inen, Igdyrji, Llinen, Lainen, Sti, U, Ton, Ja, Vs, Ttaa, Tar, Tog, Ttain, Igmoz, Ig, Omon, OkshnOms, Ozj, Ovt, NomAg, Dimin, "Inen,Vs", "Lainen,Vs", "Llinen,Vs", "Ton,Vs", "Ja,Tar", "Inen,Ttain", "Llinen,Sti", "Sti,Ton", GenAttr, Oma, Voc, DimKE, OvtOms, AdvstO, Omka, DimNe, Ill, OvOms, Shka, Ine, VGen, VerbYks, Y, PronGak, Njems, PrcPrt1, J, Kaj, An, Sa, A, Ik, Tom;
-  Foreign: No, Yes;
+  Foreign: No, Yes, Foreign;
 
   % Spanish
-  Polite: Form, Infm, Depr;
+  Polite: Form, Infm, Depr, Pol, Inf;
   Polite__erg: Form, Infm;
   Polite__abs: Form, Infm;
   Polite__dat: Form, Infm;
@@ -105,7 +105,7 @@ features {
   ConjType: Oper, Comp, Cmpr, Pred;
 
   Diat: Demsuj; Intrinsimp: Yes;
-  PunctType: Dash, Peri, Comm, Colo, Qest, Quot, Brck, Semi, Excl, Ndash, Hyph, Bull, Slsh, Elip;
+  PunctType: Dash, Peri, Comm, Colo, Qest, Quot, Brck, Semi, Excl, Ndash, Hyph, Bull, Slsh, Elip, PTERMP, CPUNCT;
   Form: Adn, Aux, Compl, Ecl, Len, Irr, Real, Emp, Spcf, HPref, VF;
   AdvType: Tim, Deg, Mod, Loc, Man, Sta, Cau;
   Strength: Strong, Weak;

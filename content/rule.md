@@ -106,7 +106,7 @@ With the command `grew transform -grs obl_loc.grs -strat "Onf(obl_loc)" -i max.c
 
 ![Max_loc](/rule/max_loc.svg)
 
-## Using twice the same lexicons
+## Using twice the same lexicon
 
 If the file [`transitive_verbs.lex`](/rule/transitive_verbs.lex) contains a list of transitive verbs, the following rule distributes the `obj` relation when two transitive verbs are coordinated.
 

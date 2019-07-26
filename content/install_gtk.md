@@ -18,7 +18,7 @@ We suppose that the basic version ([see installation page](../install)) is alrea
     * `opam install grew_gui`
 
   * Test
-    * Run `Grew gui` to run the GTk interface
+    * Run `grew gui` to run the GTk interface
     * In case of trouble, [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 
 ## On Mac OS&nbsp;X
@@ -30,6 +30,6 @@ We suppose that the basic version ([see installation page](../install)) is alrea
     * `opam install grew_gui`
 
   * Test
-    * Run `Grew gui` to run the GTk interface
+    * Run `grew gui` to run the GTk interface
     * In case of trouble, [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 

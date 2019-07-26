@@ -32,16 +32,16 @@ In this mode, **Grew** apply a Graph Rewriting System to a graph or a set of gra
 
 The full command for this mode:
 
-`grew transform -grs <grs_file> -i <input_file> -o <output_file>`
+`grew transform [<args>]`
 
-Required arguments for this mode are:
+All arguments are optional:
 
- * `<grs_file>` is the main file which describes Graph Rewriting System
- * `<input_file>`: describes the input data (CoNLL file of gr file)
- * `<output_file>`: is the name of the output file (CoNLL file)
-
-Optional argument is:
-
+ * `-grs <grs_file>`: the main file which describes Graph Rewriting System.
+ If no GRS is given an empty GRS is loaded: `strat main {Seq ()}`
+ * `-i <input_file>`: describes the input data (CoNLL file of gr file).
+ If no input file is given, Grew reads from `stdin`
+ * `-o <output_file>`: is the name of the output file (CoNLL file).
+  If no output file is given, Grew writes to `stdout`
  * `-strat <name>`: the strategy used in transformation (default value: `main`)
  * `-safe_commands`: make rewriting process fail in case of [ineffective command](../commands/#effective-commands)
 
@@ -49,7 +49,7 @@ Optional argument is:
 
 # GTK interface
 
-The command to run the GTK interface: `grew gui <args>`.
+The command to run the GTK interface: `grew gui [<args>]`.
 It supposes that you have installed the `grew_gui` opam packages (see [GUI installation page](../gtk)).
 
 Optional arguments:
@@ -74,11 +74,13 @@ where:
 
 The output is given in JSON format.
 
+:warning: The output of the `grep` mode has changed in version 1.3 (June 2019)
+
 ## Example
 
 With the following files:
 
- * The surface sequoia version 8.0: `sequoia.surf.conll` ([Download](https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tags/sequoia-8.0/sequoia.surf.conll)),
+ * The surface sequoia version 9.0: `sequoia.surf.conll` ([Download](https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tags/sequoia-9.0/sequoia.surf.conll)),
  * A pattern file with the code below: `subcat.pat` ([Download](https://gitlab.inria.fr/grew/grew_doc/raw/master/static/examples/grep/subcat.pat))
 
 ```

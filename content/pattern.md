@@ -15,7 +15,7 @@ A Pattern is defined through 3 different parts that are all optional.
  * any number of nogative clauses introduced by the keyword `without`; each clause filters out a subpart of the matchings previously selected
  * :warning: New from version 1.2: at most one global clause introduced by the keyword `global` which filters out a subpart of graphs.
 
-The global matching process is as follow:
+The global matching process is:
 
  * It takes a graph and a pattern as input.
  * It outputs a set of matchings; a matching being a function from nodes and edges defined in the positive clause to nodes and edges of the host graph.
@@ -27,7 +27,7 @@ The global matching process is as follow:
 
 Note that if there is more than one negative matching, there are all interpreted independently.
 
-One way to learn the syntax of patterns in grew is to follow the tutorial part of the [Grew-match](http://match.grew.fr) tool.
+The basic syntax of patterns in grew can be learned using the tutorial part of the [Grew-match](http://match.grew.fr) tool.
 
 ## Positive pattern
 

@@ -53,11 +53,13 @@ Some examples (with SUD labels) are given below.
 | Syntax            | Description | `comp` | `comp:obl` | `comp:obl@agent` | `comp:aux` | `comp:obj@lvc` |
 |-------------------|-------------|:------:|:----------:|:----------------:|:----------:|:----------:|
 | `X -[1=comp]-> Y` | any edge such that the feature `1` is defined with value `comp` | YES | YES | YES |YES | YES |
-| `X -[1=comp, 2=obl¦aux]-> Y` | the feature `1` is defined with value `comp` and the feature `2` is defined with one of the two values `obl` or `aux` | NO | YES |YES |YES | NO|
-| `X -[1=comp, 2<>obl¦aux]-> Y` | the feature `1` is defined with value `comp` and the feature `2` is defined with a value different from `obl` or `aux` | NO | NO | NO | NO | YES |
+| `X -[1=comp, 2=obl¦aux]-> Y`* | the feature `1` is defined with value `comp` and the feature `2` is defined with one of the two values `obl` or `aux` | NO | YES |YES |YES | NO|
+| `X -[1=comp, 2<>obl¦aux]-> Y`* | the feature `1` is defined with value `comp` and the feature `2` is defined with a value different from `obl` or `aux` | NO | NO | NO | NO | YES |
 | `X -[1=comp, !deep]-> Y` | the feature `1` is defined with value `comp` and the feature `deep` is not defined | YES | YES | NO |YES | NO|
 | `X -[1=comp, 2=*]-> Y` | the feature `1` is defined with value `comp` and the feature `2` is defined with any value | NO | YES | YES |YES | YES|
 | `X -[comp]-> Y` | the exact label `comp` and nothing else | YES | NO | NO | NO | NO |
+
+\* replace the symbol `¦` by the pipe `|` symbol in Grew (the right symbol cannot be used in Markdown table!)
 
 ### :warning::warning: Matching with atomic labels :warning::warning:
 

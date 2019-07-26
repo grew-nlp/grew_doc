@@ -51,36 +51,9 @@ add_edge N -[suj]-> M
 ~~~
 
 ### Add a new edge with a label taken in the pattern
-The command `add_edge e: N -> M` add a new edge in the current graph from the node matched with identifier `N` to the node matched with identifier `M` with the same label as the edge that was match in the pattern with the edge identifier `e`.
+The command `add_edge e: N -> M` adds a new edge in the current graph from the node matched with identifier `N` to the node matched with identifier `M` with the same label as the edge that was match in the pattern with the edge identifier `e`.
 
-#### Example:
-`add_edge_pattern.grs`:
-~~~grew
-package M {
-  rule r {
-    pattern { A[phon=A]; B[phon=B]; e: B -> A }
-    commands { del_edge e; add_edge e: A -> B }
-  }
-}
-strat main { Onf(M) }
-~~~
-
-`input.gr`:
-~~~grew
-graph {
-  A [phon="A"];
-  B [phon="B"];
-  B -[x]-> A;
-  B -[y]-> A;
-  B -[z]-> A;
-}
-~~~
-
-With the command `grew transform -grs add_edge_pattern.grs -i input.gr -o output.gr`, the rewriting will produce the graph `output.gr` below.
-
-| `input.gr` | `output.gr` |
-|:---:|:---:|
-| ![input.gr](/examples/add_edge_pattern/in.svg) | ![output.gr](/examples/add_edge_pattern/out.svg) |
+There is an example on usage of the command [here](../complex_edges#reverse-an-edge).
 
 ## Edge redirection
 Commands are available to move globally incident edges of some node of the pattern.

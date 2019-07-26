@@ -17,11 +17,10 @@ The graphs we consider in Grew are defined as usually in mathematics by two sets
 A node is described by a an identifier (needed to refer to nodes on edges definitions) and a feature structure (basically a finite list of pairs (*feature_name*, *feature_value*)).
 
 An edge is described by two nodes (called the *source* and the *target* of the edge) and by an edge label.
-Until version 1.1, edge label where atomic strings.
-Since version 1.2 labels are encoded as feature structures (mainly to ease the writing of rules with complex label like `nsubj:pass` where we would like to be able to table about subparts `nsubj` and `pass` independently).
-However, backward compatibility is ensured and the user do not need to manipulate subparts of labels, he/she can consider label are atomic (including labels like `nsubj:pass`).
-See [below](#complex-edge-labels) for more detail on complex edge labels.
+Until version 1.1, edge labels were atomic strings.
+Since version 1.2 labels are encoded as feature structures (mainly to ease the writing of rules with complex label like `nsubj:pass` where we would like to be able to access to subparts `nsubj` and `pass` independently).
 
+See [here](../complex_edges#complex-edges-in-graphs) for more detail on complex edge labels.
 
 # Graph input formats
 To describe a graph in practice, *Grew* offers several input formats: a native `gr` format, the `conll` format (and a few derived formats), the `amr` format.
@@ -75,11 +74,7 @@ As a consequence, it is impossible to use both `phon` and `form` in the same sys
 We highly recommend to use only the `form` feature in this setting. Of course, the same observation applies to `cat` and `upos` (`upos` should be prefered) and to `pos` and `xpos` (`xpos` should be chosen).
 
 ## The native format
-:TODO:
+TODO
 
 ## The AMR format
-:TODO:
-
-# Complex edge labels
-:TODO:
-
+TODO

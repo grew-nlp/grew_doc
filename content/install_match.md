@@ -99,12 +99,12 @@ For instance with our previous examples with 3 corpora, the configuration file l
 }
 ```
 
-In JSON, `groups` define the items in the top navbar and `corpora` the list of corpora in the left bar, maybe organised in folders (recursive folders are not handled).
-You can look the [configuration file](https://gitlab.inria.fr/grew/grew_match/blob/master/corpora_for_website/groups.json) used on [Grew-match](match.grew.fr) for a larger example.
+In JSON, `groups` defines the items in the top navbar and `corpora` the list of corpora in the left bar, maybe organised in folders (recursive folders are not handled).
+You can look the [configuration file](https://gitlab.inria.fr/grew/grew_match/blob/master/corpora_for_website/groups.json) used on [Grew-match](http://match.grew.fr) for a larger example.
 
 ### Install
 
-Edit the following installation script (update DEST definition and port number id needed).
+Edit the following installation script (update `DEST` definition and port number if needed).
 Run it from the place where you did the `git clone`.
 
 ```shell

@@ -29,6 +29,9 @@ Note that if there is more than one negative matching, there are all interpreted
 
 The basic syntax of patterns in grew can be learned using the tutorial part of the [Grew-match](http://match.grew.fr) tool.
 
+See [here](../complex_edges#complex-edges-in-patterns) for dealing with complex edges in patterns.
+
+
 ## Positive pattern
 
 ## Negative pattern

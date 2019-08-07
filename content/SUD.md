@@ -81,3 +81,11 @@ Tags = ["Development","golang"]
     {{< large file="_sud_diff/fr-ud-dev_00131.svg" >}}
     {{< large file="_ud_diff/fr-ud-dev_00131.svg" >}}
 
+ * `fr-ud-dev_00131`
+    {{< large file="_sud_diff/fr-ud-dev_00131.svg" >}}
+    {{< large file="_ud_diff/fr-ud-dev_00131.svg" >}}
+
+ * `fr-ud-dev_00190`
+    {{< large file="_sud_diff/fr-ud-dev_00190.svg" >}}
+    {{< large file="_ud_diff/fr-ud-dev_00190.svg" >}}
+

@@ -11,30 +11,110 @@ title = "pattern"
 
 A Pattern is defined through 3 different parts that are all optional.
 
- * at most one positive clause introduced by keyword `pattern` which describes a positive pattern that must be find a the graph.
- * any number of nogative clauses introduced by the keyword `without`; each clause filters out a subpart of the matchings previously selected
- * :warning: New from version 1.2: at most one global clause introduced by the keyword `global` which filters out a subpart of graphs.
+ * at most one positive clause introduced by keyword `pattern` which describes a positive pattern that must be found in the graph.
+ * any number of negative clauses introduced by the keyword `without`; each clause filters out a subpart of the matchings previously selected.
+ * [Since version 1.2] at most one global clause introduced by the keyword `global` which filters out a subpart of graphs.
 
 The global matching process is:
 
- * It takes a graph and a pattern as input.
- * It outputs a set of matchings; a matching being a function from nodes and edges defined in the positive clause to nodes and edges of the host graph.
+ * Take a graph and a pattern as input.
+ * Output a set of matchings; a matching being a function from nodes and edges defined in the positive clause to nodes and edges of the host graph.
 
  * If the graph does not satisfied one of the global constrains, the output is empty.
- * Else the set M is initialized as the set of matchings which satisfies the positive pattern.
+ * Else the set M is initialised as the set of matchings which satisfies the positive pattern.
     * For each negative clause, matchings which satisfies the negative pattern are removed from M.
- * Output M
+ * Output M.
 
-Note that if there is more than one negative matching, there are all interpreted independently.
+Note that if there is more than one negative matchings, there are all interpreted independently.
 
 The basic syntax of patterns in grew can be learned using the tutorial part of the [Grew-match](http://match.grew.fr) tool.
 
-See [here](../complex_edges#complex-edges-in-patterns) for dealing with complex edges in patterns.
+---
+## Positive and negative patterns
+Positive and negative patterns both follow the same syntax.
+These patterns are described by a list of clauses: node clauses, edge clauses and additional constraints
+
+### Node clauses
+In a node clause, a node is described by an identifier and some constraints on the feature structure.
+
+```grew
+N [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, lemma = "être" ]
+```
+
+The clause above illustrated the syntax of constraint that can be expressed, in turn:
+
+ * `upos = VERB` requires that the feature `upos` is defined with the value `VERB`
+ * `Mood = Ind|Imp` requires that the feature `Mood` is defined with one of the two values `Ind` or `Imp`
+ * `Tense <> Fut` requires that the feature `Tense` is defined with the value different from `Fut`
+ * `Number` requires that the feature `Number` is defined whatever is its value
+ * `!Person` requires that the feature `Person` is not defined
+ * `lemma = "être"` quotes are required when non-ASCII characters are used
+
+### Edge clauses
+
+All edge clauses below require the existence of an edge between the node selected by `N` and the node selected by `M`, evntually with additional constraints:
+
+ * `N -> M` : no additional constrains
+ * `N -[nsubj]-> M`: the edge label is `nsubj`
+ * `N -[nsubj|obj]-> M`: the edge label is either `nsubj` or `obj`
+ * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
+
+Edge may also be named for future use (in commands for instance) with an identifier:
+
+ * `e: N -> M` : no additional constrains
+
+Note that edge may refer to undeclared nodes, these nodes are then implicitly declared with any constraint.
+For instance, the two patterns below are equivalent:
+
+```grew
+pattern { N -[nsubj]-> M }
+```
+
+```grew
+pattern { N[]; M[]; N -[nsubj]-> M }
+```
+
+Since version 1.2, more complex edges can be used, see [here](../complex_edges#complex-edges-in-patterns).
+
+### Additional constraints
+
+These constrains do not identify new elements in the graph, but must be respected.
+
+ * Constraints on features values:
+  * `N.lemma = M.lemma` impose the equality of two feature values
+  * `N.lemma <> M.lemma` impose the difference of two feature values
+ * Constraints on node ordering:
+  * `N < M` the node `N` immediately precedes the node `M`
+  * `N << M` the node `N` precedes the node `M`
+ * Constraints on edges:
+  * `* -[nsubj]-> M` there is an incoming edge with label `nsubj` with target `M`
+  * `M -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `M`
+
+When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph will be found several times (up to permutation in the sets of equivalent nodes).
+For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
+
+```grew
+pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
+```
+
+This pattern is found 120 times in the Little Prince corpus ([Grew-match](http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6)) but there are only 20 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
+To avoid this, a constraint `id(N1) < id(N2)` can be used.
+It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
+
+The pattern below returns the 20 expected occurrences ([Grew-match](http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6bb86ce49))
+
+```grew
+pattern {
+    N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N;
+    id(N1) < id(N2); id(N2) < id (N3);
+}
+```
 
 
-## Positive pattern
 
-## Negative pattern
+
+
+---
 
 ## Global pattern
 Global patterns were introduced in version 1.2 to let the user express constrain about the whole graph.

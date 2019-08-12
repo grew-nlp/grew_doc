@@ -58,6 +58,7 @@ All edge clauses below require the existence of an edge between the node selecte
  * `N -[nsubj]-> M`: the edge label is `nsubj`
  * `N -[nsubj|obj]-> M`: the edge label is either `nsubj` or `obj`
  * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
+ * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
 
 Edge may also be named for future use (in commands for instance) with an identifier:
 
@@ -81,14 +82,18 @@ Since version 1.2, more complex edges can be used, see [here](../complex_edges#c
 These constrains do not identify new elements in the graph, but must be respected.
 
  * Constraints on features values:
-  * `N.lemma = M.lemma` impose the equality of two feature values
-  * `N.lemma <> M.lemma` impose the difference of two feature values
+  * `N.lemma = M.lemma` two feature values must be equal
+  * `N.lemma <> M.lemma` two feature values must be different
+  * `N.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
  * Constraints on node ordering:
   * `N < M` the node `N` immediately precedes the node `M`
   * `N << M` the node `N` precedes the node `M`
  * Constraints on edges:
   * `* -[nsubj]-> M` there is an incoming edge with label `nsubj` with target `M`
   * `M -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `M`
+ * [Since version 1.3] Constraints on edge labels:
+   * `label(e1) = label(e2)` the labels of the two edges `e1` and `e2` are equal
+   * `label(e1) <> label(e2)` the labels of the two edges `e1` and `e2` are different
 
 When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph will be found several times (up to permutation in the sets of equivalent nodes).
 For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivalent.

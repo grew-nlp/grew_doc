@@ -13,7 +13,7 @@ menu = "main"
 **Grew-match** is available [online](http://match.grew.fr) on a set of corpora (mainly from the UD project).
 If you want to use **Grew-match** on your own corpus, you have to install it locally, following the instructions on this page.
 
-## The daemon
+## STEP 1: Install the daemon
 
 You have to start locally a daemon which will handle your requests on your corpora.
 
@@ -68,7 +68,7 @@ The Daemon is started with the command (update the port number if necessary):
 grew_daemon run --port 8888 my_corpora.json
 ```
 
-## STEP 2: install the webpage
+## STEP 2: Install the webpage
 
 ### Download
 The code for the webpage is available through `gitlab.inria.fr` with:
@@ -78,10 +78,16 @@ git clone https://gitlab.inria.fr/grew/grew_match.git
 ```
 
 ### Configuration
-Edit the file `grew_match/corpora/groups.json` to describe the set of corpora available.
-For instance with our previous examples with 3 corpora, the configuration file looks like:
+Move to the main folder of the project:
 
-```JSON
+```
+cd grew_match
+```
+
+Edit the file `corpora/groups.json` to describe the set of corpora available.
+For instance with our previous example with 3 corpora, the configuration file looks like:
+
+```json
 { "groups": [
     { "id": "local",
       "name": "Local corpora",
@@ -104,16 +110,21 @@ You can look the [configuration file](https://gitlab.inria.fr/grew/grew_match/bl
 
 ### Install
 
-Edit the following installation script (update `DEST` definition and port number if needed).
-Run it from the place where you did the `git clone`.
+The project contains a file `install_template.sh`.
 
 ```shell
 # decide where you want to store the webpage locally
 DEST=/some/directory/accessible/from/the/web/server/
 
+# set the PORT number
+PORT=8888
+
+# build the DEST directory if needed
+mkdir -p $DEST
+
 # Copy the files in the right place
-cd grew_match
-cp -rf * $DEST
+cp *.php *.xml *.html *.png $DEST
+cp -r corpora css fonts icon js tables tuto $DEST
 
 # build local folders for storing data
 cd $DEST
@@ -121,11 +132,24 @@ mkdir -p data/shorten
 chmod -R 777 data
 
 # update parameters in the code
-sed -i old "s+@PORT@+8888+" ajaxGrew.php
-sed -i old "s+@DATADIR@+$DEST/data/+" ajaxGrew.php
-sed -i old "s+@DATADIR@+$DEST/data/+" purge.php
-sed -i old "s+@DATADIR@+$DEST/data/+" shorten.php
-rm -f *old
+cat ajaxGrew.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file ajaxGrew.php
+cat export.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file export.php
+cat purge.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file purge.php
+cat shorten.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file shorten.php
+```
+
+ Copy it with the name `install.sh`:
+
+```
+cp install_template.sh install.sh
+```
+
+Edit the file `install.sh` and update `DEST` definition and `PORT` if needed at the beginning of the file.
+
+Run the install script:
+
+```
+./install.sh
 ```
 
 ## Step 3 and more

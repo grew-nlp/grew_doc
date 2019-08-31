@@ -1,5 +1,5 @@
 self_doc:
-	@echo "make lchn: install ud.dom on the server"
+	@echo "make lchn: install *.dom on the server"
 
 lchn:
-	scp ud.dom ${slchn}/resources
+	scp *.dom ${slchn}/resources

@@ -13,6 +13,20 @@ menu = "main"
 **Grew-match** is available [online](http://match.grew.fr) on a set of corpora (mainly from the UD project).
 If you want to use **Grew-match** on your own corpus, you have to install it locally, following the instructions on this page.
 
+## STEP 0: Run a web server
+
+A web server is required. You can install [apache](https://www.apache.org) or one of the easy to install distribution like [LAMP on Linux](https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29) or [MAMP on Mac OSX](https://www.mamp.info).
+
+In the following we will call `DOCUMENT_ROOT` the main folder accessible from your website:
+
+ * with apache, it is defined in the `httpd.conf` file
+ * with LAMP, is should be `/opt/lampp/htdocs/`
+ * with MAMP, it should be `/Applications/MAMP/htdocs`
+
+In doubt, refer to the documentation of the corresponding web server.
+
+We use the port number `8888` below. You may have to change this if this port number is already used.
+
 ## STEP 1: Install the daemon
 
 You have to start locally a daemon which will handle your requests on your corpora.
@@ -114,7 +128,7 @@ The project contains a file `install_template.sh`.
 
 ```shell
 # decide where you want to store the webpage locally
-DEST=/some/directory/accessible/from/the/web/server/
+DEST=DOCUMENT_ROOT/grew_match
 
 # set the PORT number
 PORT=8888
@@ -132,10 +146,10 @@ mkdir -p data/shorten
 chmod -R 777 data
 
 # update parameters in the code
-cat ajaxGrew.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file ajaxGrew.php
-cat export.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file export.php
-cat purge.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file purge.php
-cat shorten.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file shorten.php
+cat ajaxGrew.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file ajaxGrew.php
+cat export.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file export.php
+cat purge.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file purge.php
+cat shorten.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file shorten.php
 ```
 
  Copy it with the name `install.sh`:
@@ -144,7 +158,7 @@ cat shorten.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv __tmp_file s
 cp install_template.sh install.sh
 ```
 
-Edit the file `install.sh` and update `DEST` definition and `PORT` if needed at the beginning of the file.
+Edit the file `install.sh` and update `DEST` definition (line 2) and `PORT` (line 5) if needed.
 
 Run the install script:
 
@@ -155,7 +169,8 @@ Run the install script:
 ## Step 3 and more
 
 ### Test
-You should be able to request your corpora from `localhost`.
+Make sure that the web server is running.
+You should be able to request your corpora from [`http://localhost:8888/grew_match`](http://localhost:8888/grew_match).
 Feel free to contact [us](mailto:Bruno.Guillaume@loria.fr) in case of trouble.
 
 ### Restart the daemon when one of the corpora is updated

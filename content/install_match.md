@@ -20,72 +20,17 @@ A web server is required. You can install [apache](https://www.apache.org) or on
 In the following we will call `DOCUMENT_ROOT` the main folder accessible from your website:
 
  * with apache, it is defined in the `httpd.conf` file
- * with LAMP, is should be `/opt/lampp/htdocs/`
+ * with LAMP, it should be `/opt/lampp/htdocs/`
  * with MAMP, it should be `/Applications/MAMP/htdocs`
 
 In doubt, refer to the documentation of the corresponding web server.
 
 We use the port number `8888` below. You may have to change this if this port number is already used.
 
-## STEP 1: Install the daemon
-
-You have to start locally a daemon which will handle your requests on your corpora.
-
-### Installation
-Follow general instruction for [Grew installation](../install) and then install the daemon with:
-
-`opam install grew_daemon`
-
-### Configuration
-To configure your daemon, you have to describe the corpora you want to use in a `conf` file.
-This file describes each corpora with a name, a directory and a list of files.
-For instance, the JSON file `my_corpora.json` below defines 3 corpora:
-
-```json
-{ "corpora": [
-  { "id": "my_corpora",
-    "directory": "/users/me/corpora/my_corpora",
-    "files": [ "my_corpora_dev.conll", "my_corpora_test.conll", "my_corpora_train.conll" ]
-  },
-  { "id": "my_corpora@2.0",
-    "directory": "/users/me/corpora/my_corpora/2.0",
-    "files": [ "my_corpora_dev.conll", "my_corpora_test.conll", "my_corpora_train.conll" ]
-  },
-  { "id": "my_corpora@1.0",
-    "directory": "/users/me/corpora/my_corpora/1.0",
-    "files": [ "my_corpora_dev.conll", "my_corpora_test.conll", "my_corpora_train.conll" ]
-  }
-  ]
-}
-```
-
-### Compile your corpora
-
-In order to speed up the pattern search and to preserve memory when a large number of corpora are available, corpora are compiled with the command:
-
-```
-grew_daemon marshal my_corpora.json
-```
-A new file with the name of the corpus and the extension `.marshal` is created in the corpus directory.
-Of course, you will have to compile again if one of your corpora is modified.
-You can clean the compiled files with
-
-```
-grew_daemon clean my_corpora.json
-```
-
-### Run the daemon
-
-The Daemon is started with the command (update the port number if necessary):
-
-```
-grew_daemon run --port 8888 my_corpora.json
-```
-
-## STEP 2: Install the webpage
+## STEP 1: Install the webpage
 
 ### Download
-The code for the webpage is available through `gitlab.inria.fr` with:
+The code for the webpage is available through [`gitlab.inria.fr`](https://gitlab.inria.fr) with:
 
 ```
 git clone https://gitlab.inria.fr/grew/grew_match.git
@@ -98,7 +43,7 @@ Move to the main folder of the project:
 cd grew_match
 ```
 
-Edit the file `corpora/groups.json` to describe the set of corpora available.
+Edit the file `corpora/groups.json` to describe the set of available corpora.
 For instance with our previous example with 3 corpora, the configuration file looks like:
 
 ```json
@@ -145,6 +90,11 @@ cd $DEST
 mkdir -p data/shorten
 chmod -R 777 data
 
+# build other useful folders
+mkdir -p _tables
+mkdir -p _logs
+mkdir -p _descs
+
 # update parameters in the code
 cat ajaxGrew.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file ajaxGrew.php
 cat export.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file export.php
@@ -164,6 +114,64 @@ Run the install script:
 
 ```
 ./install.sh
+```
+
+## STEP 2: Install the daemon
+
+You have to start locally a daemon which will handle your requests on your corpora.
+
+### Installation
+Follow general instruction for [Grew installation](../install) and then install the daemon with:
+
+`opam install grew_daemon`
+
+### Configuration
+To configure your daemon, you have to describe the corpora you want to use in a `conf` file.
+This file describes each corpora with a name, a directory and a list of files.
+For instance, the JSON file `my_corpora.json` below defines 3 corpora:
+
+```json
+{ "corpora": [
+  { "id": "my_corpora",
+    "directory": "/users/me/corpora/my_corpora",
+    "files": [ "my_corpora_dev.conll", "my_corpora_test.conll", "my_corpora_train.conll" ]
+  },
+  { "id": "my_corpora@2.0",
+    "directory": "/users/me/corpora/my_corpora/2.0",
+    "files": [ "my_corpora_dev.conll", "my_corpora_test.conll", "my_corpora_train.conll" ]
+  },
+  { "id": "my_corpora@1.0",
+    "directory": "/users/me/corpora/my_corpora/1.0",
+    "files": [ "my_corpora_dev.conll", "my_corpora_test.conll", "my_corpora_train.conll" ]
+  }
+  ]
+}
+```
+
+### Compile your corpora
+
+In order to speed up the pattern search and to preserve memory when a large number of corpora are available, corpora are compiled with the command:
+
+```
+grew_daemon marshal my_corpora.json --webserver DOCUMENT_ROOT
+```
+
+A new file with the name of the corpus and the extension `.marshal` is created in the corpus directory.
+Of course, you will have to compile again if one of your corpora is modified.
+The compilation step will also build the relation tables and put them in a place where they can be found by the server.
+
+You can clean the compiled files with:
+
+```
+grew_daemon clean my_corpora.json
+```
+
+### Run the daemon
+
+The Daemon is started with the command (update the port number if necessary):
+
+```
+grew_daemon run --port 8888 my_corpora.json
 ```
 
 ## Step 3 and more

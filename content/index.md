@@ -32,7 +32,7 @@ The easiest way to try and test **Grew** is to use one of the two online interfa
 
 ## Some of the main features of Grew
 
-  * Graph structures can use a build-in notion of **feature structures**.
+  * Graph structures can use a built-in notion of **feature structures**.
   * The left-hand side of a rule is described by a graph called a **pattern**; injective graph morphisms are used in the pattern matching algorithm.
   * **Negative pattern** can be used for a finer control on the left-hand side of rules.
   * The right-hand side of rules is described by a sequence of **atomic commands** that describe how the graph should be modified during the rule application.

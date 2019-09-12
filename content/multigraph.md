@@ -59,8 +59,8 @@ pattern {
 	N1[]; N2[]; N1.position = N2.position; N1.user <> N2.user; % N1 and N2 are parallel
 	M1[]; M2[]; M1.position = M2.position; M1.user <> M2.user; % M1 and M2 are parallel
 	e1: M1 -> N1; e2: M2 -> N2;                                % M and N are link by parallel edges
-	label(e1) <> label(e2);                                    % ask to different labels
-	id(N1) < id(N2);                                           % avois duplicate (1/2 switching)
+	label(e1) <> label(e2);                                    % ask two different labels
+	id(N1) < id(N2);                                           % avoid duplicate (1/2 switching)
 }
 ```
 
@@ -88,8 +88,8 @@ pattern {
 	N1[]; N2[]; N1.position = N2.position; N1.user <> N2.user; % N1 and N2 are parallel
 	e1: G1 -> N1;                                              % G1 is the governor of N1
 	e2: G2 -> N2;                                              % G2 is the governor of N2
-	id(G1) < id(G2);                                           % avoid duplicates (1/2 switching)
 	G1.position <> G2.position;                                % G1 and G2 are not parallel
+	id(G1) < id(G2);                                           % avoid duplicates (1/2 switching)
 }
 ```
 

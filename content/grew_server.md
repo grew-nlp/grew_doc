@@ -54,6 +54,10 @@ This service is used to remove a project. If the project does not exist, nothing
 
  * `(<string> project_id)`
 
+### The `renameProject` service
+
+ * `(<string> project_id, <string> new_project_id)`
+
 ## Samples
 All services about samples return an error if the requested project does not exist.
 
@@ -76,21 +80,19 @@ This service is used to remove a sample. If the sample does not exist, nothing a
 
  * `(<string> project_id, <string> sample_id)`
 
-## Annotations
+## Sentences
 
-### The `saveConll` service
+### The `eraseSentence` service
 
- * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <file> conll_file)`
- * `(<string> project_id, <string> sample_id, <string> sent_id, <file> conll_file)`
- * `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
- * `(<string> project_id, <string> sample_id, <file> conll_file)`
- * `(<string> project_id, <file> conll_file)`
+ * `(<string> project_id, <string> sample_id, <string> sent_id)`
 
-### The `saveGraph` service
+## Graphs
 
-:question: remove ???
+### The `eraseGraph` service
 
- * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
+ * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
+
+## Other `get` services
 
 ### The `getConll` service
 
@@ -101,13 +103,6 @@ This service is used to remove a sample. If the sample does not exist, nothing a
  * `(<string> project_id, <string> sample_id)`
  returns a 2-levels dict `sent_id` ->  `user_id` -> `conll_string`
 
-### The `getSentences` service
-
-:question: rename to `searchPattern`
-
- * `(<string> project_id, <string> pattern)`
- returns a list of dict `{'sample_id':…, 'sent_id':…, 'nodes':…, 'edges':…}`
-
 ### The `getUsers` service
 
  * `(<string> project_id, <string> sample_id, <string> sent_id)`
@@ -116,5 +111,32 @@ This service is used to remove a sample. If the sample does not exist, nothing a
 
 ### The `getSentIds` service
 
- * `(<string> project_id)`
  * `(<string> project_id, <string> sample_id)`
+ * `(<string> project_id)`
+
+## Save annotations
+
+### The `saveConll` services
+
+ * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <file> conll_file)`
+ * `(<string> project_id, <string> sample_id, <string> sent_id, <file> conll_file)`
+ * `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
+ * `(<string> project_id, <string> sample_id, <file> conll_file)`
+ * `(<string> project_id, <file> conll_file)`
+
+### The `saveGraph` service
+
+ * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
+
+
+## Search with Grew patterns
+
+### The `searchPatternInSentences` service
+
+ * `(<string> project_id, <string> pattern)`
+ returns a list of dict `{'sample_id':…, 'sent_id':…, 'nodes':…, 'edges':…}`
+
+### The `searchPatternInGraphs` service
+
+ * `(<string> project_id, <string> pattern)`
+ returns a list of dict `{'sample_id':…, 'sent_id':…, 'user_id':…, 'nodes':…, 'edges':…}`

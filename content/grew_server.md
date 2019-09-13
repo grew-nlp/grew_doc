@@ -80,6 +80,12 @@ This service is used to remove a sample. If the sample does not exist, nothing a
 
  * `(<string> project_id, <string> sample_id)`
 
+### The `renameSample` service
+
+ * `(<string> project_id, <string> sample_id, <string> new_sample_id)`
+
+An error is returned either if `sample_id` does not exist or if `new_sample_id` alredy exists in `project_id`.
+
 ## Sentences
 
 ### The `eraseSentence` service

@@ -1,3 +1,12 @@
++++
+Tags = ["Development","golang"]
+Description = ""
+menu = "main"
+Categories = ["Development","GoLang"]
+date = "2019-06-01T20:54:20+02:00"
+title = "flat"
++++
+
 # Transformation of single-headed structure into a chained structure
 
 :information_source: You can download files used in this page:
@@ -7,7 +16,7 @@
 There are two basic ways to represent *flat* structures:
 
 1. a single-headed structure: for instance the graph `SH6` below on the left for a 6 words flat structure
-1. a chained stucture: for instance the graph `C6` below on the right for the same 6 words flat structure
+1. a chained structure: for instance the graph `C6` below on the right for the same 6 words flat structure
 
 | SH6 |  C6 |
 |:---:|:---:|
@@ -42,7 +51,7 @@ Output 120 normal forms! For instance:
 ![C6_120_example](/examples/flat/img/C6_120_example.svg)
 
 Our rule is not strict enough. We have to put more restriction in the pattern part.
-If we require that `N1`and `N2`are two consecutive words, the rule is:
+If we require that `N1` and `N2` are two consecutive words, the rule is:
 
 ```grew
 rule sh2c_2 {
@@ -169,7 +178,4 @@ rule c2sh_strict {
 ```
 
 At each step, we ensure that the node `H` of the pattern is matched to the word `head` of the graph.
-
-
-
 

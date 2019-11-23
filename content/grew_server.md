@@ -31,14 +31,14 @@ Two types of parameter are used: `<string>` and `<file>`.
 All services reply with JSON data of one of this three forms:
 
  * `{ "status": "OK", "data": … }` when the request was executed correctly, the content of the `data` field depends on the service.
- * `{ "status": "WARNING", "messages": …, "data": "…" }` when the request can be partially executed; the `messages` fields contains a list of messages.
+ * `{ "status": "WARNING", "messages": …, "data": … }` when the request can be partially executed; the `messages` fields contains a list of messages.
  * `{ "status": "ERROR", "message": "…" }` when the request cannot be executed.
 
 ## Projects
 
 ### The `newProject` service
 
-This service is used to initialise a new empty project. An error is returned if the project already exists.
+This service is used to initialise a new empty project. An error is returned a project with the same name already exists.
 
  * `(<string> project_id)`
 
@@ -50,11 +50,14 @@ This service returns the list of existing projects.
 
 ### The `eraseProject` service
 
-This service is used to remove a project. If the project does not exist, nothing append
+This service is used to remove a project. If the project does not exist, nothing happens.
 
  * `(<string> project_id)`
 
 ### The `renameProject` service
+
+Renaming of an existing project.
+An error is produced either if `project_id` does not exists or if `new_project_id` already exists.
 
  * `(<string> project_id, <string> new_project_id)`
 
@@ -76,7 +79,7 @@ This service returns the list of existing samples in a given project.
 
 ### The `eraseSample` service
 
-This service is used to remove a sample. If the sample does not exist, nothing append
+This service is used to remove a sample. If the sample does not exist, nothing happens
 
  * `(<string> project_id, <string> sample_id)`
 
@@ -84,7 +87,7 @@ This service is used to remove a sample. If the sample does not exist, nothing a
 
  * `(<string> project_id, <string> sample_id, <string> new_sample_id)`
 
-An error is returned either if `sample_id` does not exist or if `new_sample_id` alredy exists in `project_id`.
+An error is returned either if `sample_id` does not exist or if `new_sample_id` already exists in `project_id`.
 
 ## Sentences
 

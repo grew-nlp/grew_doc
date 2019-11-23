@@ -10,6 +10,7 @@ Tags = ["Development","golang"]
 
 The tool `grew_daemon` was initially built to be used as the daemon to answer requests in **Grew-match**.
 But it can also be used as a command line tool to compute statistics on sets of corpora.
+This page describes this usage.
 
 # Install the `grew_daemon` tool
 
@@ -43,17 +44,17 @@ For instance, the following file `en_fr_zh.json` describes 3 corpora from UD 2.4
 grew_daemon marshal en_fr_zh.json
 ```
 
-Note that this will produce a new file `id.marshal`, stored in the corpus directory, for each corpus in `en_fr_zh.json`
+Note that this will produce a new file with the `marshal` extension, stored in the corpus directory, for each corpus in `en_fr_zh.json`
 
 # Compute statistics
 
 It is possible to compute the number of occurrences of several patterns at the same time.
-With the two files:
+For intance, with the two following 1-line files:
 
  * `ADJ_NOUN.pat` containing: `pattern { A[upos=ADJ]; N[upos=NOUN]; N -[amod]-> A; A << N }`
  * `NOUN_ADJ.pat` containing: `pattern { A[upos=ADJ]; N[upos=NOUN]; N -[amod]-> A; N << A }`
 
-The commands below computes the corresponding stats:
+The commands below computes the statistics about the number of occurrences of each pattern in each corpus:
 
 ```
 grew_daemon grep --patterns "ADJ_NOUN.pat NOUN_ADJ.pat" en_fr_zh.json
@@ -76,18 +77,19 @@ which corresponds to the table:
 | UD_French-Sequoia | 3099 | 891 | 2777 |
 | UD_Chinese-GSD | 4997 | 1481 | 0 |
 
-We can then observe that in the 3 corpora in use:
+We can then observe that in the annotations of the 3 corpora in use:
 
- * in English, there is a strong preference for prepositional adjectves
- * in French, there is a weak preference for postpositional adjectves
- * in Chinese, there is a **very** strong preference for prepositional adjectves
+ * in English, there is a strong preference for adjective position before the noun (98.4%)
+ * in French, there is a weak preference for adjective position after the noun (75,7%)
+ * in Chinese, there is a **very** strong preference for adjective position before the noun (100%)
 
 
 ----
 
 ## Remarks
 
+ * The TSV table also contains a column with the size of corpora (in number of sentences), this can be useful to make cross-corpora analysis and to compute ratios instead of raw numbers.
  * Pattern syntax can be learned [here](/pattern/) or with the online [**Grew-match**](http://match.grew.fr) tool, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with snippets given on the right of the text area.
- * If some data are changed in the corpora, it is necessary to run again the compilation step.
- * The command `grew_daemon clean en_fr_zh.json` can be used to remove marshal files (results of compilation).
- * Some patterns may take some times to be searched in corpora.
+ * If some corpus is updated, it is necessary to run again the compilation step.
+ * The command `grew_daemon clean en_fr_zh.json` can be used to remove `marshal` files (results of compilation).
+ * Some patterns may take a long time to be searched in corpora.

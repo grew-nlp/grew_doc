@@ -79,15 +79,16 @@ This service returns the list of existing samples in a given project.
 
 ### The `eraseSample` service
 
-This service is used to remove a sample. If the sample does not exist, nothing happens
+This service is used to remove a sample. If the sample does not exist, nothing happens.
 
  * `(<string> project_id, <string> sample_id)`
 
 ### The `renameSample` service
 
+An error is returned either if `sample_id` does not exist or if `new_sample_id` already exists in `project_id`.
+
  * `(<string> project_id, <string> sample_id, <string> new_sample_id)`
 
-An error is returned either if `sample_id` does not exist or if `new_sample_id` already exists in `project_id`.
 
 ## Sentences
 
@@ -142,10 +143,30 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ### The `searchPatternInSentences` service
 
- * `(<string> project_id, <string> pattern)`
- returns a list of dict `{'sample_id':…, 'sent_id':…, 'nodes':…, 'edges':…}`
+This service returns occurrences of some pattern in a project.
+Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'nodes':…, 'edges':…}`.
+
+ * `(<string> project_id, <string> pattern)` returns a list of occurrences.
+
+ * :new: `(<string> project_id, <string> pattern, <string> clusters)`
+ where `clusters` is a list of cluster keys, separated by `;`.
+ This returns nested dictionaries (the depth being equals to the length of the cluster key list).
+ The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
+ each clusters is further clustered recursively with the remaining keys.
+ For instance:
+
+   * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
+   * Data presented in **Relations tables** in **Grew match** can be obtained (for the `obj` relation in the example) with the arguments:
+
+     * `pattern`: `pattern { G -[obj]-> D }`
+     * `clusters`: `G.upos; D.upos`
 
 ### The `searchPatternInGraphs` service
 
- * `(<string> project_id, <string> pattern)`
- returns a list of dict `{'sample_id':…, 'sent_id':…, 'user_id':…, 'nodes':…, 'edges':…}`
+This service returns occurrences of some pattern in a project, for a given user.
+Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'user_id':…, 'nodes':…, 'edges':…}`.
+
+ * `(<string> project_id, <string> pattern)` returns a list of occurrences.
+
+ * :new: `(<string> project_id, <string> pattern, <string> clusters)`
+ Nested dictionaries are returned with the same structure as in the case of `searchPatternInSentences` above.

@@ -83,7 +83,7 @@ mkdir -p $DEST
 
 # Copy the files in the right place
 cp *.php *.xml *.html *.png $DEST
-cp -r corpora css fonts icon js tables tuto $DEST
+cp -r corpora css fonts icon js tuto $DEST
 
 # build local folders for storing data
 cd $DEST
@@ -96,10 +96,7 @@ mkdir -p _logs
 mkdir -p _descs
 
 # update parameters in the code
-cat ajaxGrew.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file ajaxGrew.php
-cat export.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file export.php
-cat purge.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file purge.php
-cat shorten.php | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file shorten.php
+cat main.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file main.php
 ```
 
  Copy it with the name `install.sh`:

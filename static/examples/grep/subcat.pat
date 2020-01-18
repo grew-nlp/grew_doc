@@ -1,5 +1,5 @@
 pattern {
   V [cat=V];
-  V -[a_obj]-> A;
-  V -[de_obj]-> DE;
+  e1: V -[a_obj]-> A;
+  e2: V -[de_obj]-> DE;
 }

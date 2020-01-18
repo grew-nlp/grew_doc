@@ -13,7 +13,7 @@ A Pattern is defined through 3 different parts that are all optional.
 
  * at most one positive clause introduced by keyword `pattern` which describes a positive pattern that must be found in the graph.
  * any number of negative clauses introduced by the keyword `without`; each clause filters out a subpart of the matchings previously selected.
- * [Since version 1.2] at most one global clause introduced by the keyword `global` which filters out a subpart of graphs.
+ * at most one global clause introduced by the keyword `global` which filters out a subpart of graphs.
 
 The global matching process is:
 
@@ -62,7 +62,7 @@ All edge clauses below require the existence of an edge between the node selecte
 
 Edge may also be named for future use (in commands for instance) with an identifier:
 
- * `e: N -> M` : no additional constrains
+ * `e: N -> M`
 
 Note that edge may refer to undeclared nodes, these nodes are then implicitly declared with any constraint.
 For instance, the two patterns below are equivalent:
@@ -105,6 +105,8 @@ pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
 This pattern is found 120 times in the Little Prince corpus ([Grew-match](http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6)) but there are only 20 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
 To avoid this, a constraint `id(N1) < id(N2)` can be used.
 It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
+**NB**: if a constraint `id(N1) < id(N2)` is used with two non-equivalent nodes, the result is unspecified.
+
 
 The pattern below returns the 20 expected occurrences ([Grew-match](http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6bb86ce49))
 
@@ -128,11 +130,11 @@ We plan to add more constraints in the near future. Please drop us a [feature re
 We describe below 4 of the constraints available in version 1.2.
 For each one, its negation is available by changing the `is_` prefix by the `is_not_` prefix.
 
-  * `is_cyclic`: the graph satisfied this constrain if and only if it contains a cycle.
+  * `is_cyclic`: the graph satisfied this constraint if and only if it contains a cycle.
   A cycle is a list of nodes `N1`, `N2` … `N(k-1)`, `Nk` such that there are edges `N1 -> N2`, `N2 -> N3`, `N(k-1) -> Nk`, `Nk -> N1`.
   In graph theory, a non cyclic graph is also called a Directed Acyclic Graph (DAG).
 
-  * `is_forest`: the graph satisfied this constrain if and only it is acyclic and if there are no couples of edges with the same target.
+  * `is_forest`: the graph satisfied this constraint if and only it is acyclic and if there are no couples of edges with the same target.
   In other words, a graph is a forest if and only if it is acyclic and each node has at most one incoming edge.
 
   * `is_tree`: a graph is a tree if it is a forest and if it have exactly one root.

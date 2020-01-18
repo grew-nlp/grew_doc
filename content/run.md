@@ -74,7 +74,8 @@ where:
 
 The output is given in JSON format.
 
-:warning: The output of the `grep` mode has changed in version 1.3 (June 2019)
+:warning: The output of the `grep` mode has changed in version 1.3.1 (January 2020).
+The new version describes both node matching and edge matching.
 
 ## Example
 
@@ -86,8 +87,8 @@ With the following files:
 ```
 pattern {
   V [cat=V];
-  V -[a_obj]-> A;
-  V -[de_obj]-> DE;
+  e1: V -[a_obj]-> A;
+  e2: V -[de_obj]-> DE;
 }
 ```
 
@@ -101,33 +102,70 @@ produces the following JSON output:
 [
   {
     "sent_id": "Europar.550_00496",
-    "matching": { "V": "16", "DE": "19", "A": "14" }
+    "matching": {
+      "nodes": { "V": "16", "DE": "19", "A": "14" },
+      "edges": {
+        "e2": { "source": "16", "label": "de_obj", "target": "19" },
+        "e1": { "source": "16", "label": "a_obj", "target": "14" }
+      }
+    }
   },
   {
     "sent_id": "emea-fr-test_00478",
-    "matching": { "V": "33", "DE": "32", "A": "35" }
+    "matching": {
+      "nodes": { "V": "33", "DE": "32", "A": "35" },
+      "edges": {
+        "e2": { "source": "33", "label": "de_obj", "target": "32" },
+        "e1": { "source": "33", "label": "a_obj", "target": "35" }
+      }
+    }
   },
   {
     "sent_id": "emea-fr-test_00438",
-    "matching": { "V": "20", "DE": "21", "A": "22" }
+    "matching": {
+      "nodes": { "V": "20", "DE": "21", "A": "22" },
+      "edges": {
+        "e2": { "source": "20", "label": "de_obj", "target": "21" },
+        "e1": { "source": "20", "label": "a_obj", "target": "22" }
+      }
+    }
   },
   {
     "sent_id": "annodis.er_00441",
-    "matching": { "V": "16", "DE": "20", "A": "18" }
+    "matching": {
+      "nodes": { "V": "16", "DE": "20", "A": "18" },
+      "edges": {
+        "e2": { "source": "16", "label": "de_obj", "target": "20" },
+        "e1": { "source": "16", "label": "a_obj", "target": "18" }
+      }
+    }
   },
   {
     "sent_id": "annodis.er_00240",
-    "matching": { "V": "12", "DE": "13", "A": "11" }
+    "matching": {
+      "nodes": { "V": "12", "DE": "13", "A": "11" },
+      "edges": {
+        "e2": { "source": "12", "label": "de_obj", "target": "13" },
+        "e1": { "source": "12", "label": "a_obj", "target": "11" }
+      }
+    }
   },
   {
     "sent_id": "annodis.er_00040",
-    "matching": { "V": "42", "DE": "50", "A": "47" }
+    "matching": {
+      "nodes": { "V": "42", "DE": "50", "A": "47" },
+      "edges": {
+        "e2": { "source": "42", "label": "de_obj", "target": "50" },
+        "e1": { "source": "42", "label": "a_obj", "target": "47" }
+      }
+    }
   }
 ]
 ```
 
-This means that the pattern described in the file `subcat.pat` was found 6 times in the corpus, each item gives the sentence identifier and the position of nodes matched by the pattern.
+This means that the pattern described in the file `subcat.pat` was found 6 times in the corpus, each item gives the sentence identifier and the position of nodes and edges matched by the pattern.
 
-Note that two other options exist (`-html` and `-dep_dir <directory>`).
-The first one produces a new `html` field in each JSON item with the sentence where words impacted by the pattern are in a special HTML span with class `highlight`.
-The second one produces a new file in the folder `directory` with the representation of the sentence with highlighted part (as in [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format (usable with [Dep2pict](http://dep2pict.loria.fr)).
+Note that two other options exist:
+
+ * `-html`: produces a new `html` field in each JSON item with the sentence where words impacted by the pattern are in a special HTML span with class `highlight`
+ * `-dep_dir <directory>`: produces a new file in the folder `directory` with the representation of the sentence with highlighted part (as in [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format (usable with [Dep2pict](http://dep2pict.loria.fr)).

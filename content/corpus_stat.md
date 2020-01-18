@@ -54,7 +54,7 @@ For intance, with the two following 1-line files:
  * `ADJ_NOUN.pat` containing: `pattern { A[upos=ADJ]; N[upos=NOUN]; N -[amod]-> A; A << N }`
  * `NOUN_ADJ.pat` containing: `pattern { A[upos=ADJ]; N[upos=NOUN]; N -[amod]-> A; N << A }`
 
-The commands below computes the statistics about the number of occurrences of each pattern in each corpus:
+The command below computes the statistics about the number of occurrences of each pattern in each corpus:
 
 ```
 grew_daemon grep --patterns "ADJ_NOUN.pat NOUN_ADJ.pat" en_fr_zh.json

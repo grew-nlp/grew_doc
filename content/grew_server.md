@@ -48,6 +48,15 @@ This service returns the list of existing projects.
 
  * `()`
 
+ :new: [see #2](https://gitlab.inria.fr/grew/grew_server/issues/2) in **dev**, the returned value is a list of dict:
+
+```json
+[
+    { "name": "project_1", "number_samples": 23, "number_sentences": 45, "number_tokens": 574, "number_trees": 79 },
+    { "name": "project_2", "number_samples": 2, "number_sentences": 4, "number_tokens": 54, "number_trees": 9 }
+]
+```
+
 ### The `eraseProject` service
 
 This service is used to remove a project. If the project does not exist, nothing happens.
@@ -76,6 +85,27 @@ An error is returned if the sample already exists.
 This service returns the list of existing samples in a given project.
 
  * `(<string> project_id)`
+
+ :new: [see #2](https://gitlab.inria.fr/grew/grew_server/issues/2) in **dev**, the returned value is a list of dict:
+
+```json
+[
+    { "name": "sample_1", "number_sentences": 5, "number_tokens": 74, "number_trees": 8, "users": [ "alice", "bob"] },
+    { "name": "sample_2", "number_sentences": 4, "number_tokens": 54, "number_trees": 9, "users": [ "alice", "charlie"]  }
+]
+```
+
+[
+    {
+      "name": "s",
+      "number_sentences": 1,
+      "number_tokens": 12,
+      "number_trees": 3,
+      "users": [ "denys", "ellie", "fred" ]
+    }
+  ]
+
+
 
 ### The `eraseSample` service
 
@@ -148,7 +178,7 @@ Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'nodes'
 
  * `(<string> project_id, <string> pattern)` returns a list of occurrences.
 
- * :new: `(<string> project_id, <string> pattern, <string> clusters)`
+ * `(<string> project_id, <string> pattern, <string> clusters)`
  where `clusters` is a list of cluster keys, separated by `;`.
  This returns nested dictionaries (the depth being equals to the length of the cluster key list).
  The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
@@ -168,5 +198,5 @@ Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'user_i
 
  * `(<string> project_id, <string> pattern)` returns a list of occurrences.
 
- * :new: `(<string> project_id, <string> pattern, <string> clusters)`
+ * `(<string> project_id, <string> pattern, <string> clusters)`
  Nested dictionaries are returned with the same structure as in the case of `searchPatternInSentences` above.

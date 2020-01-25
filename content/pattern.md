@@ -7,35 +7,42 @@ date = "2017-05-22T23:01:05+02:00"
 title = "pattern"
 +++
 
-# Pattern syntax
+# Patterns
 
-A Pattern is defined through 3 different parts that are all optional.
+Patterns are used in **Grew** to describe left part of rewriting rules and in **Grew-match** to describe queries to be executed on corpora.
 
- * at most one positive clause introduced by keyword `pattern` which describes a positive pattern that must be found in the graph.
- * any number of negative clauses introduced by the keyword `without`; each clause filters out a subpart of the matchings previously selected.
- * at most one global clause introduced by the keyword `global` which filters out a subpart of graphs.
+---
+## Pattern syntax
 
-The global matching process is:
+A Pattern is defined through 3 different kind of *pattern items*.
+
+ * global items (introduced by the keyword `global`) filter out structures based on information about the whole graph.
+ * positive items (introduced by keyword `pattern`) describe a positive part (nodes and relations) that must be found in the graph.
+ * negative items (introduced by the keyword `without`) filter out a part of the matchings previously selected by global and positive clauses.
+
+The full matching process is:
 
  * Take a graph and a pattern as input.
- * Output a set of matchings; a matching being a function from nodes and edges defined in the positive clause to nodes and edges of the host graph.
+ * Output a set of matchings; a *matching* being a function from nodes and edges defined in the positive items to nodes and edges of the host graph.
 
- * If the graph does not satisfied one of the global constrains, the output is empty.
- * Else the set M is initialised as the set of matchings which satisfies the positive pattern.
-    * For each negative clause, matchings which satisfies the negative pattern are removed from M.
- * Output M.
+ 1. If the graph does not satisfied one of the global items, the output is empty.
+ 1. Else the set M is initialised as the set of matchings which satisfies the union of positive items.
+ 1. For each negative item, remove from M the matchings which satisfies it.
 
-Note that if there is more than one negative matchings, there are all interpreted independently.
+### Remarks
+ * If there is more than one positive `pattern` items, the union is considered.
+ * If there is more than one negative `without` items, there are all interpreted independently (and the output is different from the one obtained with a union of negative items)
+ * It there is no positive item, there is a trivial matching which is the empty function.
 
-The basic syntax of patterns in grew can be learned using the tutorial part of the [Grew-match](http://match.grew.fr) tool.
+The syntax of patterns in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
 
 ---
 ## Positive and negative patterns
-Positive and negative patterns both follow the same syntax.
-These patterns are described by a list of clauses: node clauses, edge clauses and additional constraints
+Positive and negative items both follow the same syntax.
+They are described by a list of clauses: node clauses, edge clauses and additional constraints
 
 ### Node clauses
-In a node clause, a node is described by an identifier and some constraints on the feature structure.
+In a *node clause*, a node is described by an identifier and some constraints on its feature structure.
 
 ```grew
 N [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, lemma = "être" ]
@@ -45,26 +52,26 @@ The clause above illustrated the syntax of constraint that can be expressed, in 
 
  * `upos = VERB` requires that the feature `upos` is defined with the value `VERB`
  * `Mood = Ind|Imp` requires that the feature `Mood` is defined with one of the two values `Ind` or `Imp`
- * `Tense <> Fut` requires that the feature `Tense` is defined with the value different from `Fut`
+ * `Tense <> Fut` requires that the feature `Tense` is defined with a value different from `Fut`
  * `Number` requires that the feature `Number` is defined whatever is its value
  * `!Person` requires that the feature `Person` is not defined
  * `lemma = "être"` quotes are required when non-ASCII characters are used
 
 ### Edge clauses
 
-All edge clauses below require the existence of an edge between the node selected by `N` and the node selected by `M`, evntually with additional constraints:
+All *edge clauses* below require the existence of an edge between the node selected by `N` and the node selected by `M`, eventually with additional constraints:
 
- * `N -> M` : no additional constrains
+ * `N -> M`: no additional constrains
  * `N -[nsubj]-> M`: the edge label is `nsubj`
  * `N -[nsubj|obj]-> M`: the edge label is either `nsubj` or `obj`
  * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
  * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
 
-Edge may also be named for future use (in commands for instance) with an identifier:
+Edges may also be named for future use (in commands or in clustering for instance) with an identifier:
 
  * `e: N -> M`
 
-Note that edge may refer to undeclared nodes, these nodes are then implicitly declared with any constraint.
+Note that edge may refer to undeclared nodes, these nodes are then implicitly declared without constraint.
 For instance, the two patterns below are equivalent:
 
 ```grew
@@ -95,6 +102,7 @@ These constrains do not identify new elements in the graph, but must be respecte
    * `label(e1) = label(e2)` the labels of the two edges `e1` and `e2` are equal
    * `label(e1) <> label(e2)` the labels of the two edges `e1` and `e2` are different
 
+### Remarks
 When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph will be found several times (up to permutation in the sets of equivalent nodes).
 For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
 
@@ -117,16 +125,14 @@ pattern {
 }
 ```
 
-
-
-
-
 ---
-
 ## Global pattern
-Global patterns were introduced in version 1.2 to let the user express constrain about the whole graph.
-Currently, constraints may be expressed with a fixed list of keywords.
-We plan to add more constraints in the near future. Please drop us a [feature request](https://gitlab.inria.fr/grew/grew/issues) if you like to suggest one.
+Global patterns were introduced in version 1.2 to let the user express constrains about the structure of the whole graph.
+Since version 1.3.4, it is also possible to express constraints about metadata of the graph.
+
+### Structure constraints
+Structure constraints are expressed with a fixed list of keywords.
+
 We describe below 4 of the constraints available in version 1.2.
 For each one, its negation is available by changing the `is_` prefix by the `is_not_` prefix.
 
@@ -139,8 +145,18 @@ For each one, its negation is available by changing the `is_` prefix by the `is_
 
   * `is_tree`: a graph is a tree if it is a forest and if it have exactly one root.
 
-  * `is_projective`: the usual notion of projectivity defined on tree is generalized by saying the a structure is projective if there are no 4-tuples (`A`, `B`, `C`, `D`) of ordered nodes (i.e. `A << B`, `B << C` and `C << D`) such that `A` and `C` are linked and `B` and `D` are linked (two nodes are linked when there is at least one edge between the two, whatever is the orientation).
+  * `is_projective`: the usual notion of projectivity defined on tree is generalised by saying the a structure is projective if there are no 4-tuples (`A`, `B`, `C`, `D`) of ordered nodes (i.e. `A << B`, `B << C` and `C << D`) such that `A` and `C` are linked and `B` and `D` are linked (two nodes are linked when there is at least one edge between the two, whatever is the orientation).
 
+### Metadata constraints
 
+In **Grew**, each graph is associated with a list of metadata: a list of (key, value) pairs.
 
+In `global` items, constraints of these metadata can be expressed with:
+
+ * `sent_id = "fr-ud-train_01234" | "fr-ud-train_12345"`: the metadata `sent_id` has one of the two given values;
+ * `sent_id <> "fr-ud-train_01234" | "fr-ud-train_12345"`: the metadata `sent_id` is different from two given values;
+ * `text = re".*\baux\b.*`: the `text` metadata field follows the given regexp (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted; in the example, the field must contain the word *aux*).
+
+For corpora described by the CoNLL-U format, available metadata are described before each sentence (see [CoNNL-U doc](https://universaldependencies.org/format.html#sentence-boundaries-and-comments)).
+In the UD or SUD corpora, each sentence contains at least the two metadata `sent_id` and `text`.
 

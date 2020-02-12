@@ -96,6 +96,9 @@ This includes:
 
 See a few examples in [SUD_French-GSD](http://match.grew.fr/?corpus=SUD_French-GSD@master&custom=5e42842249c10).
 
+## Deprecated `_MISC_` and `_UD_` prefixes
+In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix. These prefixes are deprecated and are replaced by features `textform` and `wordform` (see above).
+
 ## Enhanced dependencies
 In the UD framework, a few corpora are also provided with another annotation EUD layer ([Enhanced dependencies](https://universaldependencies.org/u/overview/enhanced-syntax.html)).
 For these corpora, a switch button is available (above the textarea) where the user can chose between UD and EUD

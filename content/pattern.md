@@ -160,3 +160,14 @@ In `global` items, constraints of these metadata can be expressed with:
 For corpora described by the CoNLL-U format, available metadata are described before each sentence (see [CoNNL-U doc](https://universaldependencies.org/format.html#sentence-boundaries-and-comments)).
 In the UD or SUD corpora, each sentence contains at least the two metadata `sent_id` and `text`.
 
+---
+
+## Note about CoNNL-U specificities
+
+Additional information available in the CoNNL-U format can be accessed through special features:
+
+  * Features of column 10 (MISC) are shown with the prefix `_MISC_`
+  * Empty nodes have a feature `_UD_empty=Yes`
+  * Multiword tokens are described on the first element with features `_UD_mw_fusion` and `_UD_mw_span`
+
+⚠️ Note that these features are not handle in the same way in Grew-match (see [Grew-match doc](../match_doc#additional-feature-textform-and-wordform)).

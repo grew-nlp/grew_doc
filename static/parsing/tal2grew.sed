@@ -45,6 +45,7 @@ s/VS	VS/_	VS/
 s/t=P,S/t=pst/
 s/t=J,P/m=ind/
 s/t=I,P/m=ind/
+s/t=S,T/m=subj/
 s/g=f,m//
 s/n=p,s//
 s/p=1,3//
@@ -60,8 +61,7 @@ s/||/|/
 s/poss=s/s=poss/
 s/poss=p/s=poss/
 
-# Step 3.4: possessives
-# verbal features
+# Step 3.4: verbal features
 s/t=C/m=ind|t=cond/
 s/t=F/m=ind|t=fut/
 s/t=G/m=part|t=pst/

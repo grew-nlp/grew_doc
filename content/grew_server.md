@@ -48,7 +48,15 @@ This service returns the list of existing projects.
 
  * `()`
 
- :new: [see #2](https://gitlab.inria.fr/grew/grew_server/issues/2) in **dev**, the returned value is a list of dict:
+:warning::warning::warning: Output on **prod** version
+
+```json
+[ "project_1", "project_2" ]
+```
+
+:warning::warning::warning: Output on **dev** version
+
+The returned value is a list of dict ([see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)):
 
 ```json
 [
@@ -86,7 +94,18 @@ This service returns the list of existing samples in a given project.
 
  * `(<string> project_id)`
 
- :new: [see #2](https://gitlab.inria.fr/grew/grew_server/issues/2) in **dev**, the returned value is a list of dict:
+:warning::warning::warning: Output on **prod** version
+
+```json
+[
+  { "name": "sample_1", "size": 5, "users": [ "alice", "bob" ] },
+  { "name": "sample_2", "size": 4, "users": [ "alice", "charlie" ] }
+]
+```
+
+:warning::warning::warning: Output on **dev** version
+
+[see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)
 
 ```json
 [
@@ -94,18 +113,6 @@ This service returns the list of existing samples in a given project.
     { "name": "sample_2", "number_sentences": 4, "number_tokens": 54, "number_trees": 9, "users": [ "alice", "charlie"]  }
 ]
 ```
-
-[
-    {
-      "name": "s",
-      "number_sentences": 1,
-      "number_tokens": 12,
-      "number_trees": 3,
-      "users": [ "denys", "ellie", "fred" ]
-    }
-  ]
-
-
 
 ### The `eraseSample` service
 
@@ -171,7 +178,39 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ## Search with Grew patterns
 
+### The `searchPatternInGraphs` service
+
+This service returns occurrences of some pattern in a project, for a given user.
+Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'user_id':…, 'nodes':…, 'edges':…}`.
+
+:warning::warning::warning: In the **dev** version one more field `conll` gives the CoNLL data of the corresponding graph.
+
+ * `(<string> project_id, <string> pattern)` returns a list of occurrences.
+
+ * `(<string> project_id, <string> pattern, <string> clusters)`
+ where `clusters` is a list of cluster keys, separated by `;`.
+ This returns nested dictionaries (the depth being equals to the length of the cluster key list).
+ The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
+ each cluster is further clustered recursively with the remaining keys.
+ For instance:
+
+   * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
+   * Data presented in **Relations tables** in **Grew match** can be obtained (for the `obj` relation in the example) with the arguments:
+
+     * `pattern`: `pattern { G -[obj]-> D }`
+     * `clusters`: `G.upos; D.upos`
+
+---
+---
+
 ### The `searchPatternInSentences` service
+
+:warning::warning::warning:
+
+Service `searchPatternInSentences` is deprecated, it is no available in the **dev** version
+
+:warning::warning::warning:
+
 
 This service returns occurrences of some pattern in a project.
 Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'nodes':…, 'edges':…}`.
@@ -182,7 +221,7 @@ Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'nodes'
  where `clusters` is a list of cluster keys, separated by `;`.
  This returns nested dictionaries (the depth being equals to the length of the cluster key list).
  The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
- each clusters is further clustered recursively with the remaining keys.
+ each cluster is further clustered recursively with the remaining keys.
  For instance:
 
    * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
@@ -191,12 +230,3 @@ Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'nodes'
      * `pattern`: `pattern { G -[obj]-> D }`
      * `clusters`: `G.upos; D.upos`
 
-### The `searchPatternInGraphs` service
-
-This service returns occurrences of some pattern in a project, for a given user.
-Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'user_id':…, 'nodes':…, 'edges':…}`.
-
- * `(<string> project_id, <string> pattern)` returns a list of occurrences.
-
- * `(<string> project_id, <string> pattern, <string> clusters)`
- Nested dictionaries are returned with the same structure as in the case of `searchPatternInSentences` above.

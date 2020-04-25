@@ -51,11 +51,10 @@ apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 
 ## Step 2: Setup opam
 
-Run:
+Run: `opam init` and follow instructions (answer `y` to different questions).
 
- * `opam init` and follow instructions (answer `y` to different questions).
- * `opam switch create 4.09.0 4.09.0` installation of Ocaml. Note that it takes some times to download and build the `ocaml` compiler.
-   * Check that `ocaml` is installed with `ocamlc -v`.
+Check that `ocaml` is installed with `ocamlc -v`. This gives you the version of Ocaml installed.
+This should be (in March 2020) 4.10.0.
 
 ## Step 3: Install the Grew software
 

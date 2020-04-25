@@ -94,7 +94,7 @@ This includes:
  * typographical or orthographical errors
  * token linked by a `goeswith` relation
 
-See a few examples in [SUD_French-GSD](http://match.grew.fr/?corpus=SUD_French-GSD@master&custom=5e42842249c10).
+See a few examples in [SUD_French-GSD](http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5e42842249c10).
 
 ## Deprecated `_MISC_` and `_UD_` prefixes
 In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix. These prefixes are deprecated and are replaced by features `textform` and `wordform` (see above).

@@ -26,12 +26,13 @@ The full matching process is:
  * Output a set of matchings; a *matching* being a function from nodes and edges defined in the positive items to nodes and edges of the host graph.
 
  1. If the graph does not satisfied one of the global items, the output is empty.
- 1. Else the set M is initialised as the set of matchings which satisfies the union of positive items.
- 1. For each negative item, remove from M the matchings which satisfies it.
+ 1. Else the set M is initialised as the set of matchings which satisfy the union of positive items.
+ 1. For each negative item, remove from M the matchings which satisfy it.
 
 ### Remarks
  * If there is more than one positive `pattern` items, the union is considered.
  * If there is more than one negative `without` items, there are all interpreted independently (and the output is different from the one obtained with a union of negative items)
+ * The order of patterns items in a pattern are irrelevant.
  * It there is no positive item, there is a trivial matching which is the empty function.
 
 The syntax of patterns in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
@@ -48,7 +49,7 @@ In a *node clause*, a node is described by an identifier and some constraints on
 N [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, lemma = "être" ]
 ```
 
-The clause above illustrated the syntax of constraint that can be expressed, in turn:
+The clause above illustrates the syntax of constraint that can be expressed, in turn:
 
  * `upos = VERB` requires that the feature `upos` is defined with the value `VERB`
  * `Mood = Ind|Imp` requires that the feature `Mood` is defined with one of the two values `Ind` or `Imp`
@@ -67,7 +68,7 @@ All *edge clauses* below require the existence of an edge between the node selec
  * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
  * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
 
-Edges may also be named for future use (in commands or in clustering for instance) with an identifier:
+Edges may also be named for usage in commands (in Grew) or in clustering (in Grew-match) with an identifier:
 
  * `e: N -> M`
 
@@ -91,7 +92,10 @@ These constrains do not identify new elements in the graph, but must be respecte
  * Constraints on features values:
   * `N.lemma = M.lemma` two feature values must be equal
   * `N.lemma <> M.lemma` two feature values must be different
+  * `N.lemma = "constant"` the feature `lemma` of node `N` must be the value `constant`
   * `N.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
+  * `N.lemma = lexicon.field` imposes that the feature `lemma` of node `N` must be the be present in the `field` of the `lexicon`. **NB**: this reduce also the current lexicon the items for which `field` is equals to `N.lemma`.
+
  * Constraints on node ordering:
   * `N < M` the node `N` immediately precedes the node `M`
   * `N << M` the node `N` precedes the node `M`
@@ -103,7 +107,7 @@ These constrains do not identify new elements in the graph, but must be respecte
    * `label(e1) <> label(e2)` the labels of the two edges `e1` and `e2` are different
 
 ### Remarks
-When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph will be found several times (up to permutation in the sets of equivalent nodes).
+When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph is found several times (up to permutation in the sets of equivalent nodes).
 For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
 
 ```grew
@@ -117,6 +121,8 @@ It imposes an ordering on some internal representation of the nodes and so avoid
 
 
 The pattern below returns the 20 expected occurrences ([Grew-match](http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6bb86ce49))
+
+
 
 ```grew
 pattern {
@@ -145,7 +151,7 @@ For each one, its negation is available by changing the `is_` prefix by the `is_
 
   * `is_tree`: a graph is a tree if it is a forest and if it have exactly one root.
 
-  * `is_projective`: the usual notion of projectivity defined on tree is generalised by saying the a structure is projective if there are no 4-tuples (`A`, `B`, `C`, `D`) of ordered nodes (i.e. `A << B`, `B << C` and `C << D`) such that `A` and `C` are linked and `B` and `D` are linked (two nodes are linked when there is at least one edge between the two, whatever is the orientation).
+  * `is_projective`: the usual [notion of projectivity](https://en.wikipedia.org/wiki/Discontinuity_(linguistics)) defined on tree is generalised by saying the a structure is projective if there are no 4-tuples (`A`, `B`, `C`, `D`) of ordered nodes (i.e. `A << B`, `B << C` and `C << D`) such that `A` and `C` are linked and `B` and `D` are linked (two nodes are linked when there is at least one edge between the two, whatever is the orientation).
 
 ### Metadata constraints
 

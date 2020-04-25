@@ -114,7 +114,7 @@ Input graph: [`copy_mod.gr`](../complex_edges/copy_mod.gr)
 Rule: [`reverse.grs`](../complex_edges/reverse.grs):
 {{< grew file="/static/complex_edges/reverse.grs" >}}
 
-Command: `grew transform -grs complex_edges.grs -strat "Onf(reverse)"`
+Command: `grew transform -grs reverse.grs -strat "Onf(reverse)"`
 
 Input graph:  [`reverse.gr`](../complex_edges/reverse.gr)
 
@@ -124,9 +124,9 @@ Input graph:  [`reverse.gr`](../complex_edges/reverse.gr)
 By contrast, with the rule [`fail_reverse.grs`](../complex_edges/fail_reverse.grs):
 {{< grew file="/static/complex_edges/fail_reverse.grs" >}}
 
-the command `grew transform -grs complex_edges.grs -strat "Onf(fail_reverse_YZ)"` applied to the same graph produces the error:
+the command `grew transform -grs fail_reverse.grs -strat "Onf(fail_reverse)"` applied to the same graph produces the error:
 
-```[file: complex_edges.grs, line: 8] ADD_EDGE_EXPL: the edge identifier 'e' is undefined```
+```[file: fail_reverse.grs, line: 3] ADD_EDGE_EXPL: the edge identifier 'e' is undefined```
 
 The `add_edge` command cannot be executed because the edge `e` does not exist anymore.
 Note that with previous Grew versions, the rule `fail_reverse_YZ` can be applied and hence, it may be needed to update existing rule systems.

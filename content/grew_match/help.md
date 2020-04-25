@@ -11,7 +11,7 @@ Categories = ["Development","GoLang"]
 # Grew-match: Online Graph Matching
 
 **Grew-match** is a one page online web application for searching graph patterns in treebanks.
-Treebanks available are in several linguistic format:
+Treebanks available are in several linguistic formats:
 
  * In UD format ([Universal Dependencies](http://universaldependencies.org))
    * The 157 treebanks of the version 2.5;
@@ -26,7 +26,7 @@ Treebanks available are in several linguistic format:
  * Data of the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
  * Data of [Orfeo project](https://www.projet-orfeo.fr/)
 
-If you want to use it on some other corpora, you can run your own Grew-match following the instructions on [Local installation of Grew-match](../install_match).
+If you want to use it on some other corpora, you can run your own Grew-match following the instructions on [Local installation of Grew-match](../install).
 
 ## Basic usage
 
@@ -45,7 +45,7 @@ This means that the first 1000 items were found in 4.88% of the 16,342 sentences
 ## Learning syntax
 A [tutorial](http://match.grew.fr/?tutorial=yes) with a progressive sequence of patterns is available.
 You may also explore snippets given on the right of the text area to learn with other examples.
-A more comprehensive documentation is available in the [patterns page](../pattern).
+A more comprehensive documentation is available in the [patterns page](../../pattern).
 
 ## About CoNLL field names
 The fields 2, 3, 4 and 5 of CoNLL structure are considered as features with the following feature names.
@@ -74,12 +74,12 @@ Below the textarea, a few options are available:
  * `context`: if checked, the previous and the following sentences are shown (of course, this is useful only on corpora where original sentences ordering is preserved)
 
 ## Additional features `textform` and `wordform`
-In order to deal with several places where data present in the original sentence and the linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
+In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
 
 This is implemented in the current version of Grew-match (February 2020).
 The two fields are built from CoNLL data in the following way:
 
- 1. If multiword token `i-j` is declared:
+ 1. If a multiword token `i-j` is declared:
    * the `textform` of the first token is the `FORM` field of the multiword token
    * the `textform` of each other token is `_`
  1. If the token is an empty node (exists only in EUD):
@@ -96,20 +96,24 @@ This includes:
 
 See a few examples in [SUD_French-GSD](http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5e42842249c10).
 
-## Deprecated `_MISC_` and `_UD_` prefixes
-In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix. These prefixes are deprecated and are replaced by features `textform` and `wordform` (see above).
-
 ## Enhanced dependencies
 In the UD framework, a few corpora are also provided with another annotation EUD layer ([Enhanced dependencies](https://universaldependencies.org/u/overview/enhanced-syntax.html)).
 For these corpora, a switch button is available (above the textarea) where the user can chose between UD and EUD
 
 If EUD is selected, enhanced dependencies are displayed in blue below the sentence.
 In the pattern, an enhanced dependency can be searched with the prefix `E:`.
-Searching for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart (see [output](http://match.grew.fr/?corpus=UD_English-EWT@2.5&custom=5e42806ae3a71&eud=yes)):
+For instance, the pattern below searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart (see [output](http://match.grew.fr/?corpus=UD_English-EWT@2.5&custom=5e42806ae3a71&eud=yes)):
 ```grew
 pattern { N -[E:obj]-> M }
 without { N -[obj]-> M }
 ```  
 
+
 ## Contact
 For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@loria.fr?subject=Grew-match) or open an issue on the [GitLab project](http://gitlab.inria.fr/grew/grew_match/issues) (you will have to register).
+
+---
+
+## Deprecated `_MISC_` and `_UD_` prefixes
+In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix. These prefixes are deprecated and are replaced by features `textform` and `wordform` (see above).
+

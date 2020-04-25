@@ -17,20 +17,20 @@ If you want to use **Grew-match** on your own corpus, you have to install it loc
 
 A web server is required. You can install [apache](https://www.apache.org) or one of the easy to install distribution like [LAMP on Linux](https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29) or [MAMP on Mac OSX](https://www.mamp.info).
 
-In the following we will call `DOCUMENT_ROOT` the main folder accessible from your website:
+In the following, we will call `DOCUMENT_ROOT` the main folder accessible from your website:
 
  * with apache, it is defined in the `httpd.conf` file
  * with LAMP, it should be `/opt/lampp/htdocs/`
  * with MAMP, it should be `/Applications/MAMP/htdocs`
 
-In doubt, refer to the documentation of the corresponding web server.
+In needed, refer to the documentation of the corresponding web server.
 
-We use the port number `8888` below. You may have to change this if this port number is already used.
+We use here the port number `8888`. You may have to change this if this port number is already used.
 
 ## STEP 1: Install the webpage
 
 ### Download
-The code for the webpage is available through [`gitlab.inria.fr`](https://gitlab.inria.fr) with:
+The code for the webpage is available on [`gitlab.inria.fr`](https://gitlab.inria.fr/grew/grew_match):
 
 ```
 git clone https://gitlab.inria.fr/grew/grew_match.git
@@ -44,7 +44,7 @@ cd grew_match
 ```
 
 Edit the file `corpora/groups.json` to describe the set of available corpora.
-For instance with our previous example with 3 corpora, the configuration file looks like:
+An example of configuration file with 3 corpora:
 
 ```json
 { "groups": [
@@ -69,44 +69,14 @@ You can look the [configuration file](https://gitlab.inria.fr/grew/grew_match/bl
 
 ### Install
 
-The project contains a file `install_template.sh`.
-
-```shell
-# decide where you want to store the webpage locally
-DEST=DOCUMENT_ROOT/grew_match
-
-# set the PORT number
-PORT=8888
-
-# build the DEST directory if needed
-mkdir -p $DEST
-
-# Copy the files in the right place
-cp *.php *.xml *.html *.png $DEST
-cp -r corpora css fonts icon js tuto $DEST
-
-# build local folders for storing data
-cd $DEST
-mkdir -p data/shorten
-chmod -R 777 data
-
-# build other useful folders
-mkdir -p _tables
-mkdir -p _logs
-mkdir -p _descs
-
-# update parameters in the code
-cat main.php | sed "s+@PORT@+${PORT}+" | sed "s+@DATADIR@+$DEST/data/+" > __tmp_file && mv -f __tmp_file main.php
-```
-
- Copy it with the name `install.sh`:
+The project contains a file [`install_template.sh`](https://gitlab.inria.fr/grew/grew_match/-/blob/master/install_template.sh).
+Copy it with the name `install.sh`:
 
 ```
 cp install_template.sh install.sh
 ```
 
-Edit the file `install.sh` and update `DEST` definition (line 2) and `PORT` (line 5) if needed.
-
+Edit the new file `install.sh` and update `DEST` definition (line 2) and `PORT` (line 5) if needed.
 Run the install script:
 
 ```
@@ -150,7 +120,7 @@ For instance, the JSON file `my_corpora.json` below defines 3 corpora:
 In order to speed up the pattern search and to preserve memory when a large number of corpora are available, corpora are compiled with the command:
 
 ```
-grew_daemon marshal my_corpora.json --webserver DOCUMENT_ROOT
+grew compile -grew_match_server DOCUMENT_ROOT -i my_corpora.json
 ```
 
 A new file with the name of the corpus and the extension `.marshal` is created in the corpus directory.
@@ -160,7 +130,7 @@ The compilation step will also build the relation tables and put them in a place
 You can clean the compiled files with:
 
 ```
-grew_daemon clean my_corpora.json
+grew clean -i my_corpora.json
 ```
 
 ### Run the daemon
@@ -181,7 +151,7 @@ Feel free to contact [us](mailto:Bruno.Guillaume@loria.fr) in case of trouble.
 ### Restart the daemon when one of the corpora is updated
 
 1. Kill the running daemon (you can use the command `killall grew_daemon` if the daemon is running in the background)
-2. Run the compile operation again: `grew_daemon marshal my_corpora.json`
+2. Run the compile operation again: `grew compile -grew_match_server DOCUMENT_ROOT -i my_corpora.json`
 3. Restart the daemon: `grew_daemon run --port 8888 my_corpora.json`
 
 

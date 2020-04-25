@@ -129,7 +129,7 @@ the command `grew transform -grs fail_reverse.grs -strat "Onf(fail_reverse)"` ap
 ```[file: fail_reverse.grs, line: 3] ADD_EDGE_EXPL: the edge identifier 'e' is undefined```
 
 The `add_edge` command cannot be executed because the edge `e` does not exist anymore.
-Note that with previous Grew versions, the rule `fail_reverse_YZ` can be applied and hence, it may be needed to update existing rule systems.
+Note that with previous Grew versions, the rule `fail_reverse` can be applied and hence, it may be needed to update existing rule systems.
 
 ## TODO in an upcoming release
 

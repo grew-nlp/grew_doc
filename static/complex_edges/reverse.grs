@@ -1,4 +1,8 @@
 rule reverse {
   pattern { N -[X]-> M; e: N -[Y|Z]-> M }
-  commands { add_edge e: M -> N; del_edge e; }
+  commands {
+    add_edge new_e: M -> N;
+    new_e.label = e.label;
+    del_edge e;
+  }
 }

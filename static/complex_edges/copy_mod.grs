@@ -1,4 +1,8 @@
 rule copy_mod {
   pattern { e1: N -[1=X]-> M; M -> T }
-  commands { add_edge e1: M -> T; e1.2 = U }
+  commands {
+    add_edge new_e: M -> T;
+    new_e.label = e1.label;
+    e1.2 = U;
+  }
 }

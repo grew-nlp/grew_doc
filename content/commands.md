@@ -99,7 +99,7 @@ Command which may be ineffective are:
  * `add_edge` when the edge is already present in the graph
  * `del_edge` when the edge does not exists in the graph
  * `del_node` when the node does not exists in the graph (this can happen when there are two commands `del_node A` in the same rule)
- * `def_feat` when the feat does not exists in the node
+ * `del_feat` when the feat does not exists in the node
 
 Note that it is always possible to define a Graph Rewriting System with only effective commands following the procedure:
 

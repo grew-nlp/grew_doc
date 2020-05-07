@@ -1,18 +1,18 @@
-labels { E, E_3, E_4, E_5 }
+labels { L, L_3, L_4, L_5 }
 
-labels { E_1, E_11, E_12 }
-labels { E_2, E_21, E_22 }
+labels { L_1, L_11, L_12 }
+labels { L_2, L_21, L_22 }
 
 package p_1 {
-  rule r_1  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_1]-> Y  } }
-  rule r_11 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_11]-> Y } }
-  rule r_12 { pattern { e:X -[E_1]-> Y } commands { del_edge e; add_edge X -[E_12]-> Y } }
+  rule r_1  { pattern { e:X -[L]-> Y   } commands { del_edge e; add_edge X -[L_1]-> Y  } }
+  rule r_11 { pattern { e:X -[L_1]-> Y } commands { del_edge e; add_edge X -[L_11]-> Y } }
+  rule r_12 { pattern { e:X -[L_1]-> Y } commands { del_edge e; add_edge X -[L_12]-> Y } }
 }
 
 package p_2 {
-  rule r_2  { pattern { e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_2]-> Y  } }
-  rule r_21 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_21]-> Y } }
-  rule r_22 { pattern { e:X -[E_2]-> Y } commands { del_edge e; add_edge X -[E_22]-> Y } }
+  rule r_2  { pattern { e:X -[L]-> Y   } commands { del_edge e; add_edge X -[L_2]-> Y  } }
+  rule r_21 { pattern { e:X -[L_2]-> Y } commands { del_edge e; add_edge X -[L_21]-> Y } }
+  rule r_22 { pattern { e:X -[L_2]-> Y } commands { del_edge e; add_edge X -[L_22]-> Y } }
 }
 
 strat p_1_nfs { Iter (p_1) }  % all normal forms with package p_1
@@ -22,13 +22,3 @@ strat union { Alt (p_1,p_2) } % union of the two set of rules
 strat all_nfs { Iter (union)} % all normal forms
 
 strat s_1 { Seq (Pick(p_1), Pick(p_2), all_nfs) }
-
-package pp {
-  rule r_1  { pattern { X[cat=N, lemma=lex.lemma]; e:X -[E]-> Y   } commands { del_edge e; add_edge X -[E_1]-> Y  } }
-  rule r_2  { pattern { e:X -[E_1]-> Y   } commands { del_edge e; add_edge X -[E_2]-> Y  } }
-  rule r_3  { pattern { e:X -[E_2]-> Y   } commands { del_edge e; add_edge X -[E_3]-> Y  } }
-  rule r_4  { pattern { e:X -[E_3]-> Y   } commands { del_edge e; add_edge X -[E_4]-> Y  } }
-  rule r_5  { pattern { e:X -[E_4]-> Y   } commands { del_edge e; add_edge X -[E_5]-> Y  } }
-}
-
-strat main { Seq (Onf(pp.r_1),Onf(pp.r_2),Onf(pp.r_3),Onf(pp.r_4),Onf(pp.r_5))}

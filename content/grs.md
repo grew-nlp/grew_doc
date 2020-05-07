@@ -10,9 +10,6 @@ Description = ""
 
 # GRS syntax
 
-The syntax descried here appeared in version 0.44.0 (2017/09/05).
-For the previous syntax, view [old_grs](../old_grs) page.
-
 ## Global structure
 A GRS is composed by a set of declarations that may be provided in several files.
 These files are expected to used the `.grs` or the `.dom` file extension.
@@ -121,7 +118,6 @@ With this operator, only one normal form is built, and so :
 
 
 
-
 ## Packages
 Packages are used to organize the set of declarations and to define scopes of definitions.
 Syntax of packages definition:
@@ -198,15 +194,42 @@ Consider a folder with the five files:
   * [`multi.grs`](../examples/strategies/multi.grs)
 {{< grew file="/static/examples/strategies/multi.grs" >}}
 
+
 ### Single file declaration
 The five files above define a GRS, equivalent to the one below:
 
   * [`single.grs`](../examples/strategies/single.grs)
 {{< grew file="/static/examples/strategies/single.grs" >}}
 
+Note that all the rules consist in the changement of the label of one edge.
+Package `p_1` rewrites the label `L` into `L_1` and `L_1` into either `L_11` or `L_12`.
+Similarly, package `p_2` rewrites the label `L` into `L_2` and `L_2` into either `L_21` or `L_22`.
+
+
 ### Apply the GRS to a graph
 
-Consider the graph defined in
+Consider small graph with 3 nodes and 2 edges labeled `L` defined in
 
-  * [`input.gr`](../examples/strategies/input.gr):
+[`input.gr`](../examples/strategies/input.gr):
 {{< grew file="/static/examples/strategies/input.gr" >}}
+
+Next commands rewrite the graph `input.gr`, following different strategies (:warning: the `-gr` options is needed to output graph in the native format instead of CoNLL)
+#### strategy `p_1_nfs`
+
+`grew transform -grs single.grs -strat p_1_nfs -i input.gr -gr` computes all normal forms for the input graph with rules of package `p_1`.
+ Each initial edges `L` can be rewritten either `L_11` or `L_12`, and so 4 graphs are produced:
+{{< grew file="/static/examples/strategies/p_1_nfs.out" >}}
+
+#### strategy `p_1_onf`
+
+`grew transform -grs single.grs -strat p_1_onf -i input.gr -gr` produces one of the 4 graphs of the previous strategy.
+{{< grew file="/static/examples/strategies/p_1_onf.out" >}}
+
+#### strategy `union`
+`grew transform -grs single.grs -strat union -i input.gr -gr` compute the application of the union of one step of rewriting with `p_1` (which produces 2 graphs, replacing one the two `L` edge by `L_1` and the same with `p_2`. In the end, 4 graphs are produced (there is no iteration of rule application).
+{{< grew file="/static/examples/strategies/union.out" >}}
+
+#### strategy `all_nfs`
+`grew transform -grs single.grs -strat all_nfs -i input.gr -gr` computes all normal forms that can be obtained with these all the rules and produces 16 graphs.
+{{< grew file="/static/examples/strategies/all_nfs.out" >}}
+

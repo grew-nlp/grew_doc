@@ -1,0 +1,32 @@
+graph {
+  N_2 [label="A"] ;
+  N_1 [label="B"] ;
+  N_0 [label="C"] ;
+  N_2 -[X_11]-> N_1;
+  N_1 -[X_11]-> N_0;
+}
+
+graph {
+  N_2 [label="A"] ;
+  N_1 [label="B"] ;
+  N_0 [label="C"] ;
+  N_2 -[X_12]-> N_1;
+  N_1 -[X_11]-> N_0;
+}
+
+graph {
+  N_2 [label="A"] ;
+  N_1 [label="B"] ;
+  N_0 [label="C"] ;
+  N_2 -[X_11]-> N_1;
+  N_1 -[X_12]-> N_0;
+}
+
+graph {
+  N_2 [label="A"] ;
+  N_1 [label="B"] ;
+  N_0 [label="C"] ;
+  N_2 -[X_12]-> N_1;
+  N_1 -[X_12]-> N_0;
+}
+

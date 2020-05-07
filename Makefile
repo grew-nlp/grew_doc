@@ -1,4 +1,4 @@
-HUGO=${hugo_old}
+HUGO=hugo_old
 
 selfdoc:
 	@echo " * make start --> run locally the server"

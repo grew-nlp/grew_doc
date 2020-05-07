@@ -116,7 +116,8 @@ Rule: [`reverse.grs`](../complex_edges/reverse.grs):
 
 Command: `grew transform -grs reverse.grs -strat "Onf(reverse)"`
 
-Input graph:  [`reverse.gr`](../complex_edges/reverse.gr)
+Input graph: [`reverse.gr`](../complex_edges/reverse.gr)
+{{< grew file="/static/complex_edges/reverse.gr" >}}
 
 | ![input](/complex_edges/_reverse_in.svg) | ![output](/complex_edges/_reverse_out.svg) |
 |:---:|:---:|
@@ -131,9 +132,16 @@ the command `grew transform -grs fail_reverse.grs -strat "Onf(fail_reverse)"` ap
 The `add_edge` command cannot be executed because the edge `e` does not exist anymore.
 Note that with previous Grew versions, the rule `fail_reverse` can be applied and hence, it may be needed to update existing rule systems.
 
-## TODO in an upcoming release
+### Copy a feature value (since v1.4)
 
-### Copy a feature value
-
+Rule: [`copy_sub.grs`](../complex_edges/copy_sub.grs):
 {{< grew file="/static/complex_edges/copy_sub.grs" >}}
+
+Command: `grew transform -grs copy_sub.grs -strat "Onf(copy_sub)"`
+
+Input graph: [`copy_sub.gr`](../complex_edges/copy_sub.gr)
+{{< grew file="/static/complex_edges/copy_sub.gr" >}}
+
+| ![input](/complex_edges/_copy_sub_in.svg) | ![output](/complex_edges/_copy_sub_out.svg) |
+|:---:|:---:|
 

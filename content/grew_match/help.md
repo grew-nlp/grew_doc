@@ -66,35 +66,13 @@ Below the textarea, a few options are available:
  * `upos`: if checked, the upos (CoNLL column 4) is shown in output
  * `xpos`: if checked, the xpos (CoNLL column 5) is shown in output
  * `features`: if checked, other features (CoNLL column 6 and column 10) are shown
- * `textform/wordform`: if checked, additional features `textform` and `wordform` (see below) are shown
+ * `textform/wordform`: if checked, additional features `textform` and `wordform` (see [CoNLL doc](../../conll#additional-features-textform-and-wordform)) are shown
  * `sentence order`: 3 value are available
     * `initial`: the sentence are scanned in the order they are present in the original corpus
     * `by length`: the shortest sentences (in term of tokens number) are scanned first
     * `shuffle` the set of sentences is shuffled before searching the pattern (useful to search randomly for examples in a corpus)
  * `context`: if checked, the previous and the following sentences are shown (of course, this is useful only on corpora where original sentences ordering is preserved)
 
-## Additional features `textform` and `wordform`
-In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
-
-This is implemented in the current version of Grew-match (February 2020).
-The two fields are built from CoNLL data in the following way:
-
- 1. If a multiword token `i-j` is declared:
-   * the `textform` of the first token is the `FORM` field of the multiword token
-   * the `textform` of each other token is `_`
- 1. If the token is an empty node (exists only in EUD):
-   * `textform=_` and `wordform=_`
- 1. For each token without `textform` feature, the `textform` is set to the `FORM` field value
- 1. For each token without `wordform` feature, the `wordform` is set to the `FORM` field value
-
-⚠️ In places where `wordform` should be different from `FORM` field, this should be expressed in the data with an explicit `wordform` feature.
-This includes:
-
- * lowercased form of initial word or potentially other words in the sentence
- * typographical or orthographical errors
- * token linked by a `goeswith` relation
-
-See a few examples in [SUD_French-GSD](http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5e42842249c10).
 
 ## Enhanced dependencies
 In the UD framework, a few corpora are also provided with another annotation EUD layer ([Enhanced dependencies](https://universaldependencies.org/u/overview/enhanced-syntax.html)).
@@ -115,5 +93,6 @@ For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@lo
 ---
 
 ## Deprecated `_MISC_` and `_UD_` prefixes
-In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix. These prefixes are deprecated and are replaced by features `textform` and `wordform` (see above).
+In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix.
+These prefixes are not used anymore; they are replaced by features `textform` and `wordform` (see [CoNLL doc](../../conll#additional-features-textform-and-wordform)).
 

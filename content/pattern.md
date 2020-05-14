@@ -176,4 +176,4 @@ Additional information available in the CoNNL-U format can be accessed through s
   * Empty nodes have a feature `_UD_empty=Yes`
   * Multiword tokens are described on the first element with features `_UD_mw_fusion` and `_UD_mw_span`
 
-⚠️ Note that these features are not handle in the same way in Grew-match (see [Grew-match doc](../match_doc#additional-feature-textform-and-wordform)).
+⚠️ Note that these features are not handled in the same way in Grew-match (see [Grew-match doc](../match_doc#additional-feature-textform-and-wordform)).

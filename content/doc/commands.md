@@ -54,7 +54,7 @@ add_edge N -[suj]-> M
 TOOD : update syntax
 The command `add_edge e: N -> M` adds a new edge in the current graph from the node matched with identifier `N` to the node matched with identifier `M` with the same label as the edge that was match in the pattern with the edge identifier `e`.
 
-There is an example on usage of the command [here](../complex_edges#reverse-an-edge).
+There is an example on usage of the command TODO link to example
 
 ## Edge redirection
 Commands are available to move globally incident edges of some node of the pattern.

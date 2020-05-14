@@ -27,7 +27,7 @@ This was not very convenient to deal with complex edges:
 
   * in [Deep-sequoia](deep-sequoia.inria.fr), the edge `suj:obj` means that the final function is `suj` and the canonical function is `obj`;
   * in [UD](https://universaldependencies.org), the label `aux:pass` is a subtype of the label `aux`;
-  * in SUD, the label `compl:obl@agent` contains both a subtype `obl` and a deep feature `agent` (see [TLT 2019](https://hal.inria.fr/hal-02266003v1)).
+  * in [SUD](https://surfacesyntacticud.github.io/), the label `compl:obl@agent` contains both a subtype `obl` and a deep feature `agent` (see [TLT 2019](https://hal.inria.fr/hal-02266003v1)).
 
 In all these cases, with atomic edge labels, it is not possible to deal with one part of the label independently.
 Since version 1.2, the implementation of edge labels has changed to tackle this problem.
@@ -37,7 +37,7 @@ In **Grew** graphs, an edge label is internally stored as a flat feature structu
 We will use the traditional notation `f=v` for these couples.
 
 For backward compatibility and for ease of use in practice, a **compact** notation may be used for edge labels.
-An edge label can be written with a compact notation only if it contains features with names `rel`, `subrel` and or `deep`.
+An edge label can be written with a compact notation if it contains only features with names `rel`, `subrel` or `deep`.
 In the compact notation, the `subrel` is introduced by `:` and the `deep` feature by `@` (this corresponds to the convention used in [SUD](https://surfacesyntacticud.github.io/)).
 
 In version 1.3, feature names `1` and `2` where used instead of `rel` and `subrel`, this is still available but considered deprecated.

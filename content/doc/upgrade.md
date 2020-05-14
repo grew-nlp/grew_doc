@@ -8,12 +8,18 @@ Description = ""
 
 +++
 
+# GRS upgrading
+
 This page describes the breaking changes in **Grew** and provides the information needed to upgrade a Graph Rewriting systems.
+
+---
 
 # 1.3 to 1.4 (May 2020)
 
   * TODO : 1, 2 --> rel, subrel
   * copy edge.
+
+---
 
 # 0.49 to 1.0 (September 2018)
 

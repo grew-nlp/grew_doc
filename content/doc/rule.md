@@ -22,9 +22,6 @@ A **rewrite rule** in **Grew** is defined by:
 
 # Using lexicons in Grew rules
 
-:warning: The syntax described below was introduced in version 1.0.
-See "[About new lexical rules syntax](../lexicons_change)" for more details. :warning:
-
 **Grew** rules can be parametrized by one or several lexicons.
 
 ## Lexicon
@@ -84,6 +81,8 @@ maison	Fem
 ~~~
 
 ### Try it!
+
+TODO : review links
 
 The file [`set_gender.py`](../rule/set_gender.py) below presents a self-contained example of rewriting with the lexical rule above.
 It supposes that the grew Python library is installed (see [Installation page](../install)).

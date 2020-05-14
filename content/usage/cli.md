@@ -1,16 +1,16 @@
 +++
 Description = ""
 date = "2017-02-28T14:58:11+01:00"
-title = "run"
+title = "cli"
 menu = "main"
 Categories = ["Development","GoLang"]
 Tags = ["Development","golang"]
 +++
 
-# Running Grew
+# Grew • Command line Interface
 
-**Grew** can be used from Python. See [Tutorial page](../tuto) for basic usage from Python.
-The remaining of this page presents the command line program.
+This page presents the command line usage of **Grew**.
+It can also be used [from Python](../python).
 
 
 The command to run **Grew** is: `grew <subcommand> [<args>]`
@@ -43,14 +43,14 @@ All arguments are optional:
  * `-o <output_file>`: is the name of the output file (CoNLL file).
   If no output file is given, Grew writes to `stdout`
  * `-strat <name>`: the strategy used in transformation (default value: `main`)
- * `-safe_commands`: make rewriting process fail in case of [ineffective command](../commands/#effective-commands)
+ * `-safe_commands`: make rewriting process fail in case of [ineffective command](../../doc/commands/#effective-commands)
 
 ---
 
 # GTK interface
 
 The command to run the GTK interface: `grew gui [<args>]`.
-It supposes that you have installed the `grew_gui` opam packages (see [GUI installation page](../gtk)).
+It supposes that you have installed the `grew_gui` opam packages (see [GUI installation page](../install_gtk)).
 
 Optional arguments:
 

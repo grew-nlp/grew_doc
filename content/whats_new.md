@@ -3,22 +3,26 @@ date = "2017-05-23T16:44:27+02:00"
 title = "What's new"
 Categories = ["Development","GoLang"]
 Tags = ["Development","golang"]
-Description = ""
 menu = "main"
 
 +++
 
-* The version numbers `x.y.z` are synchronized such that `x` and `y` are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). The third component `z` is linked to bug fixes and may vary across the 3 sub-projects.
-* The symbol ":warning:" indicates changes that may break backward compatibility.
+# Grew releases
 
-More detailled informations in files `CHANGES.md` for each sub-project:
+* The version numbers `x.y.z` are synchronized such that `x` and `y` are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). The third component `z` is linked to bug fixes and may vary across the 3 sub-projects.
+* The symbol ":warning:" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
+* More detailled informations in files `CHANGES.md` for each sub-project:
 [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md),
 [grew_gui](https://gitlab.inria.fr/grew/grew_gui/blob/master/CHANGES.md)
 
 ---
 
-# [**last release**] Version 1.3 on June 24, 2019
+# :new: Version 1.4 on TODO date
+
+---
+
+# Version 1.3 on June 24, 2019
   * Add support of "@alpha" extension in edges
   * Add a default “empty.grs”
   * Read from `stdin` if there is no `-i`, write to `stdout` if there is no `-o`
@@ -42,7 +46,7 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 ---
 
 # Version 1.0 on September 10, 2018
-  * :warning: Change lexical rules syntax and lexicon representation (See [About new lexical rules syntax](../lexicons_change))
+  * :warning: Change lexical rules syntax and lexicon representation (See [About new lexical rules syntax](../doc/upgrade#new-lexical-rules-syntax))
   * Handling of Parseme's column 11
   * Large code cleaning
   * Fix [#4](https://gitlab.inria.fr/grew/grew/issues/4) & [#5](https://gitlab.inria.fr/grew/grew/issues/5)
@@ -50,7 +54,7 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 ---
 
 # Version 0.48 on June 19, 2018
- * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`). See [here](../graph#note-about-backward-compatibility) for more information.
+ * remove `conll_fields` mechanism (names of conll fields 2, 4 and 5 are `form`, `upos`, `xpos`). See [here](../doc/conll#note-about-backward-compatibility) for more information.
 
 ---
 
@@ -64,7 +68,7 @@ More detailled informations in files `CHANGES.md` for each sub-project:
 # Version 0.46 on December 14, 2017
 
  * GTK interface is proposed as a separate package and so **Grew** without GUI is much more easy to install
- * Command line arguments were revisited (see [Run Grew page](../run))
+ * Command line arguments were revisited (see [here](../usage/cli))
 
 More detailled informations in files `CHANGES.md` for each sub-project: [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md),
@@ -104,9 +108,12 @@ pattern { N[cat=NOUN]; N -[obj]-> M }
 ---
 
 # Version 0.44 on September 05, 2017
-  * :warning: new grs syntax (with package and strategies), see [grs](../grs).
+  * :warning: new grs syntax (with package and strategies), see [grs](../doc/grs).
 
-# Vversion 0.43 on May 23, 2017
+
+---
+
+# Version 0.43 on May 23, 2017
 
 
 ## Syntax changes
@@ -118,7 +125,7 @@ The old syntax is still accepted but for a limited amount of time, please update
 
 ## Command actions
   * :warning: the shift command semantics: edges with source and target nodes in the pattern are not concerned by the shifts
-  * a new syntax is available for the command `add_edge` (issue [#2](https://gitlab.inria.fr/grew/libcaml-grew/issues/2)). See [command documentation](../commands#add-a-new-edge-with-a-label-taken-in-the-pattern).
+  * New syntax is available for the command `add_edge` (issue [#2](https://gitlab.inria.fr/grew/libcaml-grew/issues/2)).
 
 ## Removed old stuff
   * :warning: old syntax for node addition is no longer supported:

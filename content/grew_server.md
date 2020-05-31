@@ -34,6 +34,8 @@ All services reply with JSON data of one of this three forms:
  * `{ "status": "WARNING", "messages": …, "data": … }` when the request can be partially executed; the `messages` fields contains a list of messages.
  * `{ "status": "ERROR", "message": "…" }` when the request cannot be executed.
 
+---
+
 ## Projects
 
 ### The `newProject` service
@@ -47,14 +49,6 @@ This service is used to initialise a new empty project. An error is returned a p
 This service returns the list of existing projects.
 
  * `()`
-
-:warning::warning::warning: Output on **prod** version
-
-```json
-[ "project_1", "project_2" ]
-```
-
-:warning::warning::warning: Output on **dev** version
 
 The returned value is a list of dict ([see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)):
 
@@ -78,6 +72,8 @@ An error is produced either if `project_id` does not exists or if `new_project_i
 
  * `(<string> project_id, <string> new_project_id)`
 
+---
+
 ## Samples
 All services about samples return an error if the requested project does not exist.
 
@@ -90,22 +86,9 @@ An error is returned if the sample already exists.
 
 ### The `getSamples` service
 
-This service returns the list of existing samples in a given project.
+This service returns the list of existing samples in a given project ([see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)).
 
  * `(<string> project_id)`
-
-:warning::warning::warning: Output on **prod** version
-
-```json
-[
-  { "name": "sample_1", "size": 5, "users": [ "alice", "bob" ] },
-  { "name": "sample_2", "size": 4, "users": [ "alice", "charlie" ] }
-]
-```
-
-:warning::warning::warning: Output on **dev** version
-
-[see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)
 
 ```json
 [
@@ -127,17 +110,23 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
  * `(<string> project_id, <string> sample_id, <string> new_sample_id)`
 
 
+---
+
 ## Sentences
 
 ### The `eraseSentence` service
 
  * `(<string> project_id, <string> sample_id, <string> sent_id)`
 
+---
+
 ## Graphs
 
 ### The `eraseGraph` service
 
  * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
+
+---
 
 ## Other `get` services
 
@@ -161,6 +150,8 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
  * `(<string> project_id, <string> sample_id)`
  * `(<string> project_id)`
 
+---
+
 ## Save annotations
 
 ### The `saveConll` services
@@ -175,45 +166,27 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
  * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
 
+---
 
 ## Search with Grew patterns
 
+:warning: The `dev` version does not handled the CoNLL data in the same way, see [here](../trans_14).
+
 ### The `searchPatternInGraphs` service
 
-This service returns occurrences of some pattern in a project, for a given user.
-Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'user_id':…, 'nodes':…, 'edges':…}`.
+Given a **Grew** pattern and a project, this service returns a list of occurrences of the pattern in the project.
+Each occurrence is described by a dict
 
-:warning::warning::warning: In the **dev** version one more field `conll` gives the CoNLL data of the corresponding graph.
-
- * `(<string> project_id, <string> pattern)` returns a list of occurrences.
-
- * `(<string> project_id, <string> pattern, <string> clusters)`
- where `clusters` is a list of cluster keys, separated by `;`.
- This returns nested dictionaries (the depth being equals to the length of the cluster key list).
- The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
- each cluster is further clustered recursively with the remaining keys.
- For instance:
-
-   * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
-   * Data presented in **Relations tables** in **Grew match** can be obtained (for the `obj` relation in the example) with the arguments:
-
-     * `pattern`: `pattern { G -[obj]-> D }`
-     * `clusters`: `G.upos; D.upos`
-
----
----
-
-### The `searchPatternInSentences` service
-
-:warning::warning::warning:
-
-Service `searchPatternInSentences` is deprecated, it is no available in the **dev** version
-
-:warning::warning::warning:
-
-
-This service returns occurrences of some pattern in a project.
-Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'nodes':…, 'edges':…}`.
+```
+{
+  'sample_id':…,
+  'sent_id':…,
+  'conll':…,
+  'user_id':…,
+  'nodes':…,
+  'edges':…
+}
+```
 
  * `(<string> project_id, <string> pattern)` returns a list of occurrences.
 
@@ -225,8 +198,57 @@ Each occurrence is described by a dict `{'sample_id':…, 'sent_id':…, 'nodes'
  For instance:
 
    * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
-   * Data presented in **Relations tables** in **Grew match** can be obtained (for the `obj` relation in the example) with the arguments:
+   * Data presented in one table of the page **Relations tables** in **Grew-match** ([ex](http://match.grew.fr/_meta/SUD_French-GSD@latest_table.html)) can be obtained (for the `obj` relation in the example) with the arguments:
 
      * `pattern`: `pattern { G -[obj]-> D }`
      * `clusters`: `G.upos; D.upos`
 
+---
+---
+---
+
+
+:warning::warning::warning: **dev** only
+
+## Usage of Grew rules
+
+### The `tryRule` service
+ * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
+
+**NB:** brackets are used for optional arguments.
+If `sample_id` is provided, the service is restricted to this sample else all samples of the project are considered.
+Similarly, if `user_id` is provided, the service is restricted to the graphs belonging to the requested user else all users are considered.
+
+The `commands` string must follow **Grew** [command syntax](../commands) (see examples below).
+
+The output is the list of new graphs produced by the rule applications (note that the same rule may be applied more than once in a given graph). Each item of the list is an object with the following fields:
+
+ * `conll`: the graph obtained after one or several applications of the rule.
+ * `sample_id`
+ * `sent_id`
+ * `user_id`
+
+**NB:** The graph are left unchanged in the project. If you want to modify the graph with the new graphs, use `applyRule` service.
+
+#### Examples:
+ * change the `upos` of from `VERB` to `V`:
+   * pattern: `pattern { N [upos=VERB] }`
+   * commands: `commands { N.upos = V }`
+ * change the relation name from `nsubj` to `subj`:
+   * pattern: `pattern { e: N -[nsubj]-> M }`
+   * commands: `commands { del_edge e; add_edge N -[subj]-> M }`
+
+
+### The `applyRule` service
+ * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
+
+The input arguments are used in the same way as in `tryRule` service.
+But instead of returning new graphs, the project is updated and new graphs replace the previous one (:warning: previous graphs are not recoverable).
+
+The output gives the number of rewritten graphs and the number of unchanged graphs:
+```json
+{
+    "rewritten": 2,
+    "unchanged": 0
+}
+```

@@ -20,7 +20,7 @@ With the pattern:
 pattern { e: M -> N; N [upos=ADJ]}
 ```
 
-if you want to cluster the result on the label of the edge `e`, the old syntax was `e`, the new one is `e.label` ([Try it!](http://match.grew.fr/?corpus=SUD_French-GSD@latest&clustering=e.label&pattern=pattern%20%7B%20N%20-%3E%20M;N%20[upos=ADJ]%20%7D)).
+if you want to cluster the result on the label of the edge `e`, the old syntax was `e`, the new one is `e.label` ([Try it!](http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5efb883ea71fc&clustering=e.label)).
 
 ## Access to the label of an edge in the pattern
 
@@ -46,7 +46,7 @@ To avoid this, it is possible to give an ordering constraint on some internal id
  * old_syntax: `id(D1) < id (D2)`
  * new_syntax: `D1.__id__ < D2.__id__`
 
-The complete pattern is:
+The complete pattern in new syntax:
 
 ```grew
 pattern {

@@ -8,10 +8,12 @@ title = "grew_server"
 
 +++
 
-# Use Grew as a server for the Arborator tool
+# Grew-API for the Arborator-Grew tool
+
+The Arborator-Grew tool is available on [https://arboratorgrew.ilpga.fr/](https://arboratorgrew.ilpga.fr/).
 
 The `grew_server` tool is a web server which manages set of annotated graphs with multiple annotations on the same sentence.
-It is built to be used with the Arborator graph annotation tool.
+It is built to be used as an API by the Arborator-Grew graph annotation tool.
 
 Below, we suppose that the server is available on some `baseURL`.
 For testing purpose, a demo server should be available at `http://arborator.grew.fr`.
@@ -208,7 +210,9 @@ Each occurrence is described by a dict
 ---
 
 
-:warning::warning::warning: **dev** only
+# New services in DEV
+
+:warning::warning::warning: The services are only available on the DEV server for testing
 
 ## Usage of Grew rules
 
@@ -252,3 +256,44 @@ The output gives the number of rewritten graphs and the number of unchanged grap
     "unchanged": 0
 }
 ```
+
+## Services for project configuration
+
+### The `getProjectConfig` service
+  * `(<string> project_id)`
+
+  The service returns a JSON data of the current configuration of the project
+
+### The `updateProjectConfig` service
+  * `(<string> project_id, <string> config)`
+
+  The service update the current configuration associated to the project.
+
+
+## Export the most recent data in a project
+
+### The `exportProject` service
+  * `(<string> project_id)`
+
+The service returns an URL on a file containing the "export" of the project. In the export:
+
+  * only graphs in the project with a `timestamp` numerical metadata are present
+  * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
+
+Note that the output may be impacted by the problem reported in [#9](https://github.com/Arborator/arborator-flask/issues/9).
+
+
+
+## Get the lexicon computed from a treebank
+
+### The `getLexicon` service
+  * `(<string> project_id)`
+
+The service returns a JSON data of the lexicon produced with the script [treebank2lexicon.py](https://github.com/Arborator/arborator-flask/blob/master/lexicon/treebank2lexicon.py).
+
+  The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
+  * only graphs in the project with a `timestamp` numerical metadata are considered
+  * if several graphs share the same `sent_id`, only the graph with the highest `timestamp` is kept
+
+Note that the output may be impacted by the problem reported in [#9](https://github.com/Arborator/arborator-flask/issues/9).
+

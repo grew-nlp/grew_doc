@@ -42,7 +42,7 @@ All services reply with JSON data of one of this three forms:
 
 ### The `newProject` service
 
-This service is used to initialise a new empty project. An error is returned a project with the same name already exists.
+This service is used to initialise a new empty project. An error is returned if a project with the same name already exists.
 
  * `(<string> project_id)`
 
@@ -273,27 +273,34 @@ The output gives the number of rewritten graphs and the number of unchanged grap
 ## Export the most recent data in a project
 
 ### The `exportProject` service
-  * `(<string> project_id)`
+  * `(<string> project_id, <string> sample_ids)`
+  * `(<string> project_id)` **DEPRECATED**: use the other service with value `[]` for `sample_ids` parameter
+
+The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 
 The service returns an URL on a file containing the "export" of the project. In the export:
 
+  * sentences are filtered with the `sample_ids` list:
+    * if the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered
+    * if the `sample_ids` list is empty, all sentences are considered
   * only graphs in the project with a `timestamp` numerical metadata are present
   * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
-
-Note that the output may be impacted by the problem reported in [#9](https://github.com/Arborator/arborator-flask/issues/9).
-
-
 
 ## Get the lexicon computed from a treebank
 
 ### The `getLexicon` service
-  * `(<string> project_id)`
+  * `(<string> project_id, <string> sample_ids)`
+  * `(<string> project_id)` **DEPRECATED**: use the other service with value `[]` for `sample_ids` parameter
+
+The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 
 The service returns a JSON data of the lexicon produced with the script [treebank2lexicon.py](https://github.com/Arborator/arborator-flask/blob/master/lexicon/treebank2lexicon.py).
 
-  The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
-  * only graphs in the project with a `timestamp` numerical metadata are considered
-  * if several graphs share the same `sent_id`, only the graph with the highest `timestamp` is kept
+The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
 
-Note that the output may be impacted by the problem reported in [#9](https://github.com/Arborator/arborator-flask/issues/9).
+  * sentences are filtered with the `sample_ids` list:
+    * if the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered
+    * if the `sample_ids` list is empty, all sentences are considered
+  * only graphs in the project with a `timestamp` numerical metadata are present
+  * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
 

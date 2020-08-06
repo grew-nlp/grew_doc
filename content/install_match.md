@@ -147,7 +147,16 @@ For instance, the JSON file `my_corpora.json` below defines 3 corpora:
 
 ### Compile your corpora
 
-In order to speed up the pattern search and to preserve memory when a large number of corpora are available, corpora are compiled with the command:
+In order to speed up the pattern search and to preserve memory when a large number of corpora are available, corpora are compiled.
+
+During the compilation, a few files are stored in three specific folders.
+Before the first compilation, you have to create them with the command:
+
+```
+mkdir DOCUMENT_ROOT/_logs DOCUMENT_ROOT/_tables DOCUMENT_ROOT/_descs
+```
+
+Then, the compilation is done with the command:
 
 ```
 grew_daemon marshal my_corpora.json --webserver DOCUMENT_ROOT

@@ -10,7 +10,7 @@ menu = "main"
 A new version 1.4 of **Grew** will be available in the upcoming weeks with a few changes in the syntax.
 
 For some technical reason, the [**Grew-match**](http://match.grew.fr) online tool is already based on the upcoming version and so already uses the new syntax.
-The `dev` version of the **Grew** API for **Arborator-Grew** also uses the new syntax.
+The **Grew** API for **Arborator-Grew** also uses the new syntax.
 
 ## Clustering on the label of an edge
 

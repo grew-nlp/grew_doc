@@ -17,7 +17,6 @@ It is built to be used as an API by the Arborator-Grew graph annotation tool.
 
 Below, we suppose that the server is available on some `baseURL`.
 For testing purpose, a demo server should be available at `http://arborator.grew.fr`.
-(:warning: data stored on this server may be lost at any time).
 
 Annotations are stored with the following hierarchy:
 
@@ -172,7 +171,7 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ## Search with Grew patterns
 
-:warning: The `dev` version does not handled the CoNLL data in the same way, see [here](../trans_14).
+:warning: The server uses the new syntax for patterns (see [here](../trans_14)).
 
 ### The `searchPatternInGraphs` service
 
@@ -205,16 +204,7 @@ Each occurrence is described by a dict
      * `pattern`: `pattern { G -[obj]-> D }`
      * `clusters`: `G.upos; D.upos`
 
----
----
----
-
-
-# New services in DEV
-
-:warning::warning::warning: The services are only available on the DEV server for testing
-
-## Usage of Grew rules
+## Applying Grew rules
 
 ### The `tryRule` service
  * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`

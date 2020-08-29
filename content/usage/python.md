@@ -7,7 +7,7 @@ Categories = ["Development","GoLang"]
 Tags = ["Development","golang"]
 +++
 
-# Grew Python library
+# Grew • Python library
 
 Examples below are taken from first chapter of the book [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
 This chapter can be [downloaded in PDF from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf).

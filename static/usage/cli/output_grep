@@ -1,0 +1,20 @@
+[
+  {
+    "sent_id": "fr-ud-dev_00623",
+    "matching": {
+      "nodes": { "N": "39", "M": "38" },
+      "edges": {
+        "e": { "source": "38", "label": { "1": "amod" }, "target": "39" }
+      }
+    }
+  },
+  {
+    "sent_id": "fr-ud-dev_00217",
+    "matching": {
+      "nodes": { "N": "17", "M": "16" },
+      "edges": {
+        "e": { "source": "16", "label": { "1": "amod" }, "target": "17" }
+      }
+    }
+  }
+]

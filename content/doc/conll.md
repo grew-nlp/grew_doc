@@ -75,7 +75,7 @@ The two fields are built from CoNLL data in the following way:
    * the `textform` of the first token is the `FORM` field of the multiword token
    * the `textform` of each other token is `_`
  1. If the token is an empty node (exists only in EUD):
-   * `textform=_` and `wordform=_`
+   * `textform=_` and `wordform=__EMPTY__`
  1. For each token without `textform` feature, the `textform` is set to the `FORM` field value
  1. For each token without `wordform` feature, the `wordform` is set to the `FORM` field value
 

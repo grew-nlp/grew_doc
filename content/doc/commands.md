@@ -12,7 +12,7 @@ menu = "main"
 Each rule contains a sequence of commands introduced by the keyword `commands`, separated by semicolon symbol `;` and surrounded by braces.
 
 ## Node deletion
-The following command removes the A nodes and all its incident edges.
+The following command removes the A node and all its incident edges.
 ~~~grew
 del_node A
 ~~~
@@ -42,19 +42,22 @@ del_edge e;
 **NOTE**: for the first syntax, if the corresponding edge does not exists, an exception is raised and the full rewriting process is stopped.
 
 ## Add a new edge
-There are two ways to add a new edge: with an given label edge or with a label edge coming from the pattern.
 
-### Add a new edge with a given label
-The syntax of the command is:
+The basic syntax to add a new edge is:
+
 ~~~grew
 add_edge N -[suj]-> M
 ~~~
 
-### Add a new edge with a label taken in the pattern
-TOOD : update syntax
-The command `add_edge e: N -> M` adds a new edge in the current graph from the node matched with identifier `N` to the node matched with identifier `M` with the same label as the edge that was match in the pattern with the edge identifier `e`.
+It is also possible to give a name to the newly created edge, in order to manipulate it in the next commands.
+For instance the two commands below create a new edge `f` and copy the edge label of some other edge `e`.
 
-There is an example on usage of the command TODO link to example
+~~~grew
+add_edge f: N -[suj]-> M;    % this supposes that `f` is a fresh name in the rule
+f.label = e.label;           % this supposes that `e` is a known edge in the rule
+~~~
+
+**NB**: the syntax above (`add_edge f:…`) has changed in version 1.4, please see [here](../upgrade) for info about migration.
 
 ## Edge redirection
 Commands are available to move globally incident edges of some node of the pattern.
@@ -74,81 +77,73 @@ The action of the 3 commands above are respectively:
   * modifying all out-edges which are starting in `B` with a `suj` or `obj` label: they are redirected to start in `C`.
   * modifying all in-edges which are ending in `B` with a label different from `suj` and `obj`: they are redirected to end in `D`.
 
-## Complex edges in commands
+## Modification of an existing edge
 
 In commands, it is possible to manipulate subpart of edges.
 If the pattern binds the identifier `e` to some edge (with the syntax `e: X -[…]-> Y`), the following commands can be used:
 
  * `e.2 = aux`: update the current edge `e`
  * `add_edge X -[1=suj, 2=e.2]-> Z`: add a new edge where the value of feature `2` is copied from the value of feature `2` of edge `e`;
- * `del_feat e.deep`: remove the feature `deep` from the edge `e`;
- * TODO: `add_edge e: Y -> Z`: add a new edge with the same label as `e`;
+ * `del_feat e.deep`: remove the feature `deep` from the edge `e` (the edge is not removed);
 
-Note that, if the identifier `e` is used several times in the commands of a same rule, each occurrence refers to the "current" `e` edge eventually modified by previous commands. TODO: example
 
-## Examples
+---
+---
 
-### Modify and copy an edge
+## Example: copy an edge feature value
 
-Rule: [`mod_copy.grs`](../complex_edges/mod_copy.grs):
-{{< grew file="/static/complex_edges/mod_copy.grs" >}}
+Rule: [`copy.grs`](/doc/commands/copy.grs):
 
-Command: `grew transform -grs mod_copy.grs -strat "Onf(mod_copy)"`
+{{< grew file="/static/doc/commands/copy.grs" >}}
 
-Input graph: [`mod_copy.gr`](../complex_edges/mod_copy.gr)
-
-| ![input](/complex_edges/_mod_copy_in.svg) | ![output](/complex_edges/_mod_copy_out.svg) |
+| Input graph: [`copy.json`](/doc/commands/copy.json) | Rewritten graph |
 |:---:|:---:|
+| ![input](/doc/commands/_copy.svg) | ![output](/doc/commands/_copy_1_out.svg) |
 
-Observe the difference if the two commands are swapped:
+---
+---
 
-Rule: [`copy_mod.grs`](../complex_edges/copy_mod.grs):
-{{< grew file="/static/complex_edges/copy_mod.grs" >}}
+The next couple of examples show that modifying an edge before copying it is different from the reverse order
 
-Command: `grew transform -grs copy_mod.grs -strat "Onf(copy_mod)"`
+## Example: modify and edge and copy it
 
-Input graph: [`copy_mod.gr`](../complex_edges/copy_mod.gr)
+Rule: [`modify_and_copy.grs`](/doc/commands/modify_and_copy.grs ):
+{{< grew file="/static/doc/commands/modify_and_copy.grs" >}}
 
-| ![input](/complex_edges/_copy_mod_in.svg) | ![output](/complex_edges/_copy_mod_out.svg) |
+| Input graph: [`copy.json`](/doc/commands/copy.json) | Rewritten graph |
 |:---:|:---:|
+| ![input](/doc/commands/_copy.svg) | ![output](/doc/commands/_copy_2_out.svg) |
 
+## Example: copy and edge and modify it
 
-### Reverse an edge
+Rule: [`copy_and_modify.grs`](/doc/commands/copy_and_modify.grs ):
+{{< grew file="/static/doc/commands/copy_and_modify.grs" >}}
 
-Rule: [`reverse.grs`](../complex_edges/reverse.grs):
-{{< grew file="/static/complex_edges/reverse.grs" >}}
-
-Command: `grew transform -grs reverse.grs -strat "Onf(reverse)"`
-
-Input graph: [`reverse.gr`](../complex_edges/reverse.gr)
-{{< grew file="/static/complex_edges/reverse.gr" >}}
-
-| ![input](/complex_edges/_reverse_in.svg) | ![output](/complex_edges/_reverse_out.svg) |
+| Input graph: [`copy.json`](/doc/commands/copy.json) | Rewritten graph |
 |:---:|:---:|
+| ![input](/doc/commands/_copy.svg) | ![output](/doc/commands/_copy_3_out.svg) |
 
-By contrast, with the rule [`fail_reverse.grs`](../complex_edges/fail_reverse.grs):
-{{< grew file="/static/complex_edges/fail_reverse.grs" >}}
 
-the command `grew transform -grs fail_reverse.grs -strat "Onf(fail_reverse)"` applied to the same graph produces the error:
+---
+---
 
-```[file: fail_reverse.grs, line: 3] ADD_EDGE_EXPL: the edge identifier 'e' is undefined```
+## Example: reverse an edge
 
-The `add_edge` command cannot be executed because the edge `e` does not exist anymore.
-Note that with previous Grew versions, the rule `fail_reverse` can be applied and hence, it may be needed to update existing rule systems.
+GRS: [`reverse.grs`](/doc/commands/reverse.grs ):
+{{< grew file="/static/doc/commands/reverse.grs" >}}
 
-### Copy a feature value (since v1.4)
 
-Rule: [`copy_sub.grs`](../complex_edges/copy_sub.grs):
-{{< grew file="/static/complex_edges/copy_sub.grs" >}}
-
-Command: `grew transform -grs copy_sub.grs -strat "Onf(copy_sub)"`
-
-Input graph: [`copy_sub.gr`](../complex_edges/copy_sub.gr)
-{{< grew file="/static/complex_edges/copy_sub.gr" >}}
-
-| ![input](/complex_edges/_copy_sub_in.svg) | ![output](/complex_edges/_copy_sub_out.svg) |
+| Input graph: [`reverse.json`](/doc/commands/reverse.json) | Rewritten graph |
 |:---:|:---:|
+| ![input](/doc/commands/_reverse.svg) | ![output](/doc/commands/_reverse_out.svg) |
 
+
+By contrast, with the GRS: [`fail_reverse.grs`](/doc/commands/fail_reverse.grs ):
+{{< grew file="/static/doc/commands/fail_reverse.grs" >}}
+
+the command `grew transform -grs fail_reverse.grs` applied to the same graph produces the error:
+
+``` MESSAGE : [file: fail_reverse.grs, line: 6] Unknown identifier "e" ```
 
 ---
 

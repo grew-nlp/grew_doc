@@ -1,8 +1,0 @@
-rule fail_reverse {
-  pattern { N -[X]-> M; e: N -[Y|Z]-> M }
-  commands {
-    del_edge e;
-    add_edge new_e: M -> N;
-    new_e.label = e.label;
-  }
-}

@@ -14,13 +14,13 @@ Categories = ["Development","GoLang"]
 Treebanks available are in several linguistic formats:
 
  * In UD format ([Universal Dependencies](http://universaldependencies.org))
-   * The 157 treebanks of the version 2.5;
+   * The 163 treebanks of the version 2.6;
    * 4 treebanks converted form the SUD format;
    * 6 French treebanks corresponding to the `dev` branch of the corresponding [github](https://github.com/UniversalDependencies) projects (if you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr))
    * A few older versions of treebanks (that we use to observe the treebank evolution)
  * In SUD format ([Surface Syntactic Universal Dependencies](https://surfacesyntacticud.github.io/))
    * The current GitHub branch of the 4 native SUD treebanks (https://github.com/surfacesyntacticud)
-   * The 157 treebanks automatically converted from the version 2.5 of Universal Dependencies (see https://surfacesyntacticud.github.io/data/)
+   * The 163 treebanks automatically converted from the version 2.6 of Universal Dependencies (see https://surfacesyntacticud.github.io/data/)
  * Different annotations of the [French Sequoia corpus](http://deep-sequoia.inria.fr/)
  * 3 available corpora in [AMR](https://amr.isi.edu/)
  * Data of the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
@@ -39,13 +39,13 @@ If you want to see the next 10 items, click on `Get more results`.
 
 To limit server usage, only the first 1000 items are computed.
 If the searched pattern is found more then 1000 times, the amount of corpus used to find the first 1000 items is reported.
-For instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus (see [output](http://match.grew.fr/?corpus=UD_French-GSD@2.5&custom=5bf2dfc6824c1)), the message is `More than 1000 results found in 4.88% of the corpus`.
-This means that the first 1000 items were found in 4.88% of the 16,342 sentences of the **UD_French-GSD** corpus.
+For instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus (see [output](http://match.grew.fr/?corpus=UD_French-GSD@2.6&custom=5bf2dfc6824c1)), the message is `More than 1000 results found in 5.16% of the corpus`.
+This means that the first 1000 items were found in 5.16% of the 16,342 sentences of the **UD_French-GSD** corpus.
 
 ## Learning syntax
 A [tutorial](http://match.grew.fr/?tutorial=yes) with a progressive sequence of patterns is available.
 You may also explore snippets given on the right of the text area to learn with other examples.
-A more comprehensive documentation is available in the [patterns page](../../pattern).
+A more comprehensive documentation is available in the [patterns page](../../doc/pattern).
 
 ## About CoNLL field names
 The fields 2, 3, 4 and 5 of CoNLL structure are considered as features with the following feature names.
@@ -94,5 +94,5 @@ For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@lo
 
 ## Deprecated `_MISC_` and `_UD_` prefixes
 In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix.
-These prefixes are not used anymore; they are replaced by features `textform` and `wordform` (see [CoNLL doc](../../conll#additional-features-textform-and-wordform)).
+These prefixes are not used anymore; they are replaced by features `textform` and `wordform` (see [CoNLL doc](../../doc/conll#additional-features-textform-and-wordform)).
 

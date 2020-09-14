@@ -9,7 +9,7 @@ menu = "main"
 
 # Grew releases
 
-* The version numbers `x.y.z` are synchronized such that `x` and `y` are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). The third component `z` is linked to bug fixes and may vary across the 3 sub-projects.
+* The version numbers `x.y.z` are synchronised such that `x` and `y` are identical for the 3 main sub-projects (`grew`, `grew_gui`, `libcaml-grew`). The third component `z` is linked to bug fixes and may vary across the 3 sub-projects.
 * The symbol ":warning:" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
 * More detailled informations in files `CHANGES.md` for each sub-project:
 [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),

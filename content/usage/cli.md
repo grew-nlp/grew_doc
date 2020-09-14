@@ -101,12 +101,12 @@ Note that two other options exist:
 ---
 # Compile
 
-A set of corpora as described in a [JSON file](../../doc/corpora) must be [compiled](./#compile) before running `grew count` or before starting `grew_daemon`.
+A set of corpora as described in a [JSON file](../../doc/corpora) must be compiled before running `grew count` or before starting `grew_daemon`.
 The command is:
 
 `grew compile -i <corpora.json>`
 
-Note that this produces a new file with the `marshal` extension, stored in the corpus directory, for each corpus.
+Note that this produces, for each corpus, a new file with the `marshal` extension stored in the corpus directory.
 The `marshal` is computed only if the corpus has changed since the last compilation.
 
 ---

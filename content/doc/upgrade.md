@@ -10,14 +10,76 @@ Description = ""
 
 # GRS upgrading
 
-This page describes the breaking changes in **Grew** and provides the information needed to upgrade a Graph Rewriting systems.
+This page describes the breaking changes in **Grew** and provides the information needed to upgrade a Graph Rewriting System.
 
 ---
 
-# 1.3 to 1.4 (May 2020)
+# 1.3 to 1.4 (September 2020)
 
-  * TODO : 1, 2 --> rel, subrel
-  * copy edge.
+
+## Access to the label of an edge in the pattern
+
+|Constraint | Old syntax | New syntax |
+|:-----------------:|:-----------------:|:-----------------:|
+| equality of two edge labels | `label(e1) = label(e2)` |  `e1.label = e2.label` |
+| inequality of two edge labels | `label(e1) <> label(e2)` |  `e1.label <> e2.label` |
+
+## Avoid duplicate solutions
+
+When several nodes are equivalent in a pattern, each occurrence is reported several times (up to permutation on the set of equivalent nodes).
+For instance, to search for two relations `det` with the same governor, the pattern below will return twice each solution.
+
+```grew
+pattern {
+  G -[det]-> D1;
+  G -[det]-> D2;
+}
+```
+
+To avoid this, it is possible to give an ordering constraint on some internal identifier:
+
+ * old_syntax: `id(D1) < id (D2)`
+ * new_syntax: `D1.__id__ < D2.__id__`
+
+The complete pattern in new syntax:
+
+```grew
+pattern {
+  G -[det]-> D1;
+  G -[det]-> D2;
+  D1.__id__ < D2.__id__;
+}
+```
+
+## Add a new edge with a label taken in the pattern
+
+In previous version, the syntax `add_edge e: N -> M` was used for adding a new edge between `N` and `M` with a label identical to the edge named `e` in the pattern.
+
+In the 1.4 version, the semantic of the same syntax has changes.
+Now, the syntax `add_edge e: N -> M` means add a new edge between `N` and `M` and give it the **fresh** name `e`.
+
+In order to have the same semantic as the previous version, the command:
+
+```grew
+add_edge e: N -> M;      # e being an edge declared in the pattern
+```
+
+must be replaced by:
+
+```grew
+add_edge f: N -> M;      # f is a fresh name
+f.label = e.label;       # the label of f is set to be equal to the one of e.
+```
+
+Fortunately, this should not produce unexpected behaviour:
+
+ * If the old syntax is used with the new **Grew** version,
+ * If the new syntax is used with the old **Grew** version, the error ` Unknwon identifier "f"` is reported.
+
+
+
+
+
 
 ---
 

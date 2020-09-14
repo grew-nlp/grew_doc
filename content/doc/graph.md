@@ -15,7 +15,7 @@ The graphs we consider in **Grew** are defined as usually in mathematics by two 
  * A set **E** of edges
 
 ## Nodes
-A node is described by a an identifier (needed to refer to nodes in edges definitions) and a feature structure (basically a finite list of pairs (*feature_name*, *feature_value*)).
+A node is described by a an identifier (needed to refer to nodes in edges definitions) and a feature structure: a finite list of pairs (*feature_name*, *feature_value*).
 
 TODO: nodes order!!
 
@@ -37,18 +37,33 @@ In **Grew** graphs, an edge label is internally stored as a flat feature structu
 We will use the traditional notation `f=v` for these couples.
 
 For backward compatibility and for ease of use in practice, a **compact** notation may be used for edge labels.
-An edge label can be written with a compact notation if it contains only features with names `rel`, `subrel` or `deep`.
-In the compact notation, the `subrel` is introduced by `:` and the `deep` feature by `@` (this corresponds to the convention used in [SUD](https://surfacesyntacticud.github.io/)).
+An edge label can be written with a compact notation if it contains only features with names `1`, `2` or `deep`.
+In the compact notation, the `2` feature is introduced by `:` and the `deep` feature by `@` (this corresponds to the convention used in [SUD](https://surfacesyntacticud.github.io/)).
+A few other specific features are used for the encoding of special relations used in deep syntax representation (either in [Enhanced UD](https://universaldependencies.org/u/overview/enhanced-syntax.html) of in [Deep-sequoia](http://deep-sequoia.inria.fr/)).
 
-In version 1.3, feature names `1` and `2` where used instead of `rel` and `subrel`, this is still available but considered deprecated.
+The table below gives examples of correspondance between compact and internal representation.
 
-| Internal representation             | Compact notation    |    Deprecated alternative    |
-|-------------------------------------|---------------------|------------------------------|
-| `rel=suj, subrel=obj`               | `suj:obj`           | `1=suj, 2=obj`               |
-| `rel=aux, subrel=pass`              | `aux:pass`          | `1=aux, 2=pass`              |
-| `rel=compl, subrel=obl, deep=agent` | `compl:obl@agent`   | `1=compl, 2=obl, deep=agent` |
+|               Relation                                                                                  | Compact notation    |  Internal representation     |
+|---------------------------------------------------------------------------------------------------------|---------------------|------------------------------|
+| Simple relation                                                                                         | `obj`               | `1=obj`                      |
+| relation with subtype in UD or in SUD                                                                   | `aux:pass`          | `1=aux, 2=pass`              |
+| [SUD relation with deep feature](https://surfacesyntacticud.github.io/guidelines/u/#sud-deep-features)  | `compl:obl@agent`   | `1=compl, 2=obl, deep=agent` |
+| [Enhanced UD relation](https://universaldependencies.org/u/overview/enhanced-syntax.html)               | `E:subj`            | `1=suj, enhanced=yes`        |
+| [Deep-sequoia](http://deep-sequoia.inria.fr/) (both surf & deep)                                        | `suj:obj`           | `1=suj, 2=obj`               |
+| Deep-sequoia (surf only)                                                                                | `S:suj:obj`         | `1=suj, 2=obj, kind=surf`    |
+| Deep-sequoia (deep only)                                                                                | `D:suj:obj`         | `1=suj, 2=obj, kind=deep`    |
 
-TODO: add info about `kind`
+
+Any other feature names (a few reserved names exists, see below) can be used in edge label representation.
+In this case, these is not compact representation and the internal representation is used.
+
+Reserved feature names are:
+
+ * `label`: the syntax `e.label` is a shortcut to make reference to the full feature structure. It can be used for instance to copy the edge label from one edge `e` to antothe edge `f` with the command: `f.label = e.label`.
+ * `length`: the syntax `e.length` is used to refer the distance (natural number) between two ordered nodes. The length of a relation between two consecutive nodes is 1.
+ * `delta`: the syntax `e.delta` is used to refer the relative position (an integer) between two ordered nodes.
+
+
 
 # Graph input formats
 To describe a graph in practice, **Grew** offers several input formats:

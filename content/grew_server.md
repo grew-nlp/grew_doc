@@ -280,11 +280,15 @@ The service returns an URL on a file containing the "export" of the project. In 
 
 ### The `getLexicon` service
   * `(<string> project_id, <string> sample_ids)`
-  * `(<string> project_id)` **DEPRECATED**: use the other service with value `[]` for `sample_ids` parameter
+  * `(<string> project_id, <string> sample_ids, <string> features)`
 
 The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 
-The service returns a JSON data of the lexicon produced with the script [treebank2lexicon.py](https://github.com/Arborator/arborator-flask/blob/master/lexicon/treebank2lexicon.py).
+The string `features` must be a JSON encoding of a list of strings (like `["Number", "PronType"]`).
+If `features` is not given, the default value is `["PronType", "Mood", "Gloss"]` (this ensures the backward compatibility with previous version).
+
+The service returns a JSON data of the lexicon produced with the Python script [treebank2lexicon.py](https://github.com/Arborator/arborator-flask/blob/master/lexicon/treebank2lexicon.py).
+The list of features are passed to the Python script.
 
 The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
 
@@ -294,3 +298,10 @@ The set of graphs considered for the production of the lexicon is the one consid
   * only graphs in the project with a `timestamp` numerical metadata are present
   * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
 
+### :warning: REMOVED
+
+In a previous version, the `getLexicon` service was available with profile:
+
+  * `(<string> project_id)`
+
+It was removed: use the profile `(<string> project_id, <string> sample_ids)` with `[]` for `sample_ids` parameter

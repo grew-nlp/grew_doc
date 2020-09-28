@@ -1,0 +1,9 @@
+rule r {
+  pattern { N -[X]-> M; e: N -[Y|Z]-> M }
+  commands {
+    del_edge e;
+    add_edge new_e: M -> N;
+    new_e.label = e.label;  % <== this command cannot be executed because `e` doesn't exist anymore
+  }
+}
+strat main { Onf (r) }

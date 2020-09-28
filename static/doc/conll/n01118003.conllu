@@ -1,0 +1,8 @@
+# newdoc id = n01118
+# sent_id = n01118003
+# text = Drop the mic.
+1	Drop	drop	VERB	VB	VerbForm=Inf	0	root	0:root	_
+2	the	the	DET	DT	Definite=Def|PronType=Art	3	det	3:det	_
+3	mic	mic	NOUN	NN	Number=Sing	1	obj	1:obj	SpaceAfter=No
+4	.	.	PUNCT	.	_	1	punct	1:punct	_
+

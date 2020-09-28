@@ -17,9 +17,9 @@ For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
 Tokens lines contain 10 fields, separated by tabulations.
 
-The file [`n01118003.conllu`](/graph/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.4).
+The file [`n01118003.conllu`](/doc/conll/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.4).
 
-{{< input file="static/graph/n01118003.conllu" >}}
+{{< input file="static/doc/conll/n01118003.conllu" >}}
 
 We explain here how **Grew** deals with the 10 fields if CoNLL files:
 
@@ -45,7 +45,7 @@ In practice, it may be useful to deal explicitly with the `root` relation (for i
 To allow this, when reading CoNLL-U format **Grew** also creates a node at position `0` and link it with the `root` relation to the linguistic root node of the sentence.
 The example above then produce the 5 nodes graphs below:
 
-![Dependency structure](/graph/n01118003.svg)
+![Dependency structure](/doc/conll/n01118003.svg)
 
 ## About CoNLL field names
 In **Grew** nodes, the fields 2, 3, 4 and 5 of CoNLL structure are considered as features with the following feature names.

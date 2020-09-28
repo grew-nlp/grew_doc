@@ -1,0 +1,9 @@
+rule r {
+  pattern { N -[X]-> M; e: N -[Y|Z]-> M }
+  commands {
+    add_edge new_e: M -> N;
+    new_e.label = e.label;
+    del_edge e;
+  }
+}
+strat main { Onf (r) }

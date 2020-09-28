@@ -1,0 +1,18 @@
+[GRAPH] {scale=200; fontname="Arial"; background=transparent; }
+[WORDS] {
+  N_0 { }
+  N_1 { word="Drop"; subword="#drop#VERB#VB#VerbForm=Inf"}
+  N_2 { word="the"; subword="#the#DET#DT#Definite=Def#PronType=Art"}
+  N_3 { word="mic"; subword="#mic#NOUN#NN#SpaceAfter=No#Number=Sing"}
+  N_4 { word="."; subword="#.#PUNCT#."}
+}
+[EDGES] {
+  N_0 -> N_1 { label="root" }
+  N_3 -> N_2 { label="det" }
+  N_3 -> N_2 { label="det"; color=blue; forecolor=blue; bottom }
+  N_1 -> N_3 { label="obj" }
+  N_1 -> N_3 { label="obj"; color=blue; forecolor=blue; bottom }
+  N_1 -> N_4 { label="punct" }
+  N_1 -> N_4 { label="punct"; color=blue; forecolor=blue; bottom }
+}
+

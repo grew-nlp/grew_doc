@@ -1,0 +1,4 @@
+rule main {
+  pattern { e1: N -[1=X]-> M; e2: M -[!2]-> T }
+  commands { e2.2 = e1.2 }
+}

@@ -86,13 +86,15 @@ pattern { N -[E:obj]-> M }
 without { N -[obj]-> M }
 ```  
 
-
 ## Contact
 For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@loria.fr?subject=Grew-match) or open an issue on the [GitLab project](http://gitlab.inria.fr/grew/grew_match/issues) (you will have to register).
 
 ---
 
 ## Deprecated `_MISC_` and `_UD_` prefixes
-In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix.
-These prefixes are not used anymore; they are replaced by features `textform` and `wordform` (see [CoNLL-U doc](../../doc/conllu#additional-features-textform-and-wordform)).
+In older versions, features declared in column 10 were accessible with the `_MISC_` prefix.
+Since 1.4, no prefix is required.
+
+Multiword tokens or empty nodes were identified with the `_UD_` prefix.
+This prefix is not used anymore; it is replaced by features `textform` and `wordform` (see [CoNLL-U doc](../../doc/conllu#additional-features-textform-and-wordform)).
 

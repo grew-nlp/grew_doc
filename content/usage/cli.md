@@ -9,8 +9,6 @@ Tags = ["Development","golang"]
 
 # Grew • Command Line Interface
 
-This page presents the command line usage of **Grew**.
-
 The command to run **Grew** is: `grew <subcommand> [<args>]`
 
 Main subcommands are:
@@ -89,8 +87,10 @@ Note that two other options exist:
 ---
 # Compile
 
-A set of corpora as described in a [JSON file](../../doc/corpora) must be compiled before running `grew count` or before starting `grew_daemon`.
-The command is:
+For the Grew-match server (`grew_daemon`) or for the command `grew count`, it is required to first compile corpora.
+For these two usage, sets of corpora are described in a [JSON file](../../doc/corpora).
+
+For compilation, the command is:
 
 `grew compile -i <corpora.json>`
 
@@ -107,7 +107,7 @@ The commands below removes the `marshal` files produced by the `grew compile` co
 ---
 # Count
 
-This mode can be used to compute corpus statistics. Given a set of patterns and a set of corpora, a TSV table is built with the number of occurrences for each pattern in each corpus.
+This mode computes corpus statistics. Given a set of patterns and a set of corpora, a TSV table is built with the number of occurrences for each pattern in each corpus.
 
 The set of corpora is described in a [JSON file](../../doc/corpora) and must be [compiled](./#compile) before running `grew count`.
 
@@ -119,7 +119,7 @@ With the two following 1-line files:
  * `ADJ_NOUN.pat` [:link:](/usage/cli/ADJ_NOUN.pat) {{< input file="static/usage/cli/ADJ_NOUN.pat" >}}
  * `NOUN_ADJ.pat` [:link:](/usage/cli/NOUN_ADJ.pat) {{< input file="static/usage/cli/NOUN_ADJ.pat" >}}
 
-and the example file `en_fr_zh.json` [:link:](/doc/corpora/en_fr_zh.json) (see [JSON file](../../doc/corpora))
+and the example file `en_fr_zh.json` [:link:](/doc/corpora/en_fr_zh.json)
 {{< input file="static/doc/corpora/en_fr_zh.json" >}}
 
 1. Compile the corpora: `grew compile -i en_fr_zh.json`

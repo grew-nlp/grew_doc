@@ -61,7 +61,7 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 
 # Version 1.0 (September 10, 2018)
-  * :warning: Change lexical rules syntax and lexicon representation (See [About new lexical rules syntax](../doc/upgrade#new-lexical-rules-syntax))
+  * :warning: Change lexical rules syntax and lexicon representation (See [About new lexical rules syntax](../doc/upgrade_old#new-lexical-rules-syntax))
   * Handling of Parseme's column 11
   * Large code cleaning
   * Fix [#4](https://gitlab.inria.fr/grew/grew/issues/4) & [#5](https://gitlab.inria.fr/grew/grew/issues/5)

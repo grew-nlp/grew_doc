@@ -79,8 +79,8 @@ Note: depending on your local installation, you may have to use `pip3` or `pip3.
 
 # Other available installations
 
- * A Gtk user interface is available, see [here](../install_gtk).
  * A docker file with the Python library ready to be used is available [here](../docker).
+ * A Gtk user interface was available with previous versions, it is not maintained anymore (see [here](../install_gtk)).
 
 ---
 

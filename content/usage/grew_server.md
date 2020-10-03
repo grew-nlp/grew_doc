@@ -204,39 +204,50 @@ Each occurrence is described by a dict
      * `pattern`: `pattern { G -[obj]-> D }`
      * `clusters`: `G.upos; D.upos`
 
+---
+
+
 ## Applying Grew rules
 
-### The `tryRule` service
- * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
+### The `tryRules` service
+ * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> rules)`
 
 **NB:** brackets are used for optional arguments.
 If `sample_id` is provided, the service is restricted to this sample else all samples of the project are considered.
 Similarly, if `user_id` is provided, the service is restricted to the graphs belonging to the requested user else all users are considered.
 
-The `commands` string must follow **Grew** [command syntax](../commands) (see examples below).
+The `rules` parameter must be a JSON encoding of a list of strings, each string being the internal content of a Grew rule.
+For instance:
 
-The output is the list of new graphs produced by the rule applications (note that the same rule may be applied more than once in a given graph). Each item of the list is an object with the following fields:
+```
+[
+"pattern { N [upos=VERB] } commands { N.upos = V }",
+"pattern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[subj]-> M }"
+]
+```
 
- * `conll`: the graph obtained after one or several applications of the rule.
+See **Grew** [command syntax](../commands) for doc about the `commands` part.
+
+The output is the list of new graphs produced by the rules applications (note that the same rule may be applied more than once in a given graph). Each item of the list is an object with the following fields:
+
+ * `conll`: the graph obtained after one or several applications of the rules.
  * `sample_id`
  * `sent_id`
  * `user_id`
 
-**NB:** The graph are left unchanged in the project. If you want to modify the graph with the new graphs, use `applyRule` service.
+**NB:** The graph are left unchanged in the project. If you want to modify the graph with the new graphs, use `applyRules` service.
 
-#### Examples:
- * change the `upos` of from `VERB` to `V`:
-   * pattern: `pattern { N [upos=VERB] }`
-   * commands: `commands { N.upos = V }`
- * change the relation name from `nsubj` to `subj`:
-   * pattern: `pattern { e: N -[nsubj]-> M }`
-   * commands: `commands { del_edge e; add_edge N -[subj]-> M }`
+### :warning: DEPRECATED The `tryRule` service
 
+The service `tryRule` is equivalent to `tryRules` but limited to only one rule. It is subsumed by the `tryRules` service and will be removed soon.
 
-### The `applyRule` service
  * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
 
-The input arguments are used in the same way as in `tryRule` service.
+
+### The `applyRules` service
+ * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> rules)`
+
+The input arguments are used in the same way as in `tryRules` service.
 But instead of returning new graphs, the project is updated and new graphs replace the previous one (:warning: previous graphs are not recoverable).
 
 The output gives the number of rewritten graphs and the number of unchanged graphs:
@@ -246,6 +257,15 @@ The output gives the number of rewritten graphs and the number of unchanged grap
     "unchanged": 0
 }
 ```
+
+### :warning: DEPRECATED The `applyRule` service
+
+The service `applyRule` is equivalent to `applyRules` but limited to only one rule. It is subsumed by the `applyRules` service and will be removed soon.
+
+ * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
+
+
+---
 
 ## Services for project configuration
 
@@ -258,6 +278,8 @@ The output gives the number of rewritten graphs and the number of unchanged grap
   * `(<string> project_id, <string> config)`
 
   The service update the current configuration associated to the project.
+
+---
 
 
 ## Export the most recent data in a project
@@ -275,6 +297,8 @@ The service returns an URL on a file containing the "export" of the project. In 
     * if the `sample_ids` list is empty, all sentences are considered
   * only graphs in the project with a `timestamp` numerical metadata are present
   * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
+
+---
 
 ## Get the lexicon computed from a treebank
 
@@ -304,4 +328,4 @@ In a previous version, the `getLexicon` service was available with profile:
 
   * `(<string> project_id)`
 
-It was removed: use the profile `(<string> project_id, <string> sample_ids)` with `[]` for `sample_ids` parameter
+It was removed. Use the profile `(<string> project_id, <string> sample_ids)` with `[]` for `sample_ids` parameter

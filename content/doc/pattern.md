@@ -67,7 +67,7 @@ All *edge clauses* below require the existence of an edge between the node selec
  * `N -[nsubj|obj]-> M`: the edge label is either `nsubj` or `obj`
  * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
  * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
- * `N -[rel=subj]-> M` the edge must match the edge feature constraints (more examples below).
+ * `N -[1=subj]-> M` the edge must match the edge feature constraints (more examples below).
 
 Edges may also be named for usage in commands (in **Grew**) or in clustering (in **Grew-match**) with an identifier:
 
@@ -87,38 +87,31 @@ pattern { N[]; M[]; N -[nsubj]-> M }
 ```
 
 
-As label edges are internally represented by feature structures, it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
-Some examples (with SUD labels) are given below.
+As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
+
+Some examples (with `sud` configuration) are given below.
 
 | Syntax            | Description | `comp` | `comp:obl` | `comp:obl@agent` | `comp:aux` | `comp:obj@lvc` |
 |-------------------|-------------|:------:|:----------:|:----------------:|:----------:|:----------:|
-| `X -[rel=comp]-> Y` | any edge such that the feature `rel` is defined with value `comp` | YES | YES | YES |YES | YES |
-| <code>X -[rel=comp, subrel=obl&vert;aux]-> Y</code> | the feature `rel` is defined with value `comp` and the feature `subrel` is defined with one of the two values `obl` or `aux` | NO | YES |YES |YES | NO|
-| <code>X -[rel=comp, subrel<>obl&vert;aux]-> Y</code> | the feature `rel` is defined with value `comp` and the feature `subrel` is defined with a value different from `obl` or `aux` | NO | NO | NO | NO | YES |
-| `X -[rel=comp, !deep]-> Y` | the feature `rel` is defined with value `comp` and the feature `deep` is not defined | YES | YES | NO |YES | NO|
-| `X -[rel=comp, subrel=*]-> Y` | the feature `rel` is defined with value `comp` and the feature `subrel` is defined with any value | NO | YES | YES |YES | YES|
+| `X -[1=comp]-> Y` | any edge such that the feature `1` is defined with value `comp` | YES | YES | YES |YES | YES |
+| <code>X -[1=comp, 2=obl&vert;aux]-> Y</code> | the feature `1` is defined with value `comp` and the feature `2` is defined with one of the two values `obl` or `aux` | NO | YES |YES |YES | NO|
+| <code>X -[1=comp, 2<>obl&vert;aux]-> Y</code> | the feature `1` is defined with value `comp` and the feature `2` is defined with a value different from `obl` or `aux` | NO | NO | NO | NO | YES |
+| `X -[1=comp, !deep]-> Y` | the feature `1` is defined with value `comp` and the feature `deep` is not defined | YES | YES | NO |YES | NO|
+| `X -[1=comp, 2=*]-> Y` | the feature `1` is defined with value `comp` and the feature `2` is defined with any value | NO | YES | YES |YES | YES|
 | `X -[comp]-> Y` | the exact label `comp` and nothing else | YES | NO | NO | NO | NO |
 
 ### :warning: Matching with atomic labels :warning:
 
-It is important to note that from the pattern point of view, the two clauses `X -[rel=comp]-> Y` (first line in the table) and `X -[comp]-> Y` (last line in the table) are not equivalent!
+It is important to note that from the pattern point of view, the two clauses `X -[1=comp]-> Y` (first line in the table) and `X -[comp]-> Y` (last line in the table) are not equivalent!
 
 ### Difference with node features matching
 
-Note that we would expect that the syntax `X -[1=comp, 2]-> Y` should be equivalent to `X -[1=comp, 2=*]-> Y` but it will bring a ambiguity for `X -[lab]-> Y` that can be interpreted as the atomic label `X -[lab]-> Y` or as `X -[lab=*]-> Y`.
+Note that we would expect that the syntax `X -[1=comp, 2]-> Y` should be equivalent to `X -[1=comp, 2=*]-> Y` but it will bring an ambiguity for `X -[lab]-> Y` that can be interpreted as the atomic label `X -[lab]-> Y` or as `X -[lab=*]-> Y`.
 To avoid this ambiguity, the syntax `X -[1=comp, 2]-> Y` in not allowed.
-
-
-
-
-
-
-
-
 
 ### Additional constraints
 
-These constrains do not identify new elements in the graph, but must be respected.
+These constrains do not bind new elements in the graph, but must be fulfilled (i.e. binding solutions which do not fulfil the constraints are filtered out).
 
  * Constraints on features values:
   * `N.lemma = M.lemma` two feature values must be equal
@@ -130,12 +123,23 @@ These constrains do not identify new elements in the graph, but must be respecte
  * Constraints on node ordering:
   * `N < M` the node `N` immediately precedes the node `M`
   * `N << M` the node `N` precedes the node `M`
- * Constraints on edges:
+
+ * Constraints on in or out edges on binded nodes:
   * `* -[nsubj]-> M` there is an incoming edge with label `nsubj` with target `M`
   * `M -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `M`
- * [Since version 1.3] Constraints on edge labels:
+
+ * [Since 1.3] Constraints on edge labels:
    * `label(e1) = label(e2)` the labels of the two edges `e1` and `e2` are equal
    * `label(e1) <> label(e2)` the labels of the two edges `e1` and `e2` are different
+
+ * [:new: 1.4] Constraints on edges relative positions (these constraints impose that the source and the target of both edges are ordered)
+   * `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered)
+   * `e1 << e2` the edge `e1` is covered by `e2`
+   * `e1 <> e2` the two edges are disjoint
+
+ * [:new: 1.4] Position of a node with respect to an edge
+   * `N << e` the node `N` is strictly included between source and targer of edge `e`.
+
 
 ### Remarks
 When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph is found several times (up to permutation in the sets of equivalent nodes).
@@ -200,4 +204,4 @@ In the UD or SUD corpora, each sentence contains at least the two metadata `sent
 
 ## Note about CoNNL-U specificities
 
-Additional information available in the CoNNL-U format can be accessed through special features `textform` and `wordform` (see [CoNLL format](../conll#additional-features-textform-and-wordform))
+Additional information available in the CoNNL-U format can be accessed through special features `textform` and `wordform` (see [CoNLL-U format](../conllu#additional-features-textform-and-wordform))

@@ -76,7 +76,7 @@ This produces the file [`data.pos.conll`](/parsing/data.pos.conll):
 
 ## Step 3: Parsing with the GRS
 
-With the file [`data.pos.conll`](/parsing/data.pos.conll) described above, the following command produces the CoNLL code of the parsed sentence:
+With the file [`data.pos.conll`](/parsing/data.pos.conll) described above, the following command produces the CoNLL-U code of the parsed sentence:
 
 `grew transform -grs POStoSSQ/grs/surf_synt_main.grs -i data.pos.conll -o data.surf.conll`
 

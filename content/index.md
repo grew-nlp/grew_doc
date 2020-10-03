@@ -5,24 +5,22 @@ date = "2017-02-27T17:44:22+01:00"
 title = "index"
 menu = "main"
 Categories = ["Development","GoLang"]
-
 +++
+
+<div style='width: 200pt;'>
+<img src="logo/grew.svg"/>
+</div>
 
 # Grew: Graph Rewriting for NLP
 
 **Grew** is a Graph Rewriting tool dedicated to applications in Natural Language Processing (NLP). It can manipulate many kinds of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS) but it can be used to represent any graph-based structure.
 
 ## News
-**2019/06/24:** New release of version **1.3**. See [What's new](/whats/) for changes
 
-**April 2018:** Publication of the book [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
-The chapter 1 is [available from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf).
+ * **2020/10/xx:** New release of version **1.4**. See [What's new](/whats_new/) for changes.
 
-<div style='margin: auto; width: 200pt;'>
-  <a href="https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348">
-    <img src="https://media.wiley.com/product_data/coverImage300/66/17863009/1786300966.jpg" alt="Book cover" style="width: 200px;"/>
-  </a>
-</div>
+ * **2020** Grew matching is available in the [Arborator-Grew](https://arboratorgrew.ilpga.fr/) tool.
+
 
 ## A first taste of Grew
 The easiest way to try and test **Grew** is to use one of the two online interfaces.
@@ -38,3 +36,12 @@ The easiest way to try and test **Grew** is to use one of the two online interfa
   * The right-hand side of rules is described by a sequence of **atomic commands** that describe how the graph should be modified during the rule application.
   * Subset of rules can be organized in **packages** and **strategies** define the way rules and packages are applied in graph transformation.
   * **Grew** has support both for **confluent** and **non-confluent** modules; when a non-confluent modules is used, all normal forms are returned and then ambiguity is handled in a natural way.
+
+## Publications
+
+ * [2020] Gaël **Guibon**, Marine **Courtin**, Kim **Gerdes** and Bruno **Guillaume**. [When Collaborative Treebank Curation Meets Graph Grammars -- Arborator With a Grew Back-End](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.651.pdf).
+
+ * [2019] Bruno **Guillaume**. [Graph Matching for Corpora Exploration](https://hal.inria.fr/hal-02267475). JLC 2019 - 10èmes Journées Internationales de la Linguistique de corpus, Nov 2019, Grenoble, France.
+
+ * [2018] Guillaume **Bonfante**, Bruno **Guillaume** and Guy **Perrier**. [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
+(The chapter 1 is [available from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf)).

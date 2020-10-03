@@ -47,10 +47,10 @@ A [tutorial](http://match.grew.fr/?tutorial=yes) with a progressive sequence of 
 You may also explore snippets given on the right of the text area to learn with other examples.
 A more comprehensive documentation is available in the [patterns page](../../doc/pattern).
 
-## About CoNLL field names
-The fields 2, 3, 4 and 5 of CoNLL structure are considered as features with the following feature names.
+## About CoNLL-U field names
+The fields 2, 3, 4 and 5 of CoNLL-U structure are considered as features with the following feature names.
 
-| CoNLL field     |    2   |    3    |    4   |    5   |
+| CoNLL-U field     |    2   |    3    |    4   |    5   |
 |-----------------|:------:|:-------:|:------:|:------:|
 | Name            | `form` | `lemma` | `upos` | `xpos` |
 
@@ -62,11 +62,11 @@ For instance, if you want to search:
 ## Display options
 Below the textarea, a few options are available:
 
- * `lemma`: if checked, the lemma (CoNLL column 3) is shown in output
- * `upos`: if checked, the upos (CoNLL column 4) is shown in output
- * `xpos`: if checked, the xpos (CoNLL column 5) is shown in output
- * `features`: if checked, other features (CoNLL column 6 and column 10) are shown
- * `textform/wordform`: if checked, additional features `textform` and `wordform` (see [CoNLL doc](../../conll#additional-features-textform-and-wordform)) are shown
+ * `lemma`: if checked, the lemma (CoNLL-U column 3) is shown in output
+ * `upos`: if checked, the upos (CoNLL-U column 4) is shown in output
+ * `xpos`: if checked, the xpos (CoNLL-U column 5) is shown in output
+ * `features`: if checked, other features (CoNLL-U column 6 and column 10) are shown
+ * `textform/wordform`: if checked, additional features `textform` and `wordform` (see [CoNLL-U doc](../../conllu#additional-features-textform-and-wordform)) are shown
  * `sentence order`: 3 value are available
     * `initial`: the sentence are scanned in the order they are present in the original corpus
     * `by length`: the shortest sentences (in term of tokens number) are scanned first
@@ -94,5 +94,5 @@ For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@lo
 
 ## Deprecated `_MISC_` and `_UD_` prefixes
 In older versions, features declared in column 10 were accessible with the `_MISC_` prefix and multiword tokens or empty nodes were identified with the `_UD_` prefix.
-These prefixes are not used anymore; they are replaced by features `textform` and `wordform` (see [CoNLL doc](../../doc/conll#additional-features-textform-and-wordform)).
+These prefixes are not used anymore; they are replaced by features `textform` and `wordform` (see [CoNLL-U doc](../../doc/conllu#additional-features-textform-and-wordform)).
 

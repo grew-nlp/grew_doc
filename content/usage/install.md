@@ -25,14 +25,12 @@ If you just need to upgrade your installation, please consult the [Upgrade page]
 **Grew** requires **opam** version **2.0.0** or higher.
 
 ### Linux
-In Debian, version 2 can be installed from default packages.
+In most Linux recent distribution, version 2 can be installed from default packages.
 
 ```bash
 apt-get install opam
 ```
 
-In Ubuntu, the version 2 is not available by default.
-See addendum at the end of this page or consult [**opam** installation page](https://opam.ocaml.org/doc/Install.html) for installation.
 
 The following commands installs a few other needed packages:
 
@@ -54,7 +52,7 @@ apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 Run: `opam init` and follow instructions (answer `y` to different questions).
 
 Check that `ocaml` is installed with `ocamlc -v`. This gives you the version of Ocaml installed.
-This should be (in March 2020) 4.10.0.
+This should be 4.10.0 or higher.
 
 ## Step 3: Install the Grew software
 
@@ -67,8 +65,8 @@ opam install grew grewpy
 
 To verify your installation:
 
-  * Try the command `grew version`
-  * In case of trouble, make sure that your PATH contains `~/.opam/default/bin` and try again
+  * Try the command `grew version`. You shoule have 1.4 or higher.
+  * In case of trouble, try `eval $(opam env)` and `opam install …` again.
   * If trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 
 ## Step 4: The Python library
@@ -88,9 +86,7 @@ Note: depending on your local installation, you may have to use `pip3` or `pip3.
 
 # Addendum
 
-Installation of `opam` version 2 on Ubuntu:
-
-You should be able to install version **2.0.6** with the following commands:
+If opam 2 in not available in your favorite package manager, you should be able to install version **2.0.6** with the following commands:
 
   * `wget -q https://github.com/ocaml/opam/releases/download/2.0.6/opam-2.0.6-x86_64-linux`
   * `sudo mv opam-2.0.6-x86_64-linux /usr/local/bin/opam`

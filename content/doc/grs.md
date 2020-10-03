@@ -213,7 +213,7 @@ Consider small graph with 3 nodes and 2 edges labeled `L` defined in
 [`input.gr`](../examples/strategies/input.gr):
 {{< grew file="/static/examples/strategies/input.gr" >}}
 
-Next commands rewrite the graph `input.gr`, following different strategies (:warning: the `-gr` options is needed to output graph in the native format instead of CoNLL)
+Next commands rewrite the graph `input.gr`, following different strategies (:warning: the `-gr` options is needed to output graph in the native format instead of CoNLL-U)
 #### strategy `p_1_nfs`
 
 `grew transform -grs single.grs -strat p_1_nfs -i input.gr -gr` computes all normal forms for the input graph with rules of package `p_1`.

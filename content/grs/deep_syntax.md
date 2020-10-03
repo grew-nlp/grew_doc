@@ -29,7 +29,7 @@ The GRS used to build the mixed **deep_and_surf** structure can be obtained by:
 `git clone https://gitlab.inria.fr/grew/SSQtoDSQ.git`
 
 The input of the GRS which produced the **deep_and_surf** structure is the **surf** structure.
-We recall here the surface structure (see [Dependency parsing](../parsing) page) for our example sentence and we suppose that the file [`test.surf.conll`](/deep_syntax/test.surf.conll) contains the CoNLL description below:
+We recall here the surface structure (see [Dependency parsing](../parsing) page) for our example sentence and we suppose that the file [`test.surf.conll`](/deep_syntax/test.surf.conll) contains the CoNLL-U description below:
 
 {{< input file="/static/deep_syntax/test.surf.conll" >}}
 

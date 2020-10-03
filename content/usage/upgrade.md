@@ -14,7 +14,7 @@ Description = ""
 The last version of **grew** requires that the **opam** tool is in version **2.0.0** or higher.
 
 You can check your versions with the command `opam --version`.
-It it's not version 2, re-install **opam** in version 2 with instructions steps 2 and 3 on the [Installation page](../install).
+It it's not version 2, re-install **opam** in version 2 with instructions steps 1 and 2 on the [Installation page](../install).
 
 ## Update prerequisite
 ### Linux

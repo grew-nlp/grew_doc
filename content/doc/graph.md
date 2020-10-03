@@ -17,7 +17,13 @@ The graphs we consider in **Grew** are defined as usually in mathematics by two 
 ## Nodes
 A node is described by a an identifier (needed to refer to nodes in edges definitions) and a feature structure: a finite list of pairs (*feature_name*, *feature_value*).
 
-TODO: nodes order!!
+In many linguistic structures, the notion of word order plays a crucial role.
+To take this into account, in a Grew graph, nodes are split in two subsets:
+
+ * totally ordered nodes (in general the words of some sentence)
+ * non ordered nodes for other layers of information encoding (examples: constituent nodes in phrase structure, nodes in AMR graphs, additional nodes encoding MWE in PARSEME graphs…)
+
+In the [node creation command](../commands#node-creation) `add_node`, the user can choose to add an unordered node or to place the new node before or after a existing one.
 
 ## Edges
 An edge is described by two nodes (called the *source* and the *target* of the edge) and by an edge label.
@@ -37,25 +43,46 @@ In **Grew** graphs, an edge label is internally stored as a flat feature structu
 We will use the traditional notation `f=v` for these couples.
 
 For backward compatibility and for ease of use in practice, a **compact** notation may be used for edge labels.
-An edge label can be written with a compact notation if it contains only features with names `1`, `2` or `deep`.
-In the compact notation, the `2` feature is introduced by `:` and the `deep` feature by `@` (this corresponds to the convention used in [SUD](https://surfacesyntacticud.github.io/)).
-A few other specific features are used for the encoding of special relations used in deep syntax representation (either in [Enhanced UD](https://universaldependencies.org/u/overview/enhanced-syntax.html) of in [Deep-sequoia](http://deep-sequoia.inria.fr/)).
 
-The table below gives examples of correspondance between compact and internal representation.
+The correspondence between compact notation and feature structure depends on the `config` parameter.
+In version 1.4, four predefine configuration are available: `ud`, `sud`, `sequoia` and `basic`.
+
+The symbol `:` (used in `ud`, `sud` and `sequoia`) is interpreted as a separator, the left part is given feature value `1` and the right part feature value `2`.
+
+The tables below give more examples of correspondances between compact and internal representation.
+
+### `ud`
+
+|               Relation                                                                        | Compact notation    |  Internal representation     |
+|-----------------------------------------------------------------------------------------------|---------------------|------------------------------|
+| Simple relation                                                                               | `obj`               | `1=obj`                      |
+| relation with subtype                                                                         | `aux:pass`          | `1=aux, 2=pass`              |
+| [Enhanced UD relation](https://universaldependencies.org/u/overview/enhanced-syntax.html)     | `E:nsubj`           | `1=nsuj, enhanced=yes`       |
+
+### `sud`
+
+|               Relation                                                                                  | Compact notation    |  Internal representation     |
+|---------------------------------------------------------------------------------------------------------|---------------------|------------------------------|
+| Simple relation                                                                                         | `mod`               | `1=mod`                      |
+| relation with subtype                                                                                   | `comp:aux`          | `1=comp, 2=aux`              |
+| [SUD relation with deep feature](https://surfacesyntacticud.github.io/guidelines/u/#sud-deep-features)  | `compl:obl@agent`   | `1=compl, 2=obl, deep=agent` |
+
+### `sequoia`
 
 |               Relation                                                                                  | Compact notation    |  Internal representation     |
 |---------------------------------------------------------------------------------------------------------|---------------------|------------------------------|
 | Simple relation                                                                                         | `obj`               | `1=obj`                      |
-| relation with subtype in UD or in SUD                                                                   | `aux:pass`          | `1=aux, 2=pass`              |
-| [SUD relation with deep feature](https://surfacesyntacticud.github.io/guidelines/u/#sud-deep-features)  | `compl:obl@agent`   | `1=compl, 2=obl, deep=agent` |
-| [Enhanced UD relation](https://universaldependencies.org/u/overview/enhanced-syntax.html)               | `E:subj`            | `1=suj, enhanced=yes`        |
 | [Deep-sequoia](http://deep-sequoia.inria.fr/) (both surf & deep)                                        | `suj:obj`           | `1=suj, 2=obj`               |
-| Deep-sequoia (surf only)                                                                                | `S:suj:obj`         | `1=suj, 2=obj, kind=surf`    |
-| Deep-sequoia (deep only)                                                                                | `D:suj:obj`         | `1=suj, 2=obj, kind=deep`    |
+| [Deep-sequoia](http://deep-sequoia.inria.fr/) (surf only)                                               | `S:suj:obj`         | `1=suj, 2=obj, kind=surf`    |
+| [Deep-sequoia](http://deep-sequoia.inria.fr/) (deep only)                                               | `D:suj:obj`         | `1=suj, 2=obj, kind=deep`    |
 
+### `basic`
+|               Relation                                                                                  | Compact notation    |  Internal representation     |
+|---------------------------------------------------------------------------------------------------------|---------------------|------------------------------|
+| Simple relation                                                                                         | `obj`               | `rel=obj`                    |
 
-Any other feature names (a few reserved names exists, see below) can be used in edge label representation.
-In this case, these is not compact representation and the internal representation is used.
+Any other feature names (except a few reserved names) can be freely used in edge label representation.
+But, if the internal representation does not correspond to one described in the tables above, there is not compact representation and the internal representation is used.
 
 Reserved feature names are:
 
@@ -68,6 +95,6 @@ Reserved feature names are:
 # Graph input formats
 To describe a graph in practice, **Grew** offers several input formats:
 
- * [CoNLL format](../conll)
+ * [CoNLL-U format](../conllu)
  * a native `gr` format (TODO)
 * the `amr` format (TODO)

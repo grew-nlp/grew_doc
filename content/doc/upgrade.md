@@ -8,16 +8,49 @@ Description = ""
 
 +++
 
-# GRS upgrading
+# Upgrade to Grew 1.4 (October 2020)
 
 This page describes the breaking changes in **Grew** and provides the information needed to update a Graph Rewriting System and the CLI commands.
 For older upgrading info, see [upgrade_old](../upgrade_old).
 
----
+## CLI (Command Line Interface)
 
-# 1.3 to 1.4 (October 2020)
+### the `-config` argument
 
+With the new code for CoNLL-U handling, Grew must be informed of the "kind" of CoNLL-U that are used.
+
+The config value can be: `ud`, `sud`, `sequoia` or `basic`. The default value is `ud`.
+
+The config value changes the way edge labels are parsed (for instance, taking `@` extension into account in SUD) and also how features are stored in CoNLL-U (columns FEATS or columns MISC).
 ## GRS (Graph Rewriting System)
+
+### Add a new edge with a label taken in the pattern
+
+In the previous version, the syntax `add_edge e: N -> M` was used for adding a new edge between `N` and `M` with a label identical to the edge named `e` in the pattern.
+
+In the 1.4 version, the semantic of the same syntax has changed.
+Now, the syntax `add_edge e: N -> M` means: add a new edge between `N` and `M` and give it the **fresh** name `e`.
+
+In order to have the same semantic as the previous version, the command:
+
+```grew
+add_edge e: N -> M;      # e being an edge declared in the pattern
+```
+
+must be replaced by:
+
+```grew
+add_edge f: N -> M;      # f is a fresh name
+f.label = e.label;       # the label of f is set to be equal to the one of e.
+```
+
+Hopefully, this should not produce unexpected behaviour:
+
+ * If the old syntax is used with the new **Grew** version (≥ 1.4), the error `ADD_EDGE_EXPL: the edge name 'e' already used` is reported.
+ * If the new syntax is used with the old **Grew** version (< 1.4), the error `Unknown identifier "f"` is reported.
+
+
+
 ### Access to the label of an edge in the pattern
 
 |Constraint | Old syntax | New syntax |
@@ -25,7 +58,7 @@ For older upgrading info, see [upgrade_old](../upgrade_old).
 | equality of two edge labels | `label(e1) = label(e2)` |  `e1.label = e2.label` |
 | inequality of two edge labels | `label(e1) <> label(e2)` |  `e1.label <> e2.label` |
 
-### Avoid duplicate solutions
+### Avoid duplicate matching solutions
 
 When several nodes are equivalent in a pattern, each occurrence is reported several times (up to permutation on the set of equivalent nodes).
 For instance, to search for two relations `det` with the same governor, the pattern below will return twice each solution.
@@ -52,38 +85,4 @@ pattern {
 }
 ```
 
-### Add a new edge with a label taken in the pattern
 
-In previous version, the syntax `add_edge e: N -> M` was used for adding a new edge between `N` and `M` with a label identical to the edge named `e` in the pattern.
-
-In the 1.4 version, the semantic of the same syntax has changes.
-Now, the syntax `add_edge e: N -> M` means add a new edge between `N` and `M` and give it the **fresh** name `e`.
-
-In order to have the same semantic as the previous version, the command:
-
-```grew
-add_edge e: N -> M;      # e being an edge declared in the pattern
-```
-
-must be replaced by:
-
-```grew
-add_edge f: N -> M;      # f is a fresh name
-f.label = e.label;       # the label of f is set to be equal to the one of e.
-```
-
-Fortunately, this should not produce unexpected behaviour:
-
- * If the old syntax is used with the new **Grew** version,
- * If the new syntax is used with the old **Grew** version, the error ` Unknwon identifier "f"` is reported.
-
-
-## CLI (Command Line Interface)
-
-### the `-config` argument
-
-With the new code for CoNLL-U handling, Grew must be informed of the "kind" of CoNLL-U that are used.
-
-The config value can be: `ud`, `sud`, `sequoia` or `basic`. The default value is `ud`.
-
-The config value changes the way edge labels are parsed (for instance, taking `@` extension in SUD) and also how features are stored in CoNLL-U (columns FEATS or columns MISC).

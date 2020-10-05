@@ -11,13 +11,13 @@ Categories = ["Development","GoLang"]
 <img src="logo/grew.svg"/>
 </div>
 
-# Grew: Graph Rewriting for NLP
+# Graph Rewriting for NLP
 
 **Grew** is a Graph Rewriting tool dedicated to applications in Natural Language Processing (NLP). It can manipulate many kinds of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS) but it can be used to represent any graph-based structure.
 
 ## News
 
- * **2020/10/xx:** New release of version **1.4**. See [What's new](/whats_new/) for changes.
+ * **2020/10/02:** New release of version **1.4**. See [What's new](/whats_new/) for changes.
 
  * **2020** Grew matching is available in the [Arborator-Grew](https://arboratorgrew.ilpga.fr/) tool.
 
@@ -45,3 +45,8 @@ The easiest way to try and test **Grew** is to use one of the two online interfa
 
  * [2018] Guillaume **Bonfante**, Bruno **Guillaume** and Guy **Perrier**. [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
 (The chapter 1 is [available from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf)).
+
+## Acknowledgements
+
+ * Thanks to **Grew** and **Grew-match** users for their feedback, their support and their suggestions
+ * Thanks to Kim Gerdes for nice Grew logo

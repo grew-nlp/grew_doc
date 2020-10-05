@@ -163,7 +163,7 @@ The pattern below returns the 20 expected occurrences
 ```grew
 pattern {
     N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N;
-    id(N1) < id(N2); id(N2) < id (N3);
+    N1.__id < N2.__id; N2.__ < N3.__id;
 }
 ```
 

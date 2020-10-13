@@ -26,7 +26,7 @@ lchn:
 
 grew_server:
 	${HUGO}
-	scp -r public/grew_server/index.html grew.lchn.fr:/home/guillaum/www/doc/grew_server
+	scp -r public/grew_server/index.html grew.lchn.fr:/home/guillaum/www/doc/usage/grew_server
 
 trans_14:
 	${HUGO}

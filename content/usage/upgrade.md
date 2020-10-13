@@ -24,7 +24,7 @@ apt-get update && apt-get upgrade
 
 ### On Mac OSX
 ```bash
-sudo port sync && sudo port upgrade
+sudo port sync && sudo port upgrade outdated
 ```
 
 ## Update the Grew software

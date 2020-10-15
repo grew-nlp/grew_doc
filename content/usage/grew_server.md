@@ -171,9 +171,7 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ## Search with Grew patterns
 
-:warning: The server uses the new syntax for patterns (see [here](../trans_14)).
-
-### The `searchPatternInGraphs` service
+### The `searchPatternInGraphs` service :warning: PROD :warning:
 
 Given a **Grew** pattern and a project, this service returns a list of occurrences of the pattern in the project.
 Each occurrence is described by a dict
@@ -192,6 +190,45 @@ Each occurrence is described by a dict
  * `(<string> project_id, <string> pattern)` returns a list of occurrences.
 
  * `(<string> project_id, <string> pattern, <string> clusters)`
+ where `clusters` is a list of cluster keys, separated by `;`.
+ This returns nested dictionaries (the depth being equals to the length of the cluster key list).
+ The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
+ each cluster is further clustered recursively with the remaining keys.
+ For instance:
+
+   * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
+   * Data presented in one table of the page **Relations tables** in **Grew-match** ([ex](http://match.grew.fr/_meta/SUD_French-GSD@latest_table.html)) can be obtained (for the `obj` relation in the example) with the arguments:
+
+     * `pattern`: `pattern { G -[obj]-> D }`
+     * `clusters`: `G.upos; D.upos`
+
+
+### The `searchPatternInGraphs` service :warning: DEV :warning:
+
+Given a **Grew** pattern, a list of users and a project, this service returns a list of occurrences of the pattern in the project.
+
+The string `user_ids` must be a JSON encoding of a list of strings:
+
+ * if the list is empty (i.e. `[]`), all users are taken into account (this is equivalent to the previous behaviour).
+ * if the list is `["__last__"]`, for each `sent_id`,  only the most recent graph is taken into account
+ * otherwise (like `["user_1", "user_2"]`), only graphs of users present in the list are taken into account
+
+Each occurrence is described by a dict
+
+```
+{
+  'sample_id':…,
+  'sent_id':…,
+  'conll':…,
+  'user_id':…,
+  'nodes':…,
+  'edges':…
+}
+```
+
+ * `(<string> project_id, <string> user_ids, <string> pattern)` returns a list of occurrences.
+
+ * `(<string> project_id, <string> user_ids, <string> pattern, <string> clusters)`
  where `clusters` is a list of cluster keys, separated by `;`.
  This returns nested dictionaries (the depth being equals to the length of the cluster key list).
  The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;

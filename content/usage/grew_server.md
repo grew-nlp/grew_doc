@@ -157,11 +157,11 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ### The `saveConll` services
 
- * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <file> conll_file)`
- * `(<string> project_id, <string> sample_id, <string> sent_id, <file> conll_file)`
+ * ~~`(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <file> conll_file)`~~ Removed in DEV (2020/10/27)
+ * ~~`(<string> project_id, <string> sample_id, <string> sent_id, <file> conll_file)`~~ Removed in DEV (2020/10/27)
  * `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
  * `(<string> project_id, <string> sample_id, <file> conll_file)`
- * `(<string> project_id, <file> conll_file)`
+ * ~~`(<string> project_id, <file> conll_file)`~~ Removed in DEV (2020/10/27)
 
 ### The `saveGraph` service
 
@@ -274,6 +274,44 @@ The output is the list of new graphs produced by the rules applications (note th
 
 **NB:** The graph are left unchanged in the project. If you want to modify the graph with the new graphs, use `applyRules` service.
 
+:new: in DEV since 2020/11/04
+The conll output contains special metadata listing nodes and edges that were changed by the rules applications:
+ * for each modified node, a metadata `modified_node` is added with the id of the node and the list of features modified by the rule
+ * for each modified edge, a metadata `modified_edge` is added with source id, new label and target_id
+
+Below, an example of output after a rewrite with the two rules:
+
+* `pattern { N [upos=VERB] } commands { N.upos=V }`
+* `pattern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[NSUBJ]-> M }`
+
+```
+# user_id = ud
+# sent_id = fr-ud-dev_00002
+# text = Les études durent six ans mais leur contenu diffère donc selon les Facultés.
+# modified_node = 3:upos
+# modified_node = 9:upos
+# modified_edge = 9,NSUBJ,8
+# modified_edge = 3,NSUBJ,2
+1	Les	le	DET	_	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	2	det	_	wordform=les
+2	études	étude	NOUN	_	Gender=Fem|Number=Plur	3	NSUBJ	_	_
+3	durent	durer	V	_	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+4	six	six	NUM	_	_	5	nummod	_	_
+5	ans	an	NOUN	_	Gender=Masc|Number=Plur	3	obj	_	_
+6	mais	mais	CCONJ	_	_	9	cc	_	_
+7	leur	son	DET	_	Gender=Masc|Number=Sing|Poss=Yes|PronType=Prs	8	det	_	_
+8	contenu	contenu	NOUN	_	Gender=Masc|Number=Sing	9	NSUBJ	_	_
+9	diffère	différer	V	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	conj	_	_
+10	donc	donc	ADV	_	_	9	advmod	_	_
+11	selon	selon	ADP	_	_	13	case	_	_
+12	les	le	DET	_	Definite=Def|Number=Plur|PronType=Art	13	det	_	_
+13	Facultés	faculté	NOUN	_	Definite=Def|Number=Plur	9	obl	_	SpaceAfter=No|wordform=facultés
+14	.	.	PUNCT	_	_	3	punct	_	_
+```
+
+
+
+
+
 ### :warning: DEPRECATED The `tryRule` service
 
 The service `tryRule` is equivalent to `tryRules` but limited to only one rule. It is subsumed by the `tryRules` service and will be removed soon.
@@ -358,6 +396,40 @@ The set of graphs considered for the production of the lexicon is the one consid
     * if the `sample_ids` list is empty, all sentences are considered
   * only graphs in the project with a `timestamp` numerical metadata are present
   * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
+
+---
+
+## Get tagset or features from a treebank
+
+:new: in DEV since 2020/11/04
+
+### The `getPOS` service
+  * `(<string> project_id, <string> sample_ids)`
+
+returns the list of POS (`upos` feature) used in the data:
+
+  * in all the project if `sample_id` is `[]`
+  * else, only for the subset of sample described by the list
+
+### The `getRelations` service
+  * `(<string> project_id, <string> sample_ids)`
+
+returns the list of relations used in the data:
+
+  * in all the project if `sample_id` is `[]`
+  * else, only for the subset of sample described by the list
+
+
+### The `getFeatures` service
+  * `(<string> project_id, <string> sample_ids)`
+
+returns the list of feature names used in the data:
+
+  * in all the project if `sample_id` is `[]`
+  * else, only for the subset of sample described by the list
+
+---
+---
 
 ### :warning: REMOVED
 

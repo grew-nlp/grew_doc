@@ -1,3 +1,5 @@
+import pprint
+
 import grew
 grew.init()
 
@@ -25,4 +27,4 @@ maison\tMasc
 
 output = grew.run(r, g, 'Iter(set_gender)')
 
-print (output)
+pprint.pprint (output)

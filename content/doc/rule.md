@@ -18,11 +18,11 @@ A **rewrite rule** in **Grew** is defined by:
 
 ## Example
 
-{{< grew file="/static/rule/accuser.grs" >}}
+{{< grew file="/static/doc/rule/accuser.grs" >}}
 
 # Using lexicons in Grew rules
 
-**Grew** rules can be parametrized by one or several lexicons.
+**Grew** rules can be parametrised by one or several lexicons.
 
 ## Lexicon
 A lexicon is defined by:
@@ -45,12 +45,12 @@ A lexicon is written as text where:
  * All other lines define the lexicon items that are n-tuples of strings.
  * All lines contain the same number of elements.
 
-The lexicon above can be then written in the file [`nouns.lex`](../rule/nouns.lex)
-{{< grew file="/static/rule/nouns.lex" >}}
+The lexicon above can be then written in the file [`nouns.lex`](nouns.lex)
+{{< grew file="/static/doc/rule/nouns.lex" >}}
 
 ## Lexical rule
 
-A rule can be parametrized by a lexicon.
+A rule can be parametrised by a lexicon.
 The rule below adds a new feat `Gender` with the relevant value when the noun is found in the lexicon.
 Note that the lexicon is named in the rule (`lex` in the example), this will allow us to use several lexicons in the same rule.
 
@@ -82,38 +82,36 @@ maison	Fem
 
 ### Try it!
 
-TODO : review links
-
-The file [`set_gender.py`](../rule/set_gender.py) below presents a self-contained example of rewriting with the lexical rule above.
-It supposes that the grew Python library is installed (see [Installation page](../install)).
+The file [`set_gender.py`](set_gender.py) below presents a self-contained example of rewriting with the lexical rule above.
+It supposes that the grew Python library is installed (see [Installation page](../../usage/install)).
 
 :warning: The tabulation is not well interpreted when using copy/paste into interactive Python session.
 That's why tabulations are replaced by explicit `\t` in the Python code below.
 
-{{< python file="/static/rule/set_gender.py" >}}
+{{< python file="/static/doc/rule/set_gender.py" >}}
 
 ## Using several lexicons
 
-The file [`obl_loc.grs`](../rule/obl_loc.grs) below defines a rule which changes the relation `obl` into `obl:loc` when both the verb and the preposition are controled by lexicons.
-{{< grew file="/static/rule/obl_loc.grs" >}}
+The file [`obl_loc.grs`](obl_loc.grs) below defines a rule which changes the relation `obl` into `obl:loc` when both the verb and the preposition are controlled by lexicons.
+{{< grew file="/static/doc/rule/obl_loc.grs" >}}
 
-The file [`max.conll`](../rule/max.conll) contains the following sentence:
+The file [`max.conll`](max.conll) contains the following sentence:
 
-![Max](/rule/max.svg)
+![Max](/doc/rule/_build/max.svg)
 
-With the command `grew transform -grs obl_loc.grs -strat "Onf(obl_loc)" -i max.conll -o max_loc.conll`, the rule above is applied twice and produces the next graph:
+With the command `grew transform -grs obl_loc.grs -strat "Onf(obl_loc)" -i max.conll`, the rule above is applied twice and produces the next graph:
 
-![Max_loc](/rule/max_loc.svg)
+![Max_loc](/doc/rule/_build/max_loc.svg)
 
 ## Using twice the same lexicon
 
-If the file [`transitive_verbs.lex`](/rule/transitive_verbs.lex) contains a list of transitive verbs, the following rule distributes the `obj` relation when two transitive verbs are coordinated.
+If the file [`transitive_verbs.lex`](transitive_verbs.lex) contains a list of transitive verbs, the following rule distributes the `obj` relation when two transitive verbs are coordinated.
 
-{{< grew file="/static/rule/transitive_coord.grs" >}}
+{{< grew file="/static/doc/rule/transitive_coord.grs" >}}
 
 This rule can be used to turn the left part below into the right part:
 
-| ![pomme](/rule/pomme.svg) | ![pomme_enhanced](/rule/pomme_enhanced.svg) |
+| ![pomme](/doc/rule/_build/pomme.svg) | ![pomme_enhanced](/doc/rule/_build/pomme_enhanced.svg) |
 |:---:|:---:|
 
 

@@ -1,0 +1,18 @@
+rule accuser {
+  pattern {
+    V [cat=V, lemma="accuser"];
+    O [];
+    D [cat=D, lemma="de"];
+    DO [cat=V, m = inf | part];
+
+    V -[obj]-> O;
+    V -[de_obj]-> D;
+    D -[obj]-> DO
+    }
+  without {
+    DO -[suj]-> O
+  }
+  commands {
+    add_edge DO -[suj]-> O
+  }
+}

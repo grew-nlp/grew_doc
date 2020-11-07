@@ -1,0 +1,8 @@
+rule transitive_coord (lex_1 from "transitive_verbs.lex", lex_2 from "transitive_verbs.lex") {
+  pattern {
+    VERB1 [lemma=lex_1.lemma]; VERB1 -[conj]-> VERB2; VERB2 [lemma=lex_2.lemma];
+    VERB2 -[obj]-> OBJ; VERB2 << OBJ;
+  }
+  without { VERB1 -[E:obj]-> OBJ; }
+  commands { add_edge VERB1 -[E:obj]-> OBJ; }
+}

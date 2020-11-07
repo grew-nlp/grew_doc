@@ -1,9 +1,0 @@
-features {
-	phon: *;
-	cat: SENT, NP, NP-SUJ, NC, NPP, P, DET, PP, V, VINF, VN, "P+D", NP-OBJ, VPinf, PP-MOD, ADV, ADJ, VPinf-ATS, PONCT;
-}
-labels { _ }
-
-sequences {
-	main {}
-}

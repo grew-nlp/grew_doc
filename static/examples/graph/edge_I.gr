@@ -1,5 +1,0 @@
-graph {
-  A [label="A"];
-  B [label="B"];
-  A -[I]-> B;
-}

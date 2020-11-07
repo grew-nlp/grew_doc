@@ -1,0 +1,8 @@
+digraph G {
+	rankdir=LR;
+	node [shape=Mrecord]
+	G_A -> G_B [ style=dashed, dir=back, label="B2A" ];
+	G_B -> G_C [ style=dashed, label="B2C" ];
+	G_C -> G_B [ style=dashed, label="C2B" ];
+	G_C -> G_D [ style=dashed, label="C2D" ];
+}

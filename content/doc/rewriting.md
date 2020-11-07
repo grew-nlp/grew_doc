@@ -34,20 +34,13 @@ When a GRS is **terminating**, we have the equivalence of the two strategies:
 ~~~
 
 See below for an example of non-terminating system where the equivalence does not hold.
-
+Again, prefer the more efficient `Onf`.
 
 ## Example of non-terminating rewriting system
 
 The following code described a non-terminating rewriting system:
 
-```grew
-package S {
-  rule B2A { pattern { e: N -[B]-> M } commands { del_edge e; add_edge N -[A]-> M } }
-  rule B2C { pattern { e: N -[B]-> M } commands { del_edge e; add_edge N -[C]-> M } }
-  rule C2B { pattern { e: N -[C]-> M } commands { del_edge e; add_edge N -[B]-> M } }
-  rule C2D { pattern { e: N -[C]-> M } commands { del_edge e; add_edge N -[D]-> M } }
-}
-```
+{{< grew file="/static/doc/rewriting/non_term.grs" >}}
 
 Each rule replaces an edge label by another.
 For instance, the rule `B2A` removes and edge with an `B` label and adds one with an `A` label.
@@ -56,7 +49,7 @@ Let `G_A`, `G_B`, `G_C` and `G_D` the 4 graphs with 2 nodes and 1 edge labelled 
 
 The schema below shows how the 4 rules act on these 4 graphs:
 
-![input.gr](/examples/non-term/xyz.svg)
+![input.gr](/doc/rewriting/_build/non_term.svg)
 
 ### Applying `S` to `G_B`
 
@@ -73,11 +66,5 @@ The schema below shows how the 4 rules act on these 4 graphs:
    * the output of the graph `G_D`
    * a non-terminating execution
 
-Note that all unpredictable behavior will be identical from one execution to another with the same input data.
-But, if the order of rules in the pacakge `S` is changed, the behavior may be different.
-
-
-
-
-
-
+For the last three case, the output is unpredictable, but several execution with the same input data will give the same output.
+But, if the order of rules in the package `S` is changed, the behaviour may be different.

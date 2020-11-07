@@ -29,11 +29,11 @@ The parsing is done in three steps:
 # Prerequisite
 
  * **Talismane**:
-  * Download from [Talismane github page](https://github.com/joliciel-informatique/talismane/releases), the 3 files: `talismane-distribution-5.2.0-bin.zip`, `frenchLanguagePack-5.2.0.zip` and `talismane-fr-5.2.0.conf`.
-  * Unzip `talismane-distribution-5.2.0-bin.zip` (and not the other zip file).
- * **Grew**: see [Installation page](../installation)
+  * Download from [Talismane github page](https://github.com/joliciel-informatique/talismane/releases), the 3 files: [`talismane-distribution-6.0.0-bin.zip`](https://github.com/joliciel-informatique/talismane/releases/download/v6.0.0/talismane-distribution-6.0.0-bin.zip), [`frenchLanguagePack-5.2.0.zip`](https://github.com/joliciel-informatique/talismane/releases/download/v5.2.0/frenchLanguagePack-5.2.0.zip) and [`talismane-fr-6.0.0.conf`](https://github.com/joliciel-informatique/talismane/releases/download/v5.2.0/talismane-fr-5.2.0.conf).
+  * Unzip `talismane-distribution-6.0.0-bin.zip` (and not the other zip file).
+ * **Grew**: see [Installation page](../../usage/install)
  * **POStoSSQ**: get it with the command: `git clone https://gitlab.inria.fr/grew/POStoSSQ.git`
- * Download sed script [`tal2grew.sed`](/parsing/tal2grew.sed)
+ * Download sed script [`tal2grew.sed`](tal2grew.sed)
 
 
 # More info on the parsing process
@@ -52,7 +52,7 @@ One easy way to produce such a pos-tagged French sentence is to use [Talismane](
 Call **Talismane** for tokenisation and POS-tagging with the command:
 
 ```
-java -Xmx1G -Dconfig.file=talismane-fr-5.2.0.conf -jar talismane-core-5.2.0.jar \
+java -Xmx1G -Dconfig.file=talismane-fr-5.2.0.conf -jar talismane-core-6.0.0.jar \
   --analyse \
   --endModule=posTagger \
   --sessionId=fr \
@@ -61,49 +61,39 @@ java -Xmx1G -Dconfig.file=talismane-fr-5.2.0.conf -jar talismane-core-5.2.0.jar 
   --outFile=data.tal
 ```
 
-This should produce the file [`data.tal`](/parsing/data.tal):
+This should produce the file [`data.tal`](_build/data.tal):
 
-{{< input file="static/parsing/data.tal" >}}
+{{< input file="static/grs/parsing/_build/data.tal" >}}
 
 ## Step 2: Convert output
 Apply the sed script:
 
 `sed -f tal2grew.sed data.tal > data.pos.conll`
 
-This produces the file [`data.pos.conll`](/parsing/data.pos.conll):
+This produces the file [`data.pos.conll`](_build/data.pos.conll):
 
-{{< input file="static/parsing/data.pos.conll" >}}
+{{< input file="static/grs/parsing/_build/data.pos.conll" >}}
 
 ## Step 3: Parsing with the GRS
 
-With the file [`data.pos.conll`](/parsing/data.pos.conll) described above, the following command produces the CoNLL-U code of the parsed sentence:
+With the file [`data.pos.conll`](_build/data.pos.conll) described above, the following command produces the CoNLL-U code of the parsed sentence:
 
 `grew transform -grs POStoSSQ/grs/surf_synt_main.grs -i data.pos.conll -o data.surf.conll`
 
-The output file is [`data.surf.conll`](/parsing/data.surf.conll):
+The output file is [`data.surf.conll`](_build/data.surf.conll):
 
-{{< input file="static/parsing/data.surf.conll" >}}
+{{< input file="static/grs/parsing/_build/data.surf.conll" >}}
 
 which encodes the syntactic structure:
 
-![Dependency structure](/parsing/data.surf.svg)
-
-It is also possible to run a GTK interface in which you can explore step by step rewriting of the input sentence:
-
-`grew gui -grs POStoSSQ/grs/surf_synt_main.grs -i data.pos.conll`
+![Dependency structure](/grs/parsing/_build/data.surf.svg)
 
 # In case of trouble
 
 ## Conversion of Talismane output
 **Talismane** outputs features with disjunction of values in case of ambiguities.
 These disjunction can not be handle with the current parsing system.
-The sed script [`tal2grew.sed`](/parsing/tal2grew.sed) rewrites or removes the disjunction we have discovered so far but this may not be exhaustive.
+The sed script [`tal2grew.sed`](tal2grew.sed) rewrites or removes the disjunction we have discovered so far but this may not be exhaustive.
 
 If there is an error in the **Grew** output, you may have to adapt the Step 3.1 in the sed file (please inform [us](mailto:Bruno.Guillaume@inria.fr) if this is the case, we will update the sed file for other users!).
-
-## Use MElt instead of Talismane
-
-If you didn't manage to use **Talismane**, MElt is an alternative.
-See [Dependency parsing with MElt](../parsing_melt) if you want to use [MElt](https://gforge.inria.fr/frs/?group_id=481)).
-
 

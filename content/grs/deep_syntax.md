@@ -29,26 +29,25 @@ The GRS used to build the mixed **deep_and_surf** structure can be obtained by:
 `git clone https://gitlab.inria.fr/grew/SSQtoDSQ.git`
 
 The input of the GRS which produced the **deep_and_surf** structure is the **surf** structure.
-We recall here the surface structure (see [Dependency parsing](../parsing) page) for our example sentence and we suppose that the file [`test.surf.conll`](/deep_syntax/test.surf.conll) contains the CoNLL-U description below:
+We recall here the surface structure (see [Dependency parsing](../parsing) page) for our example sentence and we suppose that the file [`test.surf.conll`](test.surf.conll) contains the CoNLL-U description below:
 
-{{< input file="/static/deep_syntax/test.surf.conll" >}}
+{{< input file="/static/grs/deep_syntax/test.surf.conll" >}}
 
 The mixed structure is then computed with the command:
 
 `grew transform -grs SSQtoDSQ/grs/main_dsq.grs -i test.surf.conll -o test.deep_and_surf.conll`
 
-which produces the file [`test.deep_and_surf.conll`](/deep_syntax/test.deep_and_surf.conll) which contains the code below corresponding the next figure
+which produces the file [`test.deep_and_surf.conll`](_build/test.deep_and_surf.conll) which contains the code below corresponding the next figure
 
-{{< input file="/static/deep_syntax/test.deep_and_surf.conll" >}}
+{{< input file="/static/grs/deep_syntax/_build/test.deep_and_surf.conll" >}}
 
-![Mixed dependency structure](/deep_syntax/test.deep_and_surf.svg)
+![Mixed dependency structure](/grs/deep_syntax/_build/test.deep_and_surf.svg)
 
 ## Building the deep structure
 The deep structure is a projection form the mixed structure.
-This projection is realized with à GRS file `sequoia_proj.grs` which can be download with the commands:
+This projection is realised with a GRS file [`sequoia_proj.grs`](_build/sequoia_proj.grs) which can be download with the commands:
 
 ```
-wget https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tools/sequoia.dom
 wget https://gitlab.inria.fr/sequoia/deep-sequoia/raw/master/tools/sequoia_proj.grs
 ```
 
@@ -56,10 +55,10 @@ The deep structure is then computed with the command:
 
 `grew transform -grs sequoia_proj.grs -strat deep -i test.deep_and_surf.conll -o test.deep.conll`
 
-The output [`test.deep.conll`](/deep_syntax/test.deep.conll) is given below (code and picture):
+The output [`test.deep.conll`](_build/test.deep.conll) is given below (code and picture):
 
-{{< input file="/static/deep_syntax/test.deep.conll" >}}
+{{< input file="/static/grs/deep_syntax/_build/test.deep.conll" >}}
 
-![Deep dependency structure](/deep_syntax/test.deep.svg)
+![Deep dependency structure](/grs/deep_syntax/_build/test.deep.svg)
 
 

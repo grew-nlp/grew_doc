@@ -98,7 +98,7 @@ Rule: [`copy.grs`](/doc/commands/copy.grs):
 
 | Input graph: [`copy.json`](/doc/commands/copy.json) | Rewritten graph |
 |:---:|:---:|
-| ![input](/doc/commands/_copy.svg) | ![output](/doc/commands/_copy_1_out.svg) |
+| ![input](/doc/commands/_build/copy.svg) | ![output](/doc/commands/_build/copy_1_out.svg) |
 
 ---
 ---
@@ -112,7 +112,7 @@ Rule: [`modify_and_copy.grs`](/doc/commands/modify_and_copy.grs ):
 
 | Input graph: [`copy.json`](/doc/commands/copy.json) | Rewritten graph |
 |:---:|:---:|
-| ![input](/doc/commands/_copy.svg) | ![output](/doc/commands/_copy_2_out.svg) |
+| ![input](/doc/commands/_build/copy.svg) | ![output](/doc/commands/_build/copy_2_out.svg) |
 
 ## Example: copy and edge and modify it
 
@@ -121,7 +121,7 @@ Rule: [`copy_and_modify.grs`](/doc/commands/copy_and_modify.grs ):
 
 | Input graph: [`copy.json`](/doc/commands/copy.json) | Rewritten graph |
 |:---:|:---:|
-| ![input](/doc/commands/_copy.svg) | ![output](/doc/commands/_copy_3_out.svg) |
+| ![input](/doc/commands/_build/copy.svg) | ![output](/doc/commands/_build/copy_3_out.svg) |
 
 
 ---
@@ -135,7 +135,7 @@ GRS: [`reverse.grs`](/doc/commands/reverse.grs ):
 
 | Input graph: [`reverse.json`](/doc/commands/reverse.json) | Rewritten graph |
 |:---:|:---:|
-| ![input](/doc/commands/_reverse.svg) | ![output](/doc/commands/_reverse_out.svg) |
+| ![input](/doc/commands/_build/reverse.svg) | ![output](/doc/commands/_build/reverse_out.svg) |
 
 
 By contrast, with the GRS: [`fail_reverse.grs`](/doc/commands/fail_reverse.grs ):

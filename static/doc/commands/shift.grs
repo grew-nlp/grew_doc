@@ -1,0 +1,8 @@
+rule main {
+  pattern { a[phon="♧"]; b[phon="♡"]; c[phon="♢"]; a -[A]-> b; }
+  commands {
+    shift a =[D]=> b;
+    del_node a;
+    shift b =[D]=> c;
+  }
+}

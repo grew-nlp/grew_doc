@@ -59,11 +59,14 @@ f.label = e.label;           % this supposes that `e` is a known edge in the rul
 
 **NB**: the syntax above (`add_edge f:â€¦`) has changed in version 1.4, please see [here](../upgrade) for info about migration.
 
-## Edge redirection
+## Shifting (edge redirection)
 Commands are available to move globally incident edges of some node of the pattern.
-keywords are `shift_in`, `shift_out` and `shift`, respectively for moving in-edges, out-edges and all incident edges.
+Keywords are `shift_in`, `shift_out` and `shift`, respectively for moving in-edges, out-edges and all incident edges.
 
 Brackets can be used to select the set of edges to move according to their labelling.
+
+:warning: edges between two nodes matched by the pattern are not changed by `shift` rules.
+The only edges that are moved are edges linking one node of the patten and one node which is not in the pattern.
 
 ~~~grew
   shift A ==> B
@@ -73,9 +76,9 @@ Brackets can be used to select the set of edges to move according to their label
 
 The action of the 3 commands above are respectively:
 
-  * modifying all edges which are incident to `A`: any edge in the graph starting in `A` (resp. ending in `A`) is redirected to start in `B` (resp end in `B`).
-  * modifying all out-edges which are starting in `B` with a `suj` or `obj` label: they are redirected to start in `C`.
-  * modifying all in-edges which are ending in `B` with a label different from `suj` and `obj`: they are redirected to end in `D`.
+  * modifying edges which are incident to `A`: any edge in the graph starting in `A` (resp. ending in `A`) is redirected to start in `B` (resp end in `B`).
+  * modifying out-edges which are starting in `B` with a `suj` or `obj` label: they are redirected to start in `C`.
+  * modifying in-edges which are ending in `B` with a label different from `suj` and `obj`: they are redirected to end in `D`.
 
 ## Modification of an existing edge
 
@@ -84,13 +87,15 @@ If the pattern binds the identifier `e` to some edge (with the syntax `e: X -[â€
 
  * `e.2 = aux`: update the current edge `e`
  * `add_edge X -[1=suj, 2=e.2]-> Z`: add a new edge where the value of feature `2` is copied from the value of feature `2` of edge `e`;
- * `del_feat e.deep`: remove the feature `deep` from the edge `e` (the edge is not removed);
+ * `del_feat e.deep`: remove the feature `deep` from the edge `e` (the edge is not removed, even if its label is an empty feature structure);
 
 
 ---
 ---
+# Examples
 
-## Example: copy an edge feature value
+
+## Example 1: copy an edge feature value
 
 Rule: [`copy.grs`](/doc/commands/copy.grs):
 
@@ -100,12 +105,11 @@ Rule: [`copy.grs`](/doc/commands/copy.grs):
 |:---:|:---:|
 | ![input](/doc/commands/_build/copy.svg) | ![output](/doc/commands/_build/copy_1_out.svg) |
 
----
----
 
-The next couple of examples show that modifying an edge before copying it is different from the reverse order
 
-## Example: modify and edge and copy it
+## Example 2: modify and edge and copy it
+
+This example and the next one show that modifying an edge before copying it is different from the reverse order
 
 Rule: [`modify_and_copy.grs`](/doc/commands/modify_and_copy.grs ):
 {{< grew file="/static/doc/commands/modify_and_copy.grs" >}}
@@ -114,7 +118,7 @@ Rule: [`modify_and_copy.grs`](/doc/commands/modify_and_copy.grs ):
 |:---:|:---:|
 | ![input](/doc/commands/_build/copy.svg) | ![output](/doc/commands/_build/copy_2_out.svg) |
 
-## Example: copy and edge and modify it
+## Example 2bis: copy and edge and modify it
 
 Rule: [`copy_and_modify.grs`](/doc/commands/copy_and_modify.grs ):
 {{< grew file="/static/doc/commands/copy_and_modify.grs" >}}
@@ -123,11 +127,7 @@ Rule: [`copy_and_modify.grs`](/doc/commands/copy_and_modify.grs ):
 |:---:|:---:|
 | ![input](/doc/commands/_build/copy.svg) | ![output](/doc/commands/_build/copy_3_out.svg) |
 
-
----
----
-
-## Example: reverse an edge
+## Example 3: reverse an edge
 
 GRS: [`reverse.grs`](/doc/commands/reverse.grs ):
 {{< grew file="/static/doc/commands/reverse.grs" >}}
@@ -145,13 +145,21 @@ the command `grew transform -grs fail_reverse.grs` applied to the same graph pro
 
 ``` MESSAGE : [file: fail_reverse.grs, line: 6] Unknown identifier "e" ```
 
+## Example 4: shifting
+
+GRS: [`shift.grs`](/doc/commands/shift.grs ):
+{{< grew file="/static/doc/commands/shift.grs" >}}
+
+| Input graph: [`shift.gr`](/doc/commands/shift.gr) | after one command | after one commands | Rewritten graph |
+|:---:|:---:|:---:|:---:|
+| ![input](/doc/commands/_build/shift.svg) | ![step1](/doc/commands/_build/shift_one.svg) | ![step2](/doc/commands/_build/shift_two.svg) | ![output](/doc/commands/_build/shift_rewritten.svg) |
+
+---
 ---
 
-
-
-
 # Effective commands
-There are situations where commands may not be properly defined.
+
+There are situations where the actions commands may not be difficult to define.
 Consider the rule `r` below and and a graph with two nodes `A` and `B` linked by two edges `X` and `Y` both going from `A` to `B`.
 The rule `R` can be applied to the graph but the command `add_edge` can not be applied (the edge labelled `Y` already exists).
 

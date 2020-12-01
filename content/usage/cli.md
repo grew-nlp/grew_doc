@@ -75,9 +75,9 @@ The command:
 
 produces the following JSON output:
 
-{{< input file="static/usage/cli/output_grep" >}}
+{{< json file="static/usage/cli/output_grep" >}}
 
-This means that the pattern described in the file `bleu.pat` was found twice in the corpus, each item gives the sentence identifier and the position of nodes and edges matched by the pattern.
+This means that the pattern described in the file `bleu.pat` was found twice in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
 
 Note that two other options exist:
 
@@ -88,7 +88,7 @@ Note that two other options exist:
 # Compile
 
 For the Grew-match server (`grew_daemon`) or for the command `grew count`, it is required to first compile corpora.
-For these two usage, sets of corpora are described in a [JSON file](../../doc/corpora).
+For these two usages, sets of corpora are described in a [JSON file](../../doc/corpora).
 
 For compilation, the command is:
 

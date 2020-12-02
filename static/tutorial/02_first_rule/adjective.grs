@@ -1,0 +1,4 @@
+rule adj {
+  pattern { N [upos=A] }
+  commands { N.upos = ADJ }
+}

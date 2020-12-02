@@ -1,0 +1,12 @@
+package v {
+  rule aux {
+    pattern { N [upos = V]; M -[aux.pass]-> N }
+    commands { N.upos = AUX }
+  }
+
+  rule verb {
+    pattern { N [upos = V] }
+    without { M -[aux.pass]-> N }
+    commands { N.upos = VERB }
+  }
+}

@@ -1,0 +1,12 @@
+# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC
+# sent_id = frwiki_50.1000_00907
+# text = Deux autres photos sont également montrées du doigt.
+1	Deux	deux	D	_	s=card	3	det	_	_
+2	autres	autre	A	_	n=p|s=ind	3	mod	_	_
+3	photos	photo	N	_	g=f|n=p|s=c	6	suj	_	_
+4	sont	être	V	_	m=ind|n=p|p=3|t=pst	6	aux.pass	_	_
+5	également	également	ADV	_	_	6	mod	_	_
+6	montrées	montrer	V	_	g=f|m=part|n=p|t=past	0	root	_	_
+7	du	de	P+D	_	s=def	6	mod	_	_
+8	doigt	doigt	N	_	g=m|n=s|s=c	7	obj.p	_	_
+

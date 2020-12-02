@@ -23,3 +23,7 @@ pre {
 .sidebar {
   overflow-y: auto;
 }
+
+.error {
+  color: red;
+}

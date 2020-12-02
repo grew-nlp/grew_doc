@@ -1,0 +1,11 @@
+package v {
+  rule aux {
+    pattern { N [upos = V] }
+    commands { N.upos = AUX }
+  }
+
+  rule verb {
+    pattern { N [upos = V] }
+    commands { N.upos = VERB }
+  }
+}

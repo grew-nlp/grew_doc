@@ -1,0 +1,4 @@
+rule prep {
+  pattern { N [upos=P] }
+  commands { N.upos = ADP }
+}

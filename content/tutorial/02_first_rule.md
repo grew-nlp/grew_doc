@@ -44,7 +44,7 @@ The command used to apply the rule to the input graph is:
 grew transform -config sequoia -grs adjective.grs -strat "adj" -i frwiki_50.1000_00907.seq.conll
 ```
 
-produces:
+and it produces:
 
 {{< input file="static/tutorial/02_first_rule/_build/one_step_adj.conll" >}}
 

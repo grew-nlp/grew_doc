@@ -18,7 +18,9 @@ Another well-known issue with rewriting is the problem of confluence.
 
 ## Two concurrent rules
 
-If we define the two rules package above to convert the `V` Sequoia POS tag to SUD:
+As said earlier, the Sequoia tag `V` may be converted to `AUX` or `VERB`.
+A naive way to encode this in rules is to write the package:
+
 
 {{< grew file="/static/tutorial/05_confluence/aux_verb.grs" >}}
 
@@ -39,12 +41,12 @@ Well, it produced exactly one graph output by choosing (in a way which cannot be
 What should we do with non-confluent system?
 In fact, there are two possible situations:
 
- * the two rules are correct and there is a real (linguistic) ambiguity; and the different solutions must be considered.
- * there is no ambiguity, the rules must be corrected
+ * The two rules are correct and there is a real (linguistic) ambiguity; and the different solutions must be considered.
+ * There is no ambiguity, the rules must be corrected.
 
 In our example (`AUX` and `VERB`), we are clearly in the second case, but let us consider the other one anyway, just to see how to deal with really non-confluent setting.
 
-## The `iter` strategy
+## The `Iter` strategy
 
 Here, we suppose then that we are interested in all possible solutions.
 **Grew** provides a strategy `Iter` to do this:
@@ -59,7 +61,7 @@ This will produces 4 different graphs with all combination of `AUX` and `VERB` f
 
 ## Be stricter in rules design
 
-Of course, in our POS tags conversion example, the correct solution is two design more carefully our two rules, in order to produce the correct output. For instance:
+Of course, in our POS tags conversion example, the correct solution is to design more carefully our two rules, in order to produce the correct output. For instance:
 
 {{< grew file="/static/tutorial/05_confluence/aux_verb_confluent.grs" >}}
 

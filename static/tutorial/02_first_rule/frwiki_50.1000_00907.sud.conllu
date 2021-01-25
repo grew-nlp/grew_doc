@@ -7,8 +7,7 @@
 4	sont	être	AUX	_	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 5	également	également	ADV	_	_	4	mod	_	_
 6	montrées	montrer	VERB	_	Gender=Fem|Number=Plur|Tense=Past|VerbForm=Part|Voice=Pass	4	comp:aux@pass	_	_
-7-8	du	_	_	_	_	_	_	_	_
 7	de	de	ADP	_	_	4	mod	_	_
 8	le	le	DET	_	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
-9	doigt	doigt	NOUN	_	Gender=Masc|Number=Sing	7	comp:obj	_	SpaceAfter=No
+9	doigt	doigt	NOUN	_	Gender=Masc|Number=Sing	7	comp:obj	_	_
 

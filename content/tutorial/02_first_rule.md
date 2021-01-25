@@ -26,8 +26,8 @@ The two annotations (Sequoia and SUD) are:
 
 | Format | `frwiki_50.1000_00907` |
 |:---:|:---:|
-| Sequoia | ![sequoia](/tutorial/02_first_rule/_build/frwiki_50.1000_00907.seq.svg) |
-| SUD | ![sud](/tutorial/02_first_rule/_build/frwiki_50.1000_00907.sud.svg) |
+| Sequoia [:link:CoNLL](/tutorial/02_first_rule/frwiki_50.1000_00907.seq.conll) | ![sequoia](/tutorial/02_first_rule/_build/frwiki_50.1000_00907.seq.svg) |
+| SUD [:link:CoNLL](/tutorial/02_first_rule/frwiki_50.1000_00907.sud.conllu) | ![sud](/tutorial/02_first_rule/_build/frwiki_50.1000_00907.sud.svg) |
 
 ## The adjective rule
 

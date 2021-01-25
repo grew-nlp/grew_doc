@@ -28,6 +28,10 @@ grew_server:
 	${HUGO}
 	scp -r public/usage/grew_server/index.html grew.lchn.fr:/home/guillaum/www/doc/usage/grew_server
 
+tutorial:
+	${HUGO}
+	scp -r public/tutorial/* grew.lchn.fr:/home/guillaum/www/doc/tutorial
+
 trans_14:
 	${HUGO}
 	scp -r public/trans_14/index.html grew.lchn.fr:/home/guillaum/www/doc/trans_14

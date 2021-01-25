@@ -79,9 +79,34 @@ grew transform -config sequoia -grs aux_verb_confluent.grs -strat "Iter(v)" -i f
 
 Of course, the `Onf` produces the same output in this setting.
 
-Note that there is two different ways to compute the final graph: first apply rule `aux` and then the rule `verb` or the other way round: rule `verb` and then rule `aux`. But the important consequence of the confluence property is that the same graph is produced in both cases.
+Note that there are two different ways to compute the final graph: first apply rule `aux` and then the rule `verb` or the other way round: rule `verb` and then rule `aux`. But the important consequence of the confluence property is that the same graph is produced in both cases.
 
-:warning: when a package `p` is confluent, the two strategies `Onf(p)` and `Iter(p)` give the same result. In practice, the strategy `Onf(p)` must be preferred because it is much more efficient to compute.
+## :warning: user `Iter` carefully
+
+When a package `p` is confluent, the two strategies `Onf(p)` and `Iter(p)` give the same result.
+In practice, the strategy `Onf(p)` must be preferred because it is much more efficient to compute.
+
+The `Iter(p)` strategy computes the set of all graphs which can be obtained with the package `p` from the input graph and then, returns the subset of normal forms.
+
+If the rule applies in several places in the graph, the number of graphs can be huge.
+For instance, with the rule `del_xpos` below, if the graph *G* contains *n* nodes with an `xpos` feature, the number of graphs in the produced set is 2<sup>n</sup> (each one of the *n* nodes can appear with or without `xpos` feature).
+
+{{< grew file="/static/tutorial/05_confluence/del_xpos.grs" >}}
+
+We have seen in the previous lesson that **Grew** stops the computation when a bound in the number of rule applications is reached.
+By default, the bound is 10,000; so, if we try to apply the strategy `Iter(del_xpos)` to the 14 nodes graph:
+
+{{< input file="static/tutorial/05_confluence/14_nodes.conllu" >}}
+
+There are 2<sup>14</sup> = 16,384 graphs to compute and necessarily at least the same number of rule applications.
+
+Hence, even if there is no loop in this case, there is a huge number of rule applications, this explain why **Grew** wrongly detects a loop and output the message:
+
+{{< error file="static/tutorial/05_confluence/_build/wrong_loop.log" >}}
+
+
+
+
 
 ---
 

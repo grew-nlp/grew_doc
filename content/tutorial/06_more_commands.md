@@ -14,7 +14,7 @@ Tags = ["Development","golang"]
 
 # Grew Tutorial • Lesson 6 • More commands
 
-Let us go on with our conversion of Sequoia POS taggind to the SUD POS tagging.
+Let us go on with our conversion of Sequoia POS tagging to the SUD POS tagging.
 
 We recall the two formats:
 
@@ -34,14 +34,14 @@ The commented rule below computes this transformation:
 
 {{< grew file="/static/tutorial/06_more_commands/amalgam1.grs" >}}
 
-This is our first rule in this tutorial with more than one commands.
+This is our first rule in this tutorial with more than one command.
 In general, the transformation is described by a sequence of commands which are applied successively to the current graph.
 
 The application of this rule to our input graph builds:
 
 ![onf_du](/tutorial/06_more_commands/_build/onf_amalgam1.svg)
 
-Good, we have the final tokenisation we are expected, but the new node for "le" is not linked to the graph.
+Good, we have the final tokenisation we expected, but the new node for "le" is not linked to the graph.
 We can imagine to connect it later with some other rule but it may be dangerous: imagine an input sentence with several occurrences of the word "du", the application of `Onf (amalgam)` will build a graph with several isolated nodes "le" and it may be confusing to choose later the "right" determiner with the "right" noun!
 In practice, it is safer to avoid to build disconnected graph.
 

@@ -21,13 +21,12 @@ In previous lessons, we have considered the conversion of Sequoia POS tags to SU
 
 ## A stupid looping rule
 
-Consider now adverbs: the same tag `ADV` is used in both annotation setting.
+Consider now adverbs: the same tag `ADV` is used in both annotation settings.
 We can then imagine the (somehow stupid) rule [`adverb.grs`](/tutorial/04_termination/adverb.grs) :
 
 {{< grew file="/static/tutorial/04_termination/adverb.grs" >}}
 
 Then apply it to our input graph, first alone and then with the `Onf` strategy:
-
 ```
 grew transform -config sequoia -grs adverb.grs -strat "adv" -i frwiki_50.1000_00907.seq.conll
 grew transform -config sequoia -grs adverb.grs -strat "Onf(adv)" -i frwiki_50.1000_00907.seq.conll
@@ -35,14 +34,14 @@ grew transform -config sequoia -grs adverb.grs -strat "Onf(adv)" -i frwiki_50.10
 
 The fist command returns a graph which is identical to the input one: there is exactly one `ADV` in the input graph, the rule is applied to it and replaces `ADV` by `ADV`!
 
-Now, the second command tries to apply the rule iteratively and stops when no more rule can be applied… but the rule can always be applied again and again at the same place. The computation is not terminating.
+Now, the second command tries to apply the rule iteratively and stops when no more rules can be applied… but the rule can always be applied again and again at the same place. The computation is not terminating.
 Fortunately, **Grew** tries to help us and provide the following error:
 
 {{< error file="static/tutorial/04_termination/_build/loop.log" >}}
 
-**Grew** tries to track the non termination problem with a bound on the number of rule applications (by default 10000) and stop the computation when the bound is reached. The error message also give the name of the last ten rules applied before the bound is reached to help us understand the problem.
+**Grew** tries to track the non termination problem with a bound on the number of rule applications (by default 10000) and stop the computation when the bound is reached. The error message also gives the name of the last ten rules applied before the bound is reached to help us understand the problem.
 
-The solution here, is of course to remove this rule which is useless, but more complicated case may occur!
+The solution here, is of course to remove this rule which is useless, but more complicated cases may occur!
 
 ## Another looping rule
 
@@ -61,7 +60,7 @@ but this rule will also produce an error if it is iterated: after the first appl
 
 ### Solution 1: make a stricter pattern
 
-With the rule `aux_2`, the pattern can not be found after the first application and there will be no loop.
+With the rule `aux_2`, the pattern cannot be found after the first application and there will be no loop.
 
 {{< grew file="/static/tutorial/04_termination/aux_2.grs" >}}
 
@@ -78,7 +77,7 @@ Of course, in a more general setting, we can have loops which imply more than on
 Unfortunately, it is not possible to decide algorithmically if some rewriting system is terminating or not.
 
 Anyway, in NLP applications like conversions from format **A** to format **B**, it is often easy to ensure termination as we have a kind of measure which stands for the fact that we are closer to the **B** format after each rule application.
-For instance, in all the non-looping rules below, if we count the number of Sequoia POS tag in the graph, it is strictly decreasing at each rule application.
+For instance, in all the non-looping rules above, if we count the number of Sequoia POS tag in the graph, it is strictly decreasing at each rule application.
 
 ---
 

@@ -24,8 +24,8 @@ A naive way to encode this in rules is to write the package:
 
 {{< grew file="/static/tutorial/05_confluence/aux_verb.grs" >}}
 
-The two rules are incompatible, each time you find a POS `V`, both rule can be used and produces a different output!
-We call this kind of system non-confluent
+The two rules overlap: each time a POS `V` is found, both rules can be used and produce a different output!
+We call this kind of system non-confluent.
 
 So, what is the output of the following commands?
 ```
@@ -65,7 +65,9 @@ Of course, in our POS tags conversion example, the correct solution is to design
 
 {{< grew file="/static/tutorial/05_confluence/aux_verb_confluent.grs" >}}
 
-Here, the two rules are clearly incompatible: the same clause `M -[aux.pass]-> N` is used first the `pattern` part for rule `aux` and in the `without` part for the rule `verb`.
+Here, the two rules are clearly separated: the same clause `M -[aux.pass]-> N` is used first the `pattern` part for rule `aux` and in the `without` part for the rule `verb`.
+For each occurence of `V` in the sentence, exactly one of the two rules can be used.
+
 With these two new rules, the system is confluent, and there is only one possible output.
 This can be tested with the `Iter` strategy which produces all possible graphs:
 
@@ -77,7 +79,7 @@ grew transform -config sequoia -grs aux_verb_confluent.grs -strat "Iter(v)" -i f
 
 Of course, the `Onf` produces the same output in this setting.
 
-Note that there is two different ways to compute the final graph: first apply rule `aux` and then the rule `verb` or the other way round: rule `verb` and then rule `aux`. But the important property is that the same graph is produced in both cases.
+Note that there is two different ways to compute the final graph: first apply rule `aux` and then the rule `verb` or the other way round: rule `verb` and then rule `aux`. But the important consequence of the confluence property is that the same graph is produced in both cases.
 
 :warning: when a package `p` is confluent, the two strategies `Onf(p)` and `Iter(p)` give the same result. In practice, the strategy `Onf(p)` must be preferred because it is much more efficient to compute.
 

@@ -16,7 +16,7 @@ date = "2020-12-01T13:14:46+01:00"
 
 In this lesson, we write a rule and learn how to apply it to some graph.
 
-The conversion between different formats is one the common usage of Grew.
+The conversion between different formats is one the common usages of Grew.
 We will use the example of the conversion from one dependency annotation format (used in the Sequoia project) to Surface Syntactic Universal Dependencies (SUD).
 
 ## Data
@@ -79,8 +79,8 @@ the output contains two graphs, one with the first noun *photos* with the new ta
 
 {{< input file="static/tutorial/02_first_rule/_build/one_step_noun.conll" >}}
 
-In fact, the result of the application of a rule on a graph is a set of graphs, one for each occurence of the pattern found in the input graph. This set is then empty if the the pattern is not found (like `pattern { N [upos=P] }`) or contains two graphs if the pattern if found twice (like `pattern { N [upos=N] }`).
-To iterate the application of a rule, one have to use the strategy `Onf`.
+In fact, the result of the application of a rule on a graph is a set of graphs, one for each occurence of the pattern found in the input graph. This set is then empty if the the pattern is not found (like `pattern { N [upos=P] }`) or contains two graphs if the pattern is found twice (like `pattern { N [upos=N] }`).
+To iterate the application of a rule, one has to use the strategy `Onf`.
 
 ## The strategy `Onf`
 

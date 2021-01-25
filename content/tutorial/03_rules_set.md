@@ -24,7 +24,7 @@ A solution to use several rules in the same rewriting process is to put them in 
 {{< grew file="/static/tutorial/03_rules_set/pos_rules.grs" >}}
 
 The package name `POS` can be used as strategy name for rewriting.
-Applying the package `POS` corresponds to the application of one of the rule of the package.
+Applying the package `POS` corresponds to the application of one of the rules of the package.
 
 With the input graph used in the previous lesson:
 

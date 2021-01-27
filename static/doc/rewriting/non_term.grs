@@ -4,3 +4,8 @@ package S {
   rule C2B { pattern { e: N -[C]-> M } commands { del_edge e; add_edge N -[B]-> M } }
   rule C2D { pattern { e: N -[C]-> M } commands { del_edge e; add_edge N -[D]-> M } }
 }
+
+strat iter { Iter (S) }
+strat pick_iter { Pick (Iter (S)) }
+strat iter_pick { Iter (Pick (S)) }
+strat onf { Onf (S) }

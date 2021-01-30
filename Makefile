@@ -36,9 +36,9 @@ trans_14:
 	${HUGO}
 	scp -r public/trans_14/index.html grew.lchn.fr:/home/guillaum/www/doc/trans_14
 
-match_doc:
+grew_match_help:
 	${HUGO}
-	scp -r public/match_doc/index.html grew.lchn.fr:/home/guillaum/www/doc/match_doc
+	scp -r public/grew_match/help/index.html grew.lchn.fr:/home/guillaum/www/doc/grew_match/help
 
 pattern:
 	${HUGO}

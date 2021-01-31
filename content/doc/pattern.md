@@ -149,8 +149,7 @@ For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivale
 pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
 ```
 
-This pattern is found 120 times in the Little Prince corpus
-(<a href="http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" target="blank">Grew-match</a>)
+This pattern is found 120 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
 but there are only 20 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
 To avoid this, a constraint `id(N1) < id(N2)` can be used.
 It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
@@ -158,12 +157,12 @@ It imposes an ordering on some internal representation of the nodes and so avoid
 
 
 The pattern below returns the 20 expected occurrences
-(<a href="http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6bb86ce49" target="blank">Grew-match</a>)
+{{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=60166c11100f5" >}}
 
 ```grew
 pattern {
-    N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N;
-    N1.__id < N2.__id; N2.__ < N3.__id;
+  N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N;
+  N1.__id__ < N2.__id__; N2.__id__ < N3.__id__;
 }
 ```
 

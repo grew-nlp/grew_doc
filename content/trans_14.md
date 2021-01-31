@@ -20,4 +20,5 @@ With the pattern:
 pattern { e: M -> N; N [upos=ADJ]}
 ```
 
-if you want to cluster the result on the label of the edge `e`, the old syntax was `e`, the new one is `e.label` ([Try it!](http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5efb883ea71fc&clustering=e.label)).
+if you want to cluster the result on the label of the edge `e`, the old syntax was `e`, the new one is `e.label`
+{{< tryit "http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5efb883ea71fc&clustering=e.label">}}.

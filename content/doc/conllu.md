@@ -85,5 +85,5 @@ This includes:
  * typographical or orthographical errors
  * token linked by a `goeswith` relation
 
-See a few examples in
-<a href="http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5e42842249c10" target=blank>SUD_French-GSD</a>.
+See few examples in **SUD_French-GSD** {{< tryit "http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5e42842249c10" >}}.
+

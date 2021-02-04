@@ -8,3 +8,6 @@ theme = "hyde"
 [params]
   themeColor = "theme-base-0d"
   layoutReverse = true
+
+[markup.goldmark.renderer]
+  unsafe= true

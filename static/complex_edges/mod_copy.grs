@@ -1,8 +1,0 @@
-rule mod_copy {
-  pattern { e1: N -[1=X]-> M; M -> T }
-  commands {
-    e1.2 = U;
-    add_edge new_e: M -> T;
-    new_e.label = e1.label;
-  }
-}

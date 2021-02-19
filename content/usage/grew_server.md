@@ -10,7 +10,7 @@ title = "grew_server"
 
 # Grew-API for the Arborator-Grew tool
 
-The Arborator-Grew tool is available on [https://arboratorgrew.ilpga.fr/](https://arboratorgrew.ilpga.fr/).
+The Arborator-Grew tool is available on [https://arborator.github.io](https://arborator.github.io).
 
 The `grew_server` tool is a web server which manages set of annotated graphs with multiple annotations on the same sentence.
 It is built to be used as an API by the Arborator-Grew graph annotation tool.

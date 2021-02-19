@@ -1,4 +1,4 @@
-Prism.languages.python = {
+Prism.languages.python_alt = {
 	'comment': {
 		pattern: /(^|[^\\])#.*/,
 		lookbehind: true

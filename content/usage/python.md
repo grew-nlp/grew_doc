@@ -21,21 +21,21 @@ If necessary, follow [installation page](../install).
 
 Create an empty graph:
 
-```python
+```python_alt
 g = dict()
 ```
 ---
 
 Add a node `W1` labelled _the_ to `g`:
 
-```python
+```python_alt
 g['W1'] = ('the', [])
 ```
 ---
 
 Add a second and a third node, with the edges which connect them
 
-```python
+```python_alt
 g['W2'] = ('child', [])
 g['W3'] = ('plays', [])
 g['W3'][1].append(('suj', 'W2'))
@@ -45,7 +45,7 @@ g['W2'][1].append(('det', 'W1'))
 
 Print the result
 
-```python
+```python_alt
 g
 ```
 
@@ -57,7 +57,7 @@ g
 
 ---
 Define construction functions
-```python
+```python_alt
 def add_node(g, u, a):
   #Add a node u labeled a in graph g
   g[u] = (a, [])
@@ -70,7 +70,7 @@ def add_edge(g, u, e, v):
 
 ---
 add two more nodes
-```python
+```python_alt
 add_node(g, 'W4', 'the')
 add_node(g, 'W5', 'fool')
 add_edge(g, 'W3', 'obj', 'W5')
@@ -82,7 +82,7 @@ add_edge(g, 'W5', 'det', 'W4')
 ---
 Using NLTK to build a flat graph (See [NLTK installation page](http://www.nltk.org/install.html) if necessary)
 
-```python
+```python_alt
 import nltk
 word_list = nltk.word_tokenize("She takes a glass")
 word_graph = dict()
@@ -104,13 +104,13 @@ word_graph
 
 Build a feature structure
 
-```python
+```python_alt
 fs_plays = {'phon' : 'plays', 'cat' : 'V'}
 ```
 
 ---
 and read in it
-```python
+```python_alt
 fs_plays['cat']
 ```
 
@@ -121,7 +121,7 @@ fs_plays['cat']
 ---
 Rebuild previous example with feature structures
 
-```python
+```python_alt
 g = dict()
 add_node(g, 'W1', {'phon' : 'the', 'cat' : 'DET'} )
 add_node(g, 'W2', {'phon' : 'child', 'cat' : 'N'} )
@@ -139,7 +139,7 @@ add_edge(g, 'W5', 'det', 'W4')
 
 ---
 Use the basic POS-tagger provided with NLTK
-```python
+```python_alt
 import nltk
 word_list = nltk.word_tokenize("She takes a glass")
 tag_list = nltk.pos_tag(word_list)
@@ -160,7 +160,7 @@ t_graph
 ## 1.3. Information searches
 
 Find the label or feature structure of a node
-```python
+```python_alt
 g['W4'][0]
 ```
 
@@ -171,7 +171,7 @@ g['W4'][0]
 ---
 
 Functions to get label or the list of successors
-```python
+```python_alt
 def get_label(g, u):
     return g[u][0]
 
@@ -182,13 +182,13 @@ def get_sucs(g, u):
 ### 1.3.1. Access to nodes
 
 Get the list of nodes identifiers
-```python
+```python_alt
 nodes = g.keys()
 ```
 ---
 
 Get the list of verbs
-```python
+```python_alt
 verbs = []
 for u in nodes:
   if get_label(g, u)['cat'] == 'V':
@@ -197,20 +197,20 @@ for u in nodes:
 ---
 
 or, with comprehension
-```python
+```python_alt
 verbs =  [ u for u in g if get_label(g, u)['cat'] == 'V' ]
 ```
 
 ### 1.3.2. Extracting edges
 
 Get the list of edges
-```python
+```python_alt
 triplets = [ (s, e, t) for s in g for (e, t) in get_sucs(g, s) ]
 ```
 
 ---
 or the same with a loop:
-```python
+```python_alt
 triplets = []
 for s in g:
   for (e, t) in get_sucs(g, s):
@@ -219,13 +219,13 @@ for s in g:
 
 ---
 Extract the pairs of nodes linked by a subject relationship
-```python
+```python_alt
 subject_verbs = [ (s, v) for (v, e, s) in triplets if e=='suj' ]
 ```
 
 ---
 A function to check if there is an edge between two nodes `u` and `v`
-```python
+```python_alt
 def are_related(g, u, v):
   triplets = [(s, e, t) for s in g for (e, t) in get_sucs(g, s)]
   for (s, e, t) in triplets:
@@ -236,7 +236,7 @@ def are_related(g, u, v):
 
 ---
 Check if a node is a root node (i.e. whitout incomoing edge)
-```python
+```python_alt
 def is_root(g, u):
   triplets = [(s, e, t) for s in g for (e, t) in get_sucs(g, s)]
   for (s, e, t) in triplets:
@@ -249,7 +249,7 @@ def is_root(g, u):
 
 Using the convention explained in the book, we can reconstruct the sentence corresponding to a graph using the following function
 
-```python
+```python_alt
 def get_phonology(g):
     def get_idx(node): #gets the float after 'W' in node if any
         import re #for regular expressions
@@ -270,7 +270,7 @@ get_phonology(g)
 To run the next part of the chapter, the **Grew** library must be imported and the **Grew** tool must be started.
 The two next lines are then required:
 
-```python
+```python_alt
 import grew
 grew.init()
 ```
@@ -278,7 +278,7 @@ grew.init()
 ---
 
 Build a graph with Grew syntax
-```python
+```python_alt
 g = grew.graph('''graph {
   W1 [phon="the", cat=DET];
   W2 [phon="child", cat=N];
@@ -298,7 +298,7 @@ g = grew.graph('''graph {
 Search for a specific pattern;
 each line below can be executed separately.
 
-```python
+```python_alt
 grew.search ("pattern { X[cat=V] }", g)
 grew.search ("pattern { X[cat=DET] }", g)
 grew.search ("pattern { X[cat=ADJ] }", g)
@@ -312,7 +312,7 @@ grew.search ("pattern { X[] } without { *->X }", g)
 ### 1.5.2 Common pitfalls
 
 #### 1.2.5.1. Multiple choice edge searches
-```python
+```python_alt
 g0 = grew.graph('''graph {
   W1 [phon=ils, cat=PRO];
   W2 [phon="s'", cat=PRO];
@@ -324,7 +324,7 @@ g0 = grew.graph('''graph {
 ![ilssaiment](/examples/book/ilssaiment.svg)
 
 ---
-```python
+```python_alt
 grew.search ("pattern { X -[suj|obj]-> Y }", g0)
 ```
 
@@ -333,14 +333,14 @@ grew.search ("pattern { X -[suj|obj]-> Y }", g0)
 ```
 
 #### 1.5.2.2. Anonymous nodes
-```python
+```python_alt
 m1 = 'pattern{ P[phon="en",cat=P]; V[cat=V]; V-[obj]-> *}'
 m2 = 'pattern{ P[phon="en",cat=P]; V[cat=V]; V-[obj]-> O}'
 ```
 
 
 ---
-```python
+```python_alt
 g1 = grew.graph('''graph{
 W1 [phon="en", cat=P];
 W2 [phon="prend", cat=V];
@@ -351,14 +351,14 @@ W2 -[obj]->W1;
 
 
 ---
-```python
+```python_alt
 grew.search(m1, g1)
 grew.search(m2, g1)
 ```
 
 
 ---
-```python
+```python_alt
 g2 = grew.graph('''graph{
 W1 [phon="en", cat=P];
 W2 [phon="connait", cat=V];
@@ -373,7 +373,7 @@ W2 -[obj]->W4;
 
 
 ---
-```python
+```python_alt
 grew.search(m1, g2)
 grew.search(m2, g2)
 ```
@@ -381,7 +381,7 @@ grew.search(m2, g2)
 
 #### 1.5.2.3. Multiple `without` clauses
 
-```python
+```python_alt
 g3 = grew.graph('''graph{
   W1 [phon=John, cat=NP];
   W2 [phon=reads, cat=V ];
@@ -409,12 +409,12 @@ g4 = grew.graph('''graph{
 |:---:|:---:|
 
 
-```python
+```python_alt
 m3 = "pattern{Y-[suj]->X} without{Y-[obj]->Z; Y-[mod]->T}"
 m4 = "pattern{Y-[suj]->X} without{Y-[obj]->Z} without{Y-[mod]->T}"
 ```
 
-```python
+```python_alt
 grew.search(m3, g3)
 grew.search(m4, g3)
 grew.search(m3, g4)
@@ -422,7 +422,7 @@ grew.search(m4, g4)
 ```
 
 #### 1.5.2.4. Double negations
-```python
+```python_alt
 g5 = grew.graph('''graph{
   W1 [phon=dors, cat=V, m=imp];
   W2 [phon="!", cat=PONCT];
@@ -430,19 +430,19 @@ g5 = grew.graph('''graph{
 ```
 ![dors](/examples/book/dors.svg)
 
-```python
+```python_alt
 m5 = "pattern { X[cat=V, t=fut] }"
 m6 = "pattern { X[cat=V] } without{ X[t<>fut] }"
 ```
 
-```python
+```python_alt
 grew.search(m5, g5)
 grew.search(m6, g5)
 ```
 
 
 #### 1.5.2.5. Double edges
-```python
+```python_alt
 g0 = grew.graph('''graph {
   W1 [phon=ils, cat=PRO];
   W2 [phon="s'", cat=PRO];
@@ -455,14 +455,14 @@ g0 = grew.graph('''graph {
 
 ---
 
-```python
+```python_alt
 grew.search("pattern { e : X -> Y ; f : X -> Y }", g0)
 ```
 
 ## 1.6. Graph rewriting
 
 The syntactic structure for a French sentence with a passive agent
-```python
+```python_alt
 g = grew.graph('''graph{
   W1 [phon="John",cat=NP];
   W2 [phon="est",cat=V ];
@@ -483,7 +483,7 @@ g = grew.graph('''graph{
 ---
 Example of rule dealing with passive agent
 
-```python
+```python_alt
 r = """rule passiveAgt {
   pattern {
     V [cat=V, m=pastp];
@@ -502,7 +502,7 @@ r = """rule passiveAgt {
 
 ---
 Apply the rule to the graph
-```python
+```python_alt
 grew.run(r, g, 'passiveAgt')
 ```
 
@@ -516,7 +516,7 @@ grew.run(r, g, 'passiveAgt')
 
 In order to run examples for this section, we put the two rules `passiveAgt` and `du2dele` into the same rewriting system:
 
-```python
+```python_alt
 rs = grew.grs ("""
 rule passiveAgt {
   pattern {
@@ -558,7 +558,7 @@ The code for the two French sentences is given below:
   * (1.1) _La porte du jardin du voisin_
   * (1.2) _Le chien du voisin est pris par John_
 
-```python
+```python_alt
 sent_1_1 = grew.graph('''graph{
   W1 [phon=La, cat=D];
   W2 [phon=porte, cat=N];
@@ -577,7 +577,7 @@ sent_1_1 = grew.graph('''graph{
 ![porte](/examples/book/porte.svg)
 
 
-```python
+```python_alt
 sent_1_2 = grew.graph('''graph{
   W1 [phon=Le, cat=D];
   W2 [phon=chien, cat=N];
@@ -605,7 +605,7 @@ sent_1_2 = grew.graph('''graph{
 
 As the strategy `S1` is defined as one rule `du2dele`, we can apply the rule to the sentence (1.1) with one of the two equivalent commands below:
 
-```python
+```python_alt
 grew.run(rs,sent_1_1,"S1")
 grew.run(rs,sent_1_1,"du2dele")
 ```
@@ -614,36 +614,36 @@ The output contains two graphs resulting of the application of the rule to the f
 
 #### 1.6.2.1. Alternative
 
-```python
+```python_alt
 grew.run(rs,sent_1_2,"Alt (passiveAgt, du2dele)")
 ```
 
 #### 1.6.2.2. Sequence
 
-```python
+```python_alt
 grew.run(rs,sent_1_2,"Seq (du2dele, passiveAgt)")
 ```
 
 #### 1.6.2.3. Pick
 
-```python
+```python_alt
 grew.run(rs,sent_1_1,"Pick (S1)")
 ```
 
 #### 1.6.2.4. Iteration
 
-```python
+```python_alt
 grew.run(rs,sent_1_1,"Iter (S1)")
 ```
 
 #### 1.6.2.5. Test
-```python
+```python_alt
 grew.run(rs,sent_1_1,"If(passiveAgt,Seq(passiveAgt, Iter(du2dele)), Iter(du2dele))")
 grew.run(rs,sent_1_2,"If(passiveAgt,Seq(passiveAgt, Iter(du2dele)), Iter(du2dele))")
 ```
 
 #### 1.6.2.6 Try
-```python
+```python_alt
 grew.run(rs,sent_1_1,"Try(passiveAgt)")
 grew.run(rs,sent_1_2,"Try(passiveAgt)")
 ```

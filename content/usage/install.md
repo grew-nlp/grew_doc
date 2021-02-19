@@ -27,14 +27,13 @@ If you just need to upgrade your installation, please consult the [Upgrade page]
 ### Linux
 In most Linux recent distribution, version 2 can be installed from default packages.
 
-```bash
+```
 apt-get install opam
 ```
 
-
 The following commands installs a few other needed packages:
 
-```bash
+```
 apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 ```
 
@@ -58,7 +57,7 @@ This should be 4.10.0 or higher.
 
 Run the commands:
 
-```bash
+```
 opam remote add grew "http://opam.grew.fr"
 opam install grew grewpy
 ```

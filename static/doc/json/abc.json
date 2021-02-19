@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    { "id": "A", "label": "A", "Gender": "Masc" },
+    { "id": "B", "label": "B"},
+    { "id": "C", "label": "C"}
+  ],
+  "edges": [
+    { "src": "A", "label": {"rel": "T", "subrel": "tt"}, "tar": "B"},
+    { "src": "B", "label": {"rel": "U"}, "tar": "C"},
+    { "src": "C", "label": {}, "tar": "A"}
+  ],
+  "order": [ "A", "B" ]
+}

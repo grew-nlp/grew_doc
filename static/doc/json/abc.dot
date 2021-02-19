@@ -1,0 +1,24 @@
+digraph G {
+  node [shape=Record];
+  N_0 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+<TR><TD ALIGN="right">Gender</TD><TD>=</TD><TD ALIGN="left">Masc</TD></TR>
+<TR><TD ALIGN="right">label</TD><TD>=</TD><TD ALIGN="left">A</TD></TR>
+
+</TABLE>
+>]
+  N_1 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+<TR><TD ALIGN="right">label</TD><TD>=</TD><TD ALIGN="left">B</TD></TR>
+
+</TABLE>
+>]
+  N_2 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+<TR><TD ALIGN="right">label</TD><TD>=</TD><TD ALIGN="left">C</TD></TR>
+
+</TABLE>
+>]
+  N_0 -> N_1[label="subrel=tt,rel=T,abc=azeryy", ];
+  N_1 -> N_2[label="rel=U", ];
+  N_2 -> N_0[label="subrel=tt,rel=T,abc=azeryy", ];
+ {rank=same; N_0; N_1 };
+}
+

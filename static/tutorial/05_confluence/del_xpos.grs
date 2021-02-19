@@ -1,0 +1,4 @@
+rule del_xpos{
+  pattern{ N[xpos] }
+  commands{del_feat N.xpos}
+}

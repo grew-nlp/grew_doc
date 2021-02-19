@@ -1,0 +1,17 @@
+# sent_id = n01006011
+# text = A witness told police that the victim had attacked the suspect in April.
+1	A	a	DET	DT	Definite=Ind|PronType=Art	2	det	2:det	_
+2	witness	witness	NOUN	NN	Number=Sing	3	nsubj	3:nsubj	_
+3	told	tell	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	root	0:root	_
+4	police	police	NOUN	NNS	Number=Plur	3	iobj	3:iobj	_
+5	that	that	SCONJ	IN	_	9	mark	9:mark	_
+6	the	the	DET	DT	Definite=Def|PronType=Art	7	det	7:det	_
+7	victim	victim	NOUN	NN	Number=Sing	9	nsubj	9:nsubj	_
+8	had	have	AUX	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	9	aux	9:aux	_
+9	attacked	attack	VERB	VBN	Tense=Past|VerbForm=Part	3	ccomp	3:ccomp	_
+10	the	the	DET	DT	Definite=Def|PronType=Art	11	det	11:det	_
+11	suspect	suspect	NOUN	NN	Number=Sing	9	obj	9:obj	_
+12	in	in	ADP	IN	_	13	case	13:case	_
+13	April	April	PROPN	NNP	Number=Sing	9	obl	9:obl:in	SpaceAfter=No
+14	.	.	PUNCT	.	_	3	punct	3:punct	_
+

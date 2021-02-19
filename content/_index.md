@@ -19,7 +19,7 @@ Categories = ["Development","GoLang"]
 
  * **2020/10/02:** New release of version **1.4**. See [What's new](/whats_new/) for changes.
 
- * **2020** Grew matching is available in the [Arborator-Grew](https://arboratorgrew.ilpga.fr/) tool.
+ * **2020** Grew matching is available in the [Arborator-Grew](https://arborator.github.io/) tool.
 
 
 ## A first taste of Grew

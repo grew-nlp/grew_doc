@@ -1,0 +1,14 @@
+{ "corpora": [
+  { "id": "UD_English-PUD",
+    "directory": "_build",
+    "files": ["en_pud-ud-test.conllu"]
+  },
+  { "id": "UD_French-PUD",
+    "directory": "_build",
+    "files": ["fr_pud-ud-test.conllu"]
+  },
+  { "id": "UD_Chinese-PUD",
+    "directory": "_build",
+    "files": ["zh_pud-ud-test.conllu"]
+  } ]
+}

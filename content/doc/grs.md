@@ -10,8 +10,6 @@ Description = ""
 
 # GRS syntax
 
-:warning: the syntax has changed since version 1.5. See the [end the page](#obsolete).
-
 ## Global structure
 A GRS is composed by a set of declarations that may be provided in several files.
 These files are expected to used the `.grs` file extension.
@@ -176,13 +174,3 @@ Next commands rewrite the graph [`input.gr`](../grs/input.gr), following differe
 `grew transform -grs single.grs -config basic -strat all_nfs -i input.gr -gr` computes all normal forms that can be obtained with these all the rules and produces 16 graphs.
 {{< grew file="/static/doc/grs/_build/all_nfs.gr" >}}
 
-
----
----
-
-# Obsolete
-
-In previous version, it was possible to define domains for features edges (introduced by the keyword `features`) and for edges labels (introduced by the keyword `labels`).
-
-The notion of domain previously used before are not adapted to the new implementation.
-The usage of configuration (see [here](../upgrade#the-config-argument)) replaces the obsolete domains.

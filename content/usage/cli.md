@@ -67,11 +67,15 @@ The output is given in JSON format.
 With the following files:
 
  * The `dev` part of the corpus `UD_French-GSD` version 2.6: `fr_gsd-ud-dev.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-GSD/blob/r2.6/fr_gsd-ud-dev.conllu?raw=true)
- * A pattern file with the code below: `rouge.pat`[:link:](/usage/cli/rouge.pat) {{< input file="static/usage/cli/rouge.pat" >}}
+ * A pattern file with the code below: `rouge.pat`[:link:](/usage/cli/rouge.pat)
+
+{{< grew file="static/usage/cli/rouge.pat" >}}
 
 The command:
 
-`grew grep -pattern rouge.pat -i fr_gsd-ud-dev.conllu`
+```
+grew grep -pattern rouge.pat -i fr_gsd-ud-dev.conllu
+```
 
 produces the following JSON output:
 
@@ -133,9 +137,9 @@ which corresponds to the table:
 
 | Corpus | # sentences | ADJ_NOUN | NOUN_ADJ |
 |------------|-------------|----------|----|
-| UD_English-EWT | 1000 | 1118 | 12 |
-| UD_French-Sequoia | 1000 | 423 | 935 |
-| UD_Chinese-GSD | 1000 | 364 | 0 |
+| UD_English-PUD | 1000 | 1118 | 12 |
+| UD_French-PUD | 1000 | 423 | 935 |
+| UD_Chinese-PUD | 1000 | 364 | 0 |
 
 We can then observe that in the annotations of the 3 corpora in use:
 

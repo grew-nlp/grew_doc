@@ -67,17 +67,17 @@ The output is given in JSON format.
 With the following files:
 
  * The `dev` part of the corpus `UD_French-GSD` version 2.6: `fr_gsd-ud-dev.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-GSD/blob/r2.6/fr_gsd-ud-dev.conllu?raw=true)
- * A pattern file with the code below: `bleu.pat`[:link:](/usage/cli/bleu.pat) {{< input file="static/usage/cli/bleu.pat" >}}
+ * A pattern file with the code below: `rouge.pat`[:link:](/usage/cli/rouge.pat) {{< input file="static/usage/cli/rouge.pat" >}}
 
 The command:
 
-`grew grep -pattern bleu.pat -i fr_gsd-ud-dev.conllu`
+`grew grep -pattern rouge.pat -i fr_gsd-ud-dev.conllu`
 
 produces the following JSON output:
 
-{{< json file="static/usage/cli/output_grep" >}}
+{{< json file="static/usage/cli/_build/output_grep" >}}
 
-This means that the pattern described in the file `bleu.pat` was found twice in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
+This means that the pattern described in the file `rouge.pat` was found twice in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
 
 Note that two other options exist:
 
@@ -119,28 +119,28 @@ With the two following 1-line files:
  * `ADJ_NOUN.pat` [:link:](/usage/cli/ADJ_NOUN.pat) {{< input file="static/usage/cli/ADJ_NOUN.pat" >}}
  * `NOUN_ADJ.pat` [:link:](/usage/cli/NOUN_ADJ.pat) {{< input file="static/usage/cli/NOUN_ADJ.pat" >}}
 
-and the example file `en_fr_zh.json` [:link:](/doc/corpora/en_fr_zh.json)
-{{< input file="static/doc/corpora/en_fr_zh.json" >}}
+and the example file `en_fr_zh.json` [:link:](/usage/cli/en_fr_zh.json)
+{{< input file="static/usage/cli/en_fr_zh.json" >}}
 
 1. Compile the corpora: `grew compile -i en_fr_zh.json`
 1. Build stat table: `grew count -patterns "ADJ_NOUN.pat NOUN_ADJ.pat" -i en_fr_zh.json`
 
 The output is given as TSV data:
 
-{{< input file="static/usage/cli/output_count" >}}
+{{< input file="static/usage/cli/_build/output_count" >}}
 
 which corresponds to the table:
 
 | Corpus | # sentences | ADJ_NOUN | NOUN_ADJ |
 |------------|-------------|----------|----|
-| UD_English-EWT | 16622 | 9835 | 163 |
-| UD_French-Sequoia | 3099 | 891 | 2779 |
-| UD_Chinese-GSD | 4997 | 1505 | 0 |
+| UD_English-EWT | 1000 | 1118 | 12 |
+| UD_French-Sequoia | 1000 | 423 | 935 |
+| UD_Chinese-GSD | 1000 | 364 | 0 |
 
 We can then observe that in the annotations of the 3 corpora in use:
 
- * in English, there is a strong preference for adjective position before the noun (98.4%)
- * in French, there is a weak preference for adjective position after the noun (75,7%)
+ * in English, there is a strong preference for adjective position before the noun (98.9%)
+ * in French, there is a weak preference for adjective position after the noun (68.9%)
  * in Chinese, there is a **very** strong preference for adjective position before the noun (100%)
 
 ## Remarks

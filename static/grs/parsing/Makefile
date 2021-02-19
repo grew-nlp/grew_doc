@@ -2,10 +2,10 @@ GREW=grew_dev
 
 build:
 	mkdir -p _build
-	ln -s /users/guillaum/gitlab/grew/POStoSSQ _build/
-	ln -s /Users/guillaum/resources/talismane_5.2/frenchLanguagePack-5.2.0.zip _build/
-	ln -s /Users/guillaum/resources/talismane/talismane-core-6.0.0.jar _build/
-	ln -s /Users/guillaum/resources/talismane_5.2/talismane-fr-5.2.0.conf _build/
+	ln -f -s ../../../../extern/POStoSSQ _build/POStoSSQ
+	ln -f -s ../../../../extern/frenchLanguagePack-5.2.0.zip _build/frenchLanguagePack-5.2.0.zip
+	ln -f -s ../../../../extern/talismane-core-6.0.0.jar _build/talismane-core-6.0.0.jar
+	ln -f -s ../../../../extern/talismane-fr-5.2.0.conf _build/talismane-fr-5.2.0.conf
 	echo "La souris a été mangée par le chat." > _build/data.txt
 	cd _build && \
 	java -Xmx1G -Dconfig.file=talismane-fr-5.2.0.conf -jar talismane-core-6.0.0.jar \

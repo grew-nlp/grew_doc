@@ -14,11 +14,18 @@ stop:
 	killall ${HUGO}
 
 build:
-	@make -C static/parsing run
-	@make -C static/parsing img
-	@make -C static/deep_syntax run
-	@make -C static/deep_syntax img
-	${HUGO}
+	@make -C static/doc/commands
+	@make -C static/doc/grs
+	@make -C static/doc/rewriting
+	@make -C static/doc/rule
+	@make -C static/grs/deep_syntax
+	@make -C static/grs/parsing
+	@make -C static/tutorial/02_first_rule
+	@make -C static/tutorial/03_rules_set
+	@make -C static/tutorial/04_termination
+	@make -C static/tutorial/05_confluence
+	@make -C static/tutorial/06_more_commands
+	@make -C static/usage/cli
 
 lchn:
 	${HUGO}

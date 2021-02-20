@@ -1,0 +1,9 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="en";subword="P"}
+  W2 { word="prend";subword="V"}
+}
+[EDGES] {
+  W2 -> W1 { label="obj" }
+
+}

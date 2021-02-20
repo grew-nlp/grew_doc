@@ -1,0 +1,15 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="the"; subword="DET"}
+  W2 { word="child"; subword="N"}
+  W3 { word="plays"; subword="V"}
+  W4 { word="the"; subword="DET"}
+  W5 { word="fool"; subword="N"}
+}
+[EDGES] {
+  W3 -> W2 { label="suj" }
+  W2 -> W1 { label="det" }
+  W3 -> W5 { label="obj" }
+  W5 -> W4 { label="det" }
+}
+

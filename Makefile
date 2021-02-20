@@ -26,6 +26,7 @@ build:
 	@make -C static/tutorial/05_confluence
 	@make -C static/tutorial/06_more_commands
 	@make -C static/usage/cli
+	@make -C static/usage/python
 
 lchn:
 	${HUGO}

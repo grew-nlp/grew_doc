@@ -1,0 +1,11 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="ils"; subword="PRO" }
+  W2 { word="s'"; subword="PRO" }
+  W3 { word="aiment"; subword="V" }
+}
+[EDGES] {
+  W3 -> W1 { label="suj" }
+  W3 -> W1 { label="obj" }
+}
+

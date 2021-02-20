@@ -1,0 +1,13 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="She"; subword="PRP" }
+  W2 { word="takes"; subword="VBZ" }
+  W3 { word="a"; subword="DT" }
+  W4 { word="glass"; subword="NN" }
+}
+[EDGES] {
+  W1 -> W2 { label="SUC" }
+  W2 -> W3 { label="SUC" }
+  W3 -> W4 { label="SUC" }
+}
+

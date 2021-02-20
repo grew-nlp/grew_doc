@@ -53,7 +53,7 @@ g
 {'W2': ('child', [('det', 'W1')]), 'W3': ('plays', [('suj', 'W2')]), 'W1': ('the', [])}
 ```
 
-![thechildplays](/examples/book/thechildplays.svg)
+![thechildplays](/usage/python/_build/thechildplays.svg)
 
 ---
 Define construction functions
@@ -77,7 +77,7 @@ add_edge(g, 'W3', 'obj', 'W5')
 add_edge(g, 'W5', 'det', 'W4')
 ```
 
-![thechildplays](/examples/book/thechildplaysthefool.svg)
+![thechildplays](/usage/python/_build/thechildplaysthefool.svg)
 
 ---
 Using NLTK to build a flat graph (See [NLTK installation page](http://www.nltk.org/install.html) if necessary)
@@ -98,7 +98,7 @@ word_graph
 ```
 {'W2': ('a', [('SUC', 'W3')]), 'W0': ('She', [('SUC', 'W1')]), 'W3': ('glass', []), 'W1': ('takes', [('SUC', 'W2')])}
 ```
-![thechildplays](/examples/book/sheistakingaglass.svg)
+![thechildplays](/usage/python/_build/sheistakingaglass.svg)
 
 ## 1.2. Features structures
 
@@ -134,7 +134,7 @@ add_edge(g, 'W3', 'obj', 'W5')
 add_edge(g, 'W5', 'det', 'W4')
 ```
 
-![thechildplaysthefool_fs](/examples/book/thechildplaysthefool_fs.svg)
+![thechildplaysthefool_fs](/usage/python/_build/thechildplaysthefool_fs.svg)
 
 
 ---
@@ -155,7 +155,7 @@ t_graph
 {'W2': ({'phon': 'a', 'cat': 'DT'}, [('SUC', 'W3')]), 'W0': ({'phon': 'She', 'cat': 'PRP'}, [('SUC', 'W1')]), 'W3': ({'phon': 'glass', 'cat': 'NN'}, []), 'W1': ({'phon': 'takes', 'cat': 'VBZ'}, [('SUC', 'W2')])}
 ```
 
-![sheistakingaglass_nltk](/examples/book/sheistakingaglass_nltk.svg)
+![sheistakingaglass_nltk](/usage/python/_build/sheistakingaglass_nltk.svg)
 
 ## 1.3. Information searches
 
@@ -292,7 +292,7 @@ g = grew.graph('''graph {
 }''')
 ```
 
-![thechildplaysthefool_fs](/examples/book/thechildplaysthefool_fs.svg)
+![thechildplaysthefool_fs](/usage/python/_build/thechildplaysthefool_fs.svg)
 ---
 
 Search for a specific pattern;
@@ -321,7 +321,7 @@ g0 = grew.graph('''graph {
   W3 -[obj]-> W1;
 }''')
 ```
-![ilssaiment](/examples/book/ilssaiment.svg)
+![ilssaiment](/usage/python/_build/ilssaiment.svg)
 
 ---
 ```python_alt
@@ -347,7 +347,7 @@ W2 [phon="prend", cat=V];
 W2 -[obj]->W1;
 }''')
 ```
-![enprend](/examples/book/enprend.svg)
+![enprend](/usage/python/_build/enprend.svg)
 
 
 ---
@@ -369,7 +369,7 @@ W2 -[mod]->W1;
 W2 -[obj]->W4;
 }''')
 ```
-![enconnaitlafin](/examples/book/enconnaitlafin.svg)
+![enconnaitlafin](/usage/python/_build/enconnaitlafin.svg)
 
 
 ---
@@ -405,7 +405,7 @@ g4 = grew.graph('''graph{
 }''')
 ```
 
-| ![johnreadsthebook](/examples/book/johnreadsthebook.svg) | ![johnreadsthebooktoday](/examples/book/johnreadsthebooktoday.svg) |
+| ![johnreadsthebook](/usage/python/_build/johnreadsthebook.svg) | ![johnreadsthebooktoday](/usage/python/_build/johnreadsthebooktoday.svg) |
 |:---:|:---:|
 
 
@@ -428,7 +428,7 @@ g5 = grew.graph('''graph{
   W2 [phon="!", cat=PONCT];
 }''')
 ```
-![dors](/examples/book/dors.svg)
+![dors](/usage/python/_build/dors.svg)
 
 ```python_alt
 m5 = "pattern { X[cat=V, t=fut] }"
@@ -451,7 +451,7 @@ g0 = grew.graph('''graph {
   W3 -[obj]-> W1;
 }''')
 ```
-![ilssaiment](/examples/book/ilssaiment.svg)
+![ilssaiment](/usage/python/_build/ilssaiment.svg)
 
 ---
 
@@ -478,7 +478,7 @@ g = grew.graph('''graph{
   W4 -[obj.p]-> W6;
 }''')
 ```
-![john_est_mordu_par_le_chien](/examples/book/john_est_mordu_par_le_chien.svg)
+![john_est_mordu_par_le_chien](/usage/python/_build/john_est_mordu_par_le_chien.svg)
 
 ---
 Example of rule dealing with passive agent
@@ -510,7 +510,7 @@ grew.run(r, g, 'passiveAgt')
 [{'W5': ('cat="D", phon="le"', []), 'W6': ('cat="NP", word="chien"', [('det', 'W5')]), 'W3': ('cat="V", m="pastp", phon="mordu"', [('obj', 'W1'), ('suj', 'W6')]), 'W1': ('cat="NP", phon="John"', [])}]
 ```
 
-![john_est_mordu_par_le_chien_2](/examples/book/john_est_mordu_par_le_chien_2.svg)
+![john_est_mordu_par_le_chien_2](/usage/python/_build/john_est_mordu_par_le_chien_2.svg)
 
 ### 1.6.2. From rules to strategies
 
@@ -574,7 +574,7 @@ sent_1_1 = grew.graph('''graph{
 }''')
 ```
 
-![porte](/examples/book/porte.svg)
+![porte](/usage/python/_build/porte.svg)
 
 
 ```python_alt
@@ -597,7 +597,7 @@ sent_1_2 = grew.graph('''graph{
 }''')
 ```
 
-![lechienduvoisinestmangeparjohn](/examples/book/lechienduvoisinestmangeparjohn.svg)
+![lechienduvoisinestmangeparjohn](/usage/python/_build/lechienduvoisinestmangeparjohn.svg)
 
 ---
 

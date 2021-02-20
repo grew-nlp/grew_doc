@@ -1,0 +1,14 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="John"}
+  W2 { word="reads"}
+  W3 { word="the" }
+  W4 { word="book"}
+  W5 { word="today"}
+}
+[EDGES] {
+  W2 -> W1 { label="suj" }
+  W2 -> W4 { label="obj" }
+  W4 -> W3 { label="det" }
+  W2 -> W5 { label="mod" }
+}

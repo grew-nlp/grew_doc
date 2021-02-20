@@ -1,0 +1,16 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="John"; subword = "N" }
+  W2 { word="est"; subword = "AUX" }
+  W3 { word="mordu"; subword ="V#m=pastp"}
+  W4 { word="par"; subword = "P" }
+  W5 { word="le"; subword = "D" }
+  W6 { word="chien"; subword = "N" }
+}
+[EDGES] {
+  W6 -> W5 { label="det" }
+  W3 -> W1 { label="suj" }
+  W3 -> W2 { label="aux.pass" }
+  W3 -> W4 { label="p_obj.agt" }
+  W4 -> W6 { label="obj.p" }
+}

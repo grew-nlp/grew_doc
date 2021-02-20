@@ -1,0 +1,12 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="John"; subword="N" }
+  W3 { word="mordu"; subword="V#m=pastp"}
+  W5 { word="le"; subword="D" }
+  W6 { word="chien"; subword="N" }
+}
+[EDGES] {
+  W6 -> W5 { label="det" }
+  W3 -> W1 { label="obj" }
+  W3 -> W6 { label="suj" }
+}

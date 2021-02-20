@@ -1,0 +1,8 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="Dors"; subword="V#m=imp"}
+  W2 { word="!"; subword="PONCT"}
+}
+[EDGES] {
+  W1 -> W2 {label="punct"}
+}

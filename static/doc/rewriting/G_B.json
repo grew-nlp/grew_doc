@@ -1,0 +1,4 @@
+{
+  "nodes": [ { "id": "1", "label": "X" }, { "id": "0", "label": "Y" } ],
+  "edges": [ { "src": "1", "label": { "1": "B" }, "tar": "0" } ]
+}

@@ -16,7 +16,7 @@ menu = "main"
  * Terminating
 
 ## Terminating and confluent system
-When a GRS is **terminating** and **confluent**, we have the equivalence of the 4 strategies:
+When a GRS is **terminating** and **confluent**, we have the equivalence of the four strategies:
 
 ~~~grew
   Onf (S) ≃ Iter(S) ≃ Pick (Iter (S)) ≃ Iter (Pick (S))
@@ -33,8 +33,9 @@ When a GRS is **terminating**, we have the equivalence of the two strategies:
   Onf (S) ≃ Pick (Iter (S))
 ~~~
 
-See below for an example of non-terminating system where the equivalence does not hold.
 Again, prefer the more efficient `Onf`.
+
+See below for an example of non-terminating system where the equivalence does not hold.
 
 ## Example of non-terminating rewriting system
 
@@ -45,15 +46,15 @@ The following code described a non-terminating rewriting system:
 Each rule replaces an edge label by another.
 For instance, the rule `B2A` removes and edge with an `B` label and adds one with an `A` label.
 
-Let `G_A`, `G_B`, `G_C` and `G_D` the 4 graphs with 2 nodes and 1 edge labelled `A`, `B`, `C` and `D` respectively.
+Let `G_A`, `G_B`, `G_C` and `G_D` the four graphs with two nodes and one edge labelled `A`, `B`, `C` and `D` respectively.
 
-The schema below shows how the 4 rules act on these 4 graphs:
+The schema below shows how the four rules act on these 4 graphs:
 
 ![input.gr](/doc/rewriting/_build/non_term.svg)
 
 ### Applying `S` to `G_B`
 
- * The strategy `Iter (S)` applied to `G_B` produces the 2 graphs `G_A` and `G_D`.
+ * The strategy `Iter (S)` applied to `G_B` produces the two graphs `G_A` and `G_D` (i.e. the two normal forms).
  * The strategy `Pick (Iter (S))` applied to `G_B` may produce (unpredictably):
    * the graph `G_A`
    * the graph `G_D`
@@ -64,7 +65,7 @@ The schema below shows how the 4 rules act on these 4 graphs:
  * The strategy `Onf (S)` applied to `G_B` may lead to (unpredictably):
    * the output of the graph `G_A`
    * the output of the graph `G_D`
-   * a non-terminating execution
+   * a non-terminating execution (in practice **Grew** tries to detect these cases and raises an error after a given number of rule applications)
 
-For the last three case, the output is unpredictable, but several execution with the same input data will give the same output.
+For the last three cases, the output is unpredictable, but several executions with the same input data will give the same output.
 But, if the order of rules in the package `S` is changed, the behaviour may be different.

@@ -19,7 +19,7 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 * The symbol ":warning:" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
 
 
-* More detailled informations in files `CHANGES.md` for each sub-project:
+* More detailled information in files `CHANGES.md` for each sub-project:
 [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md).
 
@@ -85,7 +85,7 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
  * GTK interface is proposed as a separate package and so **Grew** without GUI is much more easy to install
  * Command line arguments were revisited (see [here](../usage/cli))
 
-More detailled informations in files `CHANGES.md` for each sub-project: [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
+More detailled information in files `CHANGES.md` for each sub-project: [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md),
 [grew_gui](https://gitlab.inria.fr/grew/grew_gui/blob/master/CHANGES.md)
 

@@ -1,0 +1,20 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="La";     subword="D"}
+  W2 { word="porte";  subword="N"}
+  W3 { word="de";     subword="P" }
+  W8 { word="le";     subword="D"}
+  W4 { word="jardin"; subword="N"}
+  W5 { word="de";     subword="P"}
+  W7 { word="le";     subword="D"}
+  W6 { word="voisin"; subword="N"}
+}
+[EDGES] {
+  W2 -> W1 { label="det" }
+  W2 -> W3 { label="dep" }
+  W3 -> W4 { label="obj.p" }
+  W4 -> W5 { label="dep" }
+  W5 -> W6 { label="obj.p" }
+  W4 -> W8 { label="det"}
+  W6 -> W7 { label="det"}
+}

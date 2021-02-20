@@ -1,0 +1,18 @@
+[GRAPH] {scale=200; fontname="Arial";edge_label_size=8; vspace=12; subword_size=10}
+[WORDS] {
+  W1 { word="Le"}
+  W2 { word="chien"}
+  W7 { word="de"}
+  W9 { word="le"}
+  W8 { word="voisin"}
+  W4 { word="pris"}
+  W6 { word="John"}
+}
+[EDGES] {
+  W2 -> W1 { label="det" }
+  W4 -> W2 { label="obj" }
+  W2 -> W7 { label="dep" }
+  W7 -> W8 { label="mod" }
+  W8 -> W9 { label="det"}
+  W4 -> W6 { label="suj" }
+}

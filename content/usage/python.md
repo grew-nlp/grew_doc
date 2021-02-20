@@ -100,7 +100,7 @@ word_graph
 ```
 ![thechildplays](/usage/python/_build/sheistakingaglass.svg)
 
-## 1.2. Features structures
+## 1.2. Feature structures
 
 Build a feature structure
 
@@ -268,7 +268,7 @@ get_phonology(g)
 
 ## 1.5. Using patterns with the Grew library
 To run the next part of the chapter, the **Grew** library must be imported and the **Grew** tool must be started.
-The two next lines are then required:
+The next two lines are then required:
 
 ```python_alt
 import grew
@@ -597,7 +597,7 @@ sent_1_2 = grew.graph('''graph{
 }''')
 ```
 
-![lechienduvoisinestmangeparjohn](/usage/python/_build/lechienduvoisinestmangeparjohn.svg)
+![le_chien_du_voisin_est_pris_par_john](/usage/python/_build/le_chien_du_voisin_est_pris_par_john.svg)
 
 ---
 
@@ -612,11 +612,17 @@ grew.run(rs,sent_1_1,"du2dele")
 
 The output contains two graphs resulting of the application of the rule to the first or the second *du* in the sentence.
 
+| ![porte1](/usage/python/_build/porte1.svg) | ![porte2](/usage/python/_build/porte2.svg) |
+|:---:|:---:|
+
 #### 1.6.2.1. Alternative
 
 ```python_alt
 grew.run(rs,sent_1_2,"Alt (passiveAgt, du2dele)")
 ```
+
+| ![le_chien_du_voisin_est_pris_par_john_1](/usage/python/_build/le_chien_du_voisin_est_pris_par_john_1.svg) | ![le_chien_du_voisin_est_pris_par_john_2](/usage/python/_build/le_chien_du_voisin_est_pris_par_john_2.svg) |
+|:---:|:---:|
 
 #### 1.6.2.2. Sequence
 
@@ -624,11 +630,18 @@ grew.run(rs,sent_1_2,"Alt (passiveAgt, du2dele)")
 grew.run(rs,sent_1_2,"Seq (du2dele, passiveAgt)")
 ```
 
+![le_chien_du_voisin_est_pris_par_john_3](/usage/python/_build/le_chien_du_voisin_est_pris_par_john_3.svg)
+
 #### 1.6.2.3. Pick
 
 ```python_alt
 grew.run(rs,sent_1_1,"Pick (S1)")
 ```
+
+This produces unpredictably one of the two graphs:
+
+| ![porte1](/usage/python/_build/porte1.svg) | ![porte2](/usage/python/_build/porte2.svg) |
+|:---:|:---:|
 
 #### 1.6.2.4. Iteration
 
@@ -636,17 +649,34 @@ grew.run(rs,sent_1_1,"Pick (S1)")
 grew.run(rs,sent_1_1,"Iter (S1)")
 ```
 
+![porte12](/usage/python/_build/porte12.svg)
+
 #### 1.6.2.5. Test
 ```python_alt
 grew.run(rs,sent_1_1,"If(passiveAgt,Seq(passiveAgt, Iter(du2dele)), Iter(du2dele))")
+```
+
+![porte12](/usage/python/_build/porte12.svg)
+
+```python_alt
 grew.run(rs,sent_1_2,"If(passiveAgt,Seq(passiveAgt, Iter(du2dele)), Iter(du2dele))")
 ```
+
+![le_chien_du_voisin_est_pris_par_john_3](/usage/python/_build/le_chien_du_voisin_est_pris_par_john_3.svg)
 
 #### 1.6.2.6 Try
 ```python_alt
 grew.run(rs,sent_1_1,"Try(passiveAgt)")
+```
+
+![porte](/usage/python/_build/porte.svg)
+
+
+```python_alt
 grew.run(rs,sent_1_2,"Try(passiveAgt)")
 ```
+
+![le_chien_du_voisin_est_pris_par_john_1](/usage/python/_build/le_chien_du_voisin_est_pris_par_john_1.svg)
 
 ### 1.6.3 Using lexicons
 This features will be available in an upcoming release of **Grew** which should appear soon!

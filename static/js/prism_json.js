@@ -1,5 +1,5 @@
 // https://www.json.org/json-en.html
-Prism.languages.json = {
+Prism.languages.json_alt = {
 	'property': {
 		pattern: /"(?:\\.|[^\\"\r\n])*"(?=\s*:)/,
 		greedy: true

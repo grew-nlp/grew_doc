@@ -46,7 +46,7 @@ cd grew_match
 Edit the file `corpora/groups.json` to describe the set of available corpora.
 An example of configuration file with 3 corpora:
 
-```json
+```json_alt
 { "groups": [
     { "id": "local",
       "name": "Local corpora",
@@ -97,7 +97,7 @@ To configure your daemon, you have to describe the corpora you want to use in a 
 This file describes each corpora with a name, a directory and a list of files.
 For instance, the JSON file `my_corpora.json` below defines 3 corpora:
 
-```json
+```json_alt
 { "corpora": [
   { "id": "my_corpora",
     "directory": "/users/me/corpora/my_corpora",

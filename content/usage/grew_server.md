@@ -53,7 +53,7 @@ This service returns the list of existing projects.
 
 The returned value is a list of dict ([see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)):
 
-```json
+```json_alt
 [
     { "name": "project_1", "number_samples": 23, "number_sentences": 45, "number_tokens": 574, "number_trees": 79 },
     { "name": "project_2", "number_samples": 2, "number_sentences": 4, "number_tokens": 54, "number_trees": 9 }
@@ -91,7 +91,7 @@ This service returns the list of existing samples in a given project ([see #2](h
 
  * `(<string> project_id)`
 
-```json
+```json_alt
 [
     { "name": "sample_1", "number_sentences": 5, "number_tokens": 74, "number_trees": 8, "users": [ "alice", "bob"] },
     { "name": "sample_2", "number_sentences": 4, "number_tokens": 54, "number_trees": 9, "users": [ "alice", "charlie"]  }
@@ -326,7 +326,7 @@ The input arguments are used in the same way as in `tryRules` service.
 But instead of returning new graphs, the project is updated and new graphs replace the previous one (:warning: previous graphs are not recoverable).
 
 The output gives the number of rewritten graphs and the number of unchanged graphs:
-```json
+```json_alt
 {
     "rewritten": 2,
     "unchanged": 0

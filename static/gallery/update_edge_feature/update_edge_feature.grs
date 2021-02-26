@@ -1,0 +1,13 @@
+rule r {
+  pattern { e: M -[!deep]-> N; N[lemma=lex.lemma] }
+  commands { e.deep = N.form + "_" + lex.ext }
+}
+#BEGIN lex
+lemma	ext
+% --------------------
+déchiré	ext1
+déchiré	ext2
+il	ext3
+#END
+
+strat main { Iter (r) }

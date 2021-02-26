@@ -1,0 +1,8 @@
+# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC
+# sent_id = fr-ud-test_00018
+# text = Je suis déchirée.
+1	Je	il	PRON	_	Number=Sing|Person=1|PronType=Prs	2	subj	_	wordform=je
+2	suis	être	AUX	_	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	déchirée	déchiré	ADJ	_	Gender=Fem|Number=Sing	2	comp:pred	_	SpaceAfter=No
+4	.	.	PUNCT	_	_	2	punct	_	_
+

@@ -1,4 +1,4 @@
-HUGO=hugo_old
+HUGO=hugo
 
 selfdoc:
 	@echo " * make start --> run locally the server"
@@ -27,40 +27,21 @@ build:
 	@make -C static/tutorial/06_more_commands
 	@make -C static/usage/cli
 	@make -C static/usage/python
+	@make -C static/gallery/update_edge_feature
 
-lchn:
-	${HUGO}
-	scp -r public/* grew.lchn.fr:/home/guillaum/www/doc/
-
-grew_server:
-	${HUGO}
-	scp -r public/usage/grew_server/index.html grew.lchn.fr:/home/guillaum/www/doc/usage/grew_server
-
-tutorial:
-	${HUGO}
-	scp -r public/tutorial/* grew.lchn.fr:/home/guillaum/www/doc/tutorial
-
-trans_14:
-	${HUGO}
-	scp -r public/trans_14/index.html grew.lchn.fr:/home/guillaum/www/doc/trans_14
-
-grew_match_help:
-	${HUGO}
-	scp -r public/grew_match/help/index.html grew.lchn.fr:/home/guillaum/www/doc/grew_match/help
-
-pattern:
-	${HUGO}
-	scp -r public/pattern/index.html grew.lchn.fr:/home/guillaum/www/doc/pattern
-
-commands:
-	${HUGO}
-	scp -r public/commands/index.html grew.lchn.fr:/home/guillaum/www/doc/commands
-
-complex_edges:
-	${HUGO}
-	scp -r public/complex_edges/index.html grew.lchn.fr:/home/guillaum/www/doc/complex_edges
-
-purge:
-	@make -C static/parsing purge
-	@make -C static/deep_syntax purge
+clean:
+	@make -C static/doc/commands clean
+	@make -C static/doc/grs clean
+	@make -C static/doc/rewriting clean
+	@make -C static/doc/rule clean
+	@make -C static/grs/deep_syntax clean
+	@make -C static/grs/parsing clean
+	@make -C static/tutorial/02_first_rule clean
+	@make -C static/tutorial/03_rules_set clean
+	@make -C static/tutorial/04_termination clean
+	@make -C static/tutorial/05_confluence clean
+	@make -C static/tutorial/06_more_commands clean
+	@make -C static/usage/cli clean
+	@make -C static/usage/python clean
+	@make -C static/gallery/update_edge_feature clean
 

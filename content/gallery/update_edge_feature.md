@@ -9,7 +9,7 @@ menu = "main"
 
 This example shows how `libcaml_grew` version `1.4.3` fixes [#23](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/23).
 
-In the GRS file below, the command update an edge feature, using both concatenation with the `+` symbol and reference to a lexicon.
+In the GRS file below, the command updates an edge feature, using both concatenation with the `+` symbol and reference to a lexicon.
 
 {{< grew file="/static/gallery/update_edge_feature/update_edge_feature.grs" >}}
 

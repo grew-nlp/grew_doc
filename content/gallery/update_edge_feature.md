@@ -26,3 +26,4 @@ It produces two graphs (because of the non functional lexicon).
 | ![output_1](/gallery/update_edge_feature/_build/output_1.svg) | ![output_2](/gallery/update_edge_feature/_build/output_2.svg) |
 |-|-|
 
+{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/gallery/update_edge_feature/fr-ud-test_00018.conllu&grs=https://grew.fr/gallery/update_edge_feature/update_edge_feature.grs" >}} in Grew-web.

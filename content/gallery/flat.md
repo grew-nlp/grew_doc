@@ -10,8 +10,8 @@ title = "flat"
 # Transformation of single-headed structure into a chained structure
 
 :information_source: You can download files used in this page:
-[rules.grs](/tutorial/flat/rules.grs),
-[SH6.conll](/tutorial/flat/SH6.conll)
+[rules.grs](/gallery/flat/rules.grs),
+[SH6.conll](/gallery/flat/SH6.conll)
 
 There are two basic ways to represent *flat* structures:
 
@@ -20,7 +20,7 @@ There are two basic ways to represent *flat* structures:
 
 | SH6 |  C6 |
 |:---:|:---:|
-| ![SH6](/tutorial/flat/_build/SH6.svg) | ![alt C6](/tutorial/flat/_build/C6.svg) |
+| ![SH6](/gallery/flat/_build/SH6.svg) | ![alt C6](/gallery/flat/_build/C6.svg) |
 
 We will see how to convert from one to the other with Graph Rewriting.
 
@@ -48,7 +48,7 @@ But this rule applied iteratively on `GH6`:
 
 Output 120 normal forms! Here is one of them:
 
-![C6_120_example](/tutorial/flat/_build/C6_120_example.svg)
+![C6_120_example](/gallery/flat/_build/C6_120_example.svg)
 
 Our rule is not strict enough. We have to put more restriction in the pattern part.
 If we require that `N1` and `N2` are two consecutive words, the rule is:
@@ -71,7 +71,7 @@ rule sh2c_2 {
 
 Now, the command above produces 5 normal forms, one of which is:
 
-![C6_5_example](/tutorial/flat/_build/C6_5_example.svg)
+![C6_5_example](/gallery/flat/_build/C6_5_example.svg)
 
 The rule was first applied with on nodes `w2` and `w3`.
 After that, the nodes `w3` and `w4` don't have the same governor and the rule cannot be applied.
@@ -102,7 +102,7 @@ rule sh2c {
 
 Finally, we get only the expected normal form:
 
-![alt C6](/tutorial/flat/_build/C6.svg)
+![alt C6](/gallery/flat/_build/C6.svg)
 
 The last rule can be applied only on the nodes `w5` and `w6` of the graph `SH6`;
 in the next step, it can be applied only on the nodes `w4` and `w5`;
@@ -133,16 +133,16 @@ So it seems that the first try is the good one! Well, it's not so simple, as oft
 The rewriting of `C6` is tricky, let's look at `C4`.
 It can be rewritten to 6 different graphs:
 
-![C4_reducts](/tutorial/flat/_build/C4_reducts.svg)
+![C4_reducts](/gallery/flat/_build/C4_reducts.svg)
 
 |     |                    |
 |:---:|:------------------:|
-| C4  | ![C4](/tutorial/flat/_build/C4.svg) |
-| G1  | ![G1](/tutorial/flat/_build/G1.svg) |
-| G2  | ![G2](/tutorial/flat/_build/G2.svg) |
-| G3  | ![G3](/tutorial/flat/_build/G3.svg)|
-| G4  | ![G4](/tutorial/flat/_build/G4.svg) |
-| SH4 | ![SH4](/tutorial/flat/_build/SH4.svg)|
+| C4  | ![C4](/gallery/flat/_build/C4.svg) |
+| G1  | ![G1](/gallery/flat/_build/G1.svg) |
+| G2  | ![G2](/gallery/flat/_build/G2.svg) |
+| G3  | ![G3](/gallery/flat/_build/G3.svg)|
+| G4  | ![G4](/gallery/flat/_build/G4.svg) |
+| SH4 | ![SH4](/gallery/flat/_build/SH4.svg)|
 
 And all graphs are computed by the previous command before producing the normal form.
 There are (n-1)! such graphs for `Cn`.

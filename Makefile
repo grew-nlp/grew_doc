@@ -26,6 +26,7 @@ build:
 	@make -C static/tutorial/05_confluence
 	@make -C static/tutorial/06_more_commands
 	@make -C static/usage/cli
+	@make -C static/usage/grew_count
 	@make -C static/usage/python
 	@make -C static/gallery/update_edge_feature
 
@@ -42,6 +43,7 @@ clean:
 	@make -C static/tutorial/05_confluence clean
 	@make -C static/tutorial/06_more_commands clean
 	@make -C static/usage/cli clean
+	@make -C static/usage/grew_count clean
 	@make -C static/usage/python clean
 	@make -C static/gallery/update_edge_feature clean
 

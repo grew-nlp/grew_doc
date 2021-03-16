@@ -17,7 +17,7 @@ Categories = ["Development","GoLang"]
 
 ## News
 
- * **2020/10/02:** New release of version **1.4**. See [What's new](/whats_new/) for changes.
+ * **2021/03/15:** New release of version **1.5**. See [What's new](/whats_new/) for changes.
 
  * **2020** Grew matching is available in the [Arborator-Grew](https://arborator.github.io/) tool.
 

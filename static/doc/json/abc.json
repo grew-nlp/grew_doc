@@ -1,13 +1,13 @@
 {
-  "nodes": [
-    { "id": "A", "label": "A", "Gender": "Masc" },
-    { "id": "B", "label": "B"},
-    { "id": "C", "label": "C"}
-  ],
+  "nodes": {
+    "A": "A",
+    "B": "B",
+    "C": "C"
+  },
   "edges": [
-    { "src": "A", "label": {"rel": "T", "subrel": "tt"}, "tar": "B"},
-    { "src": "B", "label": {"rel": "U"}, "tar": "C"},
-    { "src": "C", "label": {}, "tar": "A"}
+    { "src": "A", "label": "X", "tar": "B"},
+    { "src": "B", "label": "Y", "tar": "C"},
+    { "src": "C", "label": "Z", "tar": "A"}
   ],
   "order": [ "A", "B" ]
 }

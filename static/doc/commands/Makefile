@@ -22,5 +22,5 @@ build:
 
 
 
-purge:
+clean:
 	rm -rf _build

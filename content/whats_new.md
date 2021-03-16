@@ -26,14 +26,18 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.4 (October 2, 2020)
+# :new: Version 1.5 (March 16, 2021)
+  * Change JSON encoding of graphs (see [JSON format](../../doc/json))
+
+---
+
+# Version 1.4 (October 2, 2020)
   * change pattern syntax (see [GRS upgrading](../../doc/upgrade))
   * add new syntax for constraints in pattern syntax (see [patterns page](../../doc/pattern#additional-constraints))
   * new implementation of Conll-U handling
   * configs replace the deprecated notion of domains
 
 :warning: the tool `grew_gui` is obsolete and not maintained. It relies on old libraries which are not available on recent version of OSes.
-
 
 ---
 

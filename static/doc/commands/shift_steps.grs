@@ -1,12 +1,12 @@
 rule one {
-  pattern { a[phon="♧"]; b[phon="♡"]; c[phon="♢"]; a -[A]-> b; }
+  pattern { a[label="♧"]; b[label="♡"]; c[label="♢"]; a -[A]-> b; }
   commands {
     shift a =[D]=> b;
   }
 }
 
 rule two {
-  pattern { a[phon="♧"]; b[phon="♡"]; c[phon="♢"]; a -[A]-> b; }
+  pattern { a[label="♧"]; b[label="♡"]; c[label="♢"]; a -[A]-> b; }
   commands {
     shift a =[D]=> b;
     del_node a;

@@ -15,6 +15,7 @@ stop:
 
 build:
 	@make -C static/doc/commands
+	@make -C static/doc/json
 	@make -C static/doc/grs
 	@make -C static/doc/rewriting
 	@make -C static/doc/rule

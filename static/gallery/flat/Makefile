@@ -9,7 +9,7 @@ build:
 	dep2pict _build/C6_120.conll -p 42 _build/C6_120_example.svg
 	grew transform -grs rules.grs -strat "Iter (sh2c_2)" -i SH6.conll -o _build/C6_5.conll
 	# select one of the output graphs
-	dep2pict _build/C6_5.conll -p 1 _build/C6_5_example.svg
+	dep2pict _build/C6_5.conll -p 3 _build/C6_5_example.svg
 
 
 clean:

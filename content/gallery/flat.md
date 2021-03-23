@@ -24,6 +24,8 @@ There are two basic ways to represent *flat* structures:
 
 We will see how to convert from one to the other with Graph Rewriting.
 
+---
+
 ## From single-headed to chained
 Of course, this will be a iterative process able to deal with an arbitrary number of items.
 The simplest rule we can think of is:
@@ -107,6 +109,8 @@ Finally, we get only the expected normal form:
 The last rule can be applied only on the nodes `w5` and `w6` of the graph `SH6`;
 in the next step, it can be applied only on the nodes `w4` and `w5`;
 etc.
+
+---
 
 ## From chained to single-headed
 In the other way, again we can solve our problem by iterating the application of a single rule:

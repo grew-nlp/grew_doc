@@ -42,9 +42,11 @@ The easiest way to try and test **Grew** is to use one of the two online interfa
 
 ## Publications
 
+ * [2021] Bruno **Guillaume**. [Graph Matching and Graph Rewriting: GREW tools for corpus exploration, maintenance and conversion](https://hal.inria.fr/hal-03177701). Demonstrations -- 16th Conference of the European Chapter of the Association for Computational Linguistics (EACL).
+
  * [2020] Gaël **Guibon**, Marine **Courtin**, Kim **Gerdes** and Bruno **Guillaume**. [When Collaborative Treebank Curation Meets Graph Grammars -- Arborator With a Grew Back-End](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.651.pdf).
 
- * [2019] Bruno **Guillaume**. [Graph Matching for Corpora Exploration](https://hal.inria.fr/hal-02267475). JLC 2019 - 10èmes Journées Internationales de la Linguistique de corpus, Nov 2019, Grenoble, France.
+ * [2019] Bruno **Guillaume**. [Graph Matching for Corpora Exploration](https://hal.inria.fr/hal-02267475). JLC 2019 - 10èmes Journées Internationales de la Linguistique de corpus, Grenoble, France.
 
  * [2018] Guillaume **Bonfante**, Bruno **Guillaume** and Guy **Perrier**. [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
 (The chapter 1 is [available from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf)).

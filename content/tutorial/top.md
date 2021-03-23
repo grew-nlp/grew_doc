@@ -8,9 +8,13 @@ menu = "main"
 
 +++
 
-## Grew tutorial
+# Grew tutorial
 
-In construction. The 6 first lessons are available:
+This page gathers some basic explanation to start using the **Grew* graph rewriting system.
+
+For more detail, see the documentation part on the right menu or the [Gallery](../../gallery/top) for more complex examples.
+
+The 6 first lessons are available:
 
  * [Lesson 1: Matching](../01_matching)
  * [Lesson 2: First rule](../02_first_rule)

@@ -7,7 +7,7 @@ menu = "main"
 
 # Grew gallery
 
-This page list examples of applications of the Grew system for various applications.
+This page lists some examples of application of the Grew system for various applications. For more basic examples, please see [Tutorial](../../tutorial/top).
 
 ---
 

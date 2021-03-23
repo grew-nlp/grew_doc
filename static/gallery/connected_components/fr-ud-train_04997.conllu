@@ -1,0 +1,15 @@
+# sent_id = fr-ud-train_04997
+# text = Pontbriand, le flanc droit et Boishamon, le flanc gauche.
+1	Pontbriand	Pontbriand	PROPN	_	_	0	root	_	SpaceAfter=No
+2	,	,	PUNCT	_	_	4	punct	_	_
+3	le	le	DET	_	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
+4	flanc	flanc	NOUN	_	Gender=Masc|Number=Sing	1	appos	_	_
+5	droit	droit	ADJ	_	Gender=Masc|Number=Sing	4	amod	_	_
+6	et	et	CCONJ	_	_	7	cc	_	_
+7	Boishamon	Boishamon	PROPN	_	_	1	conj	_	SpaceAfter=No
+8	,	,	PUNCT	_	_	10	punct	_	_
+9	le	le	DET	_	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
+10	flanc	flanc	NOUN	_	Gender=Masc|Number=Sing	7	appos	_	_
+11	gauche	gauche	ADJ	_	Gender=Masc|Number=Sing	10	amod	_	SpaceAfter=No
+12	.	.	PUNCT	_	_	1	punct	_	_
+

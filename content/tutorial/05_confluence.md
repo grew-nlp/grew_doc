@@ -8,7 +8,7 @@ Categories = ["Development","GoLang"]
 
 +++
 
-[[Lesson 4] Termination](../04_terminaison) --- [[Lesson 6] More commands](../06_more_commands)
+[Termination :arrow_left:](../04_terminaison) • [:arrow_up:](../top) • [:arrow_right: More commands](../06_more_commands)
 
 ---
 
@@ -81,7 +81,7 @@ Of course, the `Onf` produces the same output in this setting.
 
 Note that there are two different ways to compute the final graph: first apply rule `aux` and then the rule `verb` or the other way round: rule `verb` and then rule `aux`. But the important consequence of the confluence property is that the same graph is produced in both cases.
 
-## :warning: user `Iter` carefully
+## :warning: Use `Iter` carefully
 
 When a package `p` is confluent, the two strategies `Onf(p)` and `Iter(p)` give the same result.
 In practice, the strategy `Onf(p)` must be preferred because it is much more efficient to compute.
@@ -104,10 +104,10 @@ Hence, even if there is no loop in this case, there is a huge number of rule app
 
 {{< error file="static/tutorial/05_confluence/_build/wrong_loop.log" >}}
 
-
+Of course, in this case, the strategy `Onf(p)` nicely computes the unique normal form quickly (with only 14 rule applications).
 
 
 
 ---
 
-[[Lesson 4] Termination](../04_terminaison) --- [[Lesson 6] More commands](../06_more_commands)
+[Termination :arrow_left:](../04_terminaison) • [:arrow_up:](../top) • [:arrow_right: More commands](../06_more_commands)

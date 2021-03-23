@@ -8,7 +8,7 @@ title = "04_terminaison"
 
 +++
 
-[[Lesson 3] Rules set](../03_rules_set) --- [[Lesson 5] Confluence](../05_confluence)
+[Rules set :arrow_left:](../03_rules_set) • [:arrow_up:](../top) • [:arrow_right: Confluence](../05_confluence)
 
 ---
 
@@ -81,4 +81,4 @@ For instance, in all the non-looping rules above, if we count the number of Sequ
 
 ---
 
- [[Lesson 3] Rules set](../03_rules_set) --- [[Lesson 5] Confluence](../05_confluence)
+[Rules set :arrow_left:](../03_rules_set) • [:arrow_up:](../top) • [:arrow_right: Confluence](../05_confluence)

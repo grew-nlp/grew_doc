@@ -8,7 +8,7 @@ date = "2020-12-01T13:14:46+01:00"
 
 +++
 
-[[Lesson 1] Matching](../01_matching) --- [[Lesson 3] Rules set](../03_rules_set)
+[Matching :arrow_left:](../01_matching) • [:arrow_up:](../top) • [:arrow_right: Rules set](../03_rules_set)
 
 ---
 
@@ -16,7 +16,7 @@ date = "2020-12-01T13:14:46+01:00"
 
 In this lesson, we write a rule and learn how to apply it to some graph.
 
-The conversion between different formats is one the common usages of Grew.
+The conversion between different formats is one of the common usages of Grew.
 We will use the example of the conversion from one dependency annotation format (used in the Sequoia project) to Surface Syntactic Universal Dependencies (SUD).
 
 ## Data
@@ -102,4 +102,4 @@ With the strategy `Onf(prep)` for instance, the rewriting process will output on
 
 ---
 
-[[Lesson 1] Matching](../01_matching) --- [[Lesson 3] Rules set](../03_rules_set)
+[Matching :arrow_left:](../01_matching) • [:arrow_up:](../top) • [:arrow_right: Rules set](../03_rules_set)

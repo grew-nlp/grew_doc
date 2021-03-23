@@ -8,7 +8,7 @@ Tags = ["Development","golang"]
 
 +++
 
-[[Lesson 5] Confluence](../05_confluence) ---
+[Confluence :arrow_left:](../05_confluence) • [:arrow_up:](../top)
 
 ---
 
@@ -68,4 +68,4 @@ TODO: dealing the the special encoding of Mutli-Word Tokens in (S)UD with `wordf
 
 ---
 
-[[Lesson 5] Confluence](../05_confluence) ---
+[Confluence :arrow_left:](../05_confluence) • [:arrow_up:](../top)

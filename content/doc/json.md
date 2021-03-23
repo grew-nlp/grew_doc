@@ -10,9 +10,11 @@ menu = "main"
 
 # JSON format used in Grew
 
-:warning: the format described here in not the one used for exchanges with the Python binding.
-
 The JSON format described here is intended to be the exchange format between the various graph representations used in different existing projects.
+
+  * :warning: This format is available in version `1.5` of `grew`; check your version with `grew version` and [upgrade](../../usage/upgrade) if needed.
+  * :warning: This format is different from the one used for exchanges with the Python binding.
+
 
 A graph is described by a JSON object with the following fields:
 
@@ -30,9 +32,10 @@ The node content can be in one of the two following forms:
  1. a string
  2. a JSON object in which all values are strings (in general this describes a feature structure).
 
-The string form is used when the node does not have a complex structure. In this case, the given string is interpreted as a feature structure with only one feature named `label`. Hence we have:
+The string form is used when the node does not have a complex structure. In this case, the given string is interpreted as a feature structure with only one feature named `label`. Hence we have and equivalence between these two lines:
 
-  * `"nodes": { "N": "A" }` is equivalent to `"nodes": { "N": { "label" : "A" } }`
+  * `"nodes": { "N": "A" }`
+  * `"nodes": { "N": { "label" : "A" } }`
 
 Nodes in CoNLL files are interpreted as complex node, for instance:
 
@@ -40,7 +43,7 @@ Nodes in CoNLL files are interpreted as complex node, for instance:
 3	are	be	AUX	VA	Mood=Ind|Number=Plur|Tense=Pres|VerbForm=Fin	4	aux	_	_
 ```
 
-will give the following JSON node object:
+corresponds to the following JSON node object:
 ```json_alt
 {
   "form": "are",
@@ -51,7 +54,7 @@ will give the following JSON node object:
   "Number": "Plur",
   "Tense": "Pres",
   "VerbForm": "Fin",
-},
+}
 ```
 
 ## JSON encoding of an edge
@@ -59,18 +62,20 @@ will give the following JSON node object:
 An edge is described by a JSON object with three following required fields:
 
  * `src`: the node identifier of the source of the edge
- * `label`: a JSON object where all values are strings which encodes the edge feature structure
+ * `label`: the edge label description
  * `tar`: the node identifier of the target of the edge
 
 As for nodes, edges labels are described by a feature structure with a shortcut for simple labels.
-Hence an edges label can be:
+Hence an edge label can be:
 
  1. a string
  2. a JSON object in which all values are strings (this describes a feature structure)
 
-The string case is interpreted as a feature structure with on feature named `1` (to be compatible with complex edges used in UD / SUD encoding, see [Graph edges](../graph#edges) description).
+The string case is interpreted as a feature structure with one feature named `1` (to be compatible with complex edges used in UD / SUD encoding, see [Graph edges](../graph#edges) description).
+The two following codes are equivalent:
 
-  * `"edges": [ "src": "M", "label": "obj", "tar": "N" ]` is equivalent to `"edges": [ "src": "M", "label": { "1" : "obj" }, "tar": "N" ]`
+  * `"edges": [ "src": "M", "label": "obj", "tar": "N" ]`
+  * `"edges": [ "src": "M", "label": { "1" : "obj" }, "tar": "N" ]`
 
 
 ## JSON encoding of a metadata

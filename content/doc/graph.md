@@ -91,10 +91,16 @@ Reserved feature names are:
  * `delta`: the syntax `e.delta` is used to refer the relative position (an integer) between two ordered nodes.
 
 
-
 # Graph input formats
 To describe a graph in practice, **Grew** offers several input formats:
 
+ * [JSON](../json)
  * [CoNLL-U format](../conllu)
- * a native `gr` format (TODO)
-* the `amr` format (TODO)
+ * The specific `gr` format: see [Python page](../../usage/python) for examples. This format is deprecated and should not be used in new Development, JSON file above should be prefered
+ * AMR format: **Grew** is also able te read data following format used for instance in corpora freely available on (AMR web page)[https://amr.isi.edu/index.html]
+
+# Graph output formats
+
+ * [CoNLL-U](../conllu): this is the format used by default with `grew transform`
+ * [JSON](../json): available with `-json` argument on the command line
+ * Graphviz dot: available with `-dot` argument on the command line

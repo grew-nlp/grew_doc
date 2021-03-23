@@ -29,6 +29,8 @@ build:
 	@make -C static/usage/cli
 	@make -C static/usage/grew_count
 	@make -C static/usage/python
+	@make -C static/gallery/flat
+	@make -C static/gallery/connected_components
 	@make -C static/gallery/update_edge_feature
 
 clean:
@@ -46,5 +48,7 @@ clean:
 	@make -C static/usage/cli clean
 	@make -C static/usage/grew_count clean
 	@make -C static/usage/python clean
+	@make -C static/gallery/flat clean
+	@make -C static/gallery/connected_components clean
 	@make -C static/gallery/update_edge_feature clean
 

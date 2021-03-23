@@ -1,0 +1,39 @@
+rule select_one {                         % This rule applies exactly once on each connected component of the graph.
+  pattern { N[!select] }                  % Select an unselected node N
+  % Nodes are totally ordrerd though an internal "__id__" value;
+  % we use this in the two without clauses below to ensure that only one node can be chosen is a given connected component:
+  % the "smallest" one, according to "__id__" order
+  without { N -> M; M.__id__ < N.__id__}  % such that there is no "smaller" node M linked as a succesor of N
+  without { M -> N; M.__id__ < N.__id__}  % add such that there is no "smaller" node M linked as a predecessor of N
+  commands { N.select=yes }
+}
+
+package propagate {
+  rule down {
+    pattern { M[select]; N[!select]; M -> N }
+    commands { N.select = yes }
+  }
+  rule up {
+    pattern { M[!select]; N[select]; M -> N }
+    commands { M.select = yes }
+  }
+}
+
+rule remove_unselected {
+  pattern { N[!select]; }
+  commands { del_node N; }
+}
+
+rule clean {
+  pattern { N[select]; }
+  commands { del_feat N.select; }
+}
+
+strat main {
+  Seq (
+    select_one,
+    Onf (propagate),
+    Onf (remove_unselected),
+    Onf (clean),
+  )
+}

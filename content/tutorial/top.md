@@ -10,7 +10,7 @@ menu = "main"
 
 # Grew tutorial
 
-This page gathers some basic explanation to start using the **Grew* graph rewriting system.
+This page gathers some basic explanation to start using the **Grew** graph rewriting system.
 
 For more detail, see the documentation part on the right menu or the [Gallery](../../gallery/top) for more complex examples.
 

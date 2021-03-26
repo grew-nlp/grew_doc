@@ -52,7 +52,7 @@ We apply to it the following GRS which removes `appos` relations:
 
 We obtained the following structure:
 
-![fr-ud-train_04997_split](/gallery/connected_components/_build/fr-ud-train_04997_split.svg)
+![fr-ud-train_04997_split](/gallery/connected_components/_build/fr-ud-train_04997_no_appos.svg)
 
 If we applied the GRS above, we obtained 3 small structures:
 

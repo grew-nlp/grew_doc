@@ -19,7 +19,7 @@ We will learn how to make these rules working together.
 
 ## Packages
 
-A solution to use several rules in the same rewriting process is to put them in the same `package` construction.
+A solution to use several rules in the same rewriting process is to put them in the same `package` construction (file: [`pos_rules.grs`](/tutorial/03_rules_set/pos_rules.grs)).
 
 {{< grew file="/static/tutorial/03_rules_set/pos_rules.grs" >}}
 

@@ -30,7 +30,7 @@ In SUD, such combined tag are not allowed, so the sentence is annotated with two
 ## The command `add_node`
 
 So, we have to design a rule to make this new tokenisation.
-The commented rule below computes this transformation:
+The commented rule below computes this transformation (file: [`amalgam1.grs`](/tutorial/06_more_commands/amalgam1.grs)):
 
 {{< grew file="/static/tutorial/06_more_commands/amalgam1.grs" >}}
 
@@ -51,7 +51,7 @@ With our example above, our rule should take care of the connection of the new n
 This can be done with a command `add_edge M -[det]-> D` where `M` is the node for the word *doigt*.
 But, to be able to use this node `M` in the `command` part, it must be declared in the `pattern` part.
 
-The new rule is then:
+The new rule is then (file: [`amalgam2.grs`](/tutorial/06_more_commands/amalgam2.grs)):
 
 {{< grew file="/static/tutorial/06_more_commands/amalgam2.grs" >}}
 

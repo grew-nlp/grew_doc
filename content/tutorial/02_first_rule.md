@@ -54,7 +54,7 @@ which correspond to the graph below where the POS of *autres* is now `ADJ`:
 
 ## Some other rules
 
-Let us consider two other similar rules needed for the conversion:
+Let us consider two other similar rules ([`preposition.grs`](/tutorial/02_first_rule/preposition.grs), [`preposition.grs`](/tutorial/02_first_rule/noun.grs)) needed for the conversion:
 
 {{< grew file="/static/tutorial/02_first_rule/preposition.grs" >}}
 {{< grew file="/static/tutorial/02_first_rule/noun.grs" >}}

@@ -22,7 +22,7 @@ In previous lessons, we have considered the conversion of Sequoia POS tags to SU
 ## A stupid looping rule
 
 Consider now adverbs: the same tag `ADV` is used in both annotation settings.
-We can then imagine the (somehow stupid) rule [`adverb.grs`](/tutorial/04_termination/adverb.grs) :
+We can then imagine the (somehow stupid) rule `adv` (file: [`adverb.grs`](/tutorial/04_termination/adverb.grs)):
 
 {{< grew file="/static/tutorial/04_termination/adverb.grs" >}}
 
@@ -52,7 +52,7 @@ Let us come back to our input graph:
 and consider the conversion of the Sequoia POS `V`.
 In SUD (like in UD), this tag should be converted to `AUX` or to `VERB`.
 One way to decide that the new POS must be `AUX` is the presence of the relation `aux.pass`.
-We can propose the rule:
+We can propose the rule (file: [`aux_1.grs`](/tutorial/04_termination/aux_1.grs)):
 
 {{< grew file="/static/tutorial/04_termination/aux_1.grs" >}}
 
@@ -60,14 +60,14 @@ but this rule will also produce an error if it is iterated: after the first appl
 
 ### Solution 1: make a stricter pattern
 
-With the rule `aux_2`, the pattern cannot be found after the first application and there will be no loop.
+With the rule `aux_2` (file: [`aux_2.grs`](/tutorial/04_termination/aux_2.grs)), the pattern cannot be found after the first application and there will be no loop.
 
 {{< grew file="/static/tutorial/04_termination/aux_2.grs" >}}
 
 
 ### Solution 2: use a without clause
 
-The rule `aux_3` shows a more general trick which can be used in similar cases: add a `without` clause which explicitly contradicts the `commands` part.
+The rule `aux_3` (file: [`aux_3.grs`](/tutorial/04_termination/aux_3.grs)) shows a more general trick which can be used in similar cases: add a `without` clause which explicitly contradicts the `commands` part.
 
 {{< grew file="/static/tutorial/04_termination/aux_3.grs" >}}
 

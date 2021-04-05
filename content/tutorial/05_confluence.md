@@ -19,8 +19,7 @@ Another well-known issue with rewriting is the problem of confluence.
 ## Two concurrent rules
 
 As said earlier, the Sequoia tag `V` may be converted to `AUX` or `VERB`.
-A naive way to encode this in rules is to write the package:
-
+A naive way to encode this in rules is to write (file: [`aux_verb.grs`](/tutorial/05_confluence/aux_verb.grs)) the package:
 
 {{< grew file="/static/tutorial/05_confluence/aux_verb.grs" >}}
 
@@ -61,7 +60,7 @@ This will produces 4 different graphs with all combination of `AUX` and `VERB` f
 
 ## Be stricter in rules design
 
-Of course, in our POS tags conversion example, the correct solution is to design more carefully our two rules, in order to produce the correct output. For instance:
+Of course, in our POS tags conversion example, the correct solution is to design more carefully our two rules, in order to produce the correct output. For instance (file: [`aux_verb_confluent.grs`](/tutorial/05_confluence/aux_verb_confluent.grs)):
 
 {{< grew file="/static/tutorial/05_confluence/aux_verb_confluent.grs" >}}
 

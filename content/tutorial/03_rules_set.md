@@ -8,7 +8,7 @@ title = "03_rules_set"
 
 +++
 
-[First rule :arrow_left:](../02_first_rule) • [:arrow_up:](../top) • [:arrow_right: Termination](../04_terminaison)
+[First rule :arrow_left:](../02_first_rule) • [:arrow_up:](../top) • [:arrow_right: Termination](../04_termination)
 
 ---
 
@@ -48,4 +48,4 @@ As usual with `Onf`, exactly one graph is produced obtained with the successive 
 
 ---
 
-[First rule :arrow_left:](../02_first_rule) • [:arrow_up:](../top) • [:arrow_right: Termination](../04_terminaison)
+[First rule :arrow_left:](../02_first_rule) • [:arrow_up:](../top) • [:arrow_right: Termination](../04_termination)

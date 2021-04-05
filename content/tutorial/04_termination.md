@@ -4,7 +4,7 @@ Tags = ["Development","golang"]
 Description = ""
 menu = "main"
 date = "2020-12-02T08:31:07+01:00"
-title = "04_terminaison"
+title = "04_termination"
 
 +++
 

@@ -1,0 +1,9 @@
+# sent_id = en_partut-ud-1267
+# text = Two things should be clear.
+1	Two	two	NUM	N	NumType=Card	2	nummod	_	_
+2	things	thing	NOUN	S	Number=Plur	5	nsubj	_	_
+3	should	shall	AUX	VM	Mood=Ind|Person=3|Tense=Past|VerbForm=Fin	5	aux	_	_
+4	be	be	AUX	V	VerbForm=Inf	5	cop	_	_
+5	clear	clear	ADJ	A	Degree=Pos	0	root	_	SpaceAfter=No
+6	.	.	PUNCT	FS	_	5	punct	_	_
+

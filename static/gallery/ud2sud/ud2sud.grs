@@ -1,0 +1,99 @@
+package relations {
+  rule subj {
+    pattern { e:H -[nsubj|csubj]-> D}
+    commands {
+      del_edge e;
+      add_edge H -[subj]-> D
+    }
+  }
+
+  rule mod {
+    pattern { e:H -[advcl|advmod|amod|nummod]-> D; }
+    commands {
+      del_edge e;
+      add_edge H -[mod]-> D
+    }
+  }
+}
+
+package reverse_relations {
+  rule cop {
+    pattern { e:H -[1=cop, !deep]-> AUX }
+    without { H -[1=case, !deep]-> AUX1 } % rule (3) above
+    without { H -[1=cop, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+    without { H -[1=cop, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+    commands {
+      e.deep=REV;
+      add_edge f: AUX -> H; f.label = e.label;
+      del_edge e;
+      shift_in H ==> AUX;
+      shift_out H =[!deep]=> AUX;
+    }
+  }
+
+  rule aux {
+    pattern { e:H -[1=aux, !deep]-> AUX }
+    without { H -[1=case|cop|caus|pass, !deep]-> AUX1 } % rule (1) above
+    without { H -[1=aux, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+    without { H -[1=aux, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+    commands {
+      e.deep=REV;
+      add_edge f: AUX -> H; f.label = e.label;
+      del_edge e;
+      shift_in H ==> AUX;
+      shift_out H =[!deep]=> AUX;
+    }
+  }
+}
+
+package shift_out_edges {
+  rule H_D_D1{
+    pattern{
+      H -[deep=REV]-> D;  H << D;
+      e: D -[1=mod|punct]-> D1; D << D1}
+    commands{
+      add_edge f: H -> D1; f.label = e.label;
+      del_edge e
+    }
+  }
+
+  rule all_mark_embedded{
+    pattern {
+      H -[1<>mark,deep=REV]-> D;
+      e: D -[1=comp|dislocated|parataxis|subj|vocative]-> D1;}
+    commands{
+      add_edge f: H -> D1; f.label = e.label;
+      del_edge e;
+    }
+  }
+}
+
+package rename_relations {
+  rule aux {
+    pattern { e:M -[aux@REV]-> N }
+    commands { add_edge M -[comp:aux]-> N; del_edge e }
+  }
+
+  rule cop {
+    pattern { e:M -[cop@REV]-> N }
+    commands { del_edge e; add_edge M -[comp:pred]-> N }
+  }
+}
+
+strat main {
+  Seq (
+    Onf (relations),
+    Onf (reverse_relations),
+    Onf (shift_out_edges),
+    Onf (rename_relations),
+  )
+}
+
+strat main_iter {
+  Seq (
+    Iter (relations),
+    Iter (reverse_relations),
+    Iter (shift_out_edges),
+    Iter (rename_relations),
+  )
+}

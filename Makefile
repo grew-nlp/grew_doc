@@ -32,6 +32,7 @@ build:
 	@make -C static/gallery/flat
 	@make -C static/gallery/connected_components
 	@make -C static/gallery/update_edge_feature
+	@make -C static/gallery/ud2sud
 
 clean:
 	@make -C static/doc/commands clean
@@ -51,4 +52,5 @@ clean:
 	@make -C static/gallery/flat clean
 	@make -C static/gallery/connected_components clean
 	@make -C static/gallery/update_edge_feature clean
+	@make -C static/gallery/ud2sud clean
 

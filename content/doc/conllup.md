@@ -10,21 +10,22 @@ Tags = ["Development","golang"]
 
 # CoNLL-U Plus Format
 
-[:new: 1.4] **Grew** partially takes into account the [CoNLL-U Plus Format](https://universaldependencies.org/ext-format.html).
+**Grew** partially takes into account the [CoNLL-U Plus Format](https://universaldependencies.org/ext-format.html).
 
 ## Columns declaration
 
 If some CoNLL file start with the initial line `# global.columns = …`, it is taken into account for the parsing of the file.
 
-**Grew** handles 3 specific declarations for CoNLL-like output
+In order to specify the columns declaration to be used in output, the command line argument `-columns …` can be used.
+For instance `-columns "ID FORM UPOS"` will produce a 3 columns output with token id, phonological form and universal POS.
 
- 1. by default, CoNlL-U format: `# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC`
- 1. with `-cupt` argument: `# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC PARSEME:MWE`
- 1. with `-semcor` argument: `# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC PARSEME:MWE FRSEMCOR:NOUN`
+ * by default, the [CoNLL-U format](../conllu) is used: it is equivalent to `-columns "ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC"`
+ * `-cupt` argument is a shortcut for: `-columns "ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC PARSEME:MWE"`
+ * `-semcor` argument is a shortcut for: `-columns "ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC PARSEME:MWE FRSEMCOR:NOUN"`
 
 ## New columns
 
-Two new column declarations are handled by **Grew** 1.4:
+In addition to CoNLL-U columns, two column declarations are handled by **Grew**:
 
  * `PARSEME:MWE` see (http://multiword.sourceforge.net/cupt-format/) for details.
  * `FRSEMCOR:NOUN` see (https://frsemcor.github.io/FrSemCor)

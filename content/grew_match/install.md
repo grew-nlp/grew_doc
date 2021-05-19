@@ -150,6 +150,10 @@ Make sure that the web server is running.
 You should be able to request your corpora from [`http://localhost:8888/grew_match`](http://localhost:8888/grew_match).
 Feel free to contact [us](mailto:Bruno.Guillaume@loria.fr) in case of trouble.
 
+### Modification of the configuration file
+
+If the configuration file (like `my_corpora.json` above) is modified, you should run again `install.sh`.
+
 ### Restart the daemon when one of the corpora is updated
 
 1. Kill the running daemon (you can use the command `killall grew_daemon` if the daemon is running in the background)

@@ -16,7 +16,7 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
   * `grew_daemon` &rarr; the server daemon behing [Grew-match](http://match.grew.fr)
   * `grewpy` &rarr; the daemon called by Python library
 
-* The symbol ":warning:" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
+* The symbol "⚠️" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
 
 
 * More detailled information in files `CHANGES.md` for each sub-project:
@@ -26,7 +26,14 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.5 (March 16, 2021)
+# :new: Version 1.6 (May 5, 2021)
+  * ⚠️ stop backward compatibility with old feature names `pos`, `cat` and `phon`  (see [CoNNL-U](../../doc/conllu#note-about-conll-feature-values))
+  * add `-columns` argument (see [CoNNL-U Plus](../../doc/conllup#columns-declaration))
+  * fix invalid json output if there is more than one output graph
+
+---
+
+# Version 1.5 (March 16, 2021)
   * Change JSON encoding of graphs (see [JSON format](../../doc/json))
 
 ---

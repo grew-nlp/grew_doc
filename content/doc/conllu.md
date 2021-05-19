@@ -12,6 +12,7 @@ Categories = ["Development","GoLang"]
 
 The most common way to store dependency structures is the CoNLL format.
 Several extensions were proposed and we describe here the one which is used by **Grew**, known as [CoNLL-U](http://universaldependencies.org/format.html) format defined in the Universal Dependency project.
+Grew also handles the CoNLL-U plus format, see [CoNLL-U plus page](../conllup)
 
 For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
@@ -23,18 +24,23 @@ The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoN
 
 We explain here how **Grew** deals with the 10 fields if CoNLL-U files:
 
-1. **ID**. This field is a number used as an identifier for the corresponding lexical unit (LU).
+1. **ID**. This field is a number used as an internal identifier for the corresponding lexical unit (LU), it can not be accessed from directly from **Grew**.
 2. **FORM**. The phonological form of the LU.
-In **Grew**, the value of this field is available through a feature named `form`
-(for backward compatibility, the keyword `phon` can also be used instead of `form`).
+In **Grew**, the value of this field is available through a feature named `form` (see [here](../conllu#note-about-conll-feature-values) for info about older versions of **Grew**).
 3. **LEMMA**. The lemma of the LU. In **Grew**, this corresponds to the feature `lemma`.
-4. **UPOS**. The field `upos` (for backward compatibility, `cat` can also be used to refer to this field).
-5. **XPOS**. The field `xpos` (for backward compatibility, `pos` can also be used to refer to this field).
+4. **UPOS**. The field `upos` (see [here](../conllu#note-about-conll-feature-values) for info about older versions of **Grew**).
+5. **XPOS**. The field `xpos` (see [here](../conllu#note-about-conll-feature-values) for info about older versions of **Grew**)
 6. **FEATS**. List of morphological features.
 7. **HEAD**. Head of the current word, which is either a value of ID or `0` for the root node.
 8. **DEPREL**. Dependency relation to the HEAD (`root` iff HEAD = `0`).
 9. **DEPS**. (UD only) Enhanced dependency graph in the form of a list of head-deprel pairs. In **Grew**, these relations are encoded with the features `enhanced=yes`
-10. **MISC**. Any other annotation. In **Grew**, annotation of the field are accessible like morphological features if the **FEATS** column.
+10. **MISC**. Any other annotation. In **Grew**, annotation of the field are accessible like other morphological features from the **FEATS** column.
+
+A few examples of usage in **Grew** patterns:
+
+  * matching the word _is_ &rarr; `pattern { N [form="is"] }`
+  * matching the lemma _be_ &rarr;  `pattern { N [lemma="be"] }`
+  * matching the Part Of Speech _VERB_ &rarr; `pattern { N [upos=VERB] }`
 
 Note that the same format is very often use to describes dependency syntax corpora.
 In these cases, a set of sentences is described in the same file using the same convention as above and a blank line as separator between sentences.
@@ -45,25 +51,6 @@ To allow this, when reading CoNLL-U format **Grew** also creates a node at posit
 The example above then produce the 5 nodes graphs below:
 
 ![Dependency structure](/doc/conllu/n01118003.svg)
-
-## About CoNLL-U field names
-In **Grew** nodes, the fields 2, 3, 4 and 5 of CoNLL-U structure are considered as features with the following feature names.
-
-| CoNLL-U field     |    2   |    3    |    4   |    5   |
-|-----------------|:------:|:-------:|:------:|:------:|
-| Name            | `form` | `lemma` | `upos` | `xpos` |
-
-For instance
-
-  * matching the word _is_ &rarr; `pattern { N [form="is"] }`
-  * matching the lemma _be_ &rarr;  `pattern { N [lemma="be"] }`
-
-### Note about backward compatibility
-In older versions of **Grew** (before the definition of the CoNLL-U format), the fields 2, 4 and 5 where accessible with the names `phon`, `cat` and `pos` respectively.
-To have a backward compatibility and uniform handling of these fields, the names `phon`, `cat` and `pos` are replaced at parsing time by `form`, `upos` and `xpos`.
-As a consequence, it is impossible to use both `phon` and `form` in the same system.
-We highly recommend to use only the `form` feature in this setting. Of course, the same observation applies to `cat` and `upos` (`upos` should be prefered) and to `pos` and `xpos` (`xpos` should be chosen).
-
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
@@ -87,3 +74,16 @@ This includes:
 
 See few examples in **SUD_French-GSD** {{< tryit "http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5e42842249c10" >}}.
 
+---
+
+## Note about CoNLL feature values
+
+In older versions of **Grew** (before the definition of the CoNLL-U format), the fields 2, 4 and 5 where accessible with the names `phon`, `cat` and `pos` respectively.
+Since 1.6, these names cannot be used anymore.
+If you used this features names, you have to update your old GRS with the following correspondance:
+
+ * `phon` must be replaced by `form`
+ * `cat` must be replaced by `upos`
+ * `pos` must be replaced by `xpos`
+
+Note that this applies to the examples given in the book "Application of Graph Rewriting to Natural Language Processing".

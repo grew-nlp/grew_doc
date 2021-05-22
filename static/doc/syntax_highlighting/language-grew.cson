@@ -1,0 +1,81 @@
+
+'scopeName': 'source.grew'
+'name': 'grew'
+'fileTypes': [
+  'grs'
+  'pat'
+],
+'patterns': [
+  {
+    'match': '\\b(del_edge|add_edge|del_node|add_node|shift|shift_in|shift_out|del_feat|append_feat|unorder|insert|append_feats)\\b',
+    'name': 'constant.character.grew'
+  }
+
+  {
+    'match': '\\b(rule|package|strat|include|import)\\b'
+    'name': 'keyword.other.grew'
+  }
+
+  {
+    'match': '\\b(global|pattern|without|commands)\\b'
+    'name': 'keyword.other.grew'
+  }
+
+  {
+    'match': '%.*'
+    'name': 'comment.other.grew'
+  }
+
+  {
+    'match': '<<'
+    'name': 'operator.grew'
+  }
+
+  {
+    'match': '"[^"]*"'
+    'name': 'string.grew'
+  }
+
+  {
+    'match': '([a-z_A-Z0-9]*) *-\\[[.a-z_A-Z0-9.:|]*\\]-> *([a-z_A-Z0-9]*)'
+    'captures':
+      '1':
+        'name': 'variable'
+      '2':
+        'name': 'variable'
+  }
+
+  {
+    'match': '([a-z_A-Z0-9]*) *\\[[^\\]]*\\]'
+    'captures':
+      '1':
+        'name': 'variable'
+  }
+
+  {
+    'match': '([a-z_A-Z0-9]*).[a-z_A-Z0-9]* *='
+    'captures':
+      '1':
+        'name': 'variable'
+  }
+
+  {
+    'match': '(del_feat) *([a-z_A-Z0-9]*).[a-z_A-Z0-9]'
+    'captures':
+      '1':
+        'name': 'constant.character.grew'
+      '2':
+        'name': 'variable'
+  }
+
+
+  {
+    'match': '([a-z_A-Z0-9]*) *(<<|>>|<|>) *([a-z_A-Z0-9]*)'
+    'captures':
+      '1':
+        'name': 'variable'
+      '3':
+        'name': 'variable'
+  }
+
+]

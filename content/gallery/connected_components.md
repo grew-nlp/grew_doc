@@ -38,7 +38,7 @@ We obtained two output graphs, one for each connected component in the input gra
 
 | Input | Output 1 | Output 2 |
 |---|---|---|
-| ![two_cc](/gallery/connected_components/_build/two_cc.svg) | ![cc1](/gallery/connected_components/_build/cc1.svg) | ![cc1](/gallery/connected_components/_build/cc2.svg) |
+| ![two_cc](/gallery/connected_components/_build/two_cc.svg) | ![cc1](/gallery/connected_components/_build/two_cc_output__0.svg) | ![cc1](/gallery/connected_components/_build/two_cc_output__1.svg) |
 
 ### Example with linguistic data
 

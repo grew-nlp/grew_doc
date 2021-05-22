@@ -96,11 +96,14 @@ To describe a graph in practice, **Grew** offers several input formats:
 
  * [JSON](../json)
  * [CoNLL-U format](../conllu)
- * The specific `gr` format: see [Python page](../../usage/python) for examples. This format is deprecated and should not be used in new Development, JSON file above should be prefered
- * AMR format: **Grew** is also able te read data following format used for instance in corpora freely available on (AMR web page)[https://amr.isi.edu/index.html]
+ * The specific `gr` format: see [Python page](../../usage/python) for examples. This format is deprecated and should not be used in new Development, JSON file above should be preferred
+ * AMR format: **Grew** is also able to read data following format used for instance in corpora freely available on [AMR web page](https://amr.isi.edu/index.html).
 
 # Graph output formats
 
  * [CoNLL-U](../conllu): this is the format used by default with `grew transform`
  * [JSON](../json): available with `-json` argument on the command line
+   * if the output contains one graph, the CoNLL code of the graph given
+   * if the output contains zero or more than two graphs, a JSON list is returned
+ * multi [JSON](../json): available with `-multi_json` argument on the command line. Each graph is written is a separate file. With `grew transform … -o out.json -multi_json`, files are named `out__0.json`, `out__1.json`…
  * Graphviz dot: available with `-dot` argument on the command line

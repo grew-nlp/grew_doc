@@ -26,7 +26,13 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.6 (May 5, 2021)
+# :new: Version 1.6.1 (May 22, 2021)
+  * add new commands `unorder` and `insert` (⚠️ in old GRS which used `unorder` or `insert` as identifier, a renaming in needed)
+  * add `-multi_json` argument (see [Graph output formats](../../doc/graph/#graph-output-formats))
+
+---
+
+# Version 1.6 (May 5, 2021)
   * ⚠️ stop backward compatibility with old feature names `pos`, `cat` and `phon`  (see [CoNNL-U](../../doc/conllu#note-about-conll-feature-values))
   * add `-columns` argument (see [CoNNL-U Plus](../../doc/conllup#columns-declaration))
   * fix invalid json output if there is more than one output graph

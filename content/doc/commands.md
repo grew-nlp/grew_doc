@@ -131,20 +131,20 @@ If the pattern binds the identifier `e` to some edge (with the syntax `e: X -[â€
 
 ## Changing nodes order
 
-Change and ordered node into an unordered node
+Change an ordered node into an unordered node
 
 ~~~grew
 unorder N.feat
 ~~~
 
-Change and unordered node into an ordered node
+Change an unordered node into an ordered node
 
 ~~~grew
 insert N :> M  % put the unordered node N right after the node M 
 insert N :< M  % put the unordered node N right before the node M 
 ~~~
 
-The two commands can be used together to move a node. For instance the next rules exchange the position of `N1` and `N2`
+The two commands `unorder` and `insert` can be used together to move a node. For instance the next rule exchanges the positions of `N1` and `N2`
 
 ~~~grew
 rule ex {
@@ -153,16 +153,17 @@ rule ex {
 }
 ~~~
 
-## Copy several feats from one node to another one
+## Copy several features from one node to another
 
-The command `append_feats M ==> N` append feats of node `M` to feats of node `N`.
+The command `append_feats M ==> N` appends features of node `M` to features of node `N`.
 
 To be more precise: the command `append_feats M ==> N` modifies the feature structure of node `N`:
  * if the same feature `feat` is defined for both nodes, same effect as: `N.feat = N.feat + M.feat`
  * if the feature `feat` is defined in `M` only, same effect as: `N.feat = M.feat`
  * other features of `N` are unchanged
 
-It is also possible to add a string separator for feature values concatenation. the command `append_feats "+" M ==> N` will have the same effect as `N.feat = N.feat + "+" + M.feat` when `feat` is defined in both nodes.
+It is also possible to add a string separator for feature values concatenation.
+The command `append_feats "+" M ==> N` will have the same effect as `N.feat = N.feat + "+" + M.feat` when `feat` is defined in both nodes.
 
 This can be used to clone a node. The command below clone the node `N`:
 

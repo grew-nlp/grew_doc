@@ -1,4 +1,5 @@
 HUGO=hugo
+GREW=grew_dev
 
 selfdoc:
 	@echo " * make start --> run locally the server"
@@ -14,25 +15,25 @@ stop:
 	killall ${HUGO}
 
 build:
-	@make -C static/doc/commands
-	@make -C static/doc/json
-	@make -C static/doc/grs
-	@make -C static/doc/rewriting
-	@make -C static/doc/rule
-	@make -C static/grs/deep_syntax
-	@make -C static/grs/parsing
-	@make -C static/tutorial/02_first_rule
-	@make -C static/tutorial/03_rules_set
-	@make -C static/tutorial/04_termination
-	@make -C static/tutorial/05_confluence
-	@make -C static/tutorial/06_more_commands
-	@make -C static/usage/cli
-	@make -C static/usage/grew_count
-	@make -C static/usage/python
-	@make -C static/gallery/flat
-	@make -C static/gallery/connected_components
-	@make -C static/gallery/update_edge_feature
-	@make -C static/gallery/ud2sud
+	@make GREW=${GREW} -C static/doc/commands
+	@make GREW=${GREW} -C static/doc/json
+	@make GREW=${GREW} -C static/doc/grs
+	@make GREW=${GREW} -C static/doc/rewriting
+	@make GREW=${GREW} -C static/doc/rule
+	@make GREW=${GREW} -C static/grs/deep_syntax
+	@make GREW=${GREW} -C static/grs/parsing
+	@make GREW=${GREW} -C static/tutorial/02_first_rule
+	@make GREW=${GREW} -C static/tutorial/03_rules_set
+	@make GREW=${GREW} -C static/tutorial/04_termination
+	@make GREW=${GREW} -C static/tutorial/05_confluence
+	@make GREW=${GREW} -C static/tutorial/06_more_commands
+	@make GREW=${GREW} -C static/usage/cli
+	@make GREW=${GREW} -C static/usage/grew_count
+	@make GREW=${GREW} -C static/usage/python
+	@make GREW=${GREW} -C static/gallery/flat
+	@make GREW=${GREW} -C static/gallery/connected_components
+	@make GREW=${GREW} -C static/gallery/update_edge_feature
+	@make GREW=${GREW} -C static/gallery/ud2sud
 
 clean:
 	@make -C static/doc/commands clean

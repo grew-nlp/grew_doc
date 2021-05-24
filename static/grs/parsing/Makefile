@@ -1,4 +1,4 @@
-GREW=grew_dev
+GREW?=grew_dev
 
 build:
 	mkdir -p _build
@@ -16,7 +16,7 @@ build:
   --inFile=data.txt \
   --outFile=data.tal && cd -
 	sed -f tal2grew.sed _build/data.tal > _build/data.pos.conll
-	${GREW} transform -grs _build/POStoSSQ/grs/surf_synt_main.grs -config sequoia -i _build/data.pos.conll -o _build/data.surf.conll
+	${GREW} transform -quiet -grs _build/POStoSSQ/grs/surf_synt_main.grs -config sequoia -i _build/data.pos.conll -o _build/data.surf.conll
 	dep2pict _build/data.surf.conll _build/data.surf.svg
 
 clean:

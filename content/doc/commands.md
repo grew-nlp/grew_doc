@@ -11,11 +11,47 @@ menu = "main"
 # Command syntax
 Each rule contains a sequence of commands introduced by the keyword `commands`, separated by semicolon symbol `;` and surrounded by braces.
 
+---
+
+## Edge deletion
+To delete an edge, the `del_edge` command can refer either to the full description of the edge or to an identifier `e` given in the pattern:
+
+~~~grew
+del_edge A -[obj]-> B;
+del_edge e;
+~~~
+
+For the first syntax, if the corresponding edge does not exists, an exception is raised and the full rewriting process is stopped.
+
+---
+
+## Add a new edge
+
+The basic syntax to add a new edge is:
+
+~~~grew
+add_edge N -[suj]-> M
+~~~
+
+It is also possible to give a name to the newly created edge, in order to manipulate it in the next commands.
+For instance the two commands below create a new edge `f` and copy the edge label of some other edge `e`.
+
+~~~grew
+add_edge f: N -> M;    % this supposes that `f` is a fresh name in the rule
+f.label = e.label;     % this supposes that `e` is a known edge in the rule
+~~~
+
+**NB**: the syntax above (`add_edge f:…`) has changed in version 1.4, please see [here](../upgrade) for info about migration.
+
+---
+
 ## Node deletion
 The following command removes the A node and all its incident edges.
 ~~~grew
 del_node A
 ~~~
+
+---
 
 ## Node creation
 To create a new node, the command is `add_node`.
@@ -31,33 +67,7 @@ add_node B :< N
 add_node C :> N
 ~~~
 
-## Edge deletion
-To delete an edge, the `del_edge` command can refer either to the full description of the edge or to an identifier `e` given in the pattern:
-
-~~~grew
-del_edge A -[obj]-> B;
-del_edge e;
-~~~
-
-**NOTE**: for the first syntax, if the corresponding edge does not exists, an exception is raised and the full rewriting process is stopped.
-
-## Add a new edge
-
-The basic syntax to add a new edge is:
-
-~~~grew
-add_edge N -[suj]-> M
-~~~
-
-It is also possible to give a name to the newly created edge, in order to manipulate it in the next commands.
-For instance the two commands below create a new edge `f` and copy the edge label of some other edge `e`.
-
-~~~grew
-add_edge f: N -[suj]-> M;    % this supposes that `f` is a fresh name in the rule
-f.label = e.label;           % this supposes that `e` is a known edge in the rule
-~~~
-
-**NB**: the syntax above (`add_edge f:…`) has changed in version 1.4, please see [here](../upgrade) for info about migration.
+---
 
 ## Shifting (edge redirection)
 Commands are available to move globally incident edges of some node of the pattern.
@@ -80,6 +90,34 @@ The action of the 3 commands above are respectively:
   * modifying out-edges which are starting in `B` with a `suj` or `obj` label: they are redirected to start in `C`.
   * modifying in-edges which are ending in `B` with a label different from `suj` and `obj`: they are redirected to end in `D`.
 
+---
+
+## Add or update a node feature
+
+The following commands update the feature `feat` of the node `N`.
+If the node `N` does not have such a feature, it is added.
+
+~~~grew
+N.feat = "new_value"   % give a new value
+N.feat = M.feat        % copy a value from another node
+~~~
+
+It is possible to use the `+` symbol for string concatenation:
+
+~~~grew
+N.feat = M.feat + "/" + M.lemma
+~~~
+
+---
+
+## Remove a node feature
+
+~~~grew
+del_feat N.feat
+~~~
+
+---
+
 ## Modification of an existing edge
 
 In commands, it is possible to manipulate subpart of edges.
@@ -88,6 +126,56 @@ If the pattern binds the identifier `e` to some edge (with the syntax `e: X -[�
  * `e.2 = aux`: update the current edge `e`
  * `add_edge X -[1=suj, 2=e.2]-> Z`: add a new edge where the value of feature `2` is copied from the value of feature `2` of edge `e`;
  * `del_feat e.deep`: remove the feature `deep` from the edge `e` (the edge is not removed, even if its label is an empty feature structure);
+
+---
+
+## Changing nodes order
+
+Change and ordered node into an unordered node
+
+~~~grew
+unorder N.feat
+~~~
+
+Change and unordered node into an ordered node
+
+~~~grew
+insert N :> M  % put the unordered node N right after the node M 
+insert N :< M  % put the unordered node N right before the node M 
+~~~
+
+The two commands can be used together to move a node. For instance the next rules exchange the position of `N1` and `N2`
+
+~~~grew
+rule ex {
+  pattern { N1 [upos=VERB]; N2 [upos=ADV]; N1 < N2 }
+  commands { unorder N1; insert N1 :> N2 }
+}
+~~~
+
+## Copy several feats from one node to another one
+
+The command `append_feats M ==> N` append feats of node `M` to feats of node `N`.
+
+To be more precise: the command `append_feats M ==> N` modifies the feature structure of node `N`:
+ * if the same feature `feat` is defined for both nodes, same effect as: `N.feat = N.feat + M.feat`
+ * if the feature `feat` is defined in `M` only, same effect as: `N.feat = M.feat`
+ * other features of `N` are unchanged
+
+It is also possible to add a string separator for feature values concatenation. the command `append_feats "+" M ==> N` will have the same effect as `N.feat = N.feat + "+" + M.feat` when `feat` is defined in both nodes.
+
+This can be used to clone a node. The command below clone the node `N`:
+
+~~~grew
+rule clone {
+  pattern { N [upos=VERB]; }
+  commands {
+    add_node M :> N;
+    append_feats N ==> M;
+    add_edge N -[copy]-> M;
+  }
+}
+~~~
 
 
 ---
@@ -184,14 +272,12 @@ Command which may be ineffective are:
 
  * `add_edge` when the edge is already present in the graph
  * `del_edge` when the edge does not exists in the graph
- * `del_node` when the node does not exists in the graph (this can happen when there are two commands `del_node A` in the same rule)
  * `del_feat` when the feat does not exists in the node
 
 Note that it is always possible to define a Graph Rewriting System with only effective commands following the procedure:
 
  * a rule with an potential ineffective `add_edge` commands can be replaced by two rules, one with a `without` clause ensuring the absence of the edge and one without the `add_edge` command.
  * a rule with an potential ineffective `del_edge` commands can be replaced by two rules, one with the given edge in the pattern and one without the `del_edge` command.
- * an ineffective `del_node` command can be safely removed
  * a rule with an potential ineffective `del_feat` commands can be replaced by two rules, one with the feat in the pattern and one without the `del_feat` command.
 
 

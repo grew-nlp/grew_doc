@@ -1,6 +1,6 @@
 HUGO=hugo
 GREW=grew_dev
-DEP2PICT=dep2pict_dev
+DEP2PICT=dep2pict
 
 selfdoc:
 	@echo " * make start --> run locally the server"

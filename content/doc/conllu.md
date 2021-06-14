@@ -18,7 +18,7 @@ For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
 Tokens lines contain 10 fields, separated by tabulations.
 
-The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.6).
+The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.8).
 
 {{< input file="static/doc/conllu/n01118003.conllu" >}}
 
@@ -50,7 +50,7 @@ In practice, it may be useful to deal explicitly with the `root` relation (for i
 To allow this, when reading CoNLL-U format **Grew** also creates a node at position `0` and link it with the `root` relation to the linguistic root node of the sentence.
 The example above then produce the 5 nodes graphs below:
 
-![Dependency structure](/doc/conllu/n01118003.svg)
+![Dependency structure](/doc/conllu/_build/n01118003.svg)
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).

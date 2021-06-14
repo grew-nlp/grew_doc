@@ -16,6 +16,7 @@ stop:
 
 build:
 	@make GREW=${GREW} -C static/doc/commands
+	@make GREW=${GREW} -C static/doc/conllu
 	@make GREW=${GREW} -C static/doc/json
 	@make GREW=${GREW} -C static/doc/grs
 	@make GREW=${GREW} -C static/doc/rewriting
@@ -37,6 +38,7 @@ build:
 
 clean:
 	@make -C static/doc/commands clean
+	@make -C static/doc/conllu clean
 	@make -C static/doc/grs clean
 	@make -C static/doc/rewriting clean
 	@make -C static/doc/rule clean

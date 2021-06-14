@@ -66,7 +66,7 @@ The output is given in JSON format.
 
 With the following files:
 
- * The `dev` part of the corpus `UD_French-GSD` version 2.6: `fr_gsd-ud-dev.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-GSD/blob/r2.6/fr_gsd-ud-dev.conllu?raw=true)
+ * The `dev` part of the corpus `UD_French-GSD` version 2.8: `fr_gsd-ud-dev.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-GSD/blob/r2.8/fr_gsd-ud-dev.conllu?raw=true)
  * A pattern file with the code below: `rouge.pat`[:link:](/usage/cli/rouge.pat)
 
 {{< grew file="static/usage/cli/rouge.pat" >}}
@@ -137,7 +137,7 @@ which corresponds to the table:
 
 | Corpus | # sentences | ADJ_NOUN | NOUN_ADJ |
 |------------|-------------|----------|----|
-| UD_English-PUD | 1000 | 1118 | 12 |
+| UD_English-PUD | 1000 | 1114 | 12 |
 | UD_French-PUD | 1000 | 423 | 935 |
 | UD_Chinese-PUD | 1000 | 364 | 0 |
 

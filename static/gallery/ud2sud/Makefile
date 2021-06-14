@@ -1,10 +1,11 @@
 GREW?=grew
+DEP2PICT?=dep2pict
 
 build:
 	mkdir -p _build
-	dep2pict ud.conllu _build/ud.svg
+	${DEP2PICT} ud.conllu _build/ud.svg
 	${GREW} transform -quiet -grs ud2sud.grs -config sud -i ud.conllu -o _build/sud.conllu
-	dep2pict _build/sud.conllu _build/sud.svg
+	${DEP2PICT} _build/sud.conllu _build/sud.svg
 
 test:
 	${GREW} transform -quiet -grs ud2sud.grs -config sud -i ud.conllu -o sud_main.conllu

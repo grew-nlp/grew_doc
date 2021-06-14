@@ -1,5 +1,6 @@
 HUGO=hugo
 GREW=grew_dev
+DEP2PICT=dep2pict_dev
 
 selfdoc:
 	@echo " * make start --> run locally the server"
@@ -15,26 +16,26 @@ stop:
 	killall ${HUGO}
 
 build:
-	@make GREW=${GREW} -C static/doc/commands
-	@make GREW=${GREW} -C static/doc/conllu
-	@make GREW=${GREW} -C static/doc/json
-	@make GREW=${GREW} -C static/doc/grs
-	@make GREW=${GREW} -C static/doc/rewriting
-	@make GREW=${GREW} -C static/doc/rule
-	@make GREW=${GREW} -C static/grs/deep_syntax
-	@make GREW=${GREW} -C static/grs/parsing
-	@make GREW=${GREW} -C static/tutorial/02_first_rule
-	@make GREW=${GREW} -C static/tutorial/03_rules_set
-	@make GREW=${GREW} -C static/tutorial/04_termination
-	@make GREW=${GREW} -C static/tutorial/05_confluence
-	@make GREW=${GREW} -C static/tutorial/06_more_commands
-	@make GREW=${GREW} -C static/usage/cli
-	@make GREW=${GREW} -C static/usage/grew_count
-	@make GREW=${GREW} -C static/usage/python
-	@make GREW=${GREW} -C static/gallery/flat
-	@make GREW=${GREW} -C static/gallery/connected_components
-	@make GREW=${GREW} -C static/gallery/update_edge_feature
-	@make GREW=${GREW} -C static/gallery/ud2sud
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/commands
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/conllu
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/json
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/grs
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/rewriting
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/rule
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/grs/deep_syntax
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/grs/parsing
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/02_first_rule
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/03_rules_set
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/04_termination
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/05_confluence
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/06_more_commands
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/cli
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/grew_count
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/python
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/flat
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/connected_components
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/update_edge_feature
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/ud2sud
 
 clean:
 	@make -C static/doc/commands clean

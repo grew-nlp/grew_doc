@@ -1,3 +1,5 @@
+DEP2PICT?=dep2pict
+
 build:
 	mkdir -p _build
 	find . -name "*.dep" -type f -print | sed "s/.dep$$//" | xargs -I {} make "{}.svg"
@@ -9,4 +11,4 @@ clean:
 .SUFFIXES: .svg .dep
 
 .dep.svg:
-	dep2pict $< $@
+	${DEP2PICT} $< $@

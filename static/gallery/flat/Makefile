@@ -1,4 +1,5 @@
 GREW?=grew
+DEP2PICT?=dep2pict
 
 build:
 	mkdir -p _build
@@ -8,10 +9,10 @@ build:
 	mv *.svg _build
 	${GREW} transform -quiet -grs rules.grs -strat "Iter (sh2c_1)" -i SH6.conll -o _build/C6_120.conll
 	# select one of the output graphs
-	dep2pict _build/C6_120.conll -p 42 _build/C6_120_example.svg
+	${DEP2PICT} _build/C6_120.conll -p 42 _build/C6_120_example.svg
 	${GREW} transform -quiet -grs rules.grs -strat "Iter (sh2c_2)" -i SH6.conll -o _build/C6_5.conll
 	# select one of the output graphs
-	dep2pict _build/C6_5.conll -p 3 _build/C6_5_example.svg
+	${DEP2PICT} _build/C6_5.conll -p 3 _build/C6_5_example.svg
 
 
 clean:
@@ -24,9 +25,9 @@ clean:
 	dot -Tsvg $< -o $@
 
 .dep.svg:
-	dep2pict $< $@
+	${DEP2PICT} $< $@
 
 .conll.svg:
-	dep2pict $< $@
+	${DEP2PICT} $< $@
 
 

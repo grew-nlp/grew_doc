@@ -1,4 +1,5 @@
 GREW?=grew_dev
+DEP2PICT?=dep2pict
 
 build:
 	mkdir -p _build
@@ -17,7 +18,7 @@ build:
   --outFile=data.tal && cd -
 	sed -f tal2grew.sed _build/data.tal > _build/data.pos.conll
 	${GREW} transform -quiet -grs _build/POStoSSQ/grs/surf_synt_main.grs -config sequoia -i _build/data.pos.conll -o _build/data.surf.conll
-	dep2pict _build/data.surf.conll _build/data.surf.svg
+	${DEP2PICT} _build/data.surf.conll _build/data.surf.svg
 
 clean:
 	rm -rf _build

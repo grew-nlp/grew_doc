@@ -1,5 +1,5 @@
 HUGO=hugo
-GREW=grew_dev
+GREW=grew
 DEP2PICT=dep2pict
 
 selfdoc:

@@ -153,11 +153,11 @@ We can then observe that in the annotations of the 3 corpora in use:
 
 ## Example with a cluster key
 
-:warning: available only with *Grew* version 1.6.2.
+:warning: available only with *Grew* version 1.6.3.
 
 With the same data as in the previous example, the following command:
 
-`grew_dev count -pattern ADJ_NOUN.pat -key N.Number -i en_fr_zh.json`
+`grew count -pattern ADJ_NOUN.pat -key N.Number -i en_fr_zh.json`
 
 produces the TSV file:
 
@@ -167,9 +167,9 @@ which corresponds to the table:
 
 | Corpus | Plur | Sing | undefined |
 |------------|-------------|----------|----|
-| UD_English-PUD | 224 | 423 | 0 |
-| UD_French-PUD | 146 | 208 | 0 |
-| UD_Chinese-PUD | 0 | 0 | 299 |
+| UD_English-PUD | 392 | 722 | 0 |
+| UD_French-PUD | 178 | 245 | 0 |
+| UD_Chinese-PUD | 0 | 0 | 364 |
 
 
 ## Remarks

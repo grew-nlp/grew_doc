@@ -111,13 +111,17 @@ The commands below removes the `marshal` files produced by the `grew compile` co
 ---
 # Count
 
-This mode computes corpus statistics. Given a set of patterns and a set of corpora, a TSV table is built with the number of occurrences for each pattern in each corpus.
+This mode computes corpus statistics.
+There are two ways to used it:
+
+ * Given a set of patterns and a set of corpora, a TSV table is built with the number of occurrences for each pattern in each corpus.
+ * Given one pattern, a set of corpora and a cluster key, a TSV table is built with the results of the clustering (with corpora on lines and cluster keys in raws).
 
 The set of corpora is described in a [JSON file](../../doc/corpora) and must be [compiled](./#compile) before running `grew count`.
 
-Each pattern is described in a separate file.
 
-## Example
+## Example with several patterns 
+Each pattern is described in a separate file.
 With the two following 1-line files:
 
  * `ADJ_NOUN.pat` [:link:](/usage/cli/ADJ_NOUN.pat) {{< input file="static/usage/cli/ADJ_NOUN.pat" >}}
@@ -146,6 +150,27 @@ We can then observe that in the annotations of the 3 corpora in use:
  * in English, there is a strong preference for adjective position before the noun (98.9%)
  * in French, there is a weak preference for adjective position after the noun (68.9%)
  * in Chinese, there is a **very** strong preference for adjective position before the noun (100%)
+
+## Example with a cluster key
+
+:warning: available only with *Grew* version 1.6.2.
+
+With the same data as in the previous example, the following command:
+
+`grew_dev count -pattern ADJ_NOUN.pat -key N.Number -i en_fr_zh.json`
+
+produces the TSV file:
+
+{{< input file="static/usage/cli/_build/output_key" >}}
+
+which corresponds to the table:
+
+| Corpus | Plur | Sing | undefined |
+|------------|-------------|----------|----|
+| UD_English-PUD | 224 | 423 | 0 |
+| UD_French-PUD | 146 | 208 | 0 |
+| UD_Chinese-PUD | 0 | 0 | 299 |
+
 
 ## Remarks
 

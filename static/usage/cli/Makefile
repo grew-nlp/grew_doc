@@ -9,6 +9,7 @@ run:
 	${GREW} clean -i en_fr_zh.json
 	${GREW} compile -i en_fr_zh.json
 	${GREW} count -patterns "ADJ_NOUN.pat NOUN_ADJ.pat" -i en_fr_zh.json > _build/output_count
+	${GREW} count -patterns ADJ_NOUN.pat -key N.Number -i en_fr_zh.json > _build/output_key
 
 clean:
 	rm -rf _build

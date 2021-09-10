@@ -95,6 +95,7 @@ Follow general instruction for [Grew installation](../install) and then install 
 ### Configuration
 To configure your daemon, you have to describe the corpora you want to use in a `conf` file.
 This file describes each corpora with a name, a directory and a list of files.
+The names used in the file must match the corpora `id` of the files `groups.json`.
 For instance, the JSON file `my_corpora.json` below defines 3 corpora:
 
 ```json_alt

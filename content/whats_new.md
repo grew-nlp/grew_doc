@@ -26,7 +26,12 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.6.1 (May 22, 2021)
+# :new: Version 1.7.0 (September 20, 2021)
+  * Add syntax with regexp in node declaration
+
+---
+
+# Version 1.6.1 (May 22, 2021)
   * add new commands `unorder` and `insert` (⚠️ in old GRS which used `unorder` or `insert` as identifier, a renaming in needed)
   * add `-multi_json` argument (see [Graph output formats](../../doc/graph/#graph-output-formats))
 

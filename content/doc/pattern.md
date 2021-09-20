@@ -46,7 +46,7 @@ They are described by a list of clauses: node clauses, edge clauses and addition
 In a *node clause*, a node is described by an identifier and some constraints on its feature structure.
 
 ```grew
-N [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, lemma = "être" ]
+N [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, form = "être", lemma = re"s.*" ]
 ```
 
 The clause above illustrates the syntax of constraint that can be expressed, in turn:
@@ -56,7 +56,8 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * `Tense <> Fut` requires that the feature `Tense` is defined with a value different from `Fut`
  * `Number` requires that the feature `Number` is defined whatever is its value
  * `!Person` requires that the feature `Person` is not defined
- * `lemma = "être"` quotes are required when non-ASCII characters are used
+ * `form = "être"` quotes are required when non-ASCII characters are used
+ * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression (available since version `1.7.0`)
 
 ### Edge clauses
 

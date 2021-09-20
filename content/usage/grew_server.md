@@ -171,39 +171,7 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ## Search with Grew patterns
 
-### The `searchPatternInGraphs` service :warning: PROD :warning:
-
-Given a **Grew** pattern and a project, this service returns a list of occurrences of the pattern in the project.
-Each occurrence is described by a dict
-
-```
-{
-  'sample_id':…,
-  'sent_id':…,
-  'conll':…,
-  'user_id':…,
-  'nodes':…,
-  'edges':…
-}
-```
-
- * `(<string> project_id, <string> pattern)` returns a list of occurrences.
-
- * `(<string> project_id, <string> pattern, <string> clusters)`
- where `clusters` is a list of cluster keys, separated by `;`.
- This returns nested dictionaries (the depth being equals to the length of the cluster key list).
- The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
- each cluster is further clustered recursively with the remaining keys.
- For instance:
-
-   * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
-   * Data presented in one table of the page **Relations tables** in **Grew-match** ([ex](http://match.grew.fr/_meta/SUD_French-GSD@latest_table.html)) can be obtained (for the `obj` relation in the example) with the arguments:
-
-     * `pattern`: `pattern { G -[obj]-> D }`
-     * `clusters`: `G.upos; D.upos`
-
-
-### The `searchPatternInGraphs` service :warning: DEV :warning:
+### The `searchPatternInGraphs` service
 
 Given a **Grew** pattern, a list of users and a project, this service returns a list of occurrences of the pattern in the project.
 

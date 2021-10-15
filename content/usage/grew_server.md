@@ -157,11 +157,8 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ### The `saveConll` services
 
- * ~~`(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <file> conll_file)`~~ Removed in DEV (2020/10/27)
- * ~~`(<string> project_id, <string> sample_id, <string> sent_id, <file> conll_file)`~~ Removed in DEV (2020/10/27)
  * `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
  * `(<string> project_id, <string> sample_id, <file> conll_file)`
- * ~~`(<string> project_id, <file> conll_file)`~~ Removed in DEV (2020/10/27)
 
 ### The `saveGraph` service
 
@@ -240,10 +237,9 @@ The output is the list of new graphs produced by the rules applications (note th
  * `sent_id`
  * `user_id`
 
-**NB:** The graph are left unchanged in the project. If you want to modify the graph with the new graphs, use `applyRules` service.
+**NB:** The graph are left unchanged in the project. If you want to replace old graphs with the new graphs, use `applyRules` service.
 
-:new: in DEV since 2020/11/04
-The conll output contains special metadata listing nodes and edges that were changed by the rules applications:
+The CoNLL output contains special metadata listing nodes and edges that were changed by the rules applications:
  * for each modified node, a metadata `modified_node` is added with the id of the node and the list of features modified by the rule
  * for each modified edge, a metadata `modified_edge` is added with source id, new label and target_id
 
@@ -276,17 +272,6 @@ Below, an example of output after a rewrite with the two rules:
 14	.	.	PUNCT	_	_	3	punct	_	_
 ```
 
-
-
-
-
-### :warning: DEPRECATED The `tryRule` service
-
-The service `tryRule` is equivalent to `tryRules` but limited to only one rule. It is subsumed by the `tryRules` service and will be removed soon.
-
- * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
-
-
 ### The `applyRules` service
  * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> rules)`
 
@@ -300,13 +285,6 @@ The output gives the number of rewritten graphs and the number of unchanged grap
     "unchanged": 0
 }
 ```
-
-### :warning: DEPRECATED The `applyRule` service
-
-The service `applyRule` is equivalent to `applyRules` but limited to only one rule. It is subsumed by the `applyRules` service and will be removed soon.
-
- * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
-
 
 ---
 
@@ -329,7 +307,6 @@ The service `applyRule` is equivalent to `applyRules` but limited to only one ru
 
 ### The `exportProject` service
   * `(<string> project_id, <string> sample_ids)`
-  * `(<string> project_id)` **DEPRECATED**: use the other service with value `[]` for `sample_ids` parameter
 
 The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 
@@ -363,13 +340,11 @@ The set of graphs considered for the production of the lexicon is the one consid
     * if the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered
     * if the `sample_ids` list is empty, all sentences are considered
   * only graphs in the project with a `timestamp` numerical metadata are present
-  * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
+  * if several graphs share the same `sent_id`, keep only the most recent graph (the one with the highest `timestamp`)
 
 ---
 
 ## Get tagset or features from a treebank
-
-:new: in DEV since 2020/11/04
 
 ### The `getPOS` service
   * `(<string> project_id, <string> sample_ids)`
@@ -399,10 +374,17 @@ returns the list of feature names used in the data:
 ---
 ---
 
-### :warning: REMOVED
 
-In a previous version, the `getLexicon` service was available with profile:
+### :warning: DEPRECATED The `tryRule` service
 
-  * `(<string> project_id)`
+The service `tryRule` is equivalent to `tryRules` but limited to only one rule. It is subsumed by the `tryRules` service and will be removed soon.
 
-It was removed. Use the profile `(<string> project_id, <string> sample_ids)` with `[]` for `sample_ids` parameter
+ * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
+
+
+### :warning: DEPRECATED The `applyRule` service
+
+The service `applyRule` is equivalent to `applyRules` but limited to only one rule. It is subsumed by the `applyRules` service and will be removed soon.
+
+ * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
+

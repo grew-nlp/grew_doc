@@ -39,16 +39,18 @@ apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 
 ### Mac OS&nbsp;X
   * Install **[XCode](https://developer.apple.com/xcode/)**
-  * Install the package manager **[MacPorts](http://www.macports.org/)**
+  * Install the package manager **[Brew](https://brew.sh/)**
 
-:warning: **[Brew](https://brew.sh/)** is an alternative only if you do not plan to use the GUI (the package `webkit-gtk` required by the GUI is not available through **Brew**).
-
-  * `sudo port install aspcud`
-  * `sudo port install opam`
+  * `brew install aspcud`
+  * `brew install opam`
 
 ## Step 2: Setup opam
 
-Run: `opam init` and follow instructions (answer `y` to different questions).
+Run: 
+  * `opam init` 
+  * `opam switch create 4.13.1 4.13.1` Install a recent version of Ocaml.
+  * as advice by the previous command: `eval $(opam env --switch=4.13.1)`
+
 
 Check that `ocaml` is installed with `ocamlc -v`. This gives you the version of Ocaml installed.
 This should be 4.10.0 or higher.
@@ -64,7 +66,7 @@ opam install grew grewpy
 
 To verify your installation:
 
-  * Try the command `grew version`. You shoule have 1.4 or higher.
+  * Try the command `grew version`. You should have 1.4 or higher.
   * In case of trouble, try `eval $(opam env)` and `opam install …` again.
   * If trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
 

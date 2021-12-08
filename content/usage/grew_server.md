@@ -223,8 +223,7 @@ For instance:
 
 ```
 [
-"pattern { N [upos=VERB] } commands { N.upos = V }",
-"pattern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[subj]-> M }"
+"pattern { N [upos=VERB] } commands { N.upos = V }",ern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[subj]-> M }"
 ]
 ```
 
@@ -322,7 +321,7 @@ The service returns an URL on a file containing the "export" of the project. In 
 
 ## Get the lexicon computed from a treebank
 
-### The `getLexicon` service
+### :warning: ====== PROD ===== The `getLexicon` service
   * `(<string> project_id, <string> sample_ids)`
   * `(<string> project_id, <string> sample_ids, <string> features)`
 
@@ -341,6 +340,71 @@ The set of graphs considered for the production of the lexicon is the one consid
     * if the `sample_ids` list is empty, all sentences are considered
   * only graphs in the project with a `timestamp` numerical metadata are present
   * if several graphs share the same `sent_id`, keep only the most recent graph (the one with the highest `timestamp`)
+
+### :warning: ====== DEV ===== The `getLexicon` service
+This new service `getLexicon` is not compatible with the previous version!
+
+  * `(<string> project_id, <string> sample_ids, <string> features)`
+  * `(<string> project_id, <string> sample_ids, <string> features, <int> prune)`
+
+The service returns a JSON data of the lexicon computed form the given corpora.
+
+The string `sample_ids` must be a JSON encoding of a list of strings (ex: `["sample_1", "sample_2"]`).
+
+The string `features` must be a JSON encoding of a list of strings (ex: `["form", "lemma", "upos", "Gender"]`).
+
+The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
+
+  * sentences are filtered with the `sample_ids` list:
+    * if the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered
+    * if the `sample_ids` list is empty, all sentences are considered
+
+The output is a list of objects. 
+Each object contains: 
+   * a key for each feature key used to build it (value are string of null)
+   * a numeric key `freq` with the frequency of the corresponding values 
+   * In the `prune` integer argument is set as `n`, only the subset of unambiguous structure at depth `n` is reported.
+    For instance, if the keys are `["form", "lemma", "upos", "Gender", "Number"]`,
+    the pruning at level 3 will keep only lexicon entries where there is 
+    more than one couple of value for `Gender` and `Number` with the same triple `(form, lemma, upos)`.
+
+#### Exemple
+
+with a corpus containing the following sentence:
+
+```
+1	moule	moule	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
+2	moule	moule	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
+3	moule	moule	NOUN	_	Gender=Masc|Number=Sing	_	_	_	_
+4	maison	maison	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
+5	maison	maison	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
+6	souris	souris	NOUN	_	Gender=Fem	_	_	_	_
+7	souris	souris	NOUN	_	Gender=Fem|Number=Plur	_	_	_	_
+```
+
+The `getLexicon` with features `["form", "lemma", "upos", "Gender", "Number"]` returns the JSON below (note the second line where the value associated with `Number` is `null`):
+
+```
+[
+  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur", "freq": 1 },
+  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null, "freq": 1 },
+  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing", "freq": 1 },
+  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing", "freq": 2 },
+  { "form": "maison", "lemma": "maison", "upos": "NOUN", "Gender": "Fem", "Number": "Sing", "freq": 2 }
+]
+```
+
+and with the additional argument `prune` with value 3, the line about `maison` is not returned because the triple `(maison, maison, NOUN)` is associated with only one line in the previous structure.
+
+```
+[
+  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur", "freq": 1 },
+  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null, "freq": 1 },
+  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing", "freq": 1 },
+  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing", "freq": 2 }
+]
+```
+
 
 ---
 

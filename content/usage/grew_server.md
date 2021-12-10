@@ -342,8 +342,8 @@ The service returns a JSON data of the lexicon computed form the given corpora.
 
 The output is a list of objects. 
 Each object contains two fields:
-   * `feats`: an object whose keys follow `features` argument` (value are string of `null`)
-   * `freq`: an int giving the frequency of the lexical item
+   * `feats`: an object whose keys follow `features` argument (value are `string` or `null`)
+   * `freq`: an `int` giving the frequency of the lexical item
 
 If the `prune` integer argument is set as `n`, only the subset of unambiguous structure at depth `n` is reported.
     For instance, if the keys are `["form", "lemma", "upos", "Gender", "Number"]`,

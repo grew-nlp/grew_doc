@@ -16,7 +16,6 @@ The `grew_server` tool is a web server which manages set of annotated graphs wit
 It is built to be used as an API by the Arborator-Grew graph annotation tool.
 
 Below, we suppose that the server is available on some `baseURL`.
-For testing purpose, a demo server should be available at `http://arborator.grew.fr`.
 
 Annotations are stored with the following hierarchy:
 
@@ -27,7 +26,7 @@ Annotations are stored with the following hierarchy:
 
 We describe below the list of available services to deal with these levels.
 All services are called with a base name and with POST parameters.
-Two types of parameter are used: `<string>` and `<file>`.
+Three types of parameter are used: `<string>`, `<int>` and `<file>`.
 
 All services reply with JSON data of one of this three forms:
 
@@ -172,11 +171,7 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 Given a **Grew** pattern, a list of users and a project, this service returns a list of occurrences of the pattern in the project.
 
-The string `user_ids` must be a JSON encoding of a list of strings:
-
- * if the list is empty (i.e. `[]`), all users are taken into account (this is equivalent to the previous behaviour).
- * if the list is `["__last__"]`, for each `sent_id`,  only the most recent graph is taken into account
- * otherwise (like `["user_1", "user_2"]`), only graphs of users present in the list are taken into account
+See [here](#user_ids) for the usage of `user_ids` argument.
 
 Each occurrence is described by a dict
 
@@ -307,13 +302,9 @@ The output gives the number of rewritten graphs and the number of unchanged grap
 ### The `exportProject` service
   * `(<string> project_id, <string> sample_ids)`
 
-The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
+See [here](#sample_ids) for the usage of `sample_ids` argument.
 
 The service returns an URL on a file containing the "export" of the project. In the export:
-
-  * sentences are filtered with the `sample_ids` list:
-    * if the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered
-    * if the `sample_ids` list is empty, all sentences are considered
   * only graphs in the project with a `timestamp` numerical metadata are present
   * if several graphs share the same `sent_id`, keep only the graph with the highest `timestamp`
 
@@ -325,7 +316,7 @@ The service returns an URL on a file containing the "export" of the project. In 
   * `(<string> project_id, <string> sample_ids)`
   * `(<string> project_id, <string> sample_ids, <string> features)`
 
-The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
+See [here](#sample_ids) for the usage of `sample_ids` argument.
 
 The string `features` must be a JSON encoding of a list of strings (like `["Number", "PronType"]`).
 If `features` is not given, the default value is `["PronType", "Mood", "Gloss"]` (this ensures the backward compatibility with previous version).
@@ -335,35 +326,26 @@ The list of features are passed to the Python script.
 
 The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
 
-  * sentences are filtered with the `sample_ids` list:
-    * if the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered
-    * if the `sample_ids` list is empty, all sentences are considered
   * only graphs in the project with a `timestamp` numerical metadata are present
   * if several graphs share the same `sent_id`, keep only the most recent graph (the one with the highest `timestamp`)
 
 ### :warning: ====== DEV ===== The `getLexicon` service
 This new service `getLexicon` is not compatible with the previous version!
 
-  * `(<string> project_id, <string> sample_ids, <string> features)`
-  * `(<string> project_id, <string> sample_ids, <string> features, <int> prune)`
+  * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features)`
+  * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features, <int> prune)`
+
+See [here](#generic-arguments-usage) for the usage of `sample_ids` and `user_ids` arguments.
+The string `features` must be a JSON encoding of a list of strings (ex: `["form", "lemma", "upos", "Gender"]`).
 
 The service returns a JSON data of the lexicon computed form the given corpora.
 
-The string `sample_ids` must be a JSON encoding of a list of strings (ex: `["sample_1", "sample_2"]`).
-
-The string `features` must be a JSON encoding of a list of strings (ex: `["form", "lemma", "upos", "Gender"]`).
-
-The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
-
-  * sentences are filtered with the `sample_ids` list:
-    * if the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered
-    * if the `sample_ids` list is empty, all sentences are considered
-
 The output is a list of objects. 
-Each object contains: 
-   * a key for each feature key used to build it (value are string of null)
-   * a numeric key `freq` with the frequency of the corresponding values 
-   * In the `prune` integer argument is set as `n`, only the subset of unambiguous structure at depth `n` is reported.
+Each object contains two fields:
+   * `feats`: an object whose keys follow `features` argument` (value are string of `null`)
+   * `freq`: an int giving the frequency of the lexical item
+
+If the `prune` integer argument is set as `n`, only the subset of unambiguous structure at depth `n` is reported.
     For instance, if the keys are `["form", "lemma", "upos", "Gender", "Number"]`,
     the pruning at level 3 will keep only lexicon entries where there is 
     more than one couple of value for `Gender` and `Number` with the same triple `(form, lemma, upos)`.
@@ -382,15 +364,16 @@ with a corpus containing the following sentence:
 7	souris	souris	NOUN	_	Gender=Fem|Number=Plur	_	_	_	_
 ```
 
+
 The `getLexicon` with features `["form", "lemma", "upos", "Gender", "Number"]` returns the JSON below (note the second line where the value associated with `Number` is `null`):
 
 ```
 [
-  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur", "freq": 1 },
-  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null, "freq": 1 },
-  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing", "freq": 1 },
-  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing", "freq": 2 },
-  { "form": "maison", "lemma": "maison", "upos": "NOUN", "Gender": "Fem", "Number": "Sing", "freq": 2 }
+  { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur" }, "freq": 1 },
+  { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null }, "freq": 1 },
+  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing" }, "freq": 1 },
+  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 },
+  { "feats": {  "form": "maison", "lemma": "maison", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 }
 ]
 ```
 
@@ -398,10 +381,10 @@ and with the additional argument `prune` with value 3, the line about `maison` i
 
 ```
 [
-  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur", "freq": 1 },
-  { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null, "freq": 1 },
-  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing", "freq": 1 },
-  { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing", "freq": 2 }
+  { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur" }, "freq": 1 },
+  { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null }, "freq": 1 },
+  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing" }, "freq": 1 },
+  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 },
 ]
 ```
 
@@ -409,46 +392,42 @@ and with the additional argument `prune` with value 3, the line about `maison` i
 ---
 
 ## Get tagset or features from a treebank
+See [here](#sample_ids) for the usage of `sample_ids` argument.
 
 ### The `getPOS` service
   * `(<string> project_id, <string> sample_ids)`
 
-returns the list of POS (`upos` feature) used in the data:
-
-  * in all the project if `sample_id` is `[]`
-  * else, only for the subset of sample described by the list
+returns the list of POS (`upos` feature) used in the data.
 
 ### The `getRelations` service
   * `(<string> project_id, <string> sample_ids)`
 
-returns the list of relations used in the data:
-
-  * in all the project if `sample_id` is `[]`
-  * else, only for the subset of sample described by the list
-
+returns the list of relations used in the data/
 
 ### The `getFeatures` service
   * `(<string> project_id, <string> sample_ids)`
 
-returns the list of feature names used in the data:
-
-  * in all the project if `sample_id` is `[]`
-  * else, only for the subset of sample described by the list
+returns the list of feature names used in the data.
 
 ---
 ---
 
+# Generic arguments usage
 
-### :warning: DEPRECATED The `tryRule` service
+## `sample_ids`
 
-The service `tryRule` is equivalent to `tryRules` but limited to only one rule. It is subsumed by the `tryRules` service and will be removed soon.
+Several services use a `string` argument named `sample_ids`.
+The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 
- * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
+  * If the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered.
+  * If the `sample_ids` list is empty, all sentences are considered.
 
+:warning: If the list contains an unused `sample_id`, no error is returned and the `sample_id` is ignored.
 
-### :warning: DEPRECATED The `applyRule` service
+## `user_ids`
 
-The service `applyRule` is equivalent to `applyRules` but limited to only one rule. It is subsumed by the `applyRules` service and will be removed soon.
+The string `user_ids` must be a JSON encoding of a list of strings:
 
- * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> pattern, <string> commands)`
-
+ * if the list is empty (i.e. `[]`), all users are taken into account.
+ * if the list is `["__last__"]`, for each `sent_id`, only the most recent graph is taken into account
+ * otherwise (like `["user_1", "user_2"]`), only graphs of users present in the list are taken into account

@@ -207,11 +207,10 @@ Each occurrence is described by a dict
 ## Applying Grew rules
 
 ### The `tryRules` service
- * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> rules)`
+ * **DEPRECATED** `(<string> project_id, [<string> sample_id], [<string> user_id], <string> rules)`
+ * `(<string> project_id, <string> sample_ids, <string> user_ids, <string> rules)`
 
-**NB:** brackets are used for optional arguments.
-If `sample_id` is provided, the service is restricted to this sample else all samples of the project are considered.
-Similarly, if `user_id` is provided, the service is restricted to the graphs belonging to the requested user else all users are considered.
+See [here](#generic-arguments-usage) for the usage of `sample_ids` and `user_ids` arguments.
 
 The `rules` parameter must be a JSON encoding of a list of strings, each string being the internal content of a Grew rule.
 For instance:
@@ -230,8 +229,6 @@ The output is the list of new graphs produced by the rules applications (note th
  * `sample_id`
  * `sent_id`
  * `user_id`
-
-**NB:** The graph are left unchanged in the project. If you want to replace old graphs with the new graphs, use `applyRules` service.
 
 The CoNLL output contains special metadata listing nodes and edges that were changed by the rules applications:
  * for each modified node, a metadata `modified_node` is added with the id of the node and the list of features modified by the rule
@@ -267,18 +264,8 @@ Below, an example of output after a rewrite with the two rules:
 ```
 
 ### The `applyRules` service
- * `(<string> project_id, [<string> sample_id], [<string> user_id], <string> rules)`
 
-The input arguments are used in the same way as in `tryRules` service.
-But instead of returning new graphs, the project is updated and new graphs replace the previous one (:warning: previous graphs are not recoverable).
-
-The output gives the number of rewritten graphs and the number of unchanged graphs:
-```json_alt
-{
-    "rewritten": 2,
-    "unchanged": 0
-}
-```
+ It is currently disabled in DEV and will be back later
 
 ---
 

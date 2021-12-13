@@ -155,9 +155,9 @@ rule ex {
 
 ## Copy several features from one node to another
 
-The command `append_feats M ==> N` appends features of node `M` to features of node `N`.
+The command `append_feats M ==> N` appends all features (different from `form`, `lemma`, `upos`, `xpos`) of node `M` to features of node `N`.
 
-To be more precise: the command `append_feats M ==> N` modifies the feature structure of node `N`:
+To be more precise, the command `append_feats M ==> N` modifies the feature structure of node `N`:
  * if the same feature `feat` is defined for both nodes, same effect as: `N.feat = N.feat + M.feat`
  * if the feature `feat` is defined in `M` only, same effect as: `N.feat = M.feat`
  * other features of `N` are unchanged
@@ -169,15 +169,21 @@ This can be used to clone a node. The command below clone the node `N`:
 
 ~~~grew
 rule clone {
-  pattern { N [upos=VERB]; }
+  pattern { N [form, lemma, upos=VERB]; }
   commands {
     add_node M :> N;
     append_feats N ==> M;
+    M.form = N.form; M.lemma = N.lemma; M.upos = N.upos;
     add_edge N -[copy]-> M;
   }
 }
 ~~~
 
+With the syntax below, the set of features taken into account can be filtered with a regexp:
+
+~~~grew
+append_feats N1 =[re"Number\|Gender"]=> N2;
+~~~
 
 ---
 ---

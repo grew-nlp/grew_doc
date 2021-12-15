@@ -108,6 +108,14 @@ It is possible to use the `+` symbol for string concatenation:
 N.feat = M.feat + "/" + M.lemma
 ~~~
 
+:new: in version 1.8: A [Python like slicing](https://www.w3schools.com/python/python_strings_slicing.asp) can be added in the right-hand side of the updating command.
+~~~grew
+N.feat = M.feat[1:]             % copy `M.feat` on node `N`, skipping the first character
+N.feat = M.feat[:-1] + N.feat   % prepend `M.feat` (without the last character) to `N.feat`
+~~~
+
+**NB**: the indexes used in slicing refers the UFT-8 characters. If `N.form = "помощник"` then `N.form[2:4]` is `"мо"`
+
 ---
 
 ## Remove a node feature

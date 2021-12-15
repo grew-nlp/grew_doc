@@ -17,9 +17,11 @@ Categories = ["Development","GoLang"]
 
 ## News
 
- * **2021/09/20:** New release of version **1.7**. See [What's new](/whats_new/) for changes.
+ * **2021/12/15:** Version **1.8**. See [What's new](/whats_new/) for changes.
 
- * **2021/05/05:** New release of version **1.6**.
+ * **2021/09/20:** Version **1.7**.
+
+ * **2021/05/05:** Version **1.6**.
 
  * **2021/03/23:** Some new pages in the documentation: follow ⭐ in the menu on the right!
 
@@ -27,10 +29,11 @@ Categories = ["Development","GoLang"]
 
 
 ## A first taste of Grew
-The easiest way to try and test **Grew** is to use one of the two online interfaces.
+The easiest way to try and test **Grew** is to use one of the online interfaces.
 
-  1. Online graph matching: [Grew-match](http://match.grew.fr) lets the user search for a given pattern in a corpus of syntactic structures (a tutorial is available to help learning pattern syntax).
-  2. Online parsing: [Grew-parse](http://parse.grew.fr) returns for a input French sentence, a set of linguistic representations (syntax and semantics) which are built using Graph Rewriting.
+  1. [Grew-match](http://match.grew.fr) (Online graph matching): search for a given pattern in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning pattern syntax).
+  2. [Grew-web](http://transform.grew.fr) (Online graph rewriting) 
+  3. [Grew-parse](http://parse.grew.fr) (Online parsing): return for a input French sentence, a set of linguistic representations (syntax and semantics) which are built using Graph Rewriting
 
 ## Some of the main features of Grew
 
@@ -38,7 +41,7 @@ The easiest way to try and test **Grew** is to use one of the two online interfa
   * The left-hand side of a rule is described by a graph called a **pattern**; injective graph morphisms are used in the pattern matching algorithm.
   * **Negative pattern** can be used for a finer control on the left-hand side of rules.
   * The right-hand side of rules is described by a sequence of **atomic commands** that describe how the graph should be modified during the rule application.
-  * Subset of rules can be organized in **packages** and **strategies** define the way rules and packages are applied in graph transformation.
+  * Subset of rules can be organised in **packages** and **strategies** define the way rules and packages are applied in graph transformation.
   * **Grew** has support both for **confluent** and **non-confluent** modules; when a non-confluent modules is used, all normal forms are returned and then ambiguity is handled in a natural way.
 
 ## Publications

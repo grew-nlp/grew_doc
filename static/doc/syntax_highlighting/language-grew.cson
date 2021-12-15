@@ -7,7 +7,7 @@
 ],
 'patterns': [
   {
-    'match': '\\b(del_edge|add_edge|del_node|add_node|shift|shift_in|shift_out|del_feat|append_feat|unorder|insert|append_feats)\\b',
+    'match': '\\b(del_edge|add_edge|del_node|add_node|shift|shift_in|shift_out|del_feat|append_feat|unorder|insert|append_feats|prepend_feats)\\b',
     'name': 'constant.character.grew'
   }
 

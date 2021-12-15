@@ -155,10 +155,12 @@ rule ex {
 
 ## Copy several features from one node to another
 
-The command `append_feats M ==> N` appends all features (different from `form`, `lemma`, `upos`, `xpos`) of node `M` to features of node `N`.
+NB: `prepend_feats` is available since version 1.8
 
-To be more precise, the command `append_feats M ==> N` modifies the feature structure of node `N`:
- * if the same feature `feat` is defined for both nodes, same effect as: `N.feat = N.feat + M.feat`
+The commands `append_feats M ==> N` / `prepend_feats M ==> N` appends / prepends all features (different from `form`, `lemma`, `upos`, `xpos`) of node `M` to features of node `N`.
+
+To be more precise, the commands `append_feats M ==> N` / `prepend_feats M ==> N` modify the feature structure of node `N`:
+ * if the same feature `feat` is defined for both nodes, same effect as: `N.feat = N.feat + M.feat` for `append_feats` and `N.feat = M.feat + N.feat` for `preppend_feats`.
  * if the feature `feat` is defined in `M` only, same effect as: `N.feat = M.feat`
  * other features of `N` are unchanged
 
@@ -183,6 +185,7 @@ With the syntax below, the set of features taken into account can be filtered wi
 
 ~~~grew
 append_feats N1 =[re"Number\|Gender"]=> N2;
+prepend_feats N3 =[re"Gloss"]=> N4;
 ~~~
 
 ---

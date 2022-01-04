@@ -94,34 +94,34 @@ The action of the 3 commands above are respectively:
 
 ## Add or update a node feature
 
-The following commands update the feature `feat` of the node `N`.
+The following commands update the feature `f` of the node `N`.
 If the node `N` does not have such a feature, it is added.
 
 ~~~grew
-N.feat = "new_value"   % give a new value
-N.feat = M.feat        % copy a value from another node
+N.f = "new_value"    % give a new value
+N.f = M.f            % copy a feature value from another node
 ~~~
 
 It is possible to use the `+` symbol for string concatenation:
 
 ~~~grew
-N.feat = M.feat + "/" + M.lemma
+N.f = M.f + "/" + M.lemma
 ~~~
 
 :new: in version 1.8: A [Python like slicing](https://www.w3schools.com/python/python_strings_slicing.asp) can be added in the right-hand side of the updating command.
 ~~~grew
-N.feat = M.feat[1:]             % copy `M.feat` on node `N`, skipping the first character
-N.feat = M.feat[:-1] + N.feat   % prepend `M.feat` (without the last character) to `N.feat`
+N.f = M.f[1:]          % copy `M.f` on node `N`, skipping the first character
+N.f = M.f[:-1] + N.f   % prepend `M.f` (without the last character) to `N.f`
 ~~~
 
-**NB**: the indexes used in slicing refers the UFT-8 characters. If `N.form = "помощник"` then `N.form[2:4]` is `"мо"`
+**NB**: the indexes used in slicing refers the UFT-8 characters. If `N.form` is `"помощник"` then `N.form[2:4]` is `"мо"`
 
 ---
 
 ## Remove a node feature
 
 ~~~grew
-del_feat N.feat
+del_feat N.f
 ~~~
 
 ---
@@ -131,9 +131,9 @@ del_feat N.feat
 In commands, it is possible to manipulate subpart of edges.
 If the pattern binds the identifier `e` to some edge (with the syntax `e: X -[…]-> Y`), the following commands can be used:
 
- * `e.2 = aux`: update the current edge `e`
- * `add_edge X -[1=suj, 2=e.2]-> Z`: add a new edge where the value of feature `2` is copied from the value of feature `2` of edge `e`;
- * `del_feat e.deep`: remove the feature `deep` from the edge `e` (the edge is not removed, even if its label is an empty feature structure);
+ * `e.2 = aux` &rarr; update the current edge `e`
+ * `add_edge X -[1=suj, 2=e.2]-> Z`  &rarr;  add a new edge where the value of feature `2` is copied from the value of feature `2` of edge `e`;
+ * `del_feat e.deep`  &rarr;  remove the feature `deep` from the edge `e` (the edge is not removed, even if its label is an empty feature structure);
 
 ---
 
@@ -142,7 +142,7 @@ If the pattern binds the identifier `e` to some edge (with the syntax `e: X -[�
 Change an ordered node into an unordered node
 
 ~~~grew
-unorder N.feat
+unorder N
 ~~~
 
 Change an unordered node into an ordered node
@@ -168,14 +168,15 @@ NB: `prepend_feats` is available since version 1.8
 The commands `append_feats M ==> N` / `prepend_feats M ==> N` appends / prepends all features (different from `form`, `lemma`, `upos`, `xpos`) of node `M` to features of node `N`.
 
 To be more precise, the commands `append_feats M ==> N` / `prepend_feats M ==> N` modify the feature structure of node `N`:
- * if the same feature `feat` is defined for both nodes, same effect as: `N.feat = N.feat + M.feat` for `append_feats` and `N.feat = M.feat + N.feat` for `preppend_feats`.
- * if the feature `feat` is defined in `M` only, same effect as: `N.feat = M.feat`
+ * if the same feature `f` is defined for both nodes, same effect as: `N.f = N.f + M.f` for `append_feats` and `N.f = M.f + N.f` for `prepend_feats`.
+ * if the feature `f` is defined in `M` only, same effect as: `N.f = M.f`
  * other features of `N` are unchanged
 
 It is also possible to add a string separator for feature values concatenation.
-The command `append_feats "+" M ==> N` will have the same effect as `N.feat = N.feat + "+" + M.feat` when `feat` is defined in both nodes.
+The command `append_feats "/" M ==> N` will have the same effect as `N.f = N.f + "/" + M.f` when `f` is defined in both nodes.
 
-This can be used to clone a node. The command below clone the node `N`:
+This can be used to clone a node. The command below clones the node `N` into a new node, called `M` in the rule, such that `M` follows `N`.
+A new edge `copy` is added from `N` to its clone.
 
 ~~~grew
 rule clone {
@@ -296,6 +297,6 @@ Note that it is always possible to define a Graph Rewriting System with only eff
 
  * a rule with an potential ineffective `add_edge` commands can be replaced by two rules, one with a `without` clause ensuring the absence of the edge and one without the `add_edge` command.
  * a rule with an potential ineffective `del_edge` commands can be replaced by two rules, one with the given edge in the pattern and one without the `del_edge` command.
- * a rule with an potential ineffective `del_feat` commands can be replaced by two rules, one with the feat in the pattern and one without the `del_feat` command.
+ * a rule with an potential ineffective `del_feat` commands can be replaced by two rules, one with the feature in the pattern and one without the `del_feat` command.
 
 

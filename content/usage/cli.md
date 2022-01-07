@@ -153,7 +153,7 @@ We can then observe that in the annotations of the 3 corpora in use:
 
 ## Example with a cluster key
 
-:warning: available only with *Grew* version 1.6.3.
+:warning: available only with *Grew* version 1.6.3 or greater.
 
 With the same data as in the previous example, the following command:
 

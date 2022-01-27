@@ -411,10 +411,33 @@ The string `sample_ids` must be a JSON encoding of a list of strings (like `["sa
 
 :warning: If the list contains an unused `sample_id`, no error is returned and the `sample_id` is ignored.
 
-## `user_ids`
+## `user_ids` (changed on 22/01/26)
 
-The string `user_ids` must be a JSON encoding of a list of strings:
+The ways `user_ids` is parsed was changed ([commit](https://gitlab.inria.fr/grew/grew_server/-/commit/1b61650dcdb42cb00f524775c4fe8829cd6aeaae)).
+The string `user_ids` must be a JSON encoding of one of these forms:
 
- * if the list is empty (i.e. `[]`), all users are taken into account.
- * if the list is `["__last__"]`, for each `sent_id`, only the most recent graph is taken into account
- * otherwise (like `["user_1", "user_2"]`), only graphs of users present in the list are taken into account
+  * The string `"all"`: all users are taken into account for each sentence
+  * The object `{ "multi" : ["user_1", "user_2", …] }`: all users explicitly mentioned in the list are taken into account for each sentence
+  * The object `{ "one" : ["user_1", "user_2", …] }`: for each sentence, only one graph (at most) is returned; the one for the first user of the list for which the graph is defined. In the list, the pseudo-user `__last__` can be used. It selects the graph with the most recent timestamp.
+
+This parameter is used for the 3 services:
+ * `searchPatternInGraphs`
+ * `getLexicon`
+ * `tryRules`: in this case, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
+
+This fulfils the request [#110](https://github.com/Arborator/arborator-frontend/issues/110):
+
+> * See for my trees &rarr; `{ "one" : ["current_user"] }` (or `{ "multi" : ["current_user"] }` which has the same meaning)
+> * See for my trees or last tree (only one user_id per tree is returned) &rarr; `{ "one" : ["current_user", "__last__"] }`
+> * See last trees &rarr; `{ "one" : ["current_user"] }`
+> * See trees from everyone &rarr; `"all"`
+> * See trees for users in a given list &rarr; `{ "multi" : ["user_1", "user_2", …] }`
+
+### DEPRECATED
+
+The previous behaviour of user_ids in DEPRECATED and will be removed soon.
+In the mean time, it is translated as follows:
+
+ * `[]` &rarr; `"all"`
+ * `["__last__"]` &rarr; `{ "one": ["__last__"] }`
+ * `["user_1", "user_2"]` &rarr; `{ "multi": ["user_1", "user_2"] }`

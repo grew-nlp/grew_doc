@@ -195,14 +195,59 @@ Each occurrence is described by a dict
  each cluster is further clustered recursively with the remaining keys.
  For instance:
 
-   * If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
-   * Data presented in one table of the page **Relations tables** in **Grew-match** ([ex](http://match.grew.fr/_meta/SUD_French-GSD@latest_table.html)) can be obtained (for the `obj` relation in the example) with the arguments:
-
-     * `pattern`: `pattern { G -[obj]-> D }`
-     * `clusters`: `G.upos; D.upos`
+If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
 
 ---
 
+## Relation tables
+In order to produce the relations tables (as in Grew-match), the following service can be used:
+
+### The `relationTables` service
+
+ * `(<string> project_id, <string> sample_ids, <string> user_ids)`
+
+See [here](#generic-arguments-usage) for the usage of `sampe_ids` and `user_ids` POST parameters.
+
+The service returns a JSON dictionary of depth 3 where keys are:
+ * the dependency relations label
+ * the `upos` of the governor of the relation
+ * the `upos` of the dependant of the relation (**NB**: `ExtPos` is taken into account if present)
+ 
+and the values are integers indicating the number of occurrences of the each triple of keys.
+
+#### Example
+
+With the following CoNLL:
+
+```
+1	(	_	PUNCT	_	_	3	punct	_	_
+2	ouvert	_	ADJ	_	_	0	root	_	_
+3	à	_	ADP	_	_	2	mod	_	ExtPos=ADV|Idiom=Yes
+4	nouveau	_	ADJ	_	_	3	comp:obj	_	InIdiom=Yes
+5	)	_	PUNCT	_	_	3	punct	_	_
+```
+
+The `relationTables` service returns:
+
+
+```
+{
+  "root": { "_": { "ADJ": 1 } },
+  "punct": { "ADP": { "PUNCT": 2 } },
+  "mod": { "ADJ": { "ADV": 1 } },
+  "comp:obj": { "ADP": { "ADJ": 1 } }
+}
+```
+
+Note the the `mod` relation has `ADV` as the POS for the dependant, because of the `ExtPos` feature on the word `à`.
+
+The Grew pattern corresponding to the `mod` line is (using the undocumented Grew feature for requesting on ExtPos): 
+
+```grew
+pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
+```
+
+---
 
 ## Applying Grew rules
 

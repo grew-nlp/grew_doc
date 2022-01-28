@@ -251,24 +251,28 @@ pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
 
 ## Applying Grew rules
 
-### The `tryRules` service
- * **DEPRECATED** `(<string> project_id, [<string> sample_id], [<string> user_id], <string> rules)`
- * `(<string> project_id, <string> sample_ids, <string> user_ids, <string> rules)`
+### The `tryRules` service and `applyRules` service
+
+These services are disabled in DEV. Please use `tryPackage`
+
+
+
+### The `tryPackage` service
+ * `(<string> project_id, <string> sample_ids, <string> user_ids, <string> package)`
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `user_ids` arguments.
 
-The `rules` parameter must be a JSON encoding of a list of strings, each string being the internal content of a Grew rule.
+The `package` parameter must be a JSON string encoding a list of rules.
 For instance:
 
 ```
-[
-"pattern { N [upos=VERB] } commands { N.upos = V }",ern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[subj]-> M }"
-]
+"rule r1 { pattern { N [upos=VERB] } commands { N.upos = V } }
+rule r2 { pattern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[subj]-> M }"
 ```
 
 See **Grew** [command syntax](../commands) for doc about the `commands` part.
 
-The output is the list of new graphs produced by the rules applications (note that the same rule may be applied more than once in a given graph). Each item of the list is an object with the following fields:
+The output is the list of new graphs produced by the package applications (note that the same rule may be applied more than once in a given graph). Each item of the list is an object with the following fields:
 
  * `conll`: the graph obtained after one or several applications of the rules.
  * `sample_id`
@@ -308,9 +312,18 @@ Below, an example of output after a rewrite with the two rules:
 14	.	.	PUNCT	_	_	3	punct	_	_
 ```
 
-### The `applyRules` service
 
- It is currently disabled in DEV and will be back later
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
@@ -468,7 +481,7 @@ The string `user_ids` must be a JSON encoding of one of these forms:
 This parameter is used for the 3 services:
  * `searchPatternInGraphs`
  * `getLexicon`
- * `tryRules`: in this case, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
+ * `tryPackage`: in this case, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
 
 This fulfils the request [#110](https://github.com/Arborator/arborator-frontend/issues/110):
 

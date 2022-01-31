@@ -487,7 +487,7 @@ This fulfils the request [#110](https://github.com/Arborator/arborator-frontend/
 
 > * See for my trees &rarr; `{ "one" : ["current_user"] }` (or `{ "multi" : ["current_user"] }` which has the same meaning)
 > * See for my trees or last tree (only one user_id per tree is returned) &rarr; `{ "one" : ["current_user", "__last__"] }`
-> * See last trees &rarr; `{ "one" : ["current_user"] }`
+> * See last trees &rarr; `{ "one" : ["__last__"] }`
 > * See trees from everyone &rarr; `"all"`
 > * See trees for users in a given list &rarr; `{ "multi" : ["user_1", "user_2", …] }`
 

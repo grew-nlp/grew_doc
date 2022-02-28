@@ -31,6 +31,7 @@ build:
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/06_more_commands
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/cli
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/grew_count
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/grew_server
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/python
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/flat
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/connected_components
@@ -52,6 +53,7 @@ clean:
 	@make -C static/tutorial/06_more_commands clean
 	@make -C static/usage/cli clean
 	@make -C static/usage/grew_count clean
+	@make -C static/usage/grew_server clean
 	@make -C static/usage/python clean
 	@make -C static/gallery/flat clean
 	@make -C static/gallery/connected_components clean

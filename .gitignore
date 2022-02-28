@@ -1,3 +1,4 @@
 public
-**/_build
 extern
+**/_build
+**/__pycache__

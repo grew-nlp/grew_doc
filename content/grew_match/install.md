@@ -8,6 +8,8 @@ menu = "main"
 
 +++
 
+:warning: This documentation is obsolete. It corresponds to the old version of Grew-match which in not maintained!
+
 # Local installation of Grew-match
 
 **Grew-match** is available [online](http://match.grew.fr) on a set of corpora (mainly from the UD project).

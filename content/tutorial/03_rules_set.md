@@ -15,7 +15,7 @@ title = "03_rules_set"
 # Grew Tutorial • Lesson 3 • Rules set
 
 In the previous lesson, we have seen 3 rules dealing with several POS.
-We will learn how to make these rules working together.
+We will learn how to make these rules work together.
 
 ## Packages
 

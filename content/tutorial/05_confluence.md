@@ -54,7 +54,7 @@ Here, we suppose then that we are interested in all possible solutions.
 grew transform -config sequoia -grs aux_verb.grs -strat "Iter(v)" -i frwiki_50.1000_00907.seq.conll
 ```
 
-This will produces 4 different graphs with all combination of `AUX` and `VERB` for the two words *sont* and *montrées*.
+This will produces 4 different graphs with all combinations of `AUX` and `VERB` for the two words *sont* and *montrées*.
 
 {{< input file="static/tutorial/05_confluence/_build/iter_aux_verb.conll" >}}
 

@@ -51,6 +51,10 @@ All arguments are optional:
 # Grep
 
 This mode corresponds to the command line version of the [Grew-match](http://match.grew.fr) tool.
+Since Grew version 1.8.2 (April 2022), the clustering is available [:link:](./#with-clustering) in the grep mode.
+
+## Without clustering
+
 The command is:
 
 `grew grep -pattern <pattern_file> -i <corpus_file>`
@@ -62,31 +66,59 @@ where:
 
 The output is given in JSON format.
 
-## Example
+### Example
 
 With the following files:
 
- * The `dev` part of the corpus `UD_French-GSD` version 2.8: `fr_gsd-ud-dev.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-GSD/blob/r2.8/fr_gsd-ud-dev.conllu?raw=true)
+ * The corpus `UD_French-PUD` version 2.9: `fr_pud-ud-test.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.8/fr_pud-ud-test.conllu?raw=true)
  * A pattern file with the code below: `rouge.pat`[:link:](/usage/cli/rouge.pat)
 
 {{< grew file="static/usage/cli/rouge.pat" >}}
 
+**NB**: the fact the edge from `M` to `N` is given an identifier `e` will give the information about this edge in the output (see below).
+
 The command:
 
 ```
-grew grep -pattern rouge.pat -i fr_gsd-ud-dev.conllu
+grew grep -pattern rouge.pat -i fr_pud-ud-test.conllu
 ```
 
 produces the following JSON output:
 
 {{< json file="static/usage/cli/_build/output_grep" >}}
 
-This means that the pattern described in the file `rouge.pat` was found twice in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
+This means that the pattern described in the file `rouge.pat` was found three times in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
 
 Note that two other options exist:
 
  * `-html`: produces a new `html` field in each JSON item with the sentence where words impacted by the pattern are in a special HTML span with class `highlight`
  * `-dep_dir <directory>`: produces a new file in the folder `directory` with the representation of the sentence with highlighted part (as in [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format (usable with [Dep2pict](http://dep2pict.loria.fr)).
+
+
+## With clustering
+
+If the command line contains one of the two arguments `-key` or `-whether`, this mode is chosen.
+
+### Examples
+
+With the same files as in the *without clustering* part.
+
+With `-key`, we can cluster the results according to the gender of the node `N` (the adjective) and observe that *rouge* is used twice with `Masc` gender and once with `Fem`.
+
+```
+grew grep -pattern rouge.pat -key N.Gender -i fr_pud-ud-test.conllu
+```
+
+{{< json file="static/usage/cli/_build/output_grep_key" >}}
+
+With `-whether`, we can cluster the results according to the relative position of the node `N` (the adjective) and its governor.
+We observe that in the three cases, the governor `M` is always before `N`.
+
+```
+grew grep -pattern rouge.pat -whether "M << N" -i fr_pud-ud-test.conllu
+```
+
+{{< json file="static/usage/cli/_build/output_grep_whether" >}}
 
 ---
 # Compile
@@ -124,14 +156,14 @@ The set of corpora is described in a [JSON file](../../doc/corpora) and must be 
 Each pattern is described in a separate file.
 With the two following 1-line files:
 
- * `ADJ_NOUN.pat` [:link:](/usage/cli/ADJ_NOUN.pat) {{< input file="static/usage/cli/ADJ_NOUN.pat" >}}
- * `NOUN_ADJ.pat` [:link:](/usage/cli/NOUN_ADJ.pat) {{< input file="static/usage/cli/NOUN_ADJ.pat" >}}
+ * `ADJ_NOUN_pre.pat` [:link:](/usage/cli/ADJ_NOUN_pre.pat) {{< input file="static/usage/cli/ADJ_NOUN_pre.pat" >}}
+ * `ADJ_NOUN_post.pat` [:link:](/usage/cli/ADJ_NOUN_post.pat) {{< input file="static/usage/cli/ADJ_NOUN_post.pat" >}}
 
 and the example file `en_fr_zh.json` [:link:](/usage/cli/en_fr_zh.json)
 {{< input file="static/usage/cli/en_fr_zh.json" >}}
 
 1. Compile the corpora: `grew compile -i en_fr_zh.json`
-1. Build stat table: `grew count -patterns "ADJ_NOUN.pat NOUN_ADJ.pat" -i en_fr_zh.json`
+1. Build stat table: `grew count -patterns "ADJ_NOUN_pre.pat ADJ_NOUN_post.pat" -i en_fr_zh.json`
 
 The output is given as TSV data:
 
@@ -151,17 +183,17 @@ We can then observe that in the annotations of the 3 corpora in use:
  * in French, there is a weak preference for adjective position after the noun (68.9%)
  * in Chinese, there is a **very** strong preference for adjective position before the noun (100%)
 
-## Example with a cluster key
+## Example with a clustering of the output
 
-:warning: available only with *Grew* version 1.6.3 or greater.
+:warning: available only with *Grew* version 1.8.2 or greater.
 
 With the same data as in the previous example, the following command:
 
-`grew count -pattern ADJ_NOUN.pat -key N.Number -i en_fr_zh.json`
+`grew count -pattern ADJ_NOUN_pre.pat -key N.Number -i en_fr_zh.json`
 
 produces the TSV file:
 
-{{< input file="static/usage/cli/_build/output_key" >}}
+{{< input file="static/usage/cli/_build/output_count_key" >}}
 
 which corresponds to the table:
 
@@ -171,10 +203,31 @@ which corresponds to the table:
 | UD_French-PUD | 178 | 245 | 0 |
 | UD_Chinese-PUD | 0 | 0 | 364 |
 
+Using a whether clustering, with the pattern `ADJ_NOUN_post.pat` [:link:](/usage/cli/ADJ_NOUN_post.pat) 
+{{< input file="static/usage/cli/ADJ_NOUN_post.pat" >}}
+
+and the command: `grew count -pattern ADJ_NOUN.pat -whether "A << N" -i en_fr_zh.json`
+
+we obtain the TSV file:
+
+{{< input file="static/usage/cli/_build/output_count_whether" >}}
+
+which corresponds to the table:
+
+| Corpus | No | Yes |
+|------------|-------------|----------|
+| UD_English-PUD | 12 | 1114 |
+| UD_French-PUD | 935 | 423 |
+| UD_Chinese-PUD | 0 | 364 |
+
+
+
+
 
 ## Remarks
 
- * The TSV table also contains a column with the size of corpora (in number of sentences), this can be useful to make cross-corpora analysis and to compute ratios instead of raw numbers.
+ * In the case without clustering, the TSV table also contains a column with the size of corpora (in number of sentences), this can be useful to make cross-corpora analysis and to compute ratios instead of raw numbers.
+ * Only one pattern is used in case of clustering.
  * Pattern syntax can be learned [here](/doc/pattern/) or with the online **[Grew-match](http://match.grew.fr)** tool, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with snippets given on the right of the text area.
  * If some corpus is updated, it is necessary to run again the compilation step.
  * Some patterns may take a long time to be searched in corpora.

@@ -203,8 +203,8 @@ which corresponds to the table:
 | UD_French-PUD | 178 | 245 | 0 |
 | UD_Chinese-PUD | 0 | 0 | 364 |
 
-Using a whether clustering, with the pattern `ADJ_NOUN_post.pat` [:link:](/usage/cli/ADJ_NOUN_post.pat) 
-{{< input file="static/usage/cli/ADJ_NOUN_post.pat" >}}
+Using a whether clustering, with the pattern `ADJ_NOUN.pat` [:link:](/usage/cli/ADJ_NOUN.pat) 
+{{< input file="static/usage/cli/ADJ_NOUN.pat" >}}
 
 and the command: `grew count -pattern ADJ_NOUN.pat -whether "A << N" -i en_fr_zh.json`
 

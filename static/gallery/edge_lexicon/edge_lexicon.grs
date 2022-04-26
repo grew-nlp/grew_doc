@@ -1,0 +1,17 @@
+rule r {
+  pattern { e:X -[L]-> Y; Y[label=lex.node_label] }
+  commands { 
+    del_edge e;
+    add_edge f: X -> Y;
+    f.label = lex.edge_label
+  }
+}
+#BEGIN lex
+node_label	edge_label
+%-----------------------
+A	a_edge
+B	b_edge
+C	c_edge
+#END
+
+strat main { Onf (r) }

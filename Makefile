@@ -37,6 +37,7 @@ build:
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/connected_components
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/update_edge_feature
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/ud2sud
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/edge_lexicon
 
 clean:
 	@make -C static/doc/commands clean

@@ -1,0 +1,14 @@
+rule iter_rule {
+  pattern { N[label=lex.in] }
+  commands { N.label=lex.out }
+}
+#BEGIN lex
+in	out
+% --------------------
+A	A1
+A	A2
+B	B1
+B	B2
+#END
+
+strat main { Iter (iter_rule) }

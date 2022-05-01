@@ -1,0 +1,20 @@
+package iter_package {
+  rule A1 {
+    pattern { N[label="A"] }
+    commands { N.label="A1" }
+  }
+  rule A2 {
+    pattern { N[label="A"] }
+    commands { N.label="A2" }
+  }
+  rule B1 {
+    pattern { N[label="B"] }
+    commands { N.label="B1" }
+  }
+  rule B2 {
+    pattern { N[label="B"] }
+    commands { N.label="B2" }
+  }
+}
+
+strat main { Iter (iter_package) }

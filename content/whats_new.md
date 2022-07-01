@@ -13,7 +13,6 @@ menu = "main"
 The third component `z` is linked to bug fixes and may vary across sub-projects.
   * `libcaml-grew` &rarr; the Grew library, used in all other sub-projects
   * `grew` &rarr; the command line interface of Grew
-  * `grew_daemon` &rarr; the server daemon behing [Grew-match](http://match.grew.fr)
   * `grewpy` &rarr; the daemon called by Python library
 
 * The symbol "⚠️" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
@@ -26,7 +25,13 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.8.0 (December 15, 2021)
+# :new: Version 1.9.0 (June 29, 2022)
+  * update Conll handling (synchronized with `libcaml-conll 1.13`)
+  * minors bug fixes
+
+---
+
+# Version 1.8.0 (December 15, 2021)
   * Add command `prepend_feats` ([doc](../../doc/commands/#copy-several-features-from-one-node-to-another))
   * Add Python style string slicing ([doc](../../doc/commands/#add-or-update-a-node-feature))
   * Add several functions for other tools (ArboratorGrew, Grew-web…)

@@ -25,14 +25,14 @@ A graph is described by a JSON object with the following fields:
 
 ## JSON encoding of nodes
 
-Nodes are described by an JSON objects where keys are node identifiers and values describe the node content.
+Nodes are described by a JSON object where keys are node identifiers and values describe the node content.
 
 The node content can be in one of the two following forms:
 
  1. a string
  2. a JSON object in which all values are strings (in general this describes a feature structure).
 
-The string form is used when the node does not have a complex structure. In this case, the given string is interpreted as a feature structure with only one feature named `label`. Hence we have and equivalence between these two lines:
+The string form is used when the node does not have a complex structure. In this case, the given string is interpreted as a feature structure with only one feature named `label`. Hence we have an equivalence between these two lines:
 
   * `"nodes": { "N": "A" }`
   * `"nodes": { "N": { "label" : "A" } }`
@@ -59,7 +59,7 @@ corresponds to the following JSON node object:
 
 ## JSON encoding of an edge
 
-An edge is described by a JSON object with three following required fields:
+An edge is described by a JSON object with three required fields:
 
  * `src`: the node identifier of the source of the edge
  * `label`: the edge label description
@@ -72,7 +72,7 @@ Hence an edge label can be:
  2. a JSON object in which all values are strings (this describes a feature structure)
 
 The string case is interpreted as a feature structure with one feature named `1` (to be compatible with complex edges used in UD / SUD encoding, see [Graph edges](../graph#edges) description).
-The two following codes are equivalent:
+The two following codes are then equivalent:
 
   * `"edges": [ "src": "M", "label": "obj", "tar": "N" ]`
   * `"edges": [ "src": "M", "label": { "1" : "obj" }, "tar": "N" ]`

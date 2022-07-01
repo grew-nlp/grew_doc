@@ -10,6 +10,8 @@ Categories = ["Development","GoLang"]
 
 # CoNLL-U format
 
+**NB:** The doc given here correspond to **Grew** version 1.9.0 (linked to **libcaml-conll** version 1.13.0). You can check your versions with `opam list | grep grew` and `opam list | grep conll`.
+
 The most common way to store dependency structures is the CoNLL format.
 Several extensions were proposed and we describe here the one which is used by **Grew**, known as [CoNLL-U](http://universaldependencies.org/format.html) format defined in the Universal Dependency project.
 Grew also handles the CoNLL-U plus format, see [CoNLL-U plus page](../conllup)
@@ -18,23 +20,22 @@ For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
 Tokens lines contain 10 fields, separated by tabulations.
 
-The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.8).
+The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.10).
 
 {{< input file="static/doc/conllu/n01118003.conllu" >}}
 
 We explain here how **Grew** deals with the 10 fields if CoNLL-U files:
 
-1. **ID**. This field is a number used as an internal identifier for the corresponding lexical unit (LU), it can not be accessed from directly from **Grew**.
-2. **FORM**. The phonological form of the LU.
-In **Grew**, the value of this field is available through a feature named `form` (see [here](../conllu#note-about-conll-feature-values) for info about older versions of **Grew**).
-3. **LEMMA**. The lemma of the LU. In **Grew**, this corresponds to the feature `lemma`.
-4. **UPOS**. The field `upos` (see [here](../conllu#note-about-conll-feature-values) for info about older versions of **Grew**).
-5. **XPOS**. The field `xpos` (see [here](../conllu#note-about-conll-feature-values) for info about older versions of **Grew**)
-6. **FEATS**. List of morphological features.
-7. **HEAD**. Head of the current word, which is either a value of ID or `0` for the root node.
-8. **DEPREL**. Dependency relation to the HEAD (`root` iff HEAD = `0`).
-9. **DEPS**. (UD only) Enhanced dependency graph in the form of a list of head-deprel pairs. In **Grew**, these relations are encoded with the features `enhanced=yes`
-10. **MISC**. Any other annotation. In **Grew**, annotation of the field are accessible like other morphological features from the **FEATS** column.
+1. `ID`: This field is a number used as an internal identifier for the corresponding lexical unit (LU), it can not be accessed from directly from **Grew**.
+2. `FORM`: The phonological form of the LU; in **Grew**, the value of this field is available through a feature named `form`
+3. `LEMMA`: The lemma of the LU. In **Grew**, this corresponds to the feature named `lemma`.
+4. `UPOS`: The universal POS; in **Grew**, it is encoded as feature named `upos`
+5. `XPOS`: A language-specific part-of-speech tag; in **Grew**, it is encoded as feature named `xpos`
+6. `FEATS`. List of morphological features; each feature is turned into a **Grew** node feature.
+7. `HEAD`. Head of the current word, which is either a value of ID or `0` for the root node.
+8. `DEPREL`. Dependency relation to the HEAD (`root` iff HEAD = `0`).
+9. `DEPS`. (UD only) Enhanced dependency graph in the form of a list of head-deprel pairs. In **Grew**, these relations are encoded with the edge feature `enhanced=yes`.
+10. `MISC`. Any other annotation. See below for the way **Grew** parses this field.
 
 A few examples of usage in **Grew** patterns:
 
@@ -42,28 +43,51 @@ A few examples of usage in **Grew** patterns:
   * matching the lemma _be_ &rarr;  `pattern { N [lemma="be"] }`
   * matching the Part Of Speech _VERB_ &rarr; `pattern { N [upos=VERB] }`
 
-Note that the same format is very often use to describes dependency syntax corpora.
+Note that the CoNLL-U format is very often used to describe dependency syntax corpora.
 In these cases, a set of sentences is described in the same file using the same convention as above and a blank line as separator between sentences.
-It is also requires that the `sent_id` metadata is unique for each sentence in the file.
+It is also requires that each sentence is give a `sent_id` metadata which is unique in the corpus.
 
-In practice, it may be useful to deal explicitly with the `root` relation (for instance, if some rewriting rule is designed to change the root of the structure).
-To allow this, when reading CoNLL-U format **Grew** also creates a node at position `0` and link it with the `root` relation to the linguistic root node of the sentence.
-The example above then produce the 5 nodes graphs below:
+## The special node at position 0
+
+In order to be able to manipulate the `root` relation (for instance, if some rewriting rule is designed to change the root of the structure), we need to add a special node at position 0 which is the source of the `root` relation.
+
+Hence, the 4 tokens example above produces the 5 nodes graph below:
 
 ![Dependency structure](/doc/conllu/_build/n01118003.svg)
+
+## How the `MISC` column is handled by **Grew**?
+
+There are two main problems to deal with the `MISC` field in the existing UD data.
+
+ 1. The content of the `MISC` field is not fully specified and in the UD data, it is used in many different ways and our objective is both:
+   * to be able to access to the content of `MISC` and to change it through rules when it is a regular features structure
+   * to keep it unchanged in the other cases
+ 2. When a **Grew** node contains a feature like `Case=Gen`, there is no canonical way to decide if it must be output in the `FEATS` or in the `MISC` column.
+
+To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` column into a set of (feature,value) pairs. If this is not possible, the raw content is kept in a special features named `__RAW_MISC__`. Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
+
+For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
+
+ * If the config is `basic` or `sequoia`, all features are written in the `FEATS` field (and the `MISC` field is always `_`);
+ * If the config is `ud` or `sud`, there is a fixed list of features used in the `FEATS` columns (list given at the bottom of the page).
+ 
+Unfortunately, in practice, the same feature may be used in both fields `FEATS` and `MISC`.
+For instance, in the sentence `test-12` from `UD_Polish-LFG` (below), the feature `Case` appear in `FEATS` in tokens 2, 5, 6 and in `MISC` in token 4!
+In order to be able to correctly output the features in the right column, **Grew** adds a prefix `__MISC__` to the feature which is is given the `MISC` if it is in the list given at the end of the page.
+
+{{< input file="static/doc/conllu/test-12.conllu" >}}
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
 
 The two fields are built from CoNLL-U data in the following way:
-
- 1. If a multiword token `i-j` is declared:
-   * the `textform` of the first token is the `FORM` field of the multiword token
-   * the `textform` of each other token is `_`
- 1. If the token is an empty node (exists only in EUD):
-   * `textform=_` and `wordform=__EMPTY__`
- 1. For each token without `textform` feature, the `textform` is set to the `FORM` field value
- 1. For each token without `wordform` feature, the `wordform` is set to the `FORM` field value
+  1. If a multiword token `i-j` is declared:
+      * the `textform` of the first token is the `FORM` field of the multiword token
+      * the `textform` of each other token is `_`
+  1. If the token is an empty node (exists only in EUD):
+      * `textform=_` and `wordform=__EMPTY__`
+  1. For each token without `textform` feature, the `textform` is set to the `FORM` field value
+  1. For each token without `wordform` feature, the `wordform` is set to the `FORM` field value
 
 ⚠️ In places where `wordform` should be different from `FORM` field, this should be expressed in the data with an explicit `wordform` feature.
 This includes:
@@ -76,9 +100,9 @@ See few examples in **SUD_French-GSD** {{< tryit "http://match.grew.fr/?corpus=S
 
 ---
 
-## Note about CoNLL feature values
+## Naming of CoNLL columns **FORM**, **UPOS** and **XPOS** in older **Grew** versions
 
-In older versions of **Grew** (before the definition of the CoNLL-U format), the fields 2, 4 and 5 where accessible with the names `phon`, `cat` and `pos` respectively.
+In older versions of **Grew** (before the definition of the CoNLL-U format), the fields 2 (`FORM`), 4 (`UPOS`) and 5 (`XPOS`) where accessible with the names `phon`, `cat` and `pos` respectively.
 Since 1.6, these names cannot be used anymore.
 If you used this features names, you have to update your old GRS with the following correspondance:
 
@@ -87,3 +111,173 @@ If you used this features names, you have to update your old GRS with the follow
  * `pos` must be replaced by `xpos`
 
 Note that this applies to the examples given in the book "Application of Graph Rewriting to Natural Language Processing".
+
+---
+
+## List of features put in the `FEATS` field
+
+When the config is `ud` or `sud`, the following list of features are used to decide which features should be written in `FEATS` field.
+The list is build from the data available in UD 2.10 (plus the feature `Shared` specific to SUD):
+
+**Note**: Even if `ExtPos` is used in `FEATS` in `UD_English-EWT` an in `UD_Portuguese-Bosque`, it is not in the list in order to follow SUD usage of this feature in the `MISC` column (this may change in the future, see [#31](https://github.com/surfacesyntacticud/guidelines/issues/31)).
+
+  * `Abbr`
+  * `AdjType`
+  * `AdpType`
+  * `AdvType`
+  * `Agglutination`
+  * `Analyt`
+  * `Animacy`
+  * `Animacy[gram]`
+  * `Antr`
+  * `Aspect`
+  * `Augm`
+  * `Case`
+  * `Cfm`
+  * `Clas`
+  * `Class`
+  * `Clitic`
+  * `Clusivity`
+  * `Clusivity[obj]`
+  * `Clusivity[psor]`
+  * `Clusivity[subj]`
+  * `Compound`
+  * `Comt`
+  * `ConjType`
+  * `Connegative`
+  * `Contrast`
+  * `Contv`
+  * `Corf`
+  * `Decl`
+  * `Definite`
+  * `Definitizer`
+  * `Degree`
+  * `DegreeModQpm`
+  * `Deixis`
+  * `DeixisRef`
+  * `Deixis[psor]`
+  * `Delib`
+  * `Deo`
+  * `Derivation`
+  * `Determ`
+  * `Detrans`
+  * `Dev`
+  * `Dialect`
+  * `Dimin`
+  * `Dist`
+  * `Echo`
+  * `Emph`
+  * `Emphatic`
+  * `Evident`
+  * `Excl`
+  * `Foc`
+  * `Focus`
+  * `FocusType`
+  * `Foreign`
+  * `Form`
+  * `Gender`
+  * `Gender[dat]`
+  * `Gender[erg]`
+  * `Gender[obj]`
+  * `Gender[psor]`
+  * `Gender[subj]`
+  * `HebBinyan`
+  * `HebExistential`
+  * `Hum`
+  * `Hyph`
+  * `Imprs`
+  * `Incorp`
+  * `InfForm`
+  * `InflClass`
+  * `InflClass[nominal]`
+  * `Int`
+  * `Intens`
+  * `Intense`
+  * `Intension`
+  * `LangId`
+  * `Language`
+  * `Link`
+  * `Mood`
+  * `Morph`
+  * `Movement`
+  * `Mutation`
+  * `NCount`
+  * `NameType`
+  * `NegationType`
+  * `Neutral`
+  * `Nomzr`
+  * `NonFoc`
+  * `NounBase`
+  * `NounClass`
+  * `NounType`
+  * `NumForm`
+  * `NumType`
+  * `NumValue`
+  * `Number`
+  * `Number[abs]`
+  * `Number[dat]`
+  * `Number[erg]`
+  * `Number[obj]`
+  * `Number[psed]`
+  * `Number[psor]`
+  * `Number[subj]`
+  * `Obl`
+  * `Orth`
+  * `PartForm`
+  * `PartType`
+  * `PartTypeQpm`
+  * `Pcl`
+  * `Person`
+  * `Person[abs]`
+  * `Person[dat]`
+  * `Person[erg]`
+  * `Person[obj]`
+  * `Person[psor]`
+  * `Person[subj]`
+  * `Polarity`
+  * `Polite`
+  * `Polite[abs]`
+  * `Polite[dat]`
+  * `Polite[erg]`
+  * `Position`
+  * `Poss`
+  * `Possessed`
+  * `Pred`
+  * `Prefix`
+  * `PrepCase`
+  * `PrepForm`
+  * `Priv`
+  * `PronType`
+  * `Proper`
+  * `Pun`
+  * `PunctSide`
+  * `PunctType`
+  * `Recip`
+  * `Red`
+  * `Redup`
+  * `Reflex`
+  * `Reflex[obj]`
+  * `Reflex[subj]`
+  * `Rel`
+  * `Report`
+  * `Shared`  (sepcific to SUD *)
+  * `Speech`
+  * `Strength`
+  * `Style`
+  * `SubGender`
+  * `Subcat`
+  * `Subordinative`
+  * `Tense`
+  * `Top`
+  * `Trans`
+  * `Tv`
+  * `Typo`
+  * `Uninflect`
+  * `Valency`
+  * `Variant`
+  * `Ventive`
+  * `VerbClass`
+  * `VerbForm`
+  * `VerbStem`
+  * `VerbType`
+  * `Voice`

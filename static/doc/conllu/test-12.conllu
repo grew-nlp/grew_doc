@@ -1,0 +1,12 @@
+# sent_id = test-12
+# text = A inni przychodzą do telewizji pijani.
+# converted_from_file = NKJP1M_6203010001843_morph_2-p_morph_2.27-s-dis@1.xml
+# genre = social
+1	A	a	CCONJ	conj	_	3	cc	3:cc	_
+2	inni	inny	ADJ	adj:pl:nom:m1:pos	Case=Nom|Degree=Pos|Gender=Masc|Number=Plur|SubGender=Masc1	3	nsubj	3:nsubj	_
+3	przychodzą	przychodzić	VERB	fin:pl:ter:imperf	Aspect=Imp|Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	0:root	_
+4	do	do	ADP	prep:gen	AdpType=Prep	5	case	5:case	Case=Gen
+5	telewizji	telewizja	NOUN	subst:sg:gen:f	Case=Gen|Gender=Fem|Number=Sing	3	obl	3:obl:do	_
+6	pijani	pijany	ADJ	adj:pl:nom:m1:pos	Case=Nom|Degree=Pos|Gender=Masc|Number=Plur|SubGender=Masc1	2	acl	2:acl	SpaceAfter=No
+7	.	.	PUNCT	interp	PunctType=Peri	3	punct	3:punct	_
+

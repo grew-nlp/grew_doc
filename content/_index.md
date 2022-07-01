@@ -17,7 +17,9 @@ Categories = ["Development","GoLang"]
 
 ## News
 
- * **2021/12/15:** Version **1.8**. See [What's new](/whats_new/) for changes.
+ * **2022/06/29:** Version **1.9**. See [What's new](/whats_new/) for changes.
+ 
+ * **2021/12/15:** Version **1.8**.
 
  * **2021/09/20:** Version **1.7**.
 

@@ -69,6 +69,7 @@ All *edge clauses* below require the existence of an edge between the node selec
  * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
  * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
  * `N -[1=subj]-> M` the edge must match the edge feature constraints (more examples below).
+ * [Since version `1.9.1`] `N -[2="зад"]-> M` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 Edges may also be named for usage in commands (in **Grew**) or in clustering (in **Grew-match**) with an identifier:
 
@@ -129,16 +130,16 @@ These constrains do not bind new elements in the graph, but must be fulfilled (i
   * `* -[nsubj]-> M` there is an incoming edge with label `nsubj` with target `M`
   * `M -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `M`
 
- * [Since 1.3] Constraints on edge labels:
+ * [Since version `1.3`] Constraints on edge labels:
    * `label(e1) = label(e2)` the labels of the two edges `e1` and `e2` are equal
    * `label(e1) <> label(e2)` the labels of the two edges `e1` and `e2` are different
 
- * [:new: 1.4] Constraints on edges relative positions (these constraints impose that the source and the target of both edges are ordered)
+ * [Since version `1.4`] Constraints on edges relative positions (these constraints impose that the source and the target of both edges are ordered)
    * `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered)
    * `e1 << e2` the edge `e1` is covered by `e2`
    * `e1 <> e2` the two edges are disjoint
 
- * [:new: 1.4] Position of a node with respect to an edge
+ * [Since version `1.4`] Position of a node with respect to an edge
    * `N << e` the node `N` is strictly included between source and targer of edge `e`.
 
 

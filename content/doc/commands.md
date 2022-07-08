@@ -287,16 +287,18 @@ In fact, to deal with this case, **Grew** has two running modes with different b
  1. In the safe mode (set by the `-safe_commands` argument), an ineffective command stop the rewriting with and produces an exection error.
 
 ## List of ineffective Commands
-Command which may be ineffective are:
+Commands which may be ineffective are:
 
  * `add_edge` when the edge is already present in the graph
  * `del_edge` when the edge does not exists in the graph
  * `del_feat` when the feat does not exists in the node
+ * feature updating, like `N.f=v` if the node `N` already have a feature `f` with value `v` (same with `e.f=v` for and edge `e` already having a feature `f` with value `v`).
 
 Note that it is always possible to define a Graph Rewriting System with only effective commands following the procedure:
 
  * a rule with an potential ineffective `add_edge` commands can be replaced by two rules, one with a `without` clause ensuring the absence of the edge and one without the `add_edge` command.
  * a rule with an potential ineffective `del_edge` commands can be replaced by two rules, one with the given edge in the pattern and one without the `del_edge` command.
  * a rule with an potential ineffective `del_feat` commands can be replaced by two rules, one with the feature in the pattern and one without the `del_feat` command.
+ * a ineffective feature updating can be avoided with a clause `N.f<>v` or a `N.f=v` in a without clause.
 
 

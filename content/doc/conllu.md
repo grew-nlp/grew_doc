@@ -55,27 +55,32 @@ Hence, the 4 tokens example above produces the 5 nodes graph below:
 
 ![Dependency structure](/doc/conllu/_build/n01118003.svg)
 
-## How the `MISC` column is handled by **Grew**?
+## How the `MISC` field is handled by **Grew**?
 
 There are two main problems to deal with the `MISC` field in the existing UD data.
 
  1. The content of the `MISC` field is not fully specified and in the UD data, it is used in many different ways and our objective is both:
-   * to be able to access to the content of `MISC` and to change it through rules when it is a regular features structure
+   * to be able to access to the content of `MISC` and to change it through rules when it is a regular feature structure
    * to keep it unchanged in the other cases
- 2. When a **Grew** node contains a feature like `Case=Gen`, there is no canonical way to decide if it must be output in the `FEATS` or in the `MISC` column.
+ 2. When a **Grew** node contains a feature like `Case=Gen`, there is no canonical way to decide if it must be output in the `FEATS` or in the `MISC` field.
 
-To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` column into a set of (feature,value) pairs. If this is not possible, the raw content is kept in a special features named `__RAW_MISC__`. Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
+To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature,value)* pairs.
+If this is not possible, the raw content is kept in a special features named `__RAW_MISC__`
+({{< tryit "http://universal.grew.fr/?custom=62cc053994175" >}}).
+Doing this, it is possible to keep the `MISC` field unchanged during rewriting
 
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
 
  * If the config is `basic` or `sequoia`, all features are written in the `FEATS` field (and the `MISC` field is always `_`);
- * If the config is `ud` or `sud`, there is a fixed list of features used in the `FEATS` columns (list given at the bottom of the page).
- 
+ * If the config is `ud` or `sud`, there is a fixed list of features used in the `FEATS` field (list given at the bottom of the page).
+
 Unfortunately, in practice, the same feature may be used in both fields `FEATS` and `MISC`.
 For instance, in the sentence `test-12` from `UD_Polish-LFG` (below), the feature `Case` appear in `FEATS` in tokens 2, 5, 6 and in `MISC` in token 4!
-In order to be able to correctly output the features in the right column, **Grew** adds a prefix `__MISC__` to the feature which is is given the `MISC` if it is in the list given at the end of the page.
+In order to be able to correctly output the features in the right field, **Grew** adds a prefix `__MISC__` to the feature which is is given the `MISC` if it is in the list given at the end of this page.
 
 {{< input file="static/doc/conllu/test-12.conllu" >}}
+
+Requests for `Case` in FEATS: {{< tryit "http://universal.grew.fr/?custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "http://universal.grew.fr/?custom=62cc074a7ebf5" >}}.
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).

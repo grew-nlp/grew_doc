@@ -77,6 +77,11 @@ cd $DIR
 git clone https://gitlab.inria.fr/grew/grew_match_back.git
 ```
 
+prepare the folder for server log 
+
+```
+mkdir - $DIR/grew_match_back/log
+```
 
 ---
 

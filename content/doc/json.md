@@ -34,8 +34,13 @@ The node content can be in one of the two following forms:
 
 The string form is used when the node does not have a complex structure. In this case, the given string is interpreted as a feature structure with only one feature named `label`. Hence we have an equivalence between these two lines:
 
-  * `"nodes": { "N": "A" }`
-  * `"nodes": { "N": { "label" : "A" } }`
+```json_alt
+"nodes": { "N": "A" }
+```
+```json_alt
+"nodes": { "N": { "label" : "A" } }
+```
+
 
 Nodes in CoNLL files are interpreted as complex node, for instance:
 
@@ -53,9 +58,10 @@ corresponds to the following JSON node object:
   "Mood": "Ind",
   "Number": "Plur",
   "Tense": "Pres",
-  "VerbForm": "Fin",
+  "VerbForm": "Fin"
 }
 ```
+
 
 ## JSON encoding of an edge
 
@@ -72,10 +78,14 @@ Hence an edge label can be:
  2. a JSON object in which all values are strings (this describes a feature structure)
 
 The string case is interpreted as a feature structure with one feature named `1` (to be compatible with complex edges used in UD / SUD encoding, see [Graph edges](../graph#edges) description).
-The two following codes are then equivalent:
+The two following lines are then equivalent:
 
-  * `"edges": [ "src": "M", "label": "obj", "tar": "N" ]`
-  * `"edges": [ "src": "M", "label": { "1" : "obj" }, "tar": "N" ]`
+```json_alt
+{ "src": "M", "label": "obj", "tar": "N" }
+```
+```json_alt
+{ "src": "M", "label": { "1" : "obj" }, "tar": "N" }
+```
 
 
 ## JSON encoding of a metadata

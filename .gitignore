@@ -2,3 +2,5 @@ public
 extern
 **/_build
 **/__pycache__
+.vscode
+.hugo_build.lock

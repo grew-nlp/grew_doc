@@ -18,24 +18,24 @@ It it's not version 2, re-install **opam** in version 2 with instructions steps 
 
 ## Update prerequisite
 ### Linux
-```bash
+```
 apt-get update && apt-get upgrade
 ```
 
 ### On Mac OSX
-```bash
+```
 sudo port sync && sudo port upgrade outdated
 ```
 
 ## Update the Grew software
 
-```bash
+```
 opam update
 opam upgrade
 ```
 
 ## Update the Python binding
-```bash
+```
 pip install grew --upgrade
 ```
 

@@ -19,9 +19,6 @@ Main subcommands are:
   * [:link:](./#clean)`clean`: clean a set of corpora
   * [:link:](./#count) `count`: compute stats of a set of patterns in a set of corpora)
 
-  * OBSOLETE [:link:](./#gui) `gui`: run the GTK interface
-
-
 Other subcommands:
 
   * `version`: Print version numbers of the **Grew** Ocaml library and of the **Grew** tool
@@ -231,19 +228,4 @@ which corresponds to the table:
  * Pattern syntax can be learned [here](/doc/pattern/) or with the online **[Grew-match](http://match.grew.fr)** tool, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with snippets given on the right of the text area.
  * If some corpus is updated, it is necessary to run again the compilation step.
  * Some patterns may take a long time to be searched in corpora.
-
----
----
-
-# GUI (Obsolete)
-
-The command to run the GTK interface: `grew gui [<args>]`.
-It supposes that you have installed the `grew_gui` opam package (see [GUI installation page](../install_gtk)).
-
-Optional arguments:
-
- * `-grs <grs_file>`: load the given file
- * `-i <input_file>`: input data (graph or corpus) loaded in GUI
- * `-strat <name>`: the strategy selected in the interface (default: `main`)
- * `-main_feat <feat_name_list>` set the list of feature names used ad the *main* feat in graph visualization
 

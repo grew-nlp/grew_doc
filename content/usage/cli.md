@@ -147,7 +147,7 @@ This mode computes corpus statistics.
 There are two ways to used it:
 
  * Given a set of patterns and a set of corpora, a TSV table is built with the number of occurrences for each pattern in each corpus.
- * Given one pattern, a set of corpora and a cluster key, a TSV table is built with the results of the clustering (with corpora on lines and cluster keys in raws).
+ * Given one pattern, a set of corpora and a cluster key, a TSV table is built with the results of the clustering (with corpora on lines and cluster keys in rows).
 
 The set of corpora is described in a [JSON file](../../doc/corpora) and must be [compiled](./#compile) before running `grew count`.
 

@@ -12,10 +12,8 @@ Tags = ["Development","golang"]
 Examples below are taken from first chapter of the book [*Application of Graph Rewriting to Natural Language Processing*](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348).
 This chapter can be [downloaded in PDF from the editor website](https://media.wiley.com/product_data/excerpt/66/17863009/1786300966-587.pdf).
 
-Since section 1.5, examples given use the Grew Python library.
-If necessary, follow [installation page](../install).
+:warning: The book was published in 2018 and **Grew** had evolved since the publication. Some examples in this page differs from the book information, there are identified with the ":warning:" symbol.
 
-:warning: Make sure that your version of `grewpy` and of the `grew` Python lib are updated.
 
 ## 1.1. Creating a graph
 
@@ -295,23 +293,26 @@ g = grew.graph('''graph {
 ![thechildplaysthefool_fs](/usage/python/_build/thechildplaysthefool_fs.svg)
 ---
 
+:warning: the graph format used here is deprecated and will be removed in the future. **Grew** now uses either the **[Conll format](../../doc/conllu)** or the **[JSON format](../../doc/json)**.
+
 Search for a specific pattern;
-each line below can be executed separately.
+each line below can be executed separately (in comment, the expected output)
 
 ```python_alt
-grew.search ("pattern { X[cat=V] }", g)
-grew.search ("pattern { X[cat=DET] }", g)
-grew.search ("pattern { X[cat=ADJ] }", g)
-grew.search ("pattern { X[cat=V]; Y[]; X -[suj]-> Y }", g)
-grew.search ("pattern { X[cat=V]; X -[suj]-> Y }", g)
-grew.search ("pattern { X[cat=V]; e:X -[suj]-> Y }", g)
-grew.search ("pattern { X[] } without { *->X }", g)
+grew.search ("pattern { X[cat=V] }", g)                    # [{'nodes': {'X': 'W4'}, 'edges': {}}, {'nodes': {'X': 'W1'}, 'edges': {}}]
+grew.search ("pattern { X[cat=DET] }", g)                  # [{'nodes': {'X': 'W4'}, 'edges': {}}, {'nodes': {'X': 'W1'}, 'edges': {}}]
+grew.search ("pattern { X[cat=ADJ] }", g)                  # []
+grew.search ("pattern { X[cat=V]; Y[]; X -[suj]-> Y }", g) # [{'nodes': {'Y': 'W2', 'X': 'W3'}, 'edges': {}}]
+grew.search ("pattern { X[cat=V]; X -[suj]-> Y }", g)      # [{'nodes': {'Y': 'W2', 'X': 'W3'}, 'edges': {}}]
+grew.search ("pattern { X[cat=V]; e:X -[suj]-> Y }", g)    # [{'nodes': {'Y': 'W2', 'X': 'W3'}, 'edges': {'e': {'source': 'W3', 'label': 'suj', 'target': 'W2'}}}]
+grew.search ("pattern { X[] } without { *->X }", g)        # [{'nodes': {'X': 'W3'}, 'edges': {}}]
 ```
 
+:warning: the encoding of the solution in the list is different from the one described in the book.
 
 ### 1.5.2 Common pitfalls
 
-#### 1.2.5.1. Multiple choice edge searches
+#### 1.5.2.1. Multiple choice edge searches
 ```python_alt
 g0 = grew.graph('''graph {
   W1 [phon=ils, cat=PRO];
@@ -329,8 +330,21 @@ grew.search ("pattern { X -[suj|obj]-> Y }", g0)
 ```
 
 ```
-[{'__e_2__': 'W3/suj/W1', 'X': 'W3', 'Y': 'W1'}, {'__e_2__': 'W3/obj/W1', 'X': 'W3', 'Y': 'W1'}]
+[{'nodes': {'Y': 'W1', 'X': 'W3'}, 'edges': {}}, {'nodes': {'Y': 'W1', 'X': 'W3'}, 'edges': {}}]
 ```
+
+Note the field `edges` is empty because the matched edge is anonymous.
+If and identifier `e` is given to the edge in the pattern, the edge appears in the output:
+
+
+```python_alt
+grew.search ("pattern { e: X -[suj|obj]-> Y }", g0)
+```
+
+```
+[{'nodes': {'Y': 'W1', 'X': 'W3'}, 'edges': {'e': {'source': 'W3', 'label': 'suj', 'target': 'W1'}}}, {'nodes': {'Y': 'W1', 'X': 'W3'}, 'edges': {'e': {'source': 'W3', 'label': 'obj', 'target': 'W1'}}}]
+```
+
 
 #### 1.5.2.2. Anonymous nodes
 ```python_alt
@@ -344,7 +358,7 @@ m2 = 'pattern{ P[phon="en",cat=P]; V[cat=V]; V-[obj]-> O}'
 g1 = grew.graph('''graph{
 W1 [phon="en", cat=P];
 W2 [phon="prend", cat=V];
-W2 -[obj]->W1;
+W2 -[obj]-> W1;
 }''')
 ```
 ![enprend](/usage/python/_build/enprend.svg)
@@ -352,8 +366,8 @@ W2 -[obj]->W1;
 
 ---
 ```python_alt
-grew.search(m1, g1)
-grew.search(m2, g1)
+grew.search(m1, g1)  # 1 solution
+grew.search(m2, g1)  # 0 solution
 ```
 
 
@@ -374,8 +388,8 @@ W2 -[obj]->W4;
 
 ---
 ```python_alt
-grew.search(m1, g2)
-grew.search(m2, g2)
+grew.search(m1, g2)  # 1 solution [{'nodes': {'V': 'W2', 'P': 'W1'}, 'edges': {}}]
+grew.search(m2, g2)  # 1 solution [{'nodes': {'V': 'W2', 'P': 'W1', 'O': 'W4'}, 'edges': {}}]
 ```
 
 
@@ -415,10 +429,10 @@ m4 = "pattern{Y-[suj]->X} without{Y-[obj]->Z} without{Y-[mod]->T}"
 ```
 
 ```python_alt
-grew.search(m3, g3)
-grew.search(m4, g3)
-grew.search(m3, g4)
-grew.search(m4, g4)
+grew.search(m3, g3)  # 1 solution
+grew.search(m4, g3)  # 0 solution
+grew.search(m3, g4)  # 0 solution
+grew.search(m4, g4)  # 0 solution
 ```
 
 #### 1.5.2.4. Double negations
@@ -436,8 +450,8 @@ m6 = "pattern { X[cat=V] } without{ X[t<>fut] }"
 ```
 
 ```python_alt
-grew.search(m5, g5)
-grew.search(m6, g5)
+grew.search(m5, g5)  # 0 solution
+grew.search(m6, g5)  # 1 solution
 ```
 
 
@@ -456,7 +470,7 @@ g0 = grew.graph('''graph {
 ---
 
 ```python_alt
-grew.search("pattern { e : X -> Y ; f : X -> Y }", g0)
+grew.search("pattern { e : X -> Y ; f : X -> Y }", g0)  # 4 solutions
 ```
 
 ## 1.6. Graph rewriting
@@ -507,7 +521,7 @@ grew.run(r, g, 'passiveAgt')
 ```
 
 ```
-[{'W5': ('cat="D", phon="le"', []), 'W6': ('cat="NP", word="chien"', [('det', 'W5')]), 'W3': ('cat="V", m="pastp", phon="mordu"', [('obj', 'W1'), ('suj', 'W6')]), 'W1': ('cat="NP", phon="John"', [])}]
+[{'W6': [{'cat': 'NP', 'word': 'chien'}, [['det', 'W5']]], 'W5': [{'cat': 'D', 'phon': 'le'}, []], 'W3': [{'cat': 'V', 'm': 'pastp', 'phon': 'mordu'}, [['suj', 'W6'], ['obj', 'W1']]], 'W1': [{'cat': 'NP', 'phon': 'John'}, []]}]
 ```
 
 ![john_est_mordu_par_le_chien_2](/usage/python/_build/john_est_mordu_par_le_chien_2.svg)

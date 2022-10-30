@@ -45,7 +45,7 @@ We will use the traditional notation `f=v` for these couples.
 For backward compatibility and for ease of use in practice, a **compact** notation may be used for edge labels.
 
 The correspondence between compact notation and feature structure depends on the `config` parameter.
-In version 1.4, four predefine configuration are available: `ud`, `sud`, `sequoia` and `basic`.
+In version 1.4, four predefined configurations are available: `ud`, `sud`, `sequoia` and `basic`.
 
 The symbol `:` (used in `ud`, `sud` and `sequoia`) is interpreted as a separator, the left part is given feature value `1` and the right part feature value `2`.
 

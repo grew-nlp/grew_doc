@@ -18,7 +18,7 @@ The graphs we consider in **Grew** are defined as usually in mathematics by two 
 A node is described by a an identifier (needed to refer to nodes in edges definitions) and a feature structure: a finite list of pairs (*feature_name*, *feature_value*).
 
 In many linguistic structures, the notion of word order plays a crucial role.
-To take this into account, in a Grew graph, nodes are split in two subsets:
+To take this into account, in a Grew graph, nodes are split in two disjoint subsets:
 
  * totally ordered nodes (in general the words of some sentence)
  * non ordered nodes for other layers of information encoding (examples: constituent nodes in phrase structure, nodes in AMR graphs, additional nodes encoding MWE in PARSEME graphs…)
@@ -31,9 +31,9 @@ An edge is described by two nodes (called the *source* and the *target* of the e
 Before version 1.2, edge labels were atomic and did not have an internal structure.
 This was not very convenient to deal with complex edges:
 
-  * in [Deep-sequoia](deep-sequoia.inria.fr), the edge `suj:obj` means that the final function is `suj` and the canonical function is `obj`;
-  * in [UD](https://universaldependencies.org), the label `aux:pass` is a subtype of the label `aux`;
-  * in [SUD](https://surfacesyntacticud.github.io/), the label `compl:obl@agent` contains both a subtype `obl` and a deep feature `agent` (see [TLT 2019](https://hal.inria.fr/hal-02266003v1)).
+  * in [UD](https://universaldependencies.org), the label `aux:pass` is a subtype of the label `aux`
+  * in [SUD](https://surfacesyntacticud.github.io/), the label `compl:obl@agent` contains both a subtype `obl` and a deep feature `agent` (see [TLT 2019](https://hal.inria.fr/hal-02266003v1))
+  * in [Deep-sequoia](https://deep-sequoia.inria.fr), the edge `suj:obj` means that the final function is `suj` and the canonical function is `obj`
 
 In all these cases, with atomic edge labels, it is not possible to deal with one part of the label independently.
 Since version 1.2, the implementation of edge labels has changed to tackle this problem.

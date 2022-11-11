@@ -55,9 +55,24 @@ Hence, the 4 tokens example above produces the 5 nodes graph below:
 
 ![Dependency structure](/doc/conllu/_build/n01118003.svg)
 
+This special node has only the `form` feature defined to be `__0__` and no other feature. In a **Grew** request, to avoid the special node the be matched, one can add a `upos` contraint.
+For instance, with the request `pattern { N [] }` all the 5 nodes of the above graph can be matched, whereas with the request `pattern { N [upos] }` only the 4 nodes associated with real tokens can be matched.
+
+## Layered features
+
+Universal Dependency proposes a notion of [layered features](https://universaldependencies.org/u/overview/feat-layers.html) when the same feature can be marked more than once.
+For instance the French word *votre*  is a possessive determiner, introducing a singular entity but referencing to a plural possessor. 
+In CoNLL feats, this is encoded as `Number=Sing|Number[psor]=Plur`.
+
+Unfortunately, the bracket notation in the feature value name is in conflict with other usages of brackets in **Grew** syntax.
+In **Grew**, the bracket notation is replaced by an alternative one with a double underscore: The (S)UD feature name `Number[psor]` is written `Number__psor`.
+For instance:
+
+ * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { N [Number__psor=Plur] }` {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.10&pattern=pattern{N [Number__psor=Plur] }" >}}
+ * to udate the feature `Gender[psor]` to `Fem` on node `N`, use the command `N.Gender__psor = Fem`
 ## How the `MISC` field is handled by **Grew**?
 
-There are two main problems to deal with the `MISC` field in the existing UD data.
+There are two main problems to deal with the `MISC` field in the existing (S)UD data.
 
  1. The content of the `MISC` field is not fully specified and in the UD data, it is used in many different ways and our objective is both:
    * to be able to access to the content of `MISC` and to change it through rules when it is a regular feature structure
@@ -66,8 +81,8 @@ There are two main problems to deal with the `MISC` field in the existing UD dat
 
 To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature,value)* pairs.
 If this is not possible, the raw content is kept in a special features named `__RAW_MISC__`
-({{< tryit "http://universal.grew.fr/?custom=62cc053994175" >}}).
-Doing this, it is possible to keep the `MISC` field unchanged during rewriting
+({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.10&pattern=pattern { N [__RAW_MISC__] }" >}}).
+Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
 

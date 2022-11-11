@@ -106,14 +106,18 @@ Note that no curly brackets are needed in the "whether" text area (see examples 
 ## About CoNLL-U field names
 The fields 2, 3, 4 and 5 of CoNLL-U files are considered as features with the following feature names.
 
-| CoNLL-U field   |    2   |    3    |    4   |    5   |
-|-----------------|:------:|:-------:|:------:|:------:|
-| Name            | `form` | `lemma` | `upos` | `xpos` |
+| CoNLL-U field   | `FORM` (col 2) | `LEMMA` (col 3) | `UPOS` (col 4) | `XPOS` (col 5) |
+|:---------------:|:--------------:|:---------------:|:--------------:|:--------------:|
+| **Grew** syntax | `form`         | `lemma`         | `upos`         | `xpos`         |
 
 For instance:
 
   * searching for the word _is_ &rarr; `pattern { N [form="is"] }`
   * searching for the lemma _be_ &rarr;  `pattern { N [lemma="be"] }`
+
+For other features, defined in CoNLL-U fields `FEATS` (col 6) and `MISC` (col 6), the name of the feature can be used directly with exceptions:
+  * for layered features: see [here](../../doc/conllu#layered-features)
+  * for irregular used of `MISC` field: see [here](../../doc/conllu#how-the-misc-field-is-handled-by-grew)
 
 ---
 

@@ -135,7 +135,7 @@ These constrains do not bind new elements in the graph, but must be fulfilled (i
    * `e1.label <> e2.label` the labels of the two edges `e1` and `e2` are different
 
  * Constraints on edges relative positions (these constraints impose that the source and the target of both edges are ordered)
-   * `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered)
+   * `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered) {{< tryit "http://universal.grew.fr/?custom=6370168c3a22e" >}}
    * `e1 << e2` the edge `e1` is covered by `e2`
    * `e1 <> e2` the two edges are disjoint
 

@@ -89,7 +89,7 @@ Reserved feature names are:
  * `label`: the syntax `e.label` is a shortcut to make reference to the full feature structure. It can be used for instance to copy the edge label from one edge `e` to antothe edge `f` with the command: `f.label = e.label`.
  * `length`: the syntax `e.length` is used to refer the distance (natural number) between two ordered nodes. The length of a relation between two consecutive nodes is 1.
  * `delta`: the syntax `e.delta` is used to refer the relative position (an integer) between two ordered nodes.
-
+ * `__id__`: internal identifier, useful for dealing with subset of equivalent nodes in a pattern (see [here](../pattern#equivalent-nodes))
 
 # Graph input formats
 To describe a graph in practice, **Grew** offers several input formats:

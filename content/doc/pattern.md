@@ -120,30 +120,30 @@ These constrains do not bind new elements in the graph, but must be fulfilled (i
   * `N.lemma <> M.lemma` two feature values must be different
   * `N.lemma = "constant"` the feature `lemma` of node `N` must be the value `constant`
   * `N.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
-  * `N.lemma = lexicon.field` imposes that the feature `lemma` of node `N` must be the be present in the `field` of the `lexicon`. **NB**: this reduce also the current lexicon the items for which `field` is equals to `N.lemma`.
+  * `N.lemma = lexicon.field` imposes that the feature `lemma` of node `N` must be the be present in the `field` of the `lexicon`. **NB**: this reduce also the current lexicon to the items for which `field` is equals to `N.lemma`.
 
  * Constraints on node ordering:
   * `N < M` the node `N` immediately precedes the node `M`
   * `N << M` the node `N` precedes the node `M`
 
- * Constraints on in or out edges on binded nodes:
-  * `* -[nsubj]-> M` there is an incoming edge with label `nsubj` with target `M`
-  * `M -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `M`
+ * Constraints on in or out edges on bound nodes:
+  * `* -[nsubj]-> M` there is an incoming edge with label `nsubj` with target `M` (**NB**: the source node of the incoming edge is not bind; it can be equals to any other node (bound or not))
+  * `M -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `M` (**NB**: the target node of the outcoming edge is not bind; it can be equals to any other node (bound or not))
 
- * [Since version `1.3`] Constraints on edge labels:
-   * `label(e1) = label(e2)` the labels of the two edges `e1` and `e2` are equal
-   * `label(e1) <> label(e2)` the labels of the two edges `e1` and `e2` are different
+ * Constraints on edge labels:
+   * `e1.label = e2.label` the labels of the two edges `e1` and `e2` are equal
+   * `e1.label <> e2.label` the labels of the two edges `e1` and `e2` are different
 
- * [Since version `1.4`] Constraints on edges relative positions (these constraints impose that the source and the target of both edges are ordered)
+ * Constraints on edges relative positions (these constraints impose that the source and the target of both edges are ordered)
    * `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered)
    * `e1 << e2` the edge `e1` is covered by `e2`
    * `e1 <> e2` the two edges are disjoint
 
- * [Since version `1.4`] Position of a node with respect to an edge
+ * Position of a node with respect to an edge
    * `N << e` the node `N` is strictly included between source and targer of edge `e`.
 
 
-### Remarks
+### Equivalent nodes
 When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph is found several times (up to permutation in the sets of equivalent nodes).
 For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
 
@@ -151,14 +151,14 @@ For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivale
 pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
 ```
 
-This pattern is found 120 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
-but there are only 20 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
-To avoid this, a constraint `id(N1) < id(N2)` can be used.
+This pattern is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
+but there are only 45 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
+To avoid this, a constraint `N1.__id__ < N2.__id__` can be used.
 It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
-**NB**: if a constraint `id(N1) < id(N2)` is used with two non-equivalent nodes, the result is unspecified.
+**NB**: if a constraint `N1.__id__ < N2.__id__` is used with two non-equivalent nodes, the result is unspecified.
 
 
-The pattern below returns the 20 expected occurrences
+The pattern below returns the 45 expected occurrences
 {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=60166c11100f5" >}}
 
 ```grew

@@ -68,7 +68,7 @@ pattern {
 
 To avoid this, it is possible to give an ordering constraint on some internal identifier:
 
- * old_syntax: `id(D1) < id (D2)`
+ * old_syntax: `id(D1) < id(D2)`
  * new_syntax: `D1.__id__ < D2.__id__`
 
 The complete pattern in new syntax:

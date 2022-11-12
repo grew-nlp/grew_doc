@@ -17,11 +17,7 @@ For older upgrading info, see [upgrade_old](../upgrade_old).
 
 ### the `-config` argument
 
-With the new code for CoNLL-U handling, Grew must be informed of the "kind" of CoNLL-U that are used.
-
-The config value can be: `ud`, `sud`, `sequoia` or `basic`. The default value is `ud`.
-
-The config value changes the way edge labels are parsed (for instance, taking `@` extension into account in SUD) and also how features are stored in CoNLL-U (columns FEATS or columns MISC).
+See [here](../../usage/cli/#-config).
 ## GRS (Graph Rewriting System)
 
 ### Add a new edge with a label taken in the pattern

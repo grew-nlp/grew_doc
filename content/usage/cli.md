@@ -15,9 +15,9 @@ Main subcommands are:
 
   * [:link:](./#transform) `transform`: application of a rewriting system to a set of graphs
   * [:link:](./#grep)`grep`: search for a pattern in a corpus
+  * [:link:](./#count) `count`: compute stats of a set of patterns in a set of corpora)
   * [:link:](./#compile) `compile`: compile a set of corpora
   * [:link:](./#clean)`clean`: clean a set of corpora
-  * [:link:](./#count) `count`: compute stats of a set of patterns in a set of corpora)
 
 Other subcommands:
 
@@ -43,6 +43,7 @@ All arguments are optional:
  * `-o <output_file>`: is the name of the output file (CoNLL file). If no output file is given, **Grew** writes to `stdout`
  * `-strat <name>`: the strategy used in transformation (default value: `main`)
  * `-safe_commands`: flag. It makes rewriting process fail in case of [ineffective command](../../doc/commands/#effective-commands)
+ * `-config`: See [here](#-config)
 
 ---
 # Grep
@@ -60,6 +61,8 @@ where:
 
   * `<pattern_file>` is a file which describes a pattern
   * `<corpus_file>` is the corpus in which the search is done
+
+The optionnal `-config` parameter ([see here](#-config)) can also be used.
 
 The output is given in JSON format.
 
@@ -94,7 +97,7 @@ Note that two other options exist:
 
 ## With clustering
 
-If the command line contains one of the two arguments `-key` or `-whether`, this mode is chosen.
+If the command line additionally contains one of the two arguments `-key` or `-whether`, this mode is chosen.
 
 ### Examples
 
@@ -118,26 +121,6 @@ grew grep -pattern rouge.pat -whether "M << N" -i fr_pud-ud-test.conllu
 {{< json file="static/usage/cli/_build/output_grep_whether" >}}
 
 ---
-# Compile
-
-For the Grew-match server (`grew_daemon`) or for the command `grew count`, it is required to first compile corpora.
-For these two usages, sets of corpora are described in a [JSON file](../../doc/corpora).
-
-For compilation, the command is:
-
-`grew compile -i <corpora.json>`
-
-Note that this produces, for each corpus, a new file with the `marshal` extension stored in the corpus directory.
-The `marshal` is computed only if the corpus has changed since the last compilation.
-
----
-# Clean
-
-The commands below removes the `marshal` files produced by the `grew compile` command for the set of corpora described in the [JSON file](../../doc/corpora) `corpora.json`.
-
-`grew clean -i <corpora.json>`
-
----
 # Count
 
 This mode computes corpus statistics.
@@ -145,6 +128,8 @@ There are two ways to used it:
 
  * Given a set of patterns and a set of corpora, a TSV table is built with the number of occurrences for each pattern in each corpus.
  * Given one pattern, a set of corpora and a cluster key, a TSV table is built with the results of the clustering (with corpora on lines and cluster keys in rows).
+
+The optionnal `-config` parameter ([see here](#-config)) can also be used.
 
 The set of corpora is described in a [JSON file](../../doc/corpora) and must be [compiled](./#compile) before running `grew count`.
 
@@ -229,3 +214,39 @@ which corresponds to the table:
  * If some corpus is updated, it is necessary to run again the compilation step.
  * Some patterns may take a long time to be searched in corpora.
 
+
+---
+# Compile
+
+For the Grew-match backend (`grew_match_back`) or for the command `grew count`, it is required to first compile corpora.
+For these two usages, sets of corpora are described in a [JSON file](../../doc/corpora).
+
+For compilation, the command is:
+
+`grew compile -i <corpora.json>`
+
+Note that this produces, for each corpus, a new file with the `.marshal` extension stored in the corpus directory.
+The `.marshal` file is computed only if the corpus has changed since the last compilation.
+
+---
+# Clean
+
+The commands below removes the `marshal` files produced by the `grew compile` command for the set of corpora described in the [JSON file](../../doc/corpora) `corpora.json`.
+
+`grew clean -i <corpora.json>`
+
+
+---
+# Paramaters
+
+This section describes a few command line arguments that are shared by several commands.
+
+## `-config`
+The config value can be: `ud`, `sud`, `sequoia` or `basic`. The default value is `ud`.
+
+This parameter modifies how CoNNL-U and GRS files are interpreted.
+More precisely, it controls:
+  * How edge labels are parsed (for instance, taking `@` extension into account in SUD). See [here](../../doc/graph#edges) for a detailled description about this.
+  * How features are stored in CoNLL-U (columns FEATS or columns MISC). See [here](../../doc/conllu#how-the-misc-field-is-handled-by-grew) for details.
+
+This parameter is used in the `transform`, `grep` and `count` modes.

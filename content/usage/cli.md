@@ -11,7 +11,7 @@ Tags = ["Development","golang"]
 
 The command to run **Grew** is: `grew <subcommand> [<args>]`
 
-Main subcommands are:
+The 5 main subcommands are:
 
   * [:link:](./#transform) `transform`: application of a rewriting system to a set of graphs
   * [:link:](./#grep)`grep`: search for a pattern in a corpus
@@ -24,6 +24,26 @@ Other subcommands:
   * `version`: Print version numbers of the **Grew** Ocaml library and of the **Grew** tool
   * `help`: Print general help
   * `help <subcommand>`:  Print help for the given subcommand
+
+There are two modes of input data: **Mono** corpus or **Multi** corpora. See TODO for more details about input formats.
+
+The table below shows what are the accepted input modes for the main subcommands.
+
+|             | `transform` | `grep` | `count` | `compile` | `clean` |
+|:-----------:|:-----------:|:---------:|:---------:|:---------:|:---------:|
+| **Mono**    |     ✅      |     ✅     |     ✅ (1.10 🆕)     |     ❌     |     ❌     |
+| **Multi**   |     ❌      |     ✅ (1.10 🆕)     |     ✅     |     ✅     |     ✅     |
+
+The table below shows what are the ouptut mode modes for the 3 main subcommands (`compile` and `clean` does not have any output).
+
+|                | CLI arg |  `transform` | `grep` | `count` |
+|:--------------:|:----------:|:-----------:|:---------:|:---------:|
+| **CoNLL-U**    |   ∅   |     ✅ (default)      |     ❌     |     ❌     |
+| **JSON**       | `-json` |     ✅      |     ✅ (default)    |     ✅ (default)    |
+| **CoNLL-X**    | `-cupt` /  `-semcor` / `-columns …`  |     ✅      |     ❌     |     ❌     |
+| **DOT**        | `-dot` |     ✅      |     ❌     |     ❌     |
+| **multi JSON** | `-multi_json` |     ✅      |     ❌    |     ❌    |
+| **TSV**        | `-tsv` |     ❌      |     ❌     |     ✅ ([in some cases](./#count))    |
 
 ---
 
@@ -55,73 +75,103 @@ Since Grew version 1.8.2 (April 2022), the clustering is available [:link:](./#w
 
 The command is:
 
-`grew grep -pattern <pattern_file> -i <corpus_file>`
+`grew grep -request <request_file> -i <input>`
 
 where:
 
-  * `<pattern_file>` is a file which describes a pattern
-  * `<corpus_file>` is the corpus in which the search is done
-
-The optionnal `-config` parameter ([see here](#-config)) can also be used.
+  * `<request_file>` is a file which describes a request
+  * `<input>` describes the data on which the search is done
+    * one corpus (**Mono** mode); in this case, the optionnal `-config` parameter ([see here](#-config)) can also be used
+    * a set of corpora (**Multi** mode)
 
 The output is given in JSON format.
 
-### Example
+### Example with **Mono** input
 
 With the following files:
 
- * The corpus `UD_French-PUD` version 2.9: `fr_pud-ud-test.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.8/fr_pud-ud-test.conllu?raw=true)
- * A pattern file with the code below: `rouge.pat`[:link:](/usage/cli/rouge.pat)
+ * The corpus `UD_French-PUD` version 2.10: `fr_pud-ud-test.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.10/fr_pud-ud-test.conllu?raw=true)
+ * A request file with the code below: `dislocated.req`[:link:](/usage/cli/dislocated.req)
 
-{{< grew file="static/usage/cli/rouge.pat" >}}
+{{< grew file="static/usage/cli/dislocated.req" >}}
 
 **NB**: the fact the edge from `M` to `N` is given an identifier `e` will give the information about this edge in the output (see below).
 
 The command:
 
 ```
-grew grep -pattern rouge.pat -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -i fr_pud-ud-test.conllu
 ```
 
 produces the following JSON output:
 
 {{< json file="static/usage/cli/_build/output_grep" >}}
 
-This means that the pattern described in the file `rouge.pat` was found three times in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
+This means that the pattern described in the file `dislocated.req` was found three times in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
 
 Note that two other options exist:
 
  * `-html`: produces a new `html` field in each JSON item with the sentence where words impacted by the pattern are in a special HTML span with class `highlight`
  * `-dep_dir <directory>`: produces a new file in the folder `directory` with the representation of the sentence with highlighted part (as in [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format (usable with [Dep2pict](http://dep2pict.loria.fr)).
 
+### Example with **Multi** input
+
+With the **Mutli** mode data described in the example file `en_fr_zh.json` [:link:](/usage/cli/en_fr_zh.json) (which must be compiled with `grew compile -i en_fr_zh.json`)
+{{< json file="static/usage/cli/en_fr_zh.json" >}}
+
+The command:
+
+```
+grew grep -request dislocated.req -i en_fr_zh.json
+```
+
+produces the following JSON output:
+
+{{< json file="static/usage/cli/_build/output_grep_multi" >}}
+
 
 ## With clustering
 
-If the command line additionally contains one of the two arguments `-key` or `-whether`, this mode is chosen.
+In both modes **Mono** and **Multi**, if the command line additionally contains one or more arguments (`-key …` or `-whether …`),
+the set of occurrences is recursively clusterised following the given clustering items.
 
 ### Examples
 
-With the same files as in the *without clustering* part.
+With the same files as in the *without clustering* example above.
 
-With `-key`, we can cluster the results according to the gender of the node `N` (the adjective) and observe that *rouge* is used twice with `Masc` gender and once with `Fem`.
+With `-key`, we can cluster the results according to the `upos` of the node `N` (the dependent).
 
 ```
-grew grep -pattern rouge.pat -key N.Gender -i fr_pud-ud-test.conllu
+grew grep -pattern dislocated.req -key N.upos -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key" >}}
 
-With `-whether`, we can cluster the results according to the relative position of the node `N` (the adjective) and its governor.
-We observe that in the three cases, the governor `M` is always before `N`.
+With `-whether`, we can cluster the results according to the fact that the relation left-headed.
+We observe that in two cases, the governor `M` is before `N`.
 
 ```
-grew grep -pattern rouge.pat -whether "M << N" -i fr_pud-ud-test.conllu
+grew grep -pattern dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_whether" >}}
 
+
+Finally, several clustering can be applied successively. For instance
+
+```
+grew grep -pattern dislocated.req -key N.upos -whether "M << N" -i fr_pud-ud-test.conllu
+```
+
+{{< json file="static/usage/cli/_build/output_grep_key_whether" >}}
+
+### Remarks:
+ * any longer sequence of `-key …` or `-whether …` can be used
+ * the relative order of clutering items is relevant (try `grew grep -pattern dislocated.req -whether "M << N" -key N.upos -i fr_pud-ud-test.conllu`)
+ * it is possible to combine **Multi** mode and clsutering: `grew grep -pattern dislocated.req -key N.upos -whether "M << N" -i en_fr_zh.json`
+
 ---
-# Count
+# Count (TODO update doc)
 
 This mode computes corpus statistics.
 There are two ways to used it:
@@ -138,14 +188,14 @@ The set of corpora is described in a [JSON file](../../doc/corpora) and must be 
 Each pattern is described in a separate file.
 With the two following 1-line files:
 
- * `ADJ_NOUN_pre.pat` [:link:](/usage/cli/ADJ_NOUN_pre.pat) {{< input file="static/usage/cli/ADJ_NOUN_pre.pat" >}}
- * `ADJ_NOUN_post.pat` [:link:](/usage/cli/ADJ_NOUN_post.pat) {{< input file="static/usage/cli/ADJ_NOUN_post.pat" >}}
+ * `ADJ_NOUN_pre.req` [:link:](/usage/cli/ADJ_NOUN_pre.req) {{< input file="static/usage/cli/ADJ_NOUN_pre.req" >}}
+ * `ADJ_NOUN_post.req` [:link:](/usage/cli/ADJ_NOUN_post.req) {{< input file="static/usage/cli/ADJ_NOUN_post.req" >}}
 
 and the example file `en_fr_zh.json` [:link:](/usage/cli/en_fr_zh.json)
 {{< input file="static/usage/cli/en_fr_zh.json" >}}
 
 1. Compile the corpora: `grew compile -i en_fr_zh.json`
-1. Build stat table: `grew count -patterns "ADJ_NOUN_pre.pat ADJ_NOUN_post.pat" -i en_fr_zh.json`
+1. Build stat table: `grew count -patterns "ADJ_NOUN_pre.req ADJ_NOUN_post.req" -i en_fr_zh.json`
 
 The output is given as TSV data:
 
@@ -171,7 +221,7 @@ We can then observe that in the annotations of the 3 corpora in use:
 
 With the same data as in the previous example, the following command:
 
-`grew count -pattern ADJ_NOUN_pre.pat -key N.Number -i en_fr_zh.json`
+`grew count -pattern ADJ_NOUN_pre.req -key N.Number -i en_fr_zh.json`
 
 produces the TSV file:
 
@@ -185,10 +235,10 @@ which corresponds to the table:
 | UD_French-PUD | 178 | 245 | 0 |
 | UD_Chinese-PUD | 0 | 0 | 364 |
 
-Using a whether clustering, with the pattern `ADJ_NOUN.pat` [:link:](/usage/cli/ADJ_NOUN.pat) 
-{{< input file="static/usage/cli/ADJ_NOUN.pat" >}}
+Using a whether clustering, with the pattern `ADJ_NOUN.req` [:link:](/usage/cli/ADJ_NOUN.req) 
+{{< input file="static/usage/cli/ADJ_NOUN.req" >}}
 
-and the command: `grew count -pattern ADJ_NOUN.pat -whether "A << N" -i en_fr_zh.json`
+and the command: `grew count -pattern ADJ_NOUN.req -whether "A << N" -i en_fr_zh.json`
 
 we obtain the TSV file:
 

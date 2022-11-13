@@ -19,9 +19,9 @@ Each corpus is described by:
   * a `directory` where the files of the corpus are stored (use absolute paths)
   * a `files` field with a list of file names. This field is optional, by default all files with extension `conll`, `conllu`, `cupt` or `orfeo` are loaded.
 
-For instance, the file `en_fr_zh.json` [:link:](/doc/corpora/en_fr_zh.json) describes 3 corpora from UD 2.8 (of course, directories should be modified to match your local installation).
+For instance, the file `en_fr_zh.json` [:link:](/doc/corpora/en_fr_zh.json) describes 3 corpora from UD 2.10 (of course, directories should be modified to match your local installation).
 
 {{< json file="static/doc/corpora/en_fr_zh.json" >}}
 
 **NB:**: A few other fields are used for the description of corpora used in the **Grew-match**.
-See [here](https://gitlab.inria.fr/grew/grew_match_config/-/tree/master/corpora) for examples of the JSON files used in differnt instances of **Grew-match**.
+See [here](https://gitlab.inria.fr/grew/grew_match_config/-/tree/master/corpora) for examples of the JSON files used in different instances of **Grew-match**.

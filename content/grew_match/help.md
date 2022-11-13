@@ -21,7 +21,7 @@ The address [`http://match.grew.fr`](http://match.grew.fr) now displays a portal
 This instance contains the last version of the [UD](http://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
 The top navbar gives access to:
  * **UD 2.10**: The 228 treebanks of the version 2.10 of [UD](http://universaldependencies.org)
- * **SUD 2.10**: The 227 treebanks of the version 2.9 of [SUD](https://surfacesyntacticud.github.io)
+ * **SUD 2.10**: The 227 treebanks of the version 2.10 of [SUD](https://surfacesyntacticud.github.io)
  * **UD Latest**:
    * suffix `@dev`: corpora in their latest version available on `dev` branch on GitHub (English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr).
    * suffix `@conv`: the automatic conversion of the native SUD treebanks into UD.

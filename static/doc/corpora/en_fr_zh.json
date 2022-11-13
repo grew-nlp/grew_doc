@@ -1,12 +1,12 @@
 { "corpora": [
-  { "id": "UD_English-EWT@2.8",
-    "directory": "/Users/guillaum/resources/ud-treebanks-v2.8/UD_English-EWT/",
+  { "id": "UD_English-EWT@2.10",
+    "directory": "/Users/guillaum/resources/ud-treebanks-v2.10/UD_English-EWT/",
     "files": ["en_ewt-ud-dev.conllu", "en_ewt-ud-test.conllu", "en_ewt-ud-train.conllu"]
   },
-  { "id": "UD_French-Sequoia@2.8",
-    "directory": "/Users/guillaum/resources/ud-treebanks-v2.8/UD_French-Sequoia/"
+  { "id": "UD_French-Sequoia@2.10",
+    "directory": "/Users/guillaum/resources/ud-treebanks-v2.10/UD_French-Sequoia/"
   },
-  { "id": "UD_Chinese-GSD@2.8",
-    "directory": "/Users/guillaum/resources/ud-treebanks-v2.8/UD_Chinese-GSD/"
+  { "id": "UD_Chinese-GSD@2.10",
+    "directory": "/Users/guillaum/resources/ud-treebanks-v2.10/UD_Chinese-GSD/"
   } ]
 }

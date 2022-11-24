@@ -11,9 +11,12 @@ run:
 	${GREW} grep -request dislocated.req -key N.upos -i _build/fr_pud-ud-test.conllu > _build/output_grep_key
 	${GREW} grep -request dislocated.req -whether "M << N" -i _build/fr_pud-ud-test.conllu > _build/output_grep_whether
 	${GREW} grep -request dislocated.req -key N.upos -whether "M << N" -i _build/fr_pud-ud-test.conllu > _build/output_grep_key_whether
-	${GREW} count -requests "ADJ_NOUN_pre.req ADJ_NOUN_post.req" -i en_fr_zh.json > _build/output_count
-	${GREW} count -requests ADJ_NOUN_pre.req -key N.Number -i en_fr_zh.json > _build/output_count_key
-	${GREW} count -requests ADJ_NOUN.req -whether "A << N" -i en_fr_zh.json > _build/output_count_whether
+	${GREW} count -request ADJ_NOUN_pre.req -request ADJ_NOUN_post.req -i en_fr_zh.json > _build/output_count.json
+	${GREW} count -request ADJ_NOUN_pre.req -request ADJ_NOUN_post.req -i en_fr_zh.json -tsv > _build/output_count.tsv
+	${GREW} count -request ADJ_NOUN_pre.req -key N.Number -i en_fr_zh.json > _build/output_count_key.json
+	${GREW} count -request ADJ_NOUN_pre.req -key N.Number -i en_fr_zh.json -tsv > _build/output_count_key.tsv
+	${GREW} count -request ADJ_NOUN.req -whether "A << N" -i en_fr_zh.json > _build/output_count_whether.json
+	${GREW} count -request ADJ_NOUN.req -whether "A << N" -i en_fr_zh.json -tsv > _build/output_count_whether.tsv
 
 clean:
 	rm -rf _build

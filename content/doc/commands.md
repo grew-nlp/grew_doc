@@ -257,7 +257,7 @@ the command `grew transform -grs fail_reverse.grs` applied to the same graph pro
 GRS: [`shift.grs`](/doc/commands/shift.grs ):
 {{< grew file="/static/doc/commands/shift.grs" >}}
 
-| Input graph: [`shift.gr`](/doc/commands/shift.gr) | after one command | after two commands | Rewritten graph |
+| Input graph: [`shift.json`](/doc/commands/shift.json) | after one command | after two commands | Rewritten graph |
 |:---:|:---:|:---:|:---:|
 | ![input](/doc/commands/_build/shift.svg) | ![step1](/doc/commands/_build/shift_one.svg) | ![step2](/doc/commands/_build/shift_two.svg) | ![output](/doc/commands/_build/shift_rewritten.svg) |
 

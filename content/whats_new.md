@@ -25,6 +25,11 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
+# :new: Version 1.10.0 (November 23, 2022)
+  * Remove handling of **Gr** graph format. Please use [json format](../doc/json)
+  * Review input corpus handling (see [Command Line Interface](../usage/cli))
+
+---
 # :new: Version 1.9.0 (June 29, 2022)
   * update Conll handling (synchronized with `libcaml-conll 1.13`)
   * minors bug fixes

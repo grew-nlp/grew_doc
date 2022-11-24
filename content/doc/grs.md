@@ -149,28 +149,28 @@ Similarly, package `p_2` rewrites the label `L` into `L_2` and `L_2` into either
 
 Consider small graph with 3 nodes and 2 edges labeled `L` defined in
 
-[`input.gr`](../grs/input.gr):
-{{< grew file="/static/doc/grs/input.gr" >}}
+[`input.json`](../grs/input.json):
+{{< grew file="/static/doc/grs/input.json" >}}
 
-Next commands rewrite the graph [`input.gr`](../grs/input.gr), following different strategies (:warning: the `-gr` options is needed to output graph in the native format instead of CoNLL-U)
+Next commands rewrite the graph [`input.json`](../grs/input.json), following different strategies (:warning: the `-json` option is needed to output graph in the JSON format instead of CoNLL-U).
 
 #### strategy `p_1_nfs`
 
-`grew transform -grs single.grs -config basic -strat p_1_nfs -i input.gr -gr` computes all normal forms for the input graph with rules of package `p_1`.
+`grew transform -grs single.grs -config basic -strat p_1_nfs -i input.json -json` computes all normal forms for the input graph with rules of package `p_1`.
  Each initial edges `L` can be rewritten either `L_11` or `L_12`, and so 4 graphs are produced:
 
-{{< grew file="/static/doc/grs/_build/p_1_nfs.gr" >}}
+{{< grew file="/static/doc/grs/_build/p_1_nfs.json" >}}
 
 #### strategy `p_1_onf`
 
-`grew transform -grs single.grs -config basic -strat p_1_onf -i input.gr -gr` produces one of the 4 graphs of the previous strategy.
-{{< grew file="/static/doc/grs/_build/p_1_onf.gr" >}}
+`grew transform -grs single.grs -config basic -strat p_1_onf -i input.json -json` produces one of the 4 graphs of the previous strategy.
+{{< grew file="/static/doc/grs/_build/p_1_onf.json" >}}
 
 #### strategy `union`
-`grew transform -grs single.grs -config basic -strat union -i input.gr -gr` compute the application of the union of one step of rewriting with `p_1` (which produces 2 graphs, replacing one the two `L` edge by `L_1` and the same with `p_2`. In the end, 4 graphs are produced (there is no iteration of rule application).
-{{< grew file="/static/doc/grs/_build/union.gr" >}}
+`grew transform -grs single.grs -config basic -strat union -i input.json -json` compute the application of the union of one step of rewriting with `p_1` (which produces 2 graphs, replacing one the two `L` edge by `L_1` and the same with `p_2`. In the end, 4 graphs are produced (there is no iteration of rule application).
+{{< grew file="/static/doc/grs/_build/union.json" >}}
 
 #### strategy `all_nfs`
-`grew transform -grs single.grs -config basic -strat all_nfs -i input.gr -gr` computes all normal forms that can be obtained with these all the rules and produces 16 graphs.
-{{< grew file="/static/doc/grs/_build/all_nfs.gr" >}}
+`grew transform -grs single.grs -config basic -strat all_nfs -i input.json -json` computes all normal forms that can be obtained with these all the rules and produces 16 graphs.
+{{< grew file="/static/doc/grs/_build/all_nfs.json" >}}
 

@@ -17,10 +17,10 @@ build:
 	${GREW} transform -quiet -grs reverse.grs -i reverse.json -dot | dot -Tsvg -o _build/reverse_out.svg
 	#
 	# Example 4:
-	${GREW} transform -quiet -config basic -i shift.gr -dot | dot -Tsvg -o _build/shift.svg
-	${GREW} transform -quiet -config basic -grs shift_steps.grs -strat one -i shift.gr -dot | dot -Tsvg -o _build/shift_one.svg
-	${GREW} transform -quiet -config basic -grs shift_steps.grs -strat two -i shift.gr -dot | dot -Tsvg -o _build/shift_two.svg
-	${GREW} transform -quiet -config basic -grs shift.grs -i shift.gr -dot | dot -Tsvg -o _build/shift_rewritten.svg
+	${GREW} transform -quiet -config basic -i shift.json -dot | dot -Tsvg -o _build/shift.svg
+	${GREW} transform -quiet -config basic -grs shift_steps.grs -strat one -i shift.json -dot | dot -Tsvg -o _build/shift_one.svg
+	${GREW} transform -quiet -config basic -grs shift_steps.grs -strat two -i shift.json -dot | dot -Tsvg -o _build/shift_two.svg
+	${GREW} transform -quiet -config basic -grs shift.grs -i shift.json -dot | dot -Tsvg -o _build/shift_rewritten.svg
 
 
 

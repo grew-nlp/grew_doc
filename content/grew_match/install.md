@@ -56,7 +56,7 @@ You can check that the URL [`http://localhost:8000`](http://localhost:8000) show
 
 ## Step 3: Install the backend
 
-This has been tested with Ocaml 4.13.1.
+This has been tested with Ocaml 4.14.0.
 It should also work with more recent versions.
 
 Follow the **Grew** [install instruction](../../usage/install/) (Steps 1 to 3), in order to install Ocaml, opam and the Grew related librairies.

@@ -22,7 +22,10 @@ If you just need to upgrade your installation, please consult the [Upgrade page]
 
 ## Step 1: Install opam
 
+
 **Grew** requires **opam** version **2.0.0** or higher.
+In case of trouble installing opam, please consult [**opam** installation page](https://opam.ocaml.org/doc/Install.html).
+
 
 ### Linux
 In most Linux recent distribution, version 2 can be installed from default packages.
@@ -48,8 +51,8 @@ apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 
 Run: 
   * `opam init` 
-  * `opam switch create 4.13.1 4.13.1` Install a recent version of Ocaml.
-  * as advice by the previous command: `eval $(opam env --switch=4.13.1)`
+  * `opam switch create 4.14.0 4.14.0` Install a recent version of Ocaml.
+  * as advice by the previous command: `eval $(opam env --switch=4.14.0)`
 
 
 Check that `ocaml` is installed with `ocamlc -v`. This gives you the version of Ocaml installed.
@@ -82,14 +85,3 @@ Note: depending on your local installation, you may have to use `pip3` or `pip3.
 
  * A docker file with the Python library ready to be used is available [here](../docker).
 
----
-
-# Addendum
-
-If opam 2 in not available in your favorite package manager, you should be able to install version **2.0.6** with the following commands:
-
-  * `wget -q https://github.com/ocaml/opam/releases/download/2.0.6/opam-2.0.6-x86_64-linux`
-  * `sudo mv opam-2.0.6-x86_64-linux /usr/local/bin/opam`
-  * `sudo chmod a+x /usr/local/bin/opam`
-
-For more information, please consult [**opam** installation page](https://opam.ocaml.org/doc/Install.html).

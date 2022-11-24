@@ -14,7 +14,7 @@ Each rule contains a sequence of commands introduced by the keyword `commands`, 
 ---
 
 ## Edge deletion
-To delete an edge, the `del_edge` command can refer either to the full description of the edge or to an identifier `e` given in the pattern:
+To delete an edge, the `del_edge` command can refer either to the full description of the edge or to an identifier `e` given in the request:
 
 ~~~grew
 del_edge A -[obj]-> B;
@@ -76,7 +76,7 @@ Keywords are `shift_in`, `shift_out` and `shift`, respectively for moving in-edg
 Brackets can be used to select the set of edges to move according to their labelling.
 
 :warning: edges between two nodes matched by the pattern are not changed by `shift` rules.
-The only edges that are moved are edges linking one node of the patten and one node which is not in the pattern.
+The only edges that are moved are edges linking one node of the pattern and one node which is not in the pattern.
 
 ~~~grew
   shift A ==> B
@@ -129,7 +129,7 @@ del_feat N.f
 ## Modification of an existing edge
 
 In commands, it is possible to manipulate subpart of edges.
-If the pattern binds the identifier `e` to some edge (with the syntax `e: X -[…]-> Y`), the following commands can be used:
+If the request binds the identifier `e` to some edge (with the syntax `e: X -[…]-> Y`), the following commands can be used:
 
  * `e.2 = aux` &rarr; update the current edge `e`
  * `add_edge X -[1=suj, 2=e.2]-> Z`  &rarr;  add a new edge where the value of feature `2` is copied from the value of feature `2` of edge `e`;
@@ -297,8 +297,8 @@ Commands which may be ineffective are:
 Note that it is always possible to define a Graph Rewriting System with only effective commands following the procedure:
 
  * a rule with an potential ineffective `add_edge` commands can be replaced by two rules, one with a `without` clause ensuring the absence of the edge and one without the `add_edge` command.
- * a rule with an potential ineffective `del_edge` commands can be replaced by two rules, one with the given edge in the pattern and one without the `del_edge` command.
- * a rule with an potential ineffective `del_feat` commands can be replaced by two rules, one with the feature in the pattern and one without the `del_feat` command.
+ * a rule with an potential ineffective `del_edge` commands can be replaced by two rules, one with the given edge in the request and one without the `del_edge` command.
+ * a rule with an potential ineffective `del_feat` commands can be replaced by two rules, one with the feature in the request and one without the `del_feat` command.
  * a ineffective feature updating can be avoided with a clause `N.f<>v` or a `N.f=v` in a without clause.
 
 

@@ -165,11 +165,13 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ---
 
-## Search with Grew patterns
+## Search with Grew requests
 
-### The `searchPatternInGraphs` service
+### The `searchRequestInGraphs` service
 
-Given a **Grew** pattern, a list of users and a project, this service returns a list of occurrences of the pattern in the project.
+The same service named `searchPatternInGraphs` exists for backward compatibilty.
+
+Given a **Grew** request, a list of users and a project, this service returns a list of occurrences of the request in the project.
 
 See [here](#user_ids) for the usage of `user_ids` argument.
 
@@ -186,16 +188,16 @@ Each occurrence is described by a dict
 }
 ```
 
- * `(<string> project_id, <string> user_ids, <string> pattern)` returns a list of occurrences.
+ * `(<string> project_id, <string> user_ids, <string> request)` returns a list of occurrences.
 
- * `(<string> project_id, <string> user_ids, <string> pattern, <string> clusters)`
+ * `(<string> project_id, <string> user_ids, <string> request, <string> clusters)`
  where `clusters` is a list of cluster keys, separated by `;`.
  This returns nested dictionaries (the depth being equals to the length of the cluster key list).
- The set of occurrences of the `pattern` in `project_id` are clustered with the first key of the list;
+ The set of occurrences of the `request` in `project_id` are clustered with the first key of the list;
  each cluster is further clustered recursively with the remaining keys.
- For instance:
+ For instance: If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
 
-If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
+For the service named `searchPatternInGraphs`, the POST argument of the request id named `pattern` instead of `request`.
 
 ---
 

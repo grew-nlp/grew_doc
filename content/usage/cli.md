@@ -14,8 +14,8 @@ The command used to run **Grew** is: `grew <subcommand> [<args>]`
 The 5 main subcommands are:
 
   * [:link:](./#transform) `transform`: application of a rewriting system to a set of graphs
-  * [:link:](./#grep)`grep`: search for a pattern in a corpus
-  * [:link:](./#count) `count`: compute stats of a set of patterns in a set of corpora)
+  * [:link:](./#grep)`grep`: search for a request in a corpus
+  * [:link:](./#count) `count`: compute stats of a set of requests in a set of corpora)
   * [:link:](./#compile) `compile`: compile a set of corpora
   * [:link:](./#clean)`clean`: clean a set of corpora
 
@@ -107,11 +107,11 @@ produces the following JSON output:
 
 {{< json file="static/usage/cli/_build/output_grep" >}}
 
-This means that the pattern described in the file `dislocated.req` was found three times in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the pattern.
+This means that the request described in the file `dislocated.req` was found three times in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the request.
 
 Note that two other options exist:
 
- * `-html`: produces a new `html` field in each JSON item with the sentence where words impacted by the pattern are in a special HTML span with class `highlight`
+ * `-html`: produces a new `html` field in each JSON item with the sentence where words impacted by the request are in a special HTML span with class `highlight`
  * `-dep_dir <directory>`: produces a new file in the folder `directory` with the representation of the sentence with highlighted part (as in [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format (usable with [Dep2pict](http://dep2pict.loria.fr)).
 
 ### Example with **Multi** input
@@ -142,7 +142,7 @@ With the same files as in the *without clustering* example above.
 With `-key`, we can cluster the results according to the `upos` of the node `N` (the dependent).
 
 ```
-grew grep -pattern dislocated.req -key N.upos -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -key N.upos -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key" >}}
@@ -151,7 +151,7 @@ With `-whether`, we can cluster the results according to the fact that the relat
 We observe that in two cases, the governor `M` is before `N`.
 
 ```
-grew grep -pattern dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_whether" >}}
@@ -160,15 +160,15 @@ grew grep -pattern dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
 Finally, several clustering can be applied successively. For instance
 
 ```
-grew grep -pattern dislocated.req -key N.upos -whether "M << N" -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -key N.upos -whether "M << N" -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key_whether" >}}
 
 ### Remarks:
  * any longer sequence of `-key …` or `-whether …` can be used
- * the relative order of clutering items is relevant (try `grew grep -pattern dislocated.req -whether "M << N" -key N.upos -i fr_pud-ud-test.conllu`)
- * it is possible to combine **Multi** mode and clsutering: `grew grep -pattern dislocated.req -key N.upos -whether "M << N" -i en_fr_zh.json`
+ * the relative order of clutering items is relevant (try `grew grep -request dislocated.req -whether "M << N" -key N.upos -i fr_pud-ud-test.conllu`)
+ * it is possible to combine **Multi** mode and clsutering: `grew grep -request dislocated.req -key N.upos -whether "M << N" -i en_fr_zh.json`
 
 ---
 # Count
@@ -250,7 +250,7 @@ which corresponds to the table:
 
 ## Example with **Multi** mode, one request and a whether clustering of the output
 
-Using a whether clustering, with the pattern `ADJ_NOUN.req` [:link:](/usage/cli/ADJ_NOUN.req) 
+Using a whether clustering, with the request `ADJ_NOUN.req` [:link:](/usage/cli/ADJ_NOUN.req) 
 {{< input file="static/usage/cli/ADJ_NOUN.req" >}}
 
 and the command: `grew count -request ADJ_NOUN.req -whether "A << N" -i en_fr_zh.json -tsv`
@@ -270,10 +270,10 @@ which corresponds to the table:
 
 ## Remarks
 
- * Only one pattern is used in case of clustering.
- * Pattern syntax can be learned [here](/doc/pattern/) or with the online **[Grew-match](http://match.grew.fr)** tool, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with snippets given on the right of the text area.
+ * Only one request is used in case of clustering.
+ * Request syntax can be learned [here](/doc/request/) or with the online **[Grew-match](http://match.grew.fr)** tool, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with snippets given on the right of the text area.
  * If some corpus is updated, it is necessary to run again the compilation step.
- * Some patterns may take a long time to be searched in corpora.
+ * Some requests may take a long time to be searched in corpora.
  * ⚠️ In previous version (< `1.10`), the TSV table also contains a column with the size of corpora (in number of sentences). This column is no longer available in version `1.10`.
 
 

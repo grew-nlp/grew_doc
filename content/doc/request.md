@@ -4,17 +4,20 @@ Categories = ["Development","GoLang"]
 Tags = ["Development","golang"]
 Description = ""
 date = "2017-05-22T23:01:05+02:00"
-title = "pattern"
+title = "request"
+aliases = [
+    "/doc/pattern"
+]
 +++
 
-# Patterns
+# Requests
 
-Patterns are used in **Grew** to describe left part of rewriting rules and in **Grew-match** to describe queries to be executed on corpora.
+Requests are used in **Grew** to describe left part of rewriting rules and in **Grew-match** to describe queries to be executed on corpora.
 
 ---
-## Pattern syntax
+## Requests syntax
 
-A Pattern is defined through 3 different kind of *pattern items*.
+A request is defined through 3 different kind of *request items*.
 
  * global items (introduced by the keyword `global`) filter out structures based on information about the whole graph.
  * positive items (introduced by keyword `pattern`) describe a positive part (nodes and relations) that must be found in the graph.
@@ -22,7 +25,7 @@ A Pattern is defined through 3 different kind of *pattern items*.
 
 The full matching process is:
 
- * Take a graph and a pattern as input.
+ * Take a graph and a request as input.
  * Output a set of matchings; a *matching* being a function from nodes and edges defined in the positive items to nodes and edges of the host graph.
 
  1. If the graph does not satisfied one of the global items, the output is empty.
@@ -32,10 +35,10 @@ The full matching process is:
 ### Remarks
  * If there is more than one positive `pattern` items, the union is considered.
  * If there is more than one negative `without` items, there are all interpreted independently (and the output is different from the one obtained with a union of negative items)
- * The order of patterns items in a pattern are irrelevant.
+ * The order of `pattern` items in a request are irrelevant.
  * It there is no positive item, there is a trivial matching which is the empty function.
 
-The syntax of patterns in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
+The syntax of requests in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
 
 ---
 ## Positive and negative patterns
@@ -78,7 +81,7 @@ Edges may also be named for usage in commands (in **Grew**) or in clustering (in
  * …
 
 Note that edge may refer to undeclared nodes, these nodes are then implicitly declared without constraint.
-For instance, the two patterns below are equivalent:
+For instance, the two requests below are equivalent:
 
 ```grew
 pattern { N -[nsubj]-> M }
@@ -104,7 +107,7 @@ Some examples (with `sud` configuration) are given below.
 
 ### :warning: Matching with atomic labels :warning:
 
-It is important to note that from the pattern point of view, the two clauses `X -[1=comp]-> Y` (first line in the table) and `X -[comp]-> Y` (last line in the table) are not equivalent!
+It is important to note that from the request point of view, the two clauses `X -[1=comp]-> Y` (first line in the table) and `X -[comp]-> Y` (last line in the table) are not equivalent!
 
 ### Difference with node features matching
 
@@ -144,21 +147,21 @@ These constrains do not bind new elements in the graph, but must be fulfilled (i
 
 
 ### Equivalent nodes
-When two or more nodes are equivalent in a pattern, each occurrence of the pattern in a graph is found several times (up to permutation in the sets of equivalent nodes).
-For instance, in the pattern below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
+When two or more nodes are equivalent in a request, each occurrence of the request in a graph is found several times (up to permutation in the sets of equivalent nodes).
+For instance, in the request below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
 
 ```grew
 pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
 ```
 
-This pattern is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
+This request is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
 but there are only 45 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
 To avoid this, a constraint `N1.__id__ < N2.__id__` can be used.
 It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
 **NB**: if a constraint `N1.__id__ < N2.__id__` is used with two non-equivalent nodes, the result is unspecified.
 
 
-The pattern below returns the 45 expected occurrences
+The request below returns the 45 expected occurrences
 {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=60166c11100f5" >}}
 
 ```grew
@@ -169,8 +172,8 @@ pattern {
 ```
 
 ---
-## Global pattern
-Global patterns let the user express constrains about the structure of the whole graph.
+## Global request
+Global requests let the user express constrains about the structure of the whole graph.
 It is also possible to express constraints about metadata of the graph.
 
 ### Structure constraints

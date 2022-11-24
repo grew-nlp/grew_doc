@@ -27,14 +27,14 @@ Categories = ["Development","GoLang"]
 ## A first taste of Grew
 The easiest way to try and test **Grew** is to use one of the online interfaces.
 
-  1. [Grew-match](http://match.grew.fr) (Online graph matching): search for a given pattern in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning pattern syntax).
+  1. [Grew-match](http://match.grew.fr) (Online graph matching): search for a given request in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning request syntax).
   2. [Grew-web](http://transform.grew.fr) (Online graph rewriting) 
   3. [Grew-parse](http://parse.grew.fr) (Online parsing): return for a input French sentence, a set of linguistic representations (syntax and semantics) which are built using Graph Rewriting
 
 ## Some of the main features of Grew
 
   * Graph structures can use a built-in notion of **feature structures**.
-  * The left-hand side of a rule is described by a graph called a **pattern**; injective graph morphisms are used in the pattern matching algorithm.
+  * The left-hand side of a rule is described by a graph called a **request** (or **patterns**); injective graph morphisms are used in the pattern matching algorithm.
   * **Negative pattern** can be used for a finer control on the left-hand side of rules.
   * The right-hand side of rules is described by a sequence of **atomic commands** that describe how the graph should be modified during the rule application.
   * Subset of rules can be organised in **packages** and **strategies** define the way rules and packages are applied in graph transformation.

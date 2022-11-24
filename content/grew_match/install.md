@@ -203,7 +203,7 @@ make test.opt
 
 You're done! At the URL [`http://localhost:8000`](http://localhost:8000) we should be able to make a request on your corpus. 
 
- * {{< tryit "http://localhost:8000?pattern=%20" >}}: search an empty pattern
+ * {{< tryit "http://localhost:8000?pattern=%20" >}}: search an empty request
  * {{< tryit "http://localhost:8000?relation=nsubj" >}}: search the `nsubj` relation
 
 

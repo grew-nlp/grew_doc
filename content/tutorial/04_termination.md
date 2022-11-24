@@ -56,11 +56,11 @@ We can propose the rule (file: [`aux_1.grs`](/tutorial/04_termination/aux_1.grs)
 
 {{< grew file="/static/tutorial/04_termination/aux_1.grs" >}}
 
-but this rule will also produce an error if it is iterated: after the first application, the pattern `{ M -[aux.pass]-> N }` is still present in the graph and the rules can be applied again and again.
+but this rule will also produce an error if it is iterated: after the first application, the request `{ M -[aux.pass]-> N }` is still present in the graph and the rules can be applied again and again.
 
-### Solution 1: make a stricter pattern
+### Solution 1: make a stricter request
 
-With the rule `aux_2` (file: [`aux_2.grs`](/tutorial/04_termination/aux_2.grs)), the pattern cannot be found after the first application and there will be no loop.
+With the rule `aux_2` (file: [`aux_2.grs`](/tutorial/04_termination/aux_2.grs)), the request cannot be found after the first application and there will be no loop.
 
 {{< grew file="/static/tutorial/04_termination/aux_2.grs" >}}
 

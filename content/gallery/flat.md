@@ -52,7 +52,7 @@ Output 120 normal forms! Here is one of them:
 
 ![C6_120_example](/gallery/flat/_build/C6_120_example.svg)
 
-Our rule is not strict enough. We have to put more restriction in the pattern part.
+Our rule is not strict enough. We have to put more restriction in the request part.
 If we require that `N1` and `N2` are two consecutive words, the rule is:
 
 ```grew

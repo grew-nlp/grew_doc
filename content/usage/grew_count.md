@@ -39,14 +39,14 @@ The `patterns` parameter must be a JSON string describing a dictionary of patter
 ```
 
 Again, the patterns are the same as the ones available on **[Grew-match](http://match.grew.fr)**.
-Patterns syntax can be learned through **Grew-match**'s [tutorial](http://match.grew.fr?tutorial=yes) and some documentation is available on the [pattern page](../../doc/pattern).
+Patterns syntax can be learned through **Grew-match**'s [tutorial](http://match.grew.fr?tutorial=yes) and some documentation is available on the [request page](../../doc/request).
 
 ---
 
 ## Example of usage with Python
 
 The web service can be called with Python's `requests` library.
-The code below ([Download](count_test.py)) shows a way to call the web service with the two patterns above and with the 20 PUD corpora of SUD 2.10.
+The code below ([Download](count_test.py)) shows a way to call the web service with the two requests above and with the 20 PUD corpora of SUD 2.10.
 
 {{< python file="static/usage/grew_count/count_test.py" >}}
 

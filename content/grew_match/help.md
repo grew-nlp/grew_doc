@@ -32,19 +32,19 @@ Once you have selected an instance,
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
- * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.10&pattern=pattern { GOV -[nsubj]-> DEP }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.29% of the corpus`, This means that the first 1000 items were found in 5.29% of the 16,341 sentences of the **UD_French-GSD** corpus.
+ * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[nsubj]-> DEP }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.43% of the corpus`, This means that the first 1000 items were found in 5.43% of the 16,341 sentences of the **UD_French-GSD** corpus.
 )
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
 With `count`, all the solutions are computed, but, it is not possible to visualize annotation examples.
-For instance, with the same request as above, we observe 19,015 occcurences of `nsubj`.
+For instance, with the same request as above, we observe 18,998 occcurences of `nsubj`.
 
 ---
 
 ## Learning syntax
 A [tutorial](http://match.grew.fr/?tutorial=yes) with a progressive sequence of requests is available.
 You may also explore snippets given on the right of the text area to learn with other examples.
-A more comprehensive documentation is available in the [patterns page](../../doc/pattern).
+A more comprehensive documentation is available in the [requests page](../../doc/request).
 
 ---
 
@@ -57,17 +57,17 @@ Each possible value is presented as a button with the size of the associated sub
 The clustering key can be:
 
  * `N.f`: cluster following the feature named `f` for the node `N` present in the (positive part of) main request
-    * List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-LFG@2.10&pattern=pattern { N [upos=AUX] }&clust1_key=N.lemma">}}
-    * List `VerbForm` of `VERB` without `nsubj` in **UD_German-GSD** {{< tryit "http://universal.grew.fr/?corpus=UD_German-GSD@2.10&pattern=pattern { N [upos=VERB] }%0Dwithout { N -[1=nsubj]-> M }&clust1_key=N.VerbForm">}}
-    * Find the huge number of `form` associated to the lemma _saada_ in **UD_Finnish-FTB**{{< tryit "http://universal.grew.fr/?corpus=UD_Finnish-FTB@2.10&pattern=pattern { N [lemma=\"saada\"] }&clust1_key=N.form">}}
+    * List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-LFG@2.11&pattern=pattern { N [upos=AUX] }&clust1_key=N.lemma">}}
+    * List `VerbForm` of `VERB` without `nsubj` in **UD_German-GSD** {{< tryit "http://universal.grew.fr/?corpus=UD_German-GSD@2.11&pattern=pattern { N [upos=VERB] }%0Dwithout { N -[1=nsubj]-> M }&clust1_key=N.VerbForm">}}
+    * Find the huge number of `form` associated to the lemma _saada_ in **UD_Finnish-FTB**{{< tryit "http://universal.grew.fr/?corpus=UD_Finnish-FTB@2.11&pattern=pattern { N [lemma=\"saada\"] }&clust1_key=N.form">}}
  * `e.label`: cluster following the full label of edge `e` present in the (positive part of) main request
-    * List relations used for auxiliaries in **UD_Italian-ParTUT** {{< tryit "http://universal.grew.fr/?corpus=UD_Italian-ParTUT@2.10&pattern=pattern { e:M -> N; N [upos=AUX] }&clust1_key=e.label">}}
+    * List relations used for auxiliaries in **UD_Italian-ParTUT** {{< tryit "http://universal.grew.fr/?corpus=UD_Italian-ParTUT@2.11&pattern=pattern { e:M -> N; N [upos=AUX] }&clust1_key=e.label">}}
  * `e.f`: cluster following the edge feature name `f` for a named edge `e` present in the (positive part of) main request
-    * List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "http://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.10&pattern=pattern { e: GOV -[1=acl]-> DEP }&clust1_key=e.2">}}
+    * List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "http://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.11&pattern=pattern { e: GOV -[1=acl]-> DEP }&clust1_key=e.2">}}
  * `e.length`: cluster following the length of edge `e` present in the (positive part of) main request
-    * Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "http://universal.grew.fr/?corpus=UD_Korean-PUD@2.10&pattern=pattern { e: GOV -[amod]-> DEP }&clust1_key=e.length">}}
+    * Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "http://universal.grew.fr/?corpus=UD_Korean-PUD@2.11&pattern=pattern { e: GOV -[amod]-> DEP }&clust1_key=e.length">}}
  * `e.delta`: cluster following the relative position of governor and dependent of edge `e` present in the (positive part of) main request
-    * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "http://match.grew.fr/?corpus=UD_Naija-NSC@2.10&pattern=pattern { e: GOV -[nsubj]-> DEP }&clust1_key=e.delta">}}
+    * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "http://match.grew.fr/?corpus=UD_Naija-NSC@2.11&pattern=pattern { e: GOV -[nsubj]-> DEP }&clust1_key=e.delta">}}
 
 ### Use a "whether" sub-request
 A "whether" sub-request contains a list of clauses (as in `pattern` or `without` constructions).
@@ -80,12 +80,12 @@ Note that no curly brackets are needed in the "whether" text area (see examples 
 
 #### Examples
 
-  * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "http://match.grew.fr/?corpus=UD_Hungarian-Szeged@2.10&pattern=pattern { GOV -[advcl]-> DEP }&whether=GOV << DEP" >}}
-  * In **UD_English-GUM**, how often the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "http://match.grew.fr/?corpus=UD_English-GUM@2.10&pattern=pattern { GOV -[1=expl]-> DEP }&whether=GOV -[1=nsubj]-> S" >}}
+  * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "http://match.grew.fr/?corpus=UD_Hungarian-Szeged@2.11&pattern=pattern { GOV -[advcl]-> DEP }&whether=GOV << DEP" >}}
+  * In **UD_English-GUM**, how often the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "http://match.grew.fr/?corpus=UD_English-GUM@2.11&pattern=pattern { GOV -[1=expl]-> DEP }&whether=GOV -[1=nsubj]-> S" >}}
   * In **UD_French-GSD**, there are 627 left-headed `nsubj` (or subtypes):
-    * How often is it in an interrogative sentences? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.10&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=P [lemma=%22?%22]" >}}
-    * How often is it in an relative clause? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.10&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=H -[acl:relcl]-> GOV" >}}
-    * How often is there an expletive subject? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.10&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=GOV -[expl:subj]-> E" >}}
+    * How often is it in an interrogative sentences? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=P [lemma=%22?%22]" >}}
+    * How often is it in an relative clause? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=H -[acl:relcl]-> GOV" >}}
+    * How often is there an expletive subject? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=GOV -[expl:subj]-> E" >}}
 
 ---
 
@@ -130,7 +130,7 @@ For these corpora, a switch button is available (above the text area) where the 
 
 If EUD is selected, enhanced dependencies are displayed in blue below the sentence.
 In the pattern, an enhanced dependency can be searched with the prefix `E:`.
-For instance, the pattern below {{< tryit "http://match.grew.fr/?corpus=UD_English-EWT@2.10&pattern=pattern { N -[E:obj]-> M }%0Dwithout { N -[obj]-> M }&eud=yes" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
+For instance, the pattern below {{< tryit "http://match.grew.fr/?corpus=UD_English-EWT@2.11&pattern=pattern { N -[E:obj]-> M }%0Dwithout { N -[obj]-> M }&eud=yes" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
 :
 
 ```grew
@@ -145,10 +145,10 @@ without { N -[obj]-> M }
 
 ## The [`http://universal.grew.fr`](http://universal.grew.fr) instance
 
-This instance contains the version 2.10 of the [UD](http://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
+This instance contains the version 2.11 of the [UD](http://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
 The top navbar gives access to:
- * **UD 2.10**: The 228 treebanks of the version 2.10 of [UD](http://universaldependencies.org)
- * **SUD 2.10**: The 227 treebanks of the version 2.10 of [SUD](https://surfacesyntacticud.github.io)
+ * **UD 2.11**: The 243 treebanks of the version 2.11 of [UD](http://universaldependencies.org)
+ * **SUD 2.11**: The 241 treebanks of the version 2.11 of [SUD](https://surfacesyntacticud.github.io) (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora)
  * **UD Latest**:
    * suffix `@dev`: corpora in their latest version available on `dev` branch on GitHub (English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr).
    * suffix `@conv`: the automatic conversion of the native SUD treebanks into UD.

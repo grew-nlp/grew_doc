@@ -41,7 +41,7 @@ The full matching process is:
 The syntax of requests in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
 
 ---
-## Positive and negative patterns
+## Positive and negative items
 Positive and negative items both follow the same syntax.
 They are described by a list of clauses: node clauses, edge clauses and additional constraints
 
@@ -72,7 +72,7 @@ All *edge clauses* below require the existence of an edge between the node selec
  * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
  * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
  * `N -[1=subj]-> M` the edge must match the edge feature constraints (more examples below).
- * [Since version `1.9.1`] `N -[2="зад"]-> M` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
+ * [Since version `1.9.1`] `N -[2="зад"]-> M` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.11&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 Edges may also be named for usage in commands (in **Grew**) or in clustering (in **Grew-match**) with an identifier:
 

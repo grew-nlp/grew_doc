@@ -141,18 +141,23 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
 
 **Note**: Even if `ExtPos` is used in `FEATS` in `UD_English-EWT` an in `UD_Portuguese-Bosque`, it is not in the list in order to follow SUD usage of this feature in the `MISC` column (this may change in the future, see [#31](https://github.com/surfacesyntacticud/guidelines/issues/31)).
 
+
   * `Abbr`
+  * `Accomp`
   * `AdjType`
   * `AdpType`
   * `AdvType`
+  * `Advlz`
   * `Agglutination`
+  * `Also`
   * `Analyt`
   * `Animacy`
   * `Animacy[gram]`
-  * `Antr`
+  * `Animacy[obj]`
   * `Aspect`
   * `Augm`
   * `Case`
+  * `Caus`
   * `Cfm`
   * `Clas`
   * `Class`
@@ -163,6 +168,7 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `Clusivity[subj]`
   * `Compound`
   * `Comt`
+  * `Conces`
   * `ConjType`
   * `Connegative`
   * `Contrast`
@@ -183,6 +189,7 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `Detrans`
   * `Dev`
   * `Dialect`
+  * `Dim`
   * `Dimin`
   * `Dist`
   * `Echo`
@@ -190,19 +197,25 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `Emphatic`
   * `Evident`
   * `Excl`
+  * ~~`ExtPos`~~ (ExtPos is used in FEATS in UD_English-EWT, UD_Portuguese-Bosque and UD_Portuguese-GSD but in MISC in SUD corpora. We consider it as MISC here)
+  * `Fact`
+  * `False`
   * `Foc`
   * `Focus`
   * `FocusType`
   * `Foreign`
   * `Form`
   * `Gender`
+  * `Gender[abs]`
   * `Gender[dat]`
   * `Gender[erg]`
+  * `Gender[io]`
   * `Gender[obj]`
   * `Gender[psor]`
   * `Gender[subj]`
   * `HebBinyan`
   * `HebExistential`
+  * `Hon`
   * `Hum`
   * `Hyph`
   * `Imprs`
@@ -217,6 +230,7 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `LangId`
   * `Language`
   * `Link`
+  * `Mir`
   * `Mood`
   * `Morph`
   * `Movement`
@@ -225,6 +239,7 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `NameType`
   * `NegationType`
   * `Neutral`
+  * `Nmzr`
   * `Nomzr`
   * `NonFoc`
   * `NounBase`
@@ -237,6 +252,8 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `Number[abs]`
   * `Number[dat]`
   * `Number[erg]`
+  * `Number[grnd]`
+  * `Number[io]`
   * `Number[obj]`
   * `Number[psed]`
   * `Number[psor]`
@@ -251,6 +268,8 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `Person[abs]`
   * `Person[dat]`
   * `Person[erg]`
+  * `Person[grnd]`
+  * `Person[io]`
   * `Person[obj]`
   * `Person[psor]`
   * `Person[subj]`
@@ -269,9 +288,11 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `Priv`
   * `PronType`
   * `Proper`
+  * `Prp`
   * `Pun`
   * `PunctSide`
   * `PunctType`
+  * `RcpType`
   * `Recip`
   * `Red`
   * `Redup`
@@ -279,13 +300,16 @@ The list is build from the data available in UD 2.11 (plus the feature `Shared` 
   * `Reflex[obj]`
   * `Reflex[subj]`
   * `Rel`
+  * `RelType`
   * `Report`
-  * `Shared`  (sepcific to SUD *)
+  * `Restr`
+  * `Shared` (specific to SUD)
   * `Speech`
   * `Strength`
   * `Style`
   * `SubGender`
   * `Subcat`
+  * `Subord`
   * `Subordinative`
   * `Tense`
   * `Top`

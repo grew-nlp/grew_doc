@@ -4,11 +4,11 @@ title = "Work in progress"
 
 # New clustering keys
 
-⚠️ This page describes work in progress. The features mentionned here may change. ⚠️
+⚠️ This page describes work in progress. The features mentioned here may change. ⚠️
 
 In the current online version of Grew-match a few new clustering keys are available.
 The syntax used both in the way the keys are written and how the clusters are named is subject to change.
-There is a dicsussion [in this GitHub issue](https://github.com/grew-nlp/grew/issues/32) where you can give your opinion about these choices.
+There is a discussion [in this GitHub issue](https://github.com/grew-nlp/grew/issues/32) where you can give your opinion about these choices.
 
 --- 
 

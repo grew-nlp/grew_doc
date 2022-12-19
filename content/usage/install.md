@@ -60,11 +60,13 @@ This should be 4.10.0 or higher.
 
 ## Step 3: Install the Grew software
 
+If you want to install the Pyhton library, see [here](../python).
+
 Run the commands:
 
 ```
 opam remote add grew "http://opam.grew.fr"
-opam install grew grewpy
+opam install grew
 ```
 
 To verify your installation:
@@ -72,16 +74,3 @@ To verify your installation:
   * Try the command `grew version`. You should have 1.4 or higher.
   * In case of trouble, try `eval $(opam env)` and `opam install …` again.
   * If trouble persists, please [fill an issue](https://gitlab.inria.fr/grew/grew_doc/issues)
-
-## Step 4: The Python library
-
-With Python 3, use the following command:
-`pip install grew`
-
-Note: depending on your local installation, you may have to use `pip3` or `pip3.5`.
-
-
-# Other available installations
-
- * A docker file with the Python library ready to be used is available [here](../docker).
-

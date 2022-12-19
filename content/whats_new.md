@@ -13,7 +13,6 @@ menu = "main"
 The third component `z` is linked to bug fixes and may vary across sub-projects.
   * `libcaml-grew` &rarr; the Grew library, used in all other sub-projects
   * `grew` &rarr; the command line interface of Grew
-  * `grewpy` &rarr; the daemon called by Python library
 
 * The symbol "⚠️" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
 

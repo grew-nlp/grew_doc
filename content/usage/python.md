@@ -29,5 +29,6 @@ See [grewpy documentation](https://grew.fr/python) for a detail documentation of
 
 ## Examples
 
-You can download the `examples` folder of the github repositoty [here](https://downgit.github.io/#/home?url=https://github.com/grew-nlp/grewpy/tree/master/examples).
----
+You can find examples in the [`examples` folder](https://github.com/grew-nlp/grewpy/tree/master/examples).
+Click [here](https://downgit.github.io/#/home?url=https://github.com/grew-nlp/grewpy/tree/master/examples) to download the folder.
+

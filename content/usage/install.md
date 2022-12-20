@@ -60,7 +60,7 @@ This should be 4.10.0 or higher.
 
 ## Step 3: Install the Grew software
 
-If you want to install the Pyhton library, see [here](../python).
+If you want to install the Python library, see [here](../python).
 
 Run the commands:
 

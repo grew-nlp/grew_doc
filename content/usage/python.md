@@ -13,8 +13,11 @@ Tags = ["Development","golang"]
 
 ## Install
 
-1. `opam install grewpy_backend` (see [here](../install) for `opam` installation).
-2. `pip install grewpy` (`pip` may be replaced by `pip3` depending on your local installation)
+If you don' have already installed some **Grew** related software or library, follow steps 1 and 2 on [this page](../install).
+
+ - `opam update`
+ - `opam install grewpy_backend`
+ - `pip install grewpy` (`pip` may be replaced by `pip3` depending on your local installation)
 
 Test the installation with `echo "import grewpy" | python`. It should output `connected to port: 8888` (or a higher port number if `8888` is already used.)
 

@@ -4,7 +4,7 @@ url = "http://count.grew.fr/count"
 
 data={
 'corpora': '''[
-  "SUD_Arabic-PUD@2.112.11",
+  "SUD_Arabic-PUD@2.11",
   "SUD_Chinese-PUD@2.11",
   "SUD_Czech-PUD@2.11",
   "SUD_English-PUD@2.11",

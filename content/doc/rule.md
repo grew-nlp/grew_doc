@@ -12,9 +12,10 @@ Tags = ["Development","golang"]
 
 A **rewrite rule** in **Grew** is defined by:
 
-  * One request describing the part of graph to match (see [request page](../request)) and on which commands will be applied, introduced by the keyword `pattern`
-  * A set of negative clauses to filter out unwanted occurrences of the request, each clause being introduced by the keyword `without`
-  * One sequence of commands to apply (see [commands page](../commands)), introduced by the keyword `commands`
+  * A request (see [request](../request) for a complete doc) composed of:
+    * One item (introduced by the keyword `pattern`) describing the part of graph to match and on which commands will be applied, 
+    * A set of negative (or positive) filtering items to filter out unwanted occurrences of the request, each clause being introduced by the keyword `without` (or `with`)
+  * A sequence of commands to apply (see [commands page](../commands)), introduced by the keyword `commands`
 
 ## Example
 

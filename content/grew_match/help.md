@@ -69,14 +69,14 @@ The clustering key can be:
  * `e.delta`: cluster following the relative position of governor and dependent of edge `e` present in the (positive part of) main request
     * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "http://match.grew.fr/?corpus=UD_Naija-NSC@2.11&pattern=pattern { e: GOV -[nsubj]-> DEP }&clust1_key=e.delta">}}
 
-### Use a "whether" sub-request
-A "whether" sub-request contains a list of clauses (as in `pattern` or `without` constructions).
+### Use a `whether` sub-request
+A `whether` sub-request contains a list of clauses (as in `pattern` or `without` constructions).
 The set of occurrences (or the first 1000 occurrences) is split in two subsets:
 
-  * one tagged `No` corresponds to the subset of occurrences where the "whether" sub-request cannot not be fulfilled (the "whether" is interpreted like a `without`)
-  * one tagged `Yes` is the complementary of the `No` subset and so, corresponds to the occurrences where the sub-request can be matched.
+  * one tagged `No` corresponds to the subset of occurrences where the `whether` sub-request cannot not be fulfilled (the `whether` is interpreted like a `without`)
+  * one tagged `Yes` is the complementary of the `No` subset and so, corresponds to the occurrences where the sub-request can be matched (the `whether` is interpreted like a `with`)
 
-Note that no curly brackets are needed in the "whether" text area (see examples below).
+Note that no curly brackets are needed in the `whether` text area (see examples below).
 
 #### Examples
 

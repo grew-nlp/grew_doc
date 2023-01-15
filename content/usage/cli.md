@@ -135,6 +135,8 @@ produces the following JSON output:
 In both modes **Mono** and **Multi**, if the command line additionally contains one or more arguments (`-key …` or `-whether …`),
 the set of occurrences is recursively clusterised following the given clustering items.
 
+See the [clustering documentation page](../../doc/clustering) for details about the different existing clustering items.
+
 ### Examples
 
 With the same files as in the *without clustering* example above.
@@ -168,7 +170,7 @@ grew grep -request dislocated.req -key N.upos -whether "M << N" -i fr_pud-ud-tes
 ### Remarks:
  * any longer sequence of `-key …` or `-whether …` can be used
  * the relative order of clutering items is relevant (try `grew grep -request dislocated.req -whether "M << N" -key N.upos -i fr_pud-ud-test.conllu`)
- * it is possible to combine **Multi** mode and clsutering: `grew grep -request dislocated.req -key N.upos -whether "M << N" -i en_fr_zh.json`
+ * it is possible to combine **Multi** mode and clustering: `grew grep -request dislocated.req -key N.upos -whether "M << N" -i en_fr_zh.json`
 
 ---
 # Count

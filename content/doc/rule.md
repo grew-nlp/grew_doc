@@ -5,7 +5,6 @@ title = "Rules"
 menu = "main"
 Categories = ["Development","GoLang"]
 Tags = ["Development","golang"]
-
 +++
 
 # Basic Grew rules

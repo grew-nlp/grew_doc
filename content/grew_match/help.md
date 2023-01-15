@@ -51,41 +51,12 @@ A more comprehensive documentation is available in the [requests page](../../doc
 ## Clustering the occurrences
 In addition to the main request, it is possible to make some clustering on the set of occurrences returned by this request.
 
-### Use a clustering key
 When a clustering key is used, the set of occurrences (or the first 1000 occurrences if `Search` is used) is split in subsets depending of the key value.
 Each possible value is presented as a button with the size of the associated subset; the button gives access to the corresponding occurrences (in `Search` mode).
-The clustering key can be:
 
- * `N.f`: cluster following the feature named `f` for the node `N` present in the (positive part of) main request
-    * List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-LFG@2.11&pattern=pattern { N [upos=AUX] }&clust1_key=N.lemma">}}
-    * List `VerbForm` of `VERB` without `nsubj` in **UD_German-GSD** {{< tryit "http://universal.grew.fr/?corpus=UD_German-GSD@2.11&pattern=pattern { N [upos=VERB] }%0Dwithout { N -[1=nsubj]-> M }&clust1_key=N.VerbForm">}}
-    * Find the huge number of `form` associated to the lemma _saada_ in **UD_Finnish-FTB**{{< tryit "http://universal.grew.fr/?corpus=UD_Finnish-FTB@2.11&pattern=pattern { N [lemma=\"saada\"] }&clust1_key=N.form">}}
- * `e.label`: cluster following the full label of edge `e` present in the (positive part of) main request
-    * List relations used for auxiliaries in **UD_Italian-ParTUT** {{< tryit "http://universal.grew.fr/?corpus=UD_Italian-ParTUT@2.11&pattern=pattern { e:M -> N; N [upos=AUX] }&clust1_key=e.label">}}
- * `e.f`: cluster following the edge feature name `f` for a named edge `e` present in the (positive part of) main request
-    * List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "http://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.11&pattern=pattern { e: GOV -[1=acl]-> DEP }&clust1_key=e.2">}}
- * `e.length`: cluster following the length of edge `e` present in the (positive part of) main request
-    * Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "http://universal.grew.fr/?corpus=UD_Korean-PUD@2.11&pattern=pattern { e: GOV -[amod]-> DEP }&clust1_key=e.length">}}
- * `e.delta`: cluster following the relative position of governor and dependent of edge `e` present in the (positive part of) main request
-    * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "http://match.grew.fr/?corpus=UD_Naija-NSC@2.11&pattern=pattern { e: GOV -[nsubj]-> DEP }&clust1_key=e.delta">}}
+When a `whether` sub-request is used, matching are split in two clusters `Yes` and `No`.
 
-### Use a `whether` sub-request
-A `whether` sub-request contains a list of clauses (as in `pattern` or `without` constructions).
-The set of occurrences (or the first 1000 occurrences) is split in two subsets:
-
-  * one tagged `No` corresponds to the subset of occurrences where the `whether` sub-request cannot not be fulfilled (the `whether` is interpreted like a `without`)
-  * one tagged `Yes` is the complementary of the `No` subset and so, corresponds to the occurrences where the sub-request can be matched (the `whether` is interpreted like a `with`)
-
-Note that no curly brackets are needed in the `whether` text area (see examples below).
-
-#### Examples
-
-  * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "http://match.grew.fr/?corpus=UD_Hungarian-Szeged@2.11&pattern=pattern { GOV -[advcl]-> DEP }&whether=GOV << DEP" >}}
-  * In **UD_English-GUM**, how often the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "http://match.grew.fr/?corpus=UD_English-GUM@2.11&pattern=pattern { GOV -[1=expl]-> DEP }&whether=GOV -[1=nsubj]-> S" >}}
-  * In **UD_French-GSD**, there are 627 left-headed `nsubj` (or subtypes):
-    * How often is it in an interrogative sentences? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=P [lemma=%22?%22]" >}}
-    * How often is it in an relative clause? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=H -[acl:relcl]-> GOV" >}}
-    * How often is there an expletive subject? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=GOV -[expl:subj]-> E" >}}
+See [clustering documentation page](../../doc/clustering) for syntax and examples of usage.
 
 ---
 

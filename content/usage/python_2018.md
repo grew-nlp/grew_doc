@@ -229,7 +229,7 @@ def are_related(g, u, v):
 ```
 
 ---
-Check if a node is a root node (i.e. whitout incomoing edge)
+Check if a node is a root node (i.e. without incoming edge)
 ```python_alt
 def is_root(g, u):
   triplets = [(s, e, t) for s in g for (e, t) in get_sucs(g, s)]

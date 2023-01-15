@@ -96,7 +96,6 @@ To describe a graph in practice, **Grew** offers several input formats:
 
  * [JSON](../json)
  * [CoNLL-U format](../conllu)
- * The specific `gr` format: see [Python page](../../usage/python) for examples. This format is deprecated and should not be used in new Development, JSON file above should be preferred
  * AMR format: **Grew** is also able to read data following format used for instance in corpora freely available on [AMR web page](https://amr.isi.edu/index.html).
 
 # Graph output formats

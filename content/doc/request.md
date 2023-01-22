@@ -21,7 +21,7 @@ A request is defined through 4 different kinds of *request items*.
 
  * global items (introduced by the keyword `global`) filter structures based on information about the whole graph or its metadata.
  * matching items (introduced by keyword `pattern`) describe nodes and relations that must be found in the graph.
- * positive filtering (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only the ones which **follows** the additionnal graph constraints)
+ * [🆕 in 1.11] positive filtering (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only the ones which **follows** the additionnal graph constraints)
  * negative filtering (introduced by the keyword `without`) filter out matchings previously selected by other items (keeping only the ones which **do not follow** the additionnal graph constraints)
  
 The full matching on one graph process is:
@@ -75,8 +75,6 @@ All *edge clauses* below require the existence of an edge between the node selec
  * `N -[nsubj|obj]-> M`: the edge label is either `nsubj` or `obj`
  * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
  * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
- * `N -[1=subj]-> M` the edge must match the edge feature constraints (more examples below).
- * [Since version `1.9.1`] `N -[2="зад"]-> M` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.11&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 Edges may also be named for usage in commands (in **Grew**) or in clustering (in **Grew-match**) with an identifier:
 
@@ -96,27 +94,6 @@ pattern { N[]; M[]; N -[nsubj]-> M }
 ```
 
 
-As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
-
-Some examples (with `sud` configuration) are given below.
-
-| Syntax            | Description | `comp` | `comp:obl` | `comp:obl@agent` | `comp:aux` | `comp:obj@lvc` |
-|-------------------|-------------|:------:|:----------:|:----------------:|:----------:|:----------:|
-| `X -[1=comp]-> Y` | any edge such that the feature `1` is defined with value `comp` | YES | YES | YES |YES | YES |
-| <code>X -[1=comp, 2=obl&vert;aux]-> Y</code> | the feature `1` is defined with value `comp` and the feature `2` is defined with one of the two values `obl` or `aux` | NO | YES |YES |YES | NO|
-| <code>X -[1=comp, 2<>obl&vert;aux]-> Y</code> | the feature `1` is defined with value `comp` and the feature `2` is defined with a value different from `obl` or `aux` | NO | NO | NO | NO | YES |
-| `X -[1=comp, !deep]-> Y` | the feature `1` is defined with value `comp` and the feature `deep` is not defined | YES | YES | NO |YES | NO|
-| `X -[1=comp, 2=*]-> Y` | the feature `1` is defined with value `comp` and the feature `2` is defined with any value | NO | YES | YES |YES | YES|
-| `X -[comp]-> Y` | the exact label `comp` and nothing else | YES | NO | NO | NO | NO |
-
-### :warning: Matching with atomic labels :warning:
-
-It is important to note that from the request point of view, the two clauses `X -[1=comp]-> Y` (first line in the table) and `X -[comp]-> Y` (last line in the table) are not equivalent!
-
-### Difference with node features matching
-
-Note that we would expect that the syntax `X -[1=comp, 2]-> Y` should be equivalent to `X -[1=comp, 2=*]-> Y` but it will bring an ambiguity for `X -[lab]-> Y` that can be interpreted as the atomic label `X -[lab]-> Y` or as `X -[lab=*]-> Y`.
-To avoid this ambiguity, the syntax `X -[1=comp, 2]-> Y` in not allowed.
 
 ### Additional constraints
 
@@ -149,31 +126,71 @@ These constrains do not bind new elements in the graph, but must be fulfilled (i
  * Position of a node with respect to an edge
    * `N << e` the node `N` is strictly included between source and targer of edge `e`.
 
+---
 
-### Equivalent nodes
-When two or more nodes are equivalent in a request (i.e. they can be exchanged without changing the semantics of the request), each occurrence of the request in a graph is reported several times (up to permutation in the sets of equivalent nodes).
-For instance, in the request below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
+## Injectivity in nodes matching
 
-```grew
-pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
-```
+By default the matching of nodes is injective, this means that two different nodes in the request are mapped to two different nodes in the graph.
 
-This request is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
-but there are only 45 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
-To avoid this, a constraint `N1.__id__ < N2.__id__` can be used.
-It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
-**NB**: if a constraint `N1.__id__ < N2.__id__` is used with two non-equivalent nodes, the result is unspecified.
-
-
-The request below returns the 45 expected occurrences
-{{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=60166c11100f5" >}}
+For instance, the request below searches for two different tokens, both having the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.11&pattern=pattern%20{%20N1%20[%20lemma=%22make%22%20];%20N2%20[%20lemma=%22make%22%20]%20}" >}}
 
 ```grew
-pattern {
-  N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N;
-  N1.__id__ < N2.__id__; N2.__id__ < N3.__id__;
-}
+pattern { N1 [ lemma="make" ]; N2 [ lemma="make" ] }
 ```
+
+[🆕 1.11] If the node identifier is suffixed by the symbol `$`, the injectify constraint is relaxed.
+A node `N$` can be mapped to any node in the graph (either already mapped by another node of the request or not).
+
+### Example
+In AMR graphs, if we look for a predicate (with `concept=judge-01` in the example) with two arguments `ARG0` and `ARG1`, there are two dictinct cases:
+ * two different nodes `A0` and `A1` are respectively `ARG0` and `ARG1` &rarr; 1 occurence {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20N%20[concept=%22judge-01%22];%20N%20-[ARG0]-%3E%20A0;%20N%20-[ARG1]-%3E%20A1;%20}" >}}
+
+```grew
+pattern { N [concept="judge-01"]; N -[ARG0]-> A0; N -[ARG1]-> A1; }
+```
+ * the same node `A`is both `ARG0` and `ARG1` &rarr; 4 occurences {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20N%20[concept=%22judge-01%22];%20N%20-[ARG0]-%3E%20A;%20N%20-[ARG1]-%3E%20A;%20}" >}}
+
+```grew
+pattern { N [concept="judge-01"]; N -[ARG0]-> A; N -[ARG1]-> A; }
+```
+
+If we do not require the injectivity on one of the two arguments, then both cases above are returned &rarr; 5 occurences  {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20N%20[concept=%22judge-01%22];%20N%20-[ARG0]-%3E%20A;%20N%20-[ARG1]-%3E%20B$;%20}" >}}
+
+
+```grew
+pattern { N [concept="judge-01"]; N -[ARG0]-> A; N -[ARG1]-> B$; }
+```
+
+
+---
+## Complex edges
+
+As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
+
+ * `N -[1=subj]-> M` the edge must match the edge feature constraints (more examples below).
+ * [Since version `1.9.1`] `N -[2="зад"]-> M` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.11&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
+
+
+
+Some examples (with `sud` configuration) are given below.
+
+| Syntax            | Description | `comp` | `comp:obl` | `comp:obl@agent` | `comp:aux` | `comp:obj@lvc` |
+|-------------------|-------------|:------:|:----------:|:----------------:|:----------:|:----------:|
+| `X -[1=comp]-> Y` | any edge such that the feature `1` is defined with value `comp` | YES | YES | YES |YES | YES |
+| <code>X -[1=comp, 2=obl&vert;aux]-> Y</code> | the feature `1` is defined with value `comp` and the feature `2` is defined with one of the two values `obl` or `aux` | NO | YES |YES |YES | NO|
+| <code>X -[1=comp, 2<>obl&vert;aux]-> Y</code> | the feature `1` is defined with value `comp` and the feature `2` is defined with a value different from `obl` or `aux` | NO | NO | NO | NO | YES |
+| `X -[1=comp, !deep]-> Y` | the feature `1` is defined with value `comp` and the feature `deep` is not defined | YES | YES | NO |YES | NO|
+| `X -[1=comp, 2=*]-> Y` | the feature `1` is defined with value `comp` and the feature `2` is defined with any value | NO | YES | YES |YES | YES|
+| `X -[comp]-> Y` | the exact label `comp` and nothing else | YES | NO | NO | NO | NO |
+
+### :warning: Matching with atomic labels :warning:
+
+It is important to note that from the request point of view, the two clauses `X -[1=comp]-> Y` (first line in the table) and `X -[comp]-> Y` (last line in the table) are not equivalent!
+
+### Difference with node features matching
+
+Note that we would expect that the syntax `X -[1=comp, 2]-> Y` should be equivalent to `X -[1=comp, 2=*]-> Y` but it will bring an ambiguity for `X -[lab]-> Y` that can be interpreted as the atomic label `X -[lab]-> Y` or as `X -[lab=*]-> Y`.
+To avoid this ambiguity, the syntax `X -[1=comp, 2]-> Y` in not allowed.
 
 ---
 ## Global request
@@ -210,6 +227,31 @@ In `global` items, constraints of these metadata can be expressed with:
 For corpora described by the CoNLL-U format, available metadata are described before each sentence (see [CoNNL-U doc](https://universaldependencies.org/format.html#sentence-boundaries-and-comments)).
 In the UD or SUD corpora, each sentence contains at least the two metadata `sent_id` and `text`.
 
-## Note about CoNNL-U specificities
+---
 
-Additional information available in the CoNNL-U format can be accessed through special features `textform` and `wordform` (see [CoNLL-U format](../conllu#additional-features-textform-and-wordform))
+## Some other tricks
+
+### Equivalent nodes
+When two or more nodes are equivalent in a request (i.e. they can be exchanged without changing the semantics of the request), each occurrence of the request in a graph is reported several times (up to permutation in the sets of equivalent nodes).
+For instance, in the request below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
+
+```grew
+pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
+```
+
+This request is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
+but there are only 45 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
+To avoid this, a constraint `N1.__id__ < N2.__id__` can be used.
+It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
+**NB**: if a constraint `N1.__id__ < N2.__id__` is used with two non-equivalent nodes, the result is unspecified.
+
+
+The request below returns the 45 expected occurrences
+{{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=60166c11100f5" >}}
+
+```grew
+pattern {
+  N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N;
+  N1.__id__ < N2.__id__; N2.__id__ < N3.__id__;
+}
+```

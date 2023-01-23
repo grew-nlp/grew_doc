@@ -69,7 +69,7 @@ All arguments are optional:
 # Grep
 
 This mode corresponds to the command line version of the [Grew-match](http://match.grew.fr) tool.
-Since Grew version 1.8.2 (April 2022), the clustering is available [:link:](./#with-clustering) in the grep mode.
+The clustering is also available [:link:](./#with-clustering) in the grep mode.
 
 ## Without clustering
 
@@ -301,7 +301,7 @@ The commands below removes the `marshal` files produced by the `grew compile` co
 
 
 ---
-# Paramaters
+# Parameters
 
 This section describes a few command line arguments that are shared by several commands.
 

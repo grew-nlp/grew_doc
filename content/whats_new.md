@@ -24,7 +24,14 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.10.0 (November 23, 2022)
+# :new: Version 1.11.0 (January 22, 2023)
+  - ⚠️ Add syntax for positive filtering using the `with` keyword. See [Request page](../doc/request) (**NB:** this may break an existing GRS which uses the identifier `with` for a rule, a pacakge or a strategy).
+  - Add handling of [non-injective matching](../doc/request#injectivity-in-nodes-matching)
+
+
+---
+
+# Version 1.10.0 (November 23, 2022)
   * Remove handling of **Gr** graph format. Please use [json format](../doc/json)
   * Review input corpus handling (see [Command Line Interface](../usage/cli))
 

@@ -16,19 +16,18 @@ Categories = ["Development","GoLang"]
 **Grew** is a Graph Rewriting tool dedicated to applications in Natural Language Processing (NLP). It can manipulate many kinds of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS) but it can be used to represent any graph-based structure.
 
 ## News
+ * 🆕 **2023/01/22:** a new mailing list `grew@inria.fr` was created. See [here to subscribe](https://sympa.inria.fr/sympa/info/grew).
 
- * **2022/11/23:** Version **1.10**. See [What's new](/whats_new/) for changes.
+ * 🆕 **2023/01/22:** Version **1.11**. See [What's new](/whats_new/) for changes.
 
- * **2022/06/29:** Version **1.9**.
+ * **2022/11/23:** Version **1.10**.
  
- * **2020** Grew matching is available in the [Arborator-Grew](https://arborator.github.io/) tool.
-
-
 ## A first taste of Grew
 The easiest way to try and test **Grew** is to use one of the online interfaces.
 
-  1. [Grew-match](http://match.grew.fr) (Online graph matching): search for a given request in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning request syntax).
-  2. [Grew-web](http://transform.grew.fr) (Online graph rewriting) 
+  1. [Grew-match](http://match.grew.fr): Online graph matching to search for a given request in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning request syntax).
+  2. [Grew-web](http://transform.grew.fr): Online graph rewriting
+  2. [Arborator-Grew](https://arborator.github.io/): Tool for online corpus management (this is another tool, using Grew as backend)
 
 ## Some of the main features of Grew
 

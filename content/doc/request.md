@@ -31,8 +31,8 @@ The full matching on one graph process is:
 
  1. If the graph metadata does not satisfied one of the global items, the output is empty.
  1. Else the set M is initialised as the set of matchings which satisfy the union of matching items.
- 1. For each positive filtering item, remove from M the matchings which satisfy it.
- 1. For each negative filtering item, remove from M the matchings which do not satisfy it.
+ 1. For each positive filtering item, remove from M the matchings which do not satisfy it.
+ 1. For each negative filtering item, remove from M the matchings which satisfy it.
 
 On a corpus, the graph matching process is repeated on each graph.
 

@@ -1,8 +1,5 @@
 +++
-Description = ""
-Tags = ["Development", "golang"]
-Categories = ["Development", "GoLang"]
-menu = "main"
+title = "Gallery"
 +++
 
 # Grew gallery
@@ -25,3 +22,9 @@ There are two main ways for encoding of *fixed* construction in dependencies:
 ## [Extract connected components](../connected_components)
 
 [This page](../connected_components) describes a Graph Rewriting System which turn a graph in the set of its connected components.
+
+---
+
+## [Compute spans](../span)
+
+[This page](../span) illustrates the usage of non-injective matching.

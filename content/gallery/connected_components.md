@@ -1,9 +1,7 @@
 +++
-Description = ""
-Tags = ["Development", "golang"]
-Categories = ["Development", "GoLang"]
-menu = "main"
+title = "Gallery • connected components"
 +++
+[:arrow_up:](../top) Top
 
 # Compute the connected components of a graph
 

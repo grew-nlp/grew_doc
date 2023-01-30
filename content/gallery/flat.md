@@ -1,11 +1,8 @@
 +++
-Tags = ["Development","golang"]
-Description = ""
-menu = "main"
-Categories = ["Development","GoLang"]
-date = "2019-06-01T20:54:20+02:00"
-title = "flat"
+title = "Gallery • flat"
 +++
+
+[:arrow_up:](../top) Top
 
 # Transformation of single-headed structure into a chained structure
 

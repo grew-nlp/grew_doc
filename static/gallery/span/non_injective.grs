@@ -1,0 +1,29 @@
+rule init {
+  pattern { N [upos] }
+  without { N -[span=left]-> * }
+  without { N -[span=right]-> * }
+  commands { 
+    add_edge N -[span=left]-> N;
+    add_edge N -[span=right]-> N;
+  }
+}
+
+package enlarge {
+  rule left {
+    pattern { e: N -[span=left]-> LN$; N -> X; X -[span=left]-> LX$; LX$ << LN$ }
+    commands { 
+      del_edge e;
+      add_edge N -[span=left]-> LX$;
+    }
+  }
+
+  rule right {
+    pattern { e: N -[span=right]-> RN$; N -> X; X -[span=right]-> RX$; RN$ << RX$ }
+    commands { 
+      del_edge e;
+      add_edge N -[span=right]-> RX$;
+    }
+  }
+}
+
+strat main { Seq (Onf (init), Onf (enlarge)) }

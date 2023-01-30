@@ -1,0 +1,104 @@
+rule init {
+  pattern { N [upos] }
+  without { N -[span=left]-> * }
+  without { N -[span=right]-> * }
+  commands { 
+    add_edge N -[span=left]-> N;
+    add_edge N -[span=right]-> N;
+  }
+}
+
+package enlarge {
+
+  % 4 different nodes
+  rule left_1 {
+    pattern { e: N -[span=left]-> LN; N -> X; X -[span=left]-> LX; LX << LN }
+    commands { 
+      del_edge e;
+      add_edge N -[span=left]-> LX;
+    }
+  }
+
+  % LN = N
+  rule left_2 {
+    pattern { e: N -[span=left]-> N; N -> X; X -[span=left]-> LX; LX << N }
+    commands { 
+      del_edge e;
+      add_edge N -[span=left]-> LX;
+    }
+  }
+
+  % LX = X
+  rule left_3 {
+    pattern { e: N -[span=left]-> LN; N -> X; X -[span=left]-> X; X << LN }
+    commands { 
+      del_edge e;
+      add_edge N -[span=left]-> X;
+    }
+  }
+
+  % LN = N & LX = X
+  rule left_4 {
+    pattern { e: N -[span=left]-> N; N -> X; X -[span=left]-> X; X << N }
+    commands { 
+      del_edge e;
+      add_edge N -[span=left]-> X;
+    }
+  }
+
+  % LN = X
+  rule left_5 {
+    pattern { e: N -[span=left]-> X; N -> X; X -[span=left]-> LX; LX << X }
+    commands { 
+      del_edge e;
+      add_edge N -[span=left]-> LX;
+    }
+  }
+
+  % 4 different nodes
+  rule right_1 {
+    pattern { e: N -[span=right]-> RN; N -> X; X -[span=right]-> RX; RX >> RN }
+    commands { 
+      del_edge e;
+      add_edge N -[span=right]-> RX;
+    }
+  }
+
+  % RN = N
+  rule right_2 {
+    pattern { e: N -[span=right]-> N; N -> X; X -[span=right]-> RX; RX >> N }
+    commands { 
+      del_edge e;
+      add_edge N -[span=right]-> RX;
+    }
+  }
+
+  % RX = X
+  rule right_3 {
+    pattern { e: N -[span=right]-> RN; N -> X; X -[span=right]-> X; X >> RN }
+    commands { 
+      del_edge e;
+      add_edge N -[span=right]-> X;
+    }
+  }
+
+  % RN = N & RX = X
+  rule right_4 {
+    pattern { e: N -[span=right]-> N; N -> X; X -[span=right]-> X; X >> N }
+    commands { 
+      del_edge e;
+      add_edge N -[span=right]-> X;
+    }
+  }
+
+  % RN = X
+  rule right_5 {
+    pattern { e: N -[span=right]-> X; N -> X; X -[span=right]-> RX; RX >> X }
+    commands { 
+      del_edge e;
+      add_edge N -[span=right]-> RX;
+    }
+  }
+}
+
+strat main { Seq (Onf (init), Onf (enlarge)) }

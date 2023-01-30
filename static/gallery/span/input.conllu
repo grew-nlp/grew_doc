@@ -1,0 +1,8 @@
+# sent_id = fr-ud-train_06172
+# text = Qui en est responsable ?
+1	Qui	qui	PRON	_	Person=3|PronType=Int	3	subj	_	wordform=qui
+2	en	en	PRON	_	Person=3|PronType=Prs	4	comp:obl	_	_
+3	est	être	AUX	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+4	responsable	responsable	ADJ	_	Number=Sing	3	comp:pred	_	_
+5	?	?	PUNCT	_	_	3	punct	_	_
+

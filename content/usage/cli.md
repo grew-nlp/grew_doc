@@ -15,7 +15,7 @@ The 5 main subcommands are:
 
   * [:link:](./#transform) `transform`: application of a rewriting system to a set of graphs
   * [:link:](./#grep)`grep`: search for a request in a corpus
-  * [:link:](./#count) `count`: compute stats of a set of requests in a set of corpora)
+  * [:link:](./#count) `count`: compute stats of a set of requests in a set of corpora
   * [:link:](./#compile) `compile`: compile a set of corpora
   * [:link:](./#clean)`clean`: clean a set of corpora
 
@@ -182,7 +182,7 @@ The input data are:
  - one or several requests
  - any number of clustering item (either key of whether)
 
-By defalut, it returns a JSON describing several embedded dictionaries, counting in each corpus, each request clustered following clustering items.
+By default, it returns a JSON describing several embedded dictionaries, counting in each corpus, each request clustered following clustering items.
 
 If the output dimension is 2, the statistics can be printed as a TSV table.
 This is the case for:

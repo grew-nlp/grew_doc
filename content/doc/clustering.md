@@ -51,7 +51,7 @@ As suggested in [#28](https://github.com/grew-nlp/grew/issues/28), in case of co
 
 #### Example
 There is not much examples of numerical features in the current UD version.
-The following example is not linguistically pertinent buy shows the mechanism.
+The following example is not linguistically pertinent but it shows the mechanism.
 
 {{< tryit "http://universal.grew.fr/?corpus=UD_Naija-NSC@2.11&request=pattern { N [AlignBegin] }&clustering=N.AlignBegin[gap=1000, min=10000, max=20000]" >}} on `UD_Naija-NSC` with clustering key `N.AlignBegin[gap=1000, min=10000, max=20000]` and request:
 ```grew
@@ -118,8 +118,8 @@ pattern {
  * With the clustering key `N1 <-> N2`, the occurrences are clustered according to the relation between `N1` and `N2` (whatever the direction); if the direction is from `N2` to `N1`, the relation name is prefixed with minus sign like `-nsubj` or `-mark:rel`.
  A cluster named `__none__` gathers the cases when there is no relation between `N1` and `N2`. If there is more than one such relations, another cluster `__multi__` is added.
 
-### Annotation of a bigram DET NOUN
-With a clutering key `N2 -> N1` and the pattern:
+#### Annotation of a bigram DET NOUN
+With a clustering key `N2 -> N1` and the pattern:
 ```grew
 pattern { N1 [upos=DET]; N2 [upos=NOUN]; N1 < N2 }
 ```
@@ -127,13 +127,13 @@ pattern { N1 [upos=DET]; N2 [upos=NOUN]; N1 < N2 }
 we can observe how the bigram is annotated: {{< tryit "http://universal.grew.fr/?corpus=UD_German-GSD@2.11&request=pattern { N1 [upos=DET]; N2 [upos=NOUN]; N1 < N2 }&clustering=N2 -> N1" >}} on `UD_German-GSD`.
 
 #### Annotation of a bigram NOUN NOUN
-With a clutering key `N1 <-> N2` and the pattern:
+With a clustering key `N1 <-> N2` and the pattern:
 ```grew
 pattern { N1 [upos=NOUN]; N2 [upos=NOUN]; N1 < N2 }
 ```
 
-we can observe how the bigram NOUN-NOUN is annotated: {{< tryit "http://universal.grew.fr/?corpus=UD_English-GUM@2.11&request=pattern { N1 [upos=NOUN]; N2 [upos=NOUN]; N1 < N2 }&clustering=N1 <-> N2" >}} in `UD_English-GUM` or 
-{{< tryit "http://universal.grew.fr/?corpus=UD_Chinese-GSD@2.11&request=pattern { N1 [upos=NOUN]; N2 [upos=NOUN]; N1 < N2 }&clustering=N1 <-> N2" >}} in `UD_Chinese-GSD`.
+we can observe how the bigram NOUN-NOUN is annotated: {{< tryit "http://universal.grew.fr/?corpus=UD_English-GUM@2.11&request=pattern { N1 [upos=NOUN]; N2 [upos=NOUN]; N1 < N2 }&clustering=N1 <-> N2" >}} on `UD_English-GUM` or 
+{{< tryit "http://universal.grew.fr/?corpus=UD_Chinese-GSD@2.11&request=pattern { N1 [upos=NOUN]; N2 [upos=NOUN]; N1 < N2 }&clustering=N1 <-> N2" >}} on `UD_Chinese-GSD`.
 
 --- 
 

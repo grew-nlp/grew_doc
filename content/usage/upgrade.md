@@ -10,32 +10,4 @@ Description = ""
 
 # Upgrading to a new version
 
-## Make sure that your opam is in version 2
-The last version of **grew** requires that the **opam** tool is in version **2.0.0** or higher.
-
-You can check your versions with the command `opam --version`.
-It it's not version 2, re-install **opam** in version 2 with instructions steps 1 and 2 on the [Installation page](../install).
-
-## Update prerequisite
-### Linux
-```
-apt-get update && apt-get upgrade
-```
-
-### On Mac OSX
-```
-sudo port sync && sudo port upgrade outdated
-```
-
-## Update the Grew software
-
-```
-opam update
-opam upgrade
-```
-
-## Update the Python binding
-```
-pip install grew --upgrade
-```
-
+See [here](../install#grew-upgrade) for the **Grew** software and [here](../python#upgrade) for **grewpy** Python library.

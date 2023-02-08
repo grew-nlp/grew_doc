@@ -142,6 +142,8 @@ pattern { N1 [ lemma="make" ]; N2 [ lemma="make" ] }
 A node `N$` can be mapped to any node in the graph (either already mapped by another node of the request or not).
 
 ### Example
+For a more complex example with non-injective matching, you can see [this example](../../gallery/span).
+
 In AMR graphs, if we look for a predicate (with `concept=judge-01` in the example) with two arguments `ARG0` and `ARG1`, there are two dictinct cases:
  * two different nodes `A0` and `A1` are respectively `ARG0` and `ARG1` &rarr; 1 occurence {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20N%20[concept=%22judge-01%22];%20N%20-[ARG0]-%3E%20A0;%20N%20-[ARG1]-%3E%20A1;%20}" >}}
 

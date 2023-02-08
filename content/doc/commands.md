@@ -163,8 +163,6 @@ rule ex {
 
 ## Copy several features from one node to another
 
-NB: `prepend_feats` is available since version 1.8
-
 The commands `append_feats M ==> N` / `prepend_feats M ==> N` appends / prepends all features (different from `form`, `lemma`, `upos`, `xpos`) of node `M` to features of node `N`.
 
 To be more precise, the commands `append_feats M ==> N` / `prepend_feats M ==> N` modify the feature structure of node `N`:

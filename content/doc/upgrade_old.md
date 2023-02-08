@@ -56,7 +56,7 @@ vendre	yes
 #END
 ```
 
-NB: the line `%---------------` is not required, lines beginning with `%` are considered as comments and are discarded.
+**NB:** the line `%---------------` is not required, lines beginning with `%` are considered as comments and are discarded.
 
 ### Using a lexicon declared in an external file
 If the lexicon contains a large number of items, it can be declared in an external file.

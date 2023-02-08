@@ -48,7 +48,11 @@ With the grs file [non_injective.grs](../span/non_injective.grs):
 {{< grew file="/static/gallery/span/non_injective.grs" >}}
 
 {{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/gallery/span/input.conllu&grs=https://grew.fr/gallery/span/non_injective.grs" >}}
-⚠️ In **Grew-web**, when structures are drawn as dependency graph, the tool does not display relations which are loops ⚠️
+⚠️ In **Grew-web**, dependency graphs are drawn with dep2pict and loops can not be displayed directly.
+Loops are replaced by a special features with a green background and with double brackets.
+See for instance, the final graph computed with the example above:
+
+![output](/gallery/span/graph_with_loops.svg)
 
 ## Solution with only injective matching
 
@@ -57,5 +61,4 @@ With the grs file [injective.grs](../span/injective.grs):
 {{< grew file="/static/gallery/span/injective.grs" >}}
 
 {{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/gallery/span/input.conllu&grs=https://grew.fr/gallery/span/injective.grs" >}}
-⚠️ In **Grew-web**, when structures are drawn as dependency graph, the tool does not display relations which are loops ⚠️
 

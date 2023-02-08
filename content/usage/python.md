@@ -23,8 +23,13 @@ Test the installation with `echo "import grewpy" | python`. It should output `co
 
 ## Upgrade
 
-1. `opam update && install grewpy_backend`
+1. `opam update && opam install grewpy_backend`
 2. `pip install grewpy --upgrade`
+
+The latest version of `grewpy_backend` is 0.1.3. You can check your version with `opam list | grep grewpy`
+
+The latest version of `grewpy` is 0.1.2. You can check your version with `pip3 show grewpy`
+
 
 ## Usage
 
@@ -35,8 +40,10 @@ See [grewpy documentation](https://grew.fr/python) for a detail documentation of
 You can find examples in the [`examples` folder](https://github.com/grew-nlp/grewpy/tree/master/examples).
 Click [here](https://downgit.github.io/#/home?url=https://github.com/grew-nlp/grewpy/tree/master/examples) to download the folder.
 
----
 
+
+---
+---
 # DEV version
 
 **Grewpy** is currently under development. You can install a more recent (and probably less stable) version with the commands belows.
@@ -51,4 +58,5 @@ Click [here](https://downgit.github.io/#/home?url=https://github.com/grew-nlp/gr
 
  - `opam reinstall libcaml-grew grewpy_backend`
  - `git pull` in your local clone of `https://github.com/grew-nlp/grewpy`
+
 

@@ -14,6 +14,8 @@ This page gathers some basic explanation to start using the **Grew** graph rewri
 
 For more detail, see the documentation part on the right menu or the [Gallery](../../gallery/top) for more complex examples.
 
+## Rewriting rules
+
 The 6 first lessons are available:
 
  * [Lesson 1: Matching](../01_matching)
@@ -22,3 +24,7 @@ The 6 first lessons are available:
  * [Lesson 4: Termination](../04_termination)
  * [Lesson 5: Confluence](../05_confluence)
  * [Lesson 6: More commands](../06_more_commands)
+
+## Other usages
+
+ - [Building relation tables on your treebank](../relation_table)

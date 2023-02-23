@@ -53,6 +53,7 @@ clean:
 	@make -C static/tutorial/04_termination clean
 	@make -C static/tutorial/05_confluence clean
 	@make -C static/tutorial/06_more_commands clean
+	@make -C static/tutorial/relation_table
 	@make -C static/usage/cli clean
 	@make -C static/usage/grew_count clean
 	@make -C static/usage/grew_server clean

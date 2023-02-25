@@ -464,4 +464,4 @@ Here is the mapping from previous representation to new one:
 ## [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758): Add a new field `tree_by_user` in `getSamples` output
 
 [#206](https://github.com/Arborator/arborator-frontend/issues/206):
-The `getSamples` contains a new field `tree_by_user` which contains a dictionay mapping `user_id` to the number of trees for the given user.
+The `getSamples` contains a new field `tree_by_user` which contains a dictionary mapping `user_id` to the number of trees for the given user.

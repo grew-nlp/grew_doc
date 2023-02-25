@@ -1,14 +1,13 @@
 +++
-Tags = ["Development","golang"]
-Description = ""
-menu = "main"
-Categories = ["Development","GoLang"]
-date = "2019-06-01T20:54:20+02:00"
 title = "grew_server"
-
 +++
 
 # Grew-API for the Arborator-Grew tool
+
+This documentation correspond the the [master branch on Inria GitLab](https://gitlab.inria.fr/grew/grew_server/-/tree/master).
+On 2023/02/24, master is on [b8e63c50](https://gitlab.inria.fr/grew/grew_server/-/commit/b8e63c50076c500e74b74f665e173741c0398c18).
+
+See [below](.#dev) for the difference on DEV branch and DEV server.
 
 The Arborator-Grew tool is available on [https://arborator.github.io](https://arborator.github.io).
 
@@ -253,15 +252,8 @@ pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
 
 ## Applying Grew rules
 
-### The `tryRules` service and `applyRules` service
-
-These services are disabled in DEV. Please use `tryPackage`
-
-
 ### The `tryPackage` service
  * `(<string> project_id, <string> sample_ids, <string> user_ids, <string> package)`
-
-
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `user_ids` arguments.
 
@@ -281,8 +273,8 @@ The output is the list of new graphs produced by the package applications (note 
  * `sample_id`
  * `sent_id`
  * `user_id`
- * :new: on 2022/02/28 `modified_edges` with source id, new label and target_id
- * :new: on 2022/02/28 `modified_nodes` with the id of the node and the list of features modified by the rule
+ * `modified_edges` with source id, new label and target_id
+ * `modified_nodes` with the id of the node and the list of features modified by the rule
 
 Below, an example of output after a rewrite with the two rules:
 
@@ -338,26 +330,6 @@ The service returns an URL on a file containing the "export" of the project. In 
 ---
 
 ## Get the lexicon computed from a treebank
-
-### :warning: ====== PROD ===== The `getLexicon` service
-  * `(<string> project_id, <string> sample_ids)`
-  * `(<string> project_id, <string> sample_ids, <string> features)`
-
-See [here](#sample_ids) for the usage of `sample_ids` argument.
-
-The string `features` must be a JSON encoding of a list of strings (like `["Number", "PronType"]`).
-If `features` is not given, the default value is `["PronType", "Mood", "Gloss"]` (this ensures the backward compatibility with previous version).
-
-The service returns a JSON data of the lexicon produced with the Python script [treebank2lexicon.py](https://github.com/Arborator/arborator-flask/blob/master/lexicon/treebank2lexicon.py).
-The list of features are passed to the Python script.
-
-The set of graphs considered for the production of the lexicon is the one considered in the `exportProject` service:
-
-  * only graphs in the project with a `timestamp` numerical metadata are present
-  * if several graphs share the same `sent_id`, keep only the most recent graph (the one with the highest `timestamp`)
-
-### :warning: ====== DEV ===== The `getLexicon` service
-This new service `getLexicon` is not compatible with the previous version!
 
   * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features)`
   * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features, <int> prune)`
@@ -451,7 +423,7 @@ The string `sample_ids` must be a JSON encoding of a list of strings (like `["sa
 
 :warning: If the list contains an unused `sample_id`, no error is returned and the `sample_id` is ignored.
 
-## `user_ids` (changed on 22/01/26)
+## `user_ids`
 
 The ways `user_ids` is parsed was changed ([commit](https://gitlab.inria.fr/grew/grew_server/-/commit/1b61650dcdb42cb00f524775c4fe8829cd6aeaae)).
 The string `user_ids` must be a JSON encoding of one of these forms:
@@ -473,11 +445,23 @@ This fulfils the request [#110](https://github.com/Arborator/arborator-frontend/
 > * See trees from everyone &rarr; `"all"`
 > * See trees for users in a given list &rarr; `{ "multi" : ["user_1", "user_2", …] }`
 
-### DEPRECATED
+---
+---
 
-The previous behaviour of user_ids in DEPRECATED and will be removed soon.
-In the mean time, it is translated as follows:
 
- * `[]` &rarr; `"all"`
- * `["__last__"]` &rarr; `{ "one": ["__last__"] }`
- * `["user_1", "user_2"]` &rarr; `{ "multi": ["user_1", "user_2"] }`
+# DEV
+
+The following updates are already available on the DEV server and will be available in PROD after testing.
+
+## [5aebc293](https://gitlab.inria.fr/grew/grew_server/-/commit/5aebc29314ded7b3a8653734fdf6adce9be11a73): remove deprecated handling of `user_ids`
+
+The previous behaviour of `user_ids` is removed.
+Here is the mapping from previous representation to new one:
+ - `[]` &rarr; `"all"`
+ - `["__last__"]` &rarr; `{ "one": ["__last__"] }`
+ - `["user_1", "user_2"]` &rarr; `{ "multi": ["user_1", "user_2"] }`
+
+## [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758): Add a new field `tree_by_user` in `getSamples` output
+
+[#206](https://github.com/Arborator/arborator-frontend/issues/206):
+The `getSamples` contains a new field `tree_by_user` which contains a dictionay mapping `user_id` to the number of trees for the given user.

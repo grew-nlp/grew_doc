@@ -4,10 +4,12 @@ title = "grew_server"
 
 # Grew-API for the Arborator-Grew tool
 
-This documentation correspond the the [master branch on Inria GitLab](https://gitlab.inria.fr/grew/grew_server/-/tree/master).
-On 2023/02/24, master is on [b8e63c50](https://gitlab.inria.fr/grew/grew_server/-/commit/b8e63c50076c500e74b74f665e173741c0398c18).
+This documentation corresponds to the [`master` branch on Inria GitLab](https://gitlab.inria.fr/grew/grew_server/-/tree/master).
+On 2023/02/24, `master` is at [b8e63c50](https://gitlab.inria.fr/grew/grew_server/-/commit/b8e63c50076c500e74b74f665e173741c0398c18).
 
 See [below](.#dev) for the difference on DEV branch and DEV server.
+
+---
 
 The Arborator-Grew tool is available on [https://arborator.github.io](https://arborator.github.io).
 
@@ -134,9 +136,9 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
  * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
  returns a `conll_string`
  * `(<string> project_id, <string> sample_id, <string> sent_id)`
- returns a dict `user_id` -> `conll_string`
+ returns a dict `user_id` &rarr; `conll_string`
  * `(<string> project_id, <string> sample_id)`
- returns a 2-levels dict `sent_id` ->  `user_id` -> `conll_string`
+ returns a 2-levels dict `sent_id` &rarr;  `user_id` &rarr; `conll_string`
 
 ### The `getUsers` service
 
@@ -196,7 +198,7 @@ Each occurrence is described by a dict
  each cluster is further clustered recursively with the remaining keys.
  For instance: If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
 
-For the service named `searchPatternInGraphs`, the POST argument of the request id named `pattern` instead of `request`.
+For the service named `searchPatternInGraphs`, the POST argument of the request is named `pattern` instead of `request`.
 
 ---
 
@@ -242,7 +244,7 @@ The `relationTables` service returns:
 
 Note the the `mod` relation has `ADV` as the POS for the dependant, because of the `ExtPos` feature on the word `à`.
 
-The Grew pattern corresponding to the `mod` line is (using the undocumented Grew feature for requesting on ExtPos): 
+The Grew request corresponding to the `mod` line is: 
 
 ```grew
 pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
@@ -265,7 +267,7 @@ For instance:
 rule r2 { pattern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[subj]-> M }"
 ```
 
-See **Grew** [command syntax](../commands) for doc about the `commands` part.
+See **Grew** [command syntax](../../doc/commands) for doc about the `commands` part.
 
 The output is the list of new graphs produced by the package applications (note that the same rule may be applied more than once in a given graph). Each item of the list is an object with the following fields:
 
@@ -344,14 +346,14 @@ Each object contains two fields:
    * `feats`: an object whose keys follow `features` argument (value are `string` or `null`)
    * `freq`: an `int` giving the frequency of the lexical item
 
-If the `prune` integer argument is set as `n`, only the subset of unambiguous structure at depth `n` is reported.
+If the `prune` integer argument is set as `n`, only the subset of unambiguous structures at depth `n` is reported.
     For instance, if the keys are `["form", "lemma", "upos", "Gender", "Number"]`,
     the pruning at level 3 will keep only lexicon entries where there is 
-    more than one couple of value for `Gender` and `Number` with the same triple `(form, lemma, upos)`.
+    more than one couple of value for `Gender` and `Number` with the same triple of values for features `form`, `lemma` and `upos`.
 
 #### Exemple
 
-with a corpus containing the following sentence:
+With a corpus containing the following sentence:
 
 ```
 1	moule	moule	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_

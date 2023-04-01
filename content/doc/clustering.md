@@ -141,7 +141,7 @@ we can observe how the bigram NOUN-NOUN is annotated: {{< tryit "http://universa
 
 A `whether` sub-request contains a list of clauses (as in `pattern`, `without` or `with` constructions).
 The set of occurrences is split in two subsets:
-  * one tagged `No` corresponds to the subset of occurrences where the `whether` sub-request cannot not be fulfilled (the `whether` is interpreted like a `without`)
+  * one tagged `No` corresponds to the subset of occurrences where the `whether` sub-request cannot be fulfilled (the `whether` is interpreted like a `without`)
   * one tagged `Yes` is the complementary of the `No` subset and so, corresponds to the occurrences where the sub-request can be matched (the `whether` is interpreted like a `with`)
 
 Note that no curly brackets are needed in the `whether` text area (see examples below).

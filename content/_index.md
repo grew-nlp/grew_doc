@@ -26,7 +26,7 @@ Categories = ["Development","GoLang"]
 The easiest way to try and test **Grew** is to use one of the online interfaces.
 
   1. [Grew-match](http://match.grew.fr): Online graph matching to search for a given request in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning request syntax).
-  2. [Grew-web](http://transform.grew.fr): Online graph rewriting
+  2. [Grew-web](https://web.grew.fr): Online graph rewriting
   2. [Arborator-Grew](https://arborator.github.io/): Tool for online corpus management (this is another tool, using Grew as backend)
 
 ## Some of the main features of Grew

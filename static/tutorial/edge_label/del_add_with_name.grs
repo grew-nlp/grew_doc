@@ -1,0 +1,8 @@
+rule del_add_with_name {
+  pattern { e: GOV -[obj:lvc]-> DEP }   % name 'e' the matched edge
+  commands { 
+    del_edge e;                         % remove the edge 'e'
+    add_edge GOV -[comp:obj@lvc]-> DEP  % add a new edge with the new label
+  }
+}
+

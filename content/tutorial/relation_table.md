@@ -2,7 +2,7 @@
 title = "Tuto • Relation table"
 +++
 
-• [:arrow_up:](../top) •
+• [:arrow_up: Top](../top) •
 
 # Building relation tables on your treebank
 
@@ -29,7 +29,7 @@ The script below loads the corpus and computes the table for the `nsubj` relatio
 
 {{< python file="/static/tutorial/relation_table/nsubj_table.py" >}}
 
-The output isx a nested Python dictonary, the toplevel keys correspond to the `G.upos` and the embedded keys correspond to the `D.upos`.
+The output is a nested Python dictonary, the toplevel keys correspond to the `G.upos` and the embedded keys correspond to the `D.upos`.
 For instance, `nsubj_table['VERB']['NOUN']` returns `544` which corresponds to the number of occurrences of the `nsubj` relation from a `VERB` to a `NOUN`:
 
 {{< input file="static/tutorial/relation_table/_build/nsubj_table.out" >}}
@@ -81,11 +81,11 @@ grew count -request all_tables.req -key e.label -key G.upos -key D.upos -i data/
 ```
 
 ## Remarks
- - It we want to get list of occurrences instead a just a number, the command `grew count …` can be replaced by `grew grep …`, with the same arguments.
+ - It we want to get list of occurrences instead of just a number, the command `grew count …` can be replaced by `grew grep …`, with the same arguments.
  - The JSON obtained is slightly different from the one of the Python library, it contains another external layer of dictionary because the command can be applied with more than one requests.
 The output of the last command is then:
 
-```
+```json_alt
 {
   "all_tables.req": {
     "xcomp": { … },

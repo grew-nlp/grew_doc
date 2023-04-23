@@ -1,0 +1,6 @@
+rule change_whole_label {
+  pattern { e: GOV -[obj:lvc]-> DEP } % name 'e' the edge to change
+  commands {
+    e.label = "comp:obj@lvc";         % set a new value to the "label" of 'e'
+  }
+}

@@ -10,9 +10,9 @@ menu = "main"
 
 # Grew tutorial
 
-This page gathers some basic explanation to start using the **Grew** graph rewriting system.
+This page gathers some basic explanations to start using the **Grew** graph rewriting system.
 
-For more details, see the documentation part on the right menu or the [Gallery](../../gallery/top) for more complex examples.
+For more details, see the documentation (menu in the right) or the [Gallery](../../gallery/top) for more complex examples.
 
 ## basic rewriting
 
@@ -25,9 +25,11 @@ The 6 first lessons are available:
  - [Lesson 5: Confluence](../05_confluence)
  - [Lesson 6: More commands](../06_more_commands)
 
-## Usual operation on graphs
+## Usual operations on graphs
  - [Change the label of an edge](../edge_label)
 
 ## Other usages
  - [Building relation tables on your treebank](../relation_table)
 
+## Traps
+ - [Edge capture](../edge_capture)

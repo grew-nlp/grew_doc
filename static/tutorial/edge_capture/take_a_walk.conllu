@@ -1,0 +1,6 @@
+# sent_id = ex_edge_label
+# text = take a walk
+1	take	take	VERB	_	_	0	root	_	_
+2	a	a	DET	_	_	3	det	_	_
+3	walk	walk	NOUN	_	_	1	obj:lvc	_	_
+

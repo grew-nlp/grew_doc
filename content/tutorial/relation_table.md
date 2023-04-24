@@ -38,7 +38,7 @@ Note that the sums for rows and columns are not given but it is easy to add them
 
 ### Table for `nsubj` relation and its possible extension
 
-The example about requires for `nsubj` but not for `nsubj:pass` and `nsubj:caus` which are also used in **UD_French-PUD**.
+The example above requires for `nsubj` but not for `nsubj:pass` and `nsubj:caus` which are also used in **UD_French-PUD**.
 To have the table for all relations `nsubj` with and without extension, the request `'G -[nsubj]-> D'` should be changed to `'G -[1=nsubj]-> D'` (see [complex edges](../../doc/request#complex-edges) for an explanation).
 
 ### Compute tables for all relations
@@ -47,7 +47,7 @@ It is possible to get all relation tables (without looping on edge labels) by us
 
 {{< python file="/static/tutorial/relation_table/all_tables.py" >}}
 
-In the code above, `all_tables` is a dictionay mapping the possible values of dependency labesl (`e.label`) to a sub-dictionary as the one obtained above for `nsubj`.
+In the code above, `all_tables` is a dictionary mapping the possible values of dependency label (`e.label`) to a sub-dictionary as the one obtained above for `nsubj`.
 
 ```
 …,
@@ -69,7 +69,7 @@ So we suppose that our folder contains two more files:
 
 {{< grew file="/static/tutorial/relation_table/all_tables.req" >}}
 
-The command below build a JSON code of the `nsubj` relation table.
+The command below builds the JSON code of the `nsubj` relation table.
 
 ```
 grew count -request nsubj_table.req -key G.upos -key D.upos -i data/fr_pud-ud-test.conllu

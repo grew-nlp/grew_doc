@@ -18,10 +18,16 @@ stop:
 build:
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/commands
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/conllu
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/json
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/grs
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/json
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/rewriting
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/rule
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/connected_components
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/edge_lexicon
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/flat
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/iter
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/ud2sud
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/update_edge_feature
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/grs/deep_syntax
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/grs/parsing
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/02_first_rule
@@ -29,23 +35,27 @@ build:
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/04_termination
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/05_confluence
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/06_more_commands
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/edge_capture
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/edge_label
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/relation_table
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/cli
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/grew_count
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/grew_server
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/usage/python
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/flat
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/connected_components
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/update_edge_feature
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/ud2sud
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/edge_lexicon
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/iter
 
 clean:
 	@make -C static/doc/commands clean
 	@make -C static/doc/conllu clean
 	@make -C static/doc/grs clean
+	@make -C static/doc/json clean
 	@make -C static/doc/rewriting clean
 	@make -C static/doc/rule clean
+	@make -C static/gallery/connected_components clean
+	@make -C static/gallery/edge_lexicon clean
+	@make -C static/gallery/flat clean
+	@make -C static/gallery/iter clean
+	@make -C static/gallery/ud2sud clean
+	@make -C static/gallery/update_edge_feature clean
 	@make -C static/grs/deep_syntax clean
 	@make -C static/grs/parsing clean
 	@make -C static/tutorial/02_first_rule clean
@@ -53,15 +63,10 @@ clean:
 	@make -C static/tutorial/04_termination clean
 	@make -C static/tutorial/05_confluence clean
 	@make -C static/tutorial/06_more_commands clean
-	@make -C static/tutorial/relation_table
+	@make -C static/tutorial/edge_capture clean
+	@make -C static/tutorial/edge_label clean
+	@make -C static/tutorial/relation_table clean
 	@make -C static/usage/cli clean
 	@make -C static/usage/grew_count clean
 	@make -C static/usage/grew_server clean
 	@make -C static/usage/python clean
-	@make -C static/gallery/flat clean
-	@make -C static/gallery/connected_components clean
-	@make -C static/gallery/update_edge_feature clean
-	@make -C static/gallery/ud2sud clean
-	@make -C static/gallery/ud2sud edge_lexicon
-	@make -C static/gallery/ud2sud iter
-

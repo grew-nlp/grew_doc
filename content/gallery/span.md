@@ -49,7 +49,7 @@ With the grs file [non_injective.grs](../span/non_injective.grs):
 
 {{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/gallery/span/input.conllu&grs=https://grew.fr/gallery/span/non_injective.grs" >}}
 ⚠️ In **Grew-web**, dependency graphs are drawn with dep2pict and loops can not be displayed directly.
-Loops are replaced by a special features with a green background and with double brackets.
+Loops are replaced by special features with a green background and with double brackets.
 See for instance, the final graph computed with the example above:
 
 ![output](/gallery/span/graph_with_loops.svg)

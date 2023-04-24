@@ -80,7 +80,7 @@ There are two main problems to deal with the `MISC` field in the existing (S)UD 
  2. When a **Grew** node contains a feature like `Case=Gen`, there is no canonical way to decide if it must be output in the `FEATS` or in the `MISC` field.
 
 To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature,value)* pairs.
-If this is not possible, the raw content is kept in a special features named `__RAW_MISC__`
+If this is not possible, the raw content is kept in a special feature named `__RAW_MISC__`
 ({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.11&pattern=pattern { N [__RAW_MISC__] }" >}}).
 Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 

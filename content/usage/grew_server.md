@@ -51,7 +51,7 @@ This service returns the list of existing projects.
 
  * `()`
 
-The returned value is a list of dict ([see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)):
+The returned value is a list of dict:
 
 ```json_alt
 [
@@ -85,24 +85,60 @@ An error is returned if the sample already exists.
 
  * `(<string> project_id, <string> sample_id)`
 
+### [DEV only] The `newSamples` service
+
+⚠️ Added in May 2023, available only in DEV ⚠️
+
+This service is used to initialise a list of new empty samples in a given project.
+
+ * `(<string> project_id, <string> sample_ids)`
+
+The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
+If one of the given `sample_id` already exist in the project, an error is reported and the prroject is unchanged (no new sample is created).
+
 ### The `getSamples` service
 
-This service returns the list of existing samples in a given project ([see #2](https://gitlab.inria.fr/grew/grew_server/issues/2)).
+This service returns the list of existing samples in a given project.
 
  * `(<string> project_id)`
 
 ```json_alt
 [
-    { "name": "sample_1", "number_sentences": 5, "number_tokens": 74, "number_trees": 8, "users": [ "alice", "bob"] },
-    { "name": "sample_2", "number_sentences": 4, "number_tokens": 54, "number_trees": 9, "users": [ "alice", "charlie"]  }
+  {
+    "name": "sample",
+    "number_sentences": 2,
+    "number_tokens": 23,
+    "number_trees": 4,
+    "users": ["alice", "bob", "charlie"],
+    "tree_by_user": {"charlie": 1, "bob": 2, "alice": 1}
+  }
 ]
 ```
+
+The field `tree_by_user` was added in February 2023 [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758).
+
+
+
+
 
 ### The `eraseSample` service
 
 This service is used to remove a sample. If the sample does not exist, nothing happens.
 
  * `(<string> project_id, <string> sample_id)`
+
+### [DEV only] The `eraseSamples` service
+
+⚠️ Added in May 2023 ⚠️
+
+This service is used to remove a list of samples.
+For sample which does not exist, nothing happens.
+
+ * `(<string> project_id, <string> sample_ids)`
+
+The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
+
+**NB** Unlike for other services, an empty list in `sample_ids` in not interpreted as all samples, an empty list will not erase any sample.
 
 ### The `renameSample` service
 
@@ -287,19 +323,21 @@ Below, an example of output after a rewrite with the two rules:
 
 and the output data returned by the service (with CoNLL code skipped): 
 
-{{< json file="/static/usage/grew_server/_build/output.json" >}}
+{{< json file="/static/usage/grew_server/_build/output.json" >}}  
 
 
 
+### [DEV only] The `applyPackage` service
+ * `(<string> project_id, <string> sample_ids, <string> source_user_ids, <string> target_user_id, <string> package)`
 
+⚠️ Added in May 2023, available only in DEV ⚠️
 
+See [here](#generic-arguments-usage) for the usage of `sample_ids` and `source_user_ids` arguments.
 
+For `source_user_ids`, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
 
-
-
-
-
-
+This service tries to apply the package to the graphs described by `sample_ids` and `source_user_ids` and for each case where a new graph is produced by the rewriting, this new graph is saved (updated or created) for the user `target_user_id`.
+This implies that no new graphs will be created for `target_user_id` where no rules applies.
 
 ---
 
@@ -332,6 +370,8 @@ The service returns an URL on a file containing the "export" of the project. In 
 ---
 
 ## Get the lexicon computed from a treebank
+
+### The `getLexicon` service
 
   * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features)`
   * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features, <int> prune)`
@@ -427,17 +467,18 @@ The string `sample_ids` must be a JSON encoding of a list of strings (like `["sa
 
 ## `user_ids`
 
-The ways `user_ids` is parsed was changed ([commit](https://gitlab.inria.fr/grew/grew_server/-/commit/1b61650dcdb42cb00f524775c4fe8829cd6aeaae)).
-The string `user_ids` must be a JSON encoding of one of these forms:
+The string `user_ids` (or `source_user_id` in `applyPackage`) must be a JSON encoding of one of these forms:
+
+NB: this was changed in ([commit](https://gitlab.inria.fr/grew/grew_server/-/commit/1b61650dcdb42cb00f524775c4fe8829cd6aeaae), January 2022).
 
   * The string `"all"`: all users are taken into account for each sentence
   * The object `{ "multi" : ["user_1", "user_2", …] }`: all users explicitly mentioned in the list are taken into account for each sentence
   * The object `{ "one" : ["user_1", "user_2", …] }`: for each sentence, only one graph (at most) is returned; the one for the first user of the list for which the graph is defined. In the list, the pseudo-user `__last__` can be used. It selects the graph with the most recent timestamp.
 
-This parameter is used for the 3 services:
+This parameter is used for the services:
  * `searchPatternInGraphs`
  * `getLexicon`
- * `tryPackage`: in this case, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
+ * `tryPackage` and `applyPackage`: in this case, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
 
 This fulfils the request [#110](https://github.com/Arborator/arborator-frontend/issues/110):
 
@@ -446,24 +487,3 @@ This fulfils the request [#110](https://github.com/Arborator/arborator-frontend/
 > * See last trees &rarr; `{ "one" : ["__last__"] }`
 > * See trees from everyone &rarr; `"all"`
 > * See trees for users in a given list &rarr; `{ "multi" : ["user_1", "user_2", …] }`
-
----
----
-
-
-# DEV
-
-The following updates are already available on the DEV server and will be available in PROD after testing.
-
-## [5aebc293](https://gitlab.inria.fr/grew/grew_server/-/commit/5aebc29314ded7b3a8653734fdf6adce9be11a73): remove deprecated handling of `user_ids`
-
-The previous behaviour of `user_ids` is removed.
-Here is the mapping from previous representation to new one:
- - `[]` &rarr; `"all"`
- - `["__last__"]` &rarr; `{ "one": ["__last__"] }`
- - `["user_1", "user_2"]` &rarr; `{ "multi": ["user_1", "user_2"] }`
-
-## [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758): Add a new field `tree_by_user` in `getSamples` output
-
-[#206](https://github.com/Arborator/arborator-frontend/issues/206):
-The `getSamples` contains a new field `tree_by_user` which contains a dictionary mapping `user_id` to the number of trees for the given user.

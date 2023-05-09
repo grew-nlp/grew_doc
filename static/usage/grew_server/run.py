@@ -40,7 +40,7 @@ with open(conll_file, 'rb') as f:
 check_reply (reply, None)
 
 sample_ids = "[\"single\"]"
-user_ids = "\"all\""
+user_ids = '{ "one": ["ud"] }'
 rule1 = "rule r1 { pattern { N [upos=VERB] } commands { N.upos=V } }"
 rule2 = "rule r2 { pattern { e: N -[subj]-> M } commands { del_edge e; add_edge N -[SUBJ]-> M } }"
 package = "\n".join ([rule1, rule2])

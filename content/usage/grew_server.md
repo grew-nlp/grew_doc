@@ -4,10 +4,10 @@ title = "grew_server"
 
 # Grew-API for the Arborator-Grew tool
 
-This documentation corresponds to the [`master` branch on Inria GitLab](https://gitlab.inria.fr/grew/grew_server/-/tree/master).
-On 2023/02/24, `master` is at [b8e63c50](https://gitlab.inria.fr/grew/grew_server/-/commit/b8e63c50076c500e74b74f665e173741c0398c18).
+This documentation corresponds to the [Inria GitLab](https://gitlab.inria.fr/grew/grew_server).
+By default the doc applies to branch `master`
 
-See [below](.#dev) for the difference on DEV branch and DEV server.
+New features available only on the Prod serveur are identified by the flag **[⚠️DEV⚠️]**
 
 ---
 
@@ -85,16 +85,15 @@ An error is returned if the sample already exists.
 
  * `(<string> project_id, <string> sample_id)`
 
-### [DEV only] The `newSamples` service
+### The `newSamples` service
 
-⚠️ Added in May 2023, available only in DEV ⚠️
+ * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids)`
 
 This service is used to initialise a list of new empty samples in a given project.
 
- * `(<string> project_id, <string> sample_ids)`
 
 The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
-If one of the given `sample_id` already exist in the project, an error is reported and the prroject is unchanged (no new sample is created).
+If one of the given `sample_id` already exists in the project, an error is reported and the project is unchanged (no new sample is created).
 
 ### The `getSamples` service
 
@@ -127,18 +126,15 @@ This service is used to remove a sample. If the sample does not exist, nothing h
 
  * `(<string> project_id, <string> sample_id)`
 
-### [DEV only] The `eraseSamples` service
+### The `eraseSamples` service
 
-⚠️ Added in May 2023 ⚠️
+ * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids)`
 
 This service is used to remove a list of samples.
 For sample which does not exist, nothing happens.
-
- * `(<string> project_id, <string> sample_ids)`
-
 The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 
-**NB** Unlike for other services, an empty list in `sample_ids` in not interpreted as all samples, an empty list will not erase any sample.
+**NB:** Unlike for other services, an empty list in `sample_ids` in not interpreted as all samples, an empty list will not erase any sample.
 
 ### The `renameSample` service
 
@@ -162,6 +158,13 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 ### The `eraseGraph` service
 
  * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
+
+### The `eraseGraphs` service
+
+ * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> sent_ids, <string> user_id)`
+
+This service is used to remove a list of graphs, in a given `sample_id` and for a given `user_id`.
+The string `sent_ids` must be a JSON encoding of a list of strings (like `["sent_1", "sent_2"]`).
 
 ---
 
@@ -198,7 +201,16 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ### The `saveGraph` service
 
- * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
+ * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
+
+ * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graph)`
+
+### `saveGraphs`
+
+ * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graphs)`
+
+This service saves (updates or creates) each graph described in `conll_graphs` under `user_id` name.
+The argument `conll_graphs` must be one string with all graphs separated by an empty line (as in usual CoNLL-U files for corpora).
 
 ---
 
@@ -295,6 +307,9 @@ pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `user_ids` arguments.
 
+**[⚠️DEV⚠️]** For `user_ids`, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
+
+
 The `package` parameter must be a JSON string encoding a list of rules.
 For instance:
 
@@ -327,10 +342,8 @@ and the output data returned by the service (with CoNLL code skipped):
 
 
 
-### [DEV only] The `applyPackage` service
- * `(<string> project_id, <string> sample_ids, <string> source_user_ids, <string> target_user_id, <string> package)`
-
-⚠️ Added in May 2023, available only in DEV ⚠️
+### The `applyPackage` service
+ * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids, <string> source_user_ids, <string> target_user_id, <string> package)`
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `source_user_ids` arguments.
 

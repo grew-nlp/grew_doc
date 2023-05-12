@@ -39,17 +39,17 @@ All services reply with JSON data of one of this three forms:
 
 ## Projects
 
-### The `newProject` service
+### `newProject`
+ * `(<string> project_id)`
 
 This service is used to initialise a new empty project. An error is returned if a project with the same name already exists.
 
- * `(<string> project_id)`
 
-### The `getProjects` service
+### `getProjects`
+ * `()`
 
 This service returns the list of existing projects.
 
- * `()`
 
 The returned value is a list of dict:
 
@@ -60,33 +60,32 @@ The returned value is a list of dict:
 ]
 ```
 
-### The `eraseProject` service
+### `eraseProject`
+ * `(<string> project_id)`
 
 This service is used to remove a project. If the project does not exist, nothing happens.
 
- * `(<string> project_id)`
 
-### The `renameProject` service
+### `renameProject`
+ * `(<string> project_id, <string> new_project_id)`
 
 Renaming of an existing project.
 An error is produced either if `project_id` does not exists or if `new_project_id` already exists.
 
- * `(<string> project_id, <string> new_project_id)`
 
 ---
 
 ## Samples
 All services about samples return an error if the requested project does not exist.
 
-### The `newSample` service
+### `newSample`
+ * `(<string> project_id, <string> sample_id)`
 
 This service is used to initialise a new empty sample in a given project.
 An error is returned if the sample already exists.
 
- * `(<string> project_id, <string> sample_id)`
 
-### The `newSamples` service
-
+### `newSamples`
  * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids)`
 
 This service is used to initialise a list of new empty samples in a given project.
@@ -95,11 +94,10 @@ This service is used to initialise a list of new empty samples in a given projec
 The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 If one of the given `sample_id` already exists in the project, an error is reported and the project is unchanged (no new sample is created).
 
-### The `getSamples` service
+### `getSamples`
+ * `(<string> project_id)`
 
 This service returns the list of existing samples in a given project.
-
- * `(<string> project_id)`
 
 ```json_alt
 [
@@ -116,18 +114,13 @@ This service returns the list of existing samples in a given project.
 
 The field `tree_by_user` was added in February 2023 [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758).
 
-
-
-
-
-### The `eraseSample` service
+### `eraseSample`
+ * `(<string> project_id, <string> sample_id)`
 
 This service is used to remove a sample. If the sample does not exist, nothing happens.
 
- * `(<string> project_id, <string> sample_id)`
 
-### The `eraseSamples` service
-
+### `eraseSamples`
  * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids)`
 
 This service is used to remove a list of samples.
@@ -136,31 +129,28 @@ The string `sample_ids` must be a JSON encoding of a list of strings (like `["sa
 
 **NB:** Unlike for other services, an empty list in `sample_ids` in not interpreted as all samples, an empty list will not erase any sample.
 
-### The `renameSample` service
+### `renameSample`
+ * `(<string> project_id, <string> sample_id, <string> new_sample_id)`
 
 An error is returned either if `sample_id` does not exist or if `new_sample_id` already exists in `project_id`.
 
- * `(<string> project_id, <string> sample_id, <string> new_sample_id)`
 
 
 ---
 
 ## Sentences
 
-### The `eraseSentence` service
-
+### `eraseSentence`
  * `(<string> project_id, <string> sample_id, <string> sent_id)`
 
 ---
 
 ## Graphs
 
-### The `eraseGraph` service
-
+### `eraseGraph`
  * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
 
-### The `eraseGraphs` service
-
+### `eraseGraphs`
  * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> sent_ids, <string> user_id)`
 
 This service is used to remove a list of graphs, in a given `sample_id` and for a given `user_id`.
@@ -170,8 +160,7 @@ The string `sent_ids` must be a JSON encoding of a list of strings (like `["sent
 
 ## Other `get` services
 
-### The `getConll` service
-
+### `getConll`
  * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
  returns a `conll_string`
  * `(<string> project_id, <string> sample_id, <string> sent_id)`
@@ -179,14 +168,12 @@ The string `sent_ids` must be a JSON encoding of a list of strings (like `["sent
  * `(<string> project_id, <string> sample_id)`
  returns a 2-levels dict `sent_id` &rarr;  `user_id` &rarr; `conll_string`
 
-### The `getUsers` service
-
+### `getUsers`
  * `(<string> project_id, <string> sample_id, <string> sent_id)`
  * `(<string> project_id, <string> sample_id)`
  * `(<string> project_id)`
 
-### The `getSentIds` service
-
+### `getSentIds`
  * `(<string> project_id, <string> sample_id)`
  * `(<string> project_id)`
 
@@ -194,19 +181,15 @@ The string `sent_ids` must be a JSON encoding of a list of strings (like `["sent
 
 ## Save annotations
 
-### The `saveConll` services
-
+### `saveConll`
  * `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
  * `(<string> project_id, <string> sample_id, <file> conll_file)`
 
-### The `saveGraph` service
-
+### `saveGraph`
  * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
-
  * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graph)`
 
 ### `saveGraphs`
-
  * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graphs)`
 
 This service saves (updates or creates) each graph described in `conll_graphs` under `user_id` name.
@@ -216,9 +199,8 @@ The argument `conll_graphs` must be one string with all graphs separated by an e
 
 ## Search with Grew requests
 
-### The `searchRequestInGraphs` service
-
-The same service named `searchPatternInGraphs` exists for backward compatibilty.
+### `searchRequestInGraphs`
+ * `(<string> project_id, <string> user_ids, <string> request)` returns a list of occurrences.
 
 Given a **Grew** request, a list of users and a project, this service returns a list of occurrences of the request in the project.
 
@@ -237,8 +219,7 @@ Each occurrence is described by a dict
 }
 ```
 
- * `(<string> project_id, <string> user_ids, <string> request)` returns a list of occurrences.
-
+The same service is avalaible with clustering:
  * `(<string> project_id, <string> user_ids, <string> request, <string> clusters)`
  where `clusters` is a list of cluster keys, separated by `;`.
  This returns nested dictionaries (the depth being equals to the length of the cluster key list).
@@ -246,15 +227,17 @@ Each occurrence is described by a dict
  each cluster is further clustered recursively with the remaining keys.
  For instance: If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
 
-For the service named `searchPatternInGraphs`, the POST argument of the request is named `pattern` instead of `request`.
+
+### `searchPatternInGraphs`
+ * **[❌DEPRECATED❌]** `(<string> project_id, <string> user_ids, <string> pattern)`
+ * **[❌DEPRECATED❌]** `(<string> project_id, <string> user_ids, <string> pattern, <string> clusters)`
 
 ---
 
 ## Relation tables
 In order to produce the relations tables (as in Grew-match), the following service can be used:
 
-### The `relationTables` service
-
+### `relationTables`
  * `(<string> project_id, <string> sample_ids, <string> user_ids)`
 
 See [here](#generic-arguments-usage) for the usage of `sampe_ids` and `user_ids` POST parameters.
@@ -280,7 +263,6 @@ With the following CoNLL:
 
 The `relationTables` service returns:
 
-
 ```
 {
   "root": { "_": { "ADJ": 1 } },
@@ -302,13 +284,12 @@ pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
 
 ## Applying Grew rules
 
-### The `tryPackage` service
+### `tryPackage`
  * `(<string> project_id, <string> sample_ids, <string> user_ids, <string> package)`
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `user_ids` arguments.
 
 **[⚠️DEV⚠️]** For `user_ids`, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
-
 
 The `package` parameter must be a JSON string encoding a list of rules.
 For instance:
@@ -341,8 +322,7 @@ and the output data returned by the service (with CoNLL code skipped):
 {{< json file="/static/usage/grew_server/_build/output.json" >}}  
 
 
-
-### The `applyPackage` service
+### `applyPackage`
  * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids, <string> source_user_ids, <string> target_user_id, <string> package)`
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `source_user_ids` arguments.
@@ -356,12 +336,12 @@ This implies that no new graphs will be created for `target_user_id` where no ru
 
 ## Services for project configuration
 
-### The `getProjectConfig` service
+### `getProjectConfig`
   * `(<string> project_id)`
 
   The service returns a JSON data of the current configuration of the project
 
-### The `updateProjectConfig` service
+### `updateProjectConfig`
   * `(<string> project_id, <string> config)`
 
   The service update the current configuration associated to the project.
@@ -371,7 +351,7 @@ This implies that no new graphs will be created for `target_user_id` where no ru
 
 ## Export the most recent data in a project
 
-### The `exportProject` service
+### `exportProject`
   * `(<string> project_id, <string> sample_ids)`
 
 See [here](#sample_ids) for the usage of `sample_ids` argument.
@@ -384,8 +364,7 @@ The service returns an URL on a file containing the "export" of the project. In 
 
 ## Get the lexicon computed from a treebank
 
-### The `getLexicon` service
-
+### `getLexicon`
   * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features)`
   * `(<string> project_id, <string> user_ids, <string> sample_ids, <string> features, <int> prune)`
 
@@ -404,7 +383,7 @@ If the `prune` integer argument is set as `n`, only the subset of unambiguous st
     the pruning at level 3 will keep only lexicon entries where there is 
     more than one couple of value for `Gender` and `Number` with the same triple of values for features `form`, `lemma` and `upos`.
 
-#### Exemple
+#### Example
 
 With a corpus containing the following sentence:
 
@@ -448,17 +427,17 @@ and with the additional argument `prune` with value 3, the line about `maison` i
 ## Get tagset or features from a treebank
 See [here](#sample_ids) for the usage of `sample_ids` argument.
 
-### The `getPOS` service
+### `getPOS`
   * `(<string> project_id, <string> sample_ids)`
 
 returns the list of POS (`upos` feature) used in the data.
 
-### The `getRelations` service
+### `getRelations`
   * `(<string> project_id, <string> sample_ids)`
 
 returns the list of relations used in the data/
 
-### The `getFeatures` service
+### `getFeatures`
   * `(<string> project_id, <string> sample_ids)`
 
 returns the list of feature names used in the data.

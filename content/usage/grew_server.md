@@ -155,6 +155,7 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 This service is used to remove a list of graphs, in a given `sample_id` and for a given `user_id`.
 The string `sent_ids` must be a JSON encoding of a list of strings (like `["sent_1", "sent_2"]`).
+If `sent_ids` is the empty list, all graphs for the given user in the sample are erased.
 
 ---
 

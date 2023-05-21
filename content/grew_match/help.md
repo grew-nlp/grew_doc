@@ -32,7 +32,7 @@ Once you have selected an instance,
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
- * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.11&pattern=pattern { GOV -[nsubj]-> DEP }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.43% of the corpus`, This means that the first 1000 items were found in 5.43% of the 16,341 sentences of the **UD_French-GSD** corpus.
+ * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[nsubj]-> DEP }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.43% of the corpus`, This means that the first 1000 items were found in 5.43% of the 16,341 sentences of the **UD_French-GSD** corpus.
 )
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
@@ -101,7 +101,7 @@ For these corpora, a switch button is available (above the text area) where the 
 
 If EUD is selected, enhanced dependencies are displayed in blue below the sentence.
 In the pattern, an enhanced dependency can be searched with the prefix `E:`.
-For instance, the pattern below {{< tryit "http://match.grew.fr/?corpus=UD_English-EWT@2.11&pattern=pattern { N -[E:obj]-> M }%0Dwithout { N -[obj]-> M }&eud=yes" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
+For instance, the pattern below {{< tryit "http://match.grew.fr/?corpus=UD_English-EWT@2.12&pattern=pattern { N -[E:obj]-> M }%0Dwithout { N -[obj]-> M }&eud=yes" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
 :
 
 ```grew
@@ -116,10 +116,10 @@ without { N -[obj]-> M }
 
 ## The [`http://universal.grew.fr`](http://universal.grew.fr) instance
 
-This instance contains the version 2.11 of the [UD](http://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
+This instance contains the version 2.12 of the [UD](http://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
 The top navbar gives access to:
- * **UD 2.11**: The 243 treebanks of the version 2.11 of [UD](http://universaldependencies.org)
- * **SUD 2.11**: The 241 treebanks of the version 2.11 of [SUD](https://surfacesyntacticud.github.io) (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora)
+ * **UD 2.12**: The 246 treebanks of the version 2.12 of [UD](http://universaldependencies.org)
+ * **SUD 2.12**: The 245 treebanks of the version 2.12 of [SUD](https://surfacesyntacticud.github.io) (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora)
  * **UD Latest**:
    * suffix `@dev`: corpora in their latest version available on `dev` branch on GitHub (English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr).
    * suffix `@conv`: the automatic conversion of the native SUD treebanks into UD.

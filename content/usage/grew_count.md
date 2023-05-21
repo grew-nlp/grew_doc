@@ -22,8 +22,8 @@ The `corpora` parameter must be a JSON string describing a list of corpora. For 
 
 ```json_alt
 [
-  "SUD_French-PUD@2.11",
-  "SUD_English-PUD@2.11"
+  "SUD_French-PUD@2.12",
+  "SUD_English-PUD@2.12"
 ]
 ```
 
@@ -46,7 +46,7 @@ requests syntax can be learned through **Grew-match**'s [tutorial](http://match.
 ## Example of usage with Python
 
 The web service can be called with Python's `requests` library.
-The code below ([Download](count_test.py)) shows a way to call the web service with the two requests above and with the 20 PUD corpora of SUD 2.11.
+The code below ([Download](count_test.py)) shows a way to call the web service with the two requests above and with the 20 PUD corpora of SUD 2.12.
 
 {{< python file="static/usage/grew_count/count_test.py" >}}
 

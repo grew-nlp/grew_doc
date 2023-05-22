@@ -26,9 +26,9 @@ Test the installation with `echo "import grewpy" | python`. It should output `co
 1. `opam update && opam upgrade grewpy_backend`
 2. `pip install grewpy --upgrade`
 
-The latest version of `grewpy_backend` is 0.3.1. You can check your version with `opam list | grep grewpy`
+The latest version of `grewpy_backend` is **0.4.0**. You can check your version with `opam list | grep grewpy`
 
-The latest version of `grewpy` is 0.2.0. You can check your version with `pip3 show grewpy`
+The latest version of `grewpy` is **0.4.0**. You can check your version with `pip show grewpy`
 
 
 ## Usage

@@ -9,6 +9,6 @@ rule amalgam {
     N.upos = ADP;           % Set the `ADP` tag for the preposition "de"
     D.form = "le";          % Add the form feature of `D` to `le`
     D.upos = DET;           % Set the `DET` tag for the determiner "le"
-    add_edge M -[det]-> D;  % Add the dependency link to the new node `D`
+    add_edge M -[det]-> D;  % Add the dependency linked to the new node `D`
   }
 }

@@ -32,12 +32,12 @@ Once you have selected an instance,
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
- * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[nsubj]-> DEP }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.43% of the corpus`, This means that the first 1000 items were found in 5.43% of the 16,341 sentences of the **UD_French-GSD** corpus.
+ * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[nsubj]-> DEP }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.44% of the corpus`, This means that the first 1000 items were found in 5.44% of the 16,341 sentences of the **UD_French-GSD** corpus.
 )
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
 With `count`, all the solutions are computed, but, it is not possible to visualize annotation examples.
-For instance, with the same request as above, we observe 18,998 occcurences of `nsubj`.
+For instance, with the same request as above, we observe 18,973 occcurences of `nsubj`.
 
 ---
 
@@ -120,15 +120,14 @@ This instance contains the version 2.12 of the [UD](http://universaldependencies
 The top navbar gives access to:
  * **UD 2.12**: The 246 treebanks of the version 2.12 of [UD](http://universaldependencies.org)
  * **SUD 2.12**: The 245 treebanks of the version 2.12 of [SUD](https://surfacesyntacticud.github.io) (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora)
- * **UD Latest**:
-   * suffix `@dev`: corpora in their latest version available on `dev` branch on GitHub (English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr).
-   * suffix `@conv`: the automatic conversion of the native SUD treebanks into UD.
- * **SUD Latest**:
-   * suffix `@latest`: latest version available on GitHub of the native SUD corpora.
+ * **UD Latest**: (with suffix `@dev`) Some UD corpora in their latest version available on `dev` branch on GitHub English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr). These treebanks are updated in at most one hour after a new push is done on GitHub.
+ * **SUD Latest**: (with suffix `@latest`) latest version available on GitHub of the native SUD corpora.
+ * **UD Auto**: (with suffix `@conv`) automatic UD conversion of SUD-native treebanks
+ * **SUD Auto**: automatic SUD conversion of some UD treebanks and a few other automatically built SUD treebanks
 
 ## Other instances
   * [`http://parseme.grew.fr`](http://parseme.grew.fr): MWE annotation from the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
-  * [`http://semanitcs.grew.fr`](http://semanitcs.grew.fr): a few available semantic graphbanks
+  * [`http://semantics.grew.fr`](http://semantics.grew.fr): a few available semantic graphbanks
     * Some freely available data in [AMR](https://amr.isi.edu/)
     * The [PMB](https://pmb.let.rug.nl/) Gold data
   * [`http://orfeo.grew.fr`](http://orfeo.grew.fr): See [Orfeo project](https://www.projet-orfeo.fr/)

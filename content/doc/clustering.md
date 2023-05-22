@@ -66,7 +66,7 @@ So it may be useful to be able to report the value of `ExtPos` if it exists and 
 This is possible with the clustering key `N.ExtPos/upos`
 
 #### Example with `ExtPos`
-On UD_French-GSD, when searching for POS of a dependent of the `case` relation with the request `pattern { H -[case]-> D }`, the clustering key `D.upos` reports 6 clusters {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { H -[case]-> D }&clustering=D.upos" >}} and the clustering key `D.ExtPos/upos` reports the more regular set of 2 clusters {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { H -[case]-> D }&clustering=D.ExtPos/upos" >}}.
+On UD_French-GSD, when searching for POS of a dependent of the `case` relation with the request `pattern { H -[case]-> D }`, the clustering key `D.upos` reports 7 clusters {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { H -[case]-> D }&clustering=D.upos" >}} (use the `Count` button to see all clusters) and the clustering key `D.ExtPos/upos` reports the more regular set of 2 clusters {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { H -[case]-> D }&clustering=D.ExtPos/upos" >}}.
 
 #### Example with corrected features
 
@@ -77,7 +77,7 @@ pattern { N -[amod]-> A ; N.Gender <> A.Gender}
 ```
 
 and the two clustering keys `N.CorrectGender/Gender` and `A.CorrectGender/Gender`
-{{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { N -[amod]-> A ; N.Gender <> A.Gender}&clust1_key=N.CorrectGender/Gender&clust2_key=A.CorrectGender/Gender" >}}, we can observe more in details the Gender agreement between two nodes related by `amod`: most of the case are link to typos, many of the other cases are annotation errors in version 2.12.
+{{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { N -[amod]-> A ; N.Gender <> A.Gender}&clust1_key=N.CorrectGender/Gender&clust2_key=A.CorrectGender/Gender" >}}, we can observe more in details the Gender agreement between two nodes related by `amod`: most of the case are linked to typos, many of the other cases are annotation errors in version 2.12.
 
 ### Clustering on relative order of nodes
 
@@ -150,7 +150,7 @@ Note that no curly brackets are needed in the `whether` text area (see examples 
 
   * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "http://match.grew.fr/?corpus=UD_Hungarian-Szeged@2.12&pattern=pattern { GOV -[advcl]-> DEP }&whether=GOV << DEP" >}}
   * In **UD_English-GUM**, how often the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "http://match.grew.fr/?corpus=UD_English-GUM@2.12&pattern=pattern { GOV -[1=expl]-> DEP }&whether=GOV -[1=nsubj]-> S" >}}
-  * In **UD_French-GSD**, there are 627 left-headed `nsubj` (or subtypes):
+  * In **UD_French-GSD**, there are 619 left-headed `nsubj` (or subtypes):
     * How often is it in an interrogative sentences? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=P [lemma=%22?%22]" >}}
     * How often is it in an relative clause? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=H -[acl:relcl]-> GOV" >}}
     * How often is there an expletive subject? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=GOV -[expl:subj]-> E" >}}

@@ -24,7 +24,13 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.11.0 (January 22, 2023)
+# :new: Version 1.12.0 (March 24, 2023)
+  * ⚠️ library is renamed `grewlib` (old name was `libcaml-grew`)
+  * use dune build system
+
+---
+
+# Version 1.11.0 (January 22, 2023)
   - ⚠️ Add syntax for positive filtering using the `with` keyword. See [Request page](../doc/request) (**NB:** this may break an existing GRS which uses the identifier `with` for a rule, a pacakge or a strategy).
   - Add handling of [non-injective matching](../doc/request#injectivity-in-nodes-matching)
 

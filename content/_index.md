@@ -15,10 +15,13 @@ Categories = ["Development","GoLang"]
 
 **Grew** is a Graph Rewriting tool dedicated to applications in Natural Language Processing (NLP). It can manipulate many kinds of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS) but it can be used to represent any graph-based structure.
 
-## News
- * 🆕 **2023/01/22:** a new mailing list `grew@inria.fr` was created. See [here to subscribe](https://sympa.inria.fr/sympa/info/grew).
+There is a mailing list `grew@inria.fr` for announcement or discussion related to Grew.
+See [here to subscribe](https://sympa.inria.fr/sympa/info/grew).
 
- * 🆕 **2023/01/22:** Version **1.11**. See [What's new](/whats_new/) for changes.
+## News
+ * 🆕 **2023/03/24:** Version **1.12**. See [What's new](/whats_new/) for changes.
+
+ * **2023/01/22:** Version **1.11**.
 
  * **2022/11/23:** Version **1.10**.
  

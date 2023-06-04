@@ -35,7 +35,7 @@ In both cases, **Grew** interprets each annotated element as a new node with lin
 Below, an example of these annotations on **UD_French-Sequoia** (blue: MWE annotation of the Parseme project, orange: NE annotation of the Parseme project, green: semantic noun annotation of the FrSemCor project).
 
 <div>
-<img src="https://deep-sequoia.inria.fr/example/frwiki_50.1000_00754-ud.parseme.frsemcor.svg"/>
+<img src="https://deep-sequoia.inria.fr/example/frwiki_50.1000_00754-ud.parseme.frsemcor.svg">
 </div>
 
 **NB**: other aspects of the CoNLL-U Plus Format, like cross-reference are not handled.

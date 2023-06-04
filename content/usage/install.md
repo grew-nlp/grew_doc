@@ -15,7 +15,7 @@ You have to install:
  1. `ocaml` which can be installed by `opam`
  1. `grew` an related libraries which are available as `opam` packages
 
-If you just need to upgrade your installation, please consult the [Upgrade page](../upgrade).
+If you just need to upgrade your installation, please consult the [Upgrade section](./#grew-upgrade).
 
 :warning: If you run into trouble using the instructions of this page, feel free to [open an issue on GitHub](https://github.com/grew-nlp/grew/issues/new).
 
@@ -92,7 +92,7 @@ The latest version is 1.12. You can check your version with
 opam list | grep grew
 ```
 
-you should obtain (the third line may not appear if you haven't installed the Python librairy backend):
+you should obtain (the third line may not appear if you haven't installed the Python library backend):
 
 ```
 grew                          1.12.0      Grew system

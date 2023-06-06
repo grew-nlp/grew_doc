@@ -8,7 +8,7 @@ Categories = ["Development","GoLang"]
 +++
 
 <div style='width: 200pt;'>
-<img src="logo/grew.svg">
+<img src="logo/grew.svg" alt="Grew logo">
 </div>
 
 # Graph Rewriting for NLP

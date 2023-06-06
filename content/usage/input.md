@@ -34,7 +34,7 @@ The **Mono** mode corresponds the following arguments on the command line:
 
 # The **Multi** mode
 
-The **Mono** mode is used when the command line argument contains a sequence of arguments `-i <file>.json` with JSON files following the JSON description of a set of corpora below.
+The **Multi** mode is used when the command line argument contains a sequence of arguments `-i <file>.json` with JSON files following the JSON description of a set of corpora below.
 
 ## JSON description of a set of corpora
 

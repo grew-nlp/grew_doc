@@ -34,7 +34,7 @@ build:
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/03_rules_set
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/04_termination
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/05_confluence
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/06_more_commands
+	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/tokenisation_change
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/edge_capture
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/edge_label
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/relation_table
@@ -62,7 +62,7 @@ clean:
 	@make -C static/tutorial/03_rules_set clean
 	@make -C static/tutorial/04_termination clean
 	@make -C static/tutorial/05_confluence clean
-	@make -C static/tutorial/06_more_commands clean
+	@make -C static/tutorial/tokenisation_change clean
 	@make -C static/tutorial/edge_capture clean
 	@make -C static/tutorial/edge_label clean
 	@make -C static/tutorial/relation_table clean

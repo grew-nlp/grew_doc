@@ -23,10 +23,10 @@ The 6 first lessons are available:
  - [Lesson 3: Rules set](../03_rules_set)
  - [Lesson 4: Termination](../04_termination)
  - [Lesson 5: Confluence](../05_confluence)
- - [Lesson 6: More commands](../06_more_commands)
 
 ## Usual operations on graphs
  - [Change the label of an edge](../edge_label)
+ - [Change tokenization](../tokenisation_change)
 
 ## Other usages
  - [Building relation tables on your treebank](../relation_table)

@@ -8,7 +8,7 @@ Categories = ["Development","GoLang"]
 
 +++
 
-[Termination :arrow_left:](../04_termination) • [:arrow_up:](../top) • [:arrow_right: More commands](../06_more_commands)
+[Termination :arrow_left:](../04_termination) • [:arrow_up:](../top)
 
 ---
 
@@ -109,4 +109,4 @@ Of course, in this case, the strategy `Onf(p)` nicely computes the unique normal
 
 ---
 
-[Termination :arrow_left:](../04_termination) • [:arrow_up:](../top) • [:arrow_right: More commands](../06_more_commands)
+[Termination :arrow_left:](../04_termination) • [:arrow_up:](../top)

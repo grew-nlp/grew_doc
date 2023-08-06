@@ -83,7 +83,7 @@ To upgrade to a new version of **Grew**, run the commands:
 
 ```
 opam update
-opam upgrade grew
+opam upgrade
 ```
 
 The latest version is 1.12. You can check your version with

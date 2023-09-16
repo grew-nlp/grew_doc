@@ -16,6 +16,7 @@ stop:
 	killall ${HUGO}
 
 build:
+	@mkae -C content/grewpy
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/commands
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/conllu
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/doc/grs

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import json
 import base64
 import pathlib
@@ -11,8 +12,10 @@ from traitlets.config import Config
 from nbconvert.preprocessors import Preprocessor
 
 DUPLICATE_NEWLINES_RE = re.compile(r"\n\n\n+", flags=re.MULTILINE)
-ROOT_DIR = pathlib.Path(__file__).parent
-POSTS_DIR = ROOT_DIR / "content" / "posts"
+PYTHON_ALT = re.compile(r"```python\n")
+
+def python_alt(content: str) -> str:
+    return PYTHON_ALT.sub("```python_alt\n", content)
 
 def remove_duplicate_newlines(content: str) -> str:
     return DUPLICATE_NEWLINES_RE.sub("\n\n", content)
@@ -61,7 +64,6 @@ class ExtractImages(Preprocessor):
         return nb, resources
 
 if __name__ == "__main__":
-    notebook_paths = POSTS_DIR.glob("*/*.ipynb")
     c = Config()
     c.RegexRemovePreprocessor.patterns = ["\s*\Z"]
     c.MarkdownExporter.preprocessors = [
@@ -70,6 +72,8 @@ if __name__ == "__main__":
     ]
     exporter = nbconvert.MarkdownExporter(config=c)
 
+    ROOT_DIR = pathlib.Path('.')
+    notebook_paths = ROOT_DIR.glob("*.ipynb")
     for notebook_path in notebook_paths:
         with open(notebook_path, "r") as f:
             data = json.load(f)
@@ -88,13 +92,13 @@ if __name__ == "__main__":
             fix_image_links,
             fix_front_matter,
             remove_duplicate_newlines,
+            python_alt,
         ]
 
         for filter in filters:
             md_content = filter(md_content)
 
         # Write out the new content
-        md_path = md_path.parent / "index.md"
         with open(md_path, "w") as f:
             f.write(md_content.strip() + "\n")
         print(f"Wrote {md_path}")

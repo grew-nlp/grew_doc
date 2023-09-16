@@ -23,7 +23,7 @@ When a GRS is **terminating** and **confluent**, we have the equivalence of the 
 ~~~
 
 They all compute one graph which is the unique normal form.
-In this case, the strategy `Onf` should be used because it is the more efficient one.
+In this case, the `Onf` strategy should be used as it is the more efficient one.
 
 
 ## Terminating system
@@ -35,7 +35,7 @@ When a GRS is **terminating**, we have the equivalence of the two strategies:
 
 Again, prefer the more efficient `Onf`.
 
-See below for an example of non-terminating system where the equivalence does not hold.
+See below for an example of a non-terminating system where the equivalence does not hold.
 
 ## Example of non-terminating rewriting system
 
@@ -43,12 +43,12 @@ The following code described a non-terminating rewriting system:
 
 {{< grew file="/static/doc/rewriting/non_term.grs" >}}
 
-Each rule replaces an edge label by another.
-For instance, the rule `B2A` removes and edge with an `B` label and adds one with an `A` label.
+Each rule replaces one edge label with another.
+For example, the rule `B2A` removes an edge with a `B` label and adds one with an `A` label.
 
-Let `G_A`, `G_B`, `G_C` and `G_D` the four graphs with two nodes and one edge labelled `A`, `B`, `C` and `D` respectively.
+Let `G_A`, `G_B`, `G_C` and `G_D` be the four graphs with two nodes and one edge labelled `A`, `B`, `C` and `D` respectively.
 
-The schema below shows how the four rules act on these 4 graphs:
+The schema below shows how the four rules act on these four graphs:
 
 ![input.gr](/doc/rewriting/_build/non_term.svg)
 
@@ -67,5 +67,5 @@ The schema below shows how the four rules act on these 4 graphs:
    * the output of the graph `G_D`
    * a non-terminating execution (in practice **Grew** tries to detect these cases and raises an error after a given number of rule applications)
 
-For the last three cases, the output is unpredictable, but several executions with the same input data will give the same output.
-But, if the order of rules in the package `S` is changed, the behaviour may be different.
+In the last three cases, the output is unpredictable, but multiple executions with the same input data will give the same output.
+However, if the order of the rules in the package `S` is changed, the behaviour may be different.

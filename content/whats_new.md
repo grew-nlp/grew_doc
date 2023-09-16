@@ -17,14 +17,19 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 * The symbol "⚠️" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
 
 
-* More detailled information in files `CHANGES.md` for each sub-project:
+* More detailed information in files `CHANGES.md` for each sub-project:
 [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md).
 
 ---
 ---
 
-# :new: Version 1.12.0 (March 24, 2023)
+# :new: Version 1.13 (September 16, 2023)
+  * Change type of `cluster_key`
+
+---
+
+# Version 1.12 (March 24, 2023)
   * ⚠️ library is renamed `grewlib` (old name was `libcaml-grew`)
   * use dune build system
 
@@ -136,7 +141,7 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
  * GTK interface is proposed as a separate package and so **Grew** without GUI is much more easy to install
  * Command line arguments were revisited (see [here](../usage/cli))
 
-More detailled information in files `CHANGES.md` for each sub-project: [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
+More detailed information in files `CHANGES.md` for each sub-project: [libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md),
 [grew_gui](https://gitlab.inria.fr/grew/grew_gui/blob/master/CHANGES.md)
 

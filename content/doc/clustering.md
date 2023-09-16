@@ -1,22 +1,23 @@
 # Clustering
 
-There is a general clustering mechanism in **Grew** which can be used in several contexts to split a set of matchings produced by a request on a corpus in a some subsets (a partition) according to some criteria.
+There is a general clustering mechanism in **Grew** that can be used in various contexts to divide a set of matchings produced by a request on a corpus into a number of subsets (a partition) according to some criteria.
 
 --- 
 
 ## Where it can be used?
 
  * In **Grew-match**, below the main textarea where the request is written, it is possible to describe either one or two clustering items
- * With the command line argument, in `grep` ou `count` modes, clustering can be perfomed. For details and examples, see [here for `grep`](../../usage/cli#with-clustering) and [here for `count`](../../usage/cli#example-with-multi-mode-one-request-and-a-key-clustering-of-the-output)
- * With the Python library **Grewpy**, in functions [`Corpus.count`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.count) and [`Corpus.search`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.search)
+ * With the command line argument, in `grep` or `count` mode, clustering can be performed.
+ Details and examples can be found [here for `grep`](../../usage/cli#with-clustering) and [here for `count`](../../usage/cli#example-with-multi-mode-one-request-and-a-key-clustering-of-the-output)
+ * Using Python library **Grewpy**, in the functions [`Corpus.count`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.count) and [`Corpus.search`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.search)
 
 --- 
 
 ## Clustering with a key
 
 ### Clustering on a node feature
-With the clustering key `N.f`, the matchings are clustered following the value of the feature named `f` for the node `N` present in the (matching part of) main request.
-If for some matchings, the feature is not defined, a cluster is added with the value `__undefined__`.
+With the clustering key `N.f`, the matchings are clustered following the value of the feature named `f` for the node `N` present in the (matching part of the) main request.
+If the feature is not defined for some matchings, a cluster with the value `__undefined__` is added.
 
 #### Examples
   * List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-LFG@2.12&pattern=pattern { N [upos=AUX] }&clust1_key=N.lemma">}}
@@ -31,7 +32,8 @@ If for some matchings, the feature is not defined, a cluster is added with the v
   * List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "http://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.12&pattern=pattern { e: GOV -[1=acl]-> DEP }&clust1_key=e.2">}}
 
 ### Clustering on the full label of an edge
-With the clustering key `e.label`, the matchings are clustered following the full label of edge `e` present in the (positive part of) main request. **NB** the way the label value is reported depends on the configuration used.
+With the clustering key `e.label`, the matchings are clustered according to the full label of edge `e` present in the (positive part of the) main request.
+**NB** the way the label value is reported depends on the configuration used.
 
 #### Example
   * List relations used for auxiliaries in **UD_Italian-ParTUT** {{< tryit "http://universal.grew.fr/?corpus=UD_Italian-ParTUT@2.12&pattern=pattern { e:M -> N; N [upos=AUX] }&clust1_key=e.label">}}
@@ -50,7 +52,7 @@ As suggested in [#28](https://github.com/grew-nlp/grew/issues/28), in case of co
  * `X.feat[gap=g, min=a, max=b]` will cluster the values between a and b by pack of size g, with two packs for all values < a and > b.
 
 #### Example
-There is not much examples of numerical features in the current UD version.
+There are not many examples of numerical features in the current version of UD.
 The following example is not linguistically pertinent but it shows the mechanism.
 
 {{< tryit "http://universal.grew.fr/?corpus=UD_Naija-NSC@2.12&request=pattern { N [AlignBegin] }&clustering=N.AlignBegin[gap=1000, min=10000, max=20000]" >}} on `UD_Naija-NSC` with clustering key `N.AlignBegin[gap=1000, min=10000, max=20000]` and request:
@@ -61,9 +63,9 @@ pattern { N [AlignBegin] }
 There are (up to) 12 clusters, named `]-∞, 10000[`, `[10000, 11000[`, … `[19000, 20000[` and `[20000, +∞[`.
 
 ### Clustering on successive feature names
-The feature name [`ExtPos`](https://surfacesyntacticud.github.io/guidelines/u/extpos/) is used mainly when the *external POS* differs from the regular `upos`.
-So it may be useful to be able to report the value of `ExtPos` if it exists and the value of `upos` else. 
-This is possible with the clustering key `N.ExtPos/upos`
+The feature name [`ExtPos`](https://surfacesyntacticud.github.io/guidelines/u/extpos/) is mainly used when the *external POS* is different from the regular `upos`.
+So it may be useful to be able to report the value of `ExtPos` if it exists and the value of `upos` otherwise. 
+This is possible with the clustering key `N.ExtPos/upos`.
 
 #### Example with `ExtPos`
 On UD_French-GSD, when searching for POS of a dependent of the `case` relation with the request `pattern { H -[case]-> D }`, the clustering key `D.upos` reports 7 clusters {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { H -[case]-> D }&clustering=D.upos" >}} (use the `Count` button to see all clusters) and the clustering key `D.ExtPos/upos` reports the more regular set of 2 clusters {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { H -[case]-> D }&clustering=D.ExtPos/upos" >}}.
@@ -77,11 +79,11 @@ pattern { N -[amod]-> A ; N.Gender <> A.Gender}
 ```
 
 and the two clustering keys `N.CorrectGender/Gender` and `A.CorrectGender/Gender`
-{{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { N -[amod]-> A ; N.Gender <> A.Gender}&clust1_key=N.CorrectGender/Gender&clust2_key=A.CorrectGender/Gender" >}}, we can observe more in details the Gender agreement between two nodes related by `amod`: most of the case are linked to typos, many of the other cases are annotation errors in version 2.12.
+{{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&request=pattern { N -[amod]-> A ; N.Gender <> A.Gender}&clust1_key=N.CorrectGender/Gender&clust2_key=A.CorrectGender/Gender" >}}, we can observe in more detail the Gender agreement between two nodes related by `amod`: most of the cases are related to typos, many of the other cases are annotation errors in version 2.12.
 
-### Clustering on relative order of nodes
+### Clustering by relative order of nodes
 
-With a clustering key `N1#N2#N3` where `N1`, `N2` and `N3` are nodes from the `pattern` part of the request, the occurrences are clustered according to the relative order of nodes and clusters are identified by `N1 << N2 << N3`, `N2 << N1 << N3`… This can be used with any number of nodes.
+With a clustering key `N1#N2#N3` where `N1`, `N2` and `N3` are nodes from the `pattern` part of the request, the occurrences are clustered according to the relative order of the nodes and clusters are identified by `N1 << N2 << N3`, `N2 << N1 << N3`… This can be used with any number of nodes.
 
 #### Example: Verb, Subject, Object ordering
 
@@ -113,10 +115,11 @@ pattern {
 
 ### Clustering on how two nodes are related (or not)
 
- * With the clustering key `N1 -> N2`, the occurrences are clustered according to the relation from `N1` to `N2`; a cluster named `__none__` gathers the cases when there is no relation from `N1` to `N2`. If there is more than one such relations, another cluster `__multi__` is added. Note that with dependency syntax, the cluster `__multi__` will never appear, but it can appear in other context like enhanced UD or semantic graphs.
+ * With the clustering key `N1 -> N2`, the occurrences are clustered according to the relation from `N1` to `N2`; a cluster named `__none__` collects the cases where there is no relation from `N1` to `N2`. If there is more than one such relations, another cluster `__multi__` is added.
+ Note that the `__multi__` cluster never appears in dependency syntax, but it may appear in other contexts such as enhanced UD or semantic graphs.
 
- * With the clustering key `N1 <-> N2`, the occurrences are clustered according to the relation between `N1` and `N2` (whatever the direction); if the direction is from `N2` to `N1`, the relation name is prefixed with minus sign like `-nsubj` or `-mark:rel`.
- A cluster named `__none__` gathers the cases when there is no relation between `N1` and `N2`. If there is more than one such relations, another cluster `__multi__` is added.
+ * With the clustering key `N1 <-> N2`, the occurrences are clustered according to the relation between `N1` and `N2` (no matter which direction); if the direction is from `N2` to `N1`, the relation name is prefixed with minus sign like `-nsubj` or `-mark:rel`.
+ A cluster called `__none__` contains the cases where there is no relation between `N1` and `N2`. If there is more than one such relation, another cluster `__multi__` is added.
 
 #### Annotation of a bigram DET NOUN
 With a clustering key `N2 -> N1` and the pattern:
@@ -149,7 +152,7 @@ Note that no curly brackets are needed in the `whether` text area (see examples 
 ### Examples
 
   * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "http://match.grew.fr/?corpus=UD_Hungarian-Szeged@2.12&pattern=pattern { GOV -[advcl]-> DEP }&whether=GOV << DEP" >}}
-  * In **UD_English-GUM**, how often the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "http://match.grew.fr/?corpus=UD_English-GUM@2.12&pattern=pattern { GOV -[1=expl]-> DEP }&whether=GOV -[1=nsubj]-> S" >}}
+  * In **UD_English-GUM**, how often does the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "http://match.grew.fr/?corpus=UD_English-GUM@2.12&pattern=pattern { GOV -[1=expl]-> DEP }&whether=GOV -[1=nsubj]-> S" >}}
   * In **UD_French-GSD**, there are 619 left-headed `nsubj` (or subtypes):
     * How often is it in an interrogative sentences? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=P [lemma=%22?%22]" >}}
     * How often is it in an relative clause? {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern { GOV -[1=nsubj]-> DEP; GOV << DEP }&whether=H -[acl:relcl]-> GOV" >}}

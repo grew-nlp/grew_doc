@@ -24,7 +24,7 @@ A dictionnary for a request must contain the following keys:
  - `request`: a JSON encoding of a Grew request (see below)
 
 Other fields may be added for specific usage but they are not mandatory.
-Among these optionnal field, we can have:
+Among these optional field, we can have:
  - TODO
 
 ## JSON format for request

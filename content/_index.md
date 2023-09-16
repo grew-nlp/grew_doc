@@ -13,33 +13,33 @@ Categories = ["Development","GoLang"]
 
 # Graph Rewriting for NLP
 
-**Grew** is a Graph Rewriting tool dedicated to applications in Natural Language Processing (NLP). It can manipulate many kinds of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS) but it can be used to represent any graph-based structure.
+**Grew** is a Graph Rewriting tool for Natural Language Processing (NLP) applications. It can manipulate many types of linguistic representation. It has been used on POS-tagged sequence, surface dependency syntax, deep dependency syntax, semantic representation (AMR, DMRS), but it can be used to represent any graph-based structure.
 
-There is a mailing list `grew@inria.fr` for announcement or discussion related to Grew.
+There is a mailing list `grew@inria.fr` for announcements or discussions related to Grew.
 See [here to subscribe](https://sympa.inria.fr/sympa/info/grew).
 
 ## News
- * 🆕 **2023/03/24:** Version **1.12**. See [What's new](/whats_new/) for changes.
+ * 🆕 **2023/09/16:** Version **1.13**. See [What's new](/whats_new/) for changes.
+
+ * **2023/03/24:** Version **1.12**.
 
  * **2023/01/22:** Version **1.11**.
-
- * **2022/11/23:** Version **1.10**.
  
 ## A first taste of Grew
-The easiest way to try and test **Grew** is to use one of the online interfaces.
+The easiest way to try out **Grew** is to use one of the online interfaces.
 
   1. [Grew-match](http://match.grew.fr): Online graph matching to search for a given request in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning request syntax).
   2. [Grew-web](https://web.grew.fr): Online graph rewriting
   2. [Arborator-Grew](https://arborator.github.io/): Tool for online corpus management (this is another tool, using Grew as backend)
 
-## Some of the main features of Grew
+## Some of the key features of Grew
 
   * Graph structures can use a built-in notion of **feature structures**.
-  * The left-hand side of a rule is described by a graph called a **request** (or **patterns**); injective graph morphisms are used in the pattern matching algorithm.
-  * **Negative pattern** can be used for a finer control on the left-hand side of rules.
-  * The right-hand side of rules is described by a sequence of **atomic commands** that describe how the graph should be modified during the rule application.
-  * Subset of rules can be organised in **packages** and **strategies** define the way rules and packages are applied in graph transformation.
-  * **Grew** has support both for **confluent** and **non-confluent** modules; when a non-confluent modules is used, all normal forms are returned and then ambiguity is handled in a natural way.
+  * The left-hand side of a rule is described by a graph called a **request** (or **pattern**); injective graph morphisms are used in the pattern matching algorithm.
+  * **Negative patterns** can be used for a finer control on the left-hand side of rules.
+  * The right-hand side of the rules is described by a sequence of **atomic commands** that describe how the graph should be modified during the rule application.
+  * A subset of rules can be organised into **packages**, and **strategies** define the way in which rules and packages are applied during graph transformation.
+  * **Grew** has support for both **confluent** and **non-confluent** modules; when a non-confluent module is used, all normal forms are returned and then ambiguity is handled in a natural way.
 
 ## Publications
 
@@ -54,5 +54,5 @@ The easiest way to try and test **Grew** is to use one of the online interfaces.
 
 ## Acknowledgements
 
- * Thanks to **Grew** and **Grew-match** users for their feedback, their support and their suggestions
- * Thanks to Kim Gerdes for nice Grew logo
+ * Thanks to the users of **Grew** and **Grew-match** for their feedback, support and suggestions.
+ * Thanks to Kim Gerdes for beautiful Grew logo.

@@ -51,11 +51,15 @@ apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 
 Run: 
   * `opam init` 
-  * `opam switch create 4.14.1 4.14.1` Install a recent version of Ocaml.
+  * `opam switch create 4.14.1 4.14.1` Install the _long term support version_ of Ocaml.
   * as adviced by the previous command: `eval $(opam env --switch=4.14.1)`
 
-Check that `ocaml` is installed with `ocamlc -v`. This gives you the version of Ocaml installed.
-This should be 4.10.0 or higher.
+Check that `ocaml` is installed with `ocamlc -v`.
+This gives you the version of Ocaml installed.
+This should be 4.13 or higher.
+
+**Note:** There are more recent version of Ocaml (5.0 and 5.1).
+These versions are experimental and they are not supported (some Grew web service don't work with ocaml 5).
 
 Run the following command to add the grew specific opam repository:
 ```
@@ -71,7 +75,7 @@ opam install grew
 
 To verify your installation:
 
-  * Try the command `grew version`. You should have 1.12 (see [Upgrade page](../upgrade) if needed)
+  * Try the command `grew version`. You should have 1.13 (see [Upgrade page](../upgrade) if needed)
   * In case of trouble, try `eval $(opam env)` and `opam install grew` again.
   * If trouble persists, please [fill an issue](https://github.com/grew-nlp/grew/issues/new)
 
@@ -86,7 +90,7 @@ opam update
 opam upgrade
 ```
 
-The latest version is 1.12. You can check your version with
+The latest version is 1.13. You can check your version with
 
 ```
 opam list | grep grew
@@ -95,7 +99,7 @@ opam list | grep grew
 you should obtain (the third line may not appear if you haven't installed the Python library backend):
 
 ```
-grew                          1.12.0      Grew system
-grewlib                       1.12.4      The main library for the Grew system
-grewpy_backend                0.4.0       The Ocaml backend for the `grewpy` Python lib
+grew                          1.13.0      Grew system
+grewlib                       1.13.1      The main library for the Grew system
+grewpy_backend                0.5.0       The Ocaml backend for the `grewpy` Python lib
 ```

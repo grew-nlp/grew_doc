@@ -69,7 +69,7 @@ All arguments are optional:
 # Grep
 
 This mode corresponds to the command line version of the [Grew-match](http://match.grew.fr) tool.
-The clustering is also available [:link:](./#with-clustering) in the grep mode.
+Clustering is also available [:link:](./#with-clustering) in the grep mode.
 
 ## Without clustering
 
@@ -81,7 +81,7 @@ where:
 
   * `<request_file>` is a file which describes a request
   * `<input>` describes the data on which the search is done
-    * one corpus (**Mono** mode); in this case, the optionnal `-config` parameter ([see here](#-config)) can also be used
+    * one corpus (**Mono** mode); in this case, the optional `-config` parameter ([see here](#-config)) can also be used
     * a set of corpora (**Multi** mode)
 
 The output is given in JSON format.
@@ -107,12 +107,12 @@ produces the following JSON output:
 
 {{< json file="static/usage/cli/_build/output_grep" >}}
 
-This means that the request described in the file `dislocated.req` was found three times in the corpus, each item gives the sentence identifier and the position of the nodes and the edges matched by the request.
+This means that the request described in the file `dislocated.req` has been found three times in the corpus, each item giving the sentence identifier and the position of the nodes and the edges matched by the request.
 
-Note that two other options exist:
+Note that there are two other options:
 
  * `-html`: produces a new `html` field in each JSON item with the sentence where words impacted by the request are in a special HTML span with class `highlight`
- * `-dep_dir <directory>`: produces a new file in the folder `directory` with the representation of the sentence with highlighted part (as in [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format (usable with [Dep2pict](http://dep2pict.loria.fr)).
+ * `-dep_dir <directory>`: produces a new file in the `directory` folder with the representation of the sentence with the highlighted part (as in the [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format usable with Dep2pict.
 
 ### Example with **Multi** input
 
@@ -132,10 +132,10 @@ produces the following JSON output:
 
 ## With clustering
 
-In both modes **Mono** and **Multi**, if the command line additionally contains one or more arguments (`-key …` or `-whether …`),
-the set of occurrences is recursively clusterised following the given clustering items.
+In both **Mono** and **Multi** modes, if the command line additionally contains one or more arguments (`-key …` or `-whether …`),
+the set of occurrences is clustered recursively according to the given clustering items.
 
-See the [clustering documentation page](../../doc/clustering) for details about the different existing clustering items.
+See the [Clustering documentation page](../../doc/clustering) for details of the various clustering items available.
 
 ### Examples
 
@@ -149,8 +149,8 @@ grew grep -request dislocated.req -key N.upos -i fr_pud-ud-test.conllu
 
 {{< json file="static/usage/cli/_build/output_grep_key" >}}
 
-With `-whether`, we can cluster the results according to the fact that the relation left-headed.
-We observe that in two cases, the governor `M` is before `N`.
+With `-whether`, we can cluster the results according to the fact that the relation is left-headed.
+We see that in two cases, the governor `M` is before `N`.
 
 ```
 grew grep -request dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
@@ -159,7 +159,7 @@ grew grep -request dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
 {{< json file="static/usage/cli/_build/output_grep_whether" >}}
 
 
-Finally, several clustering can be applied successively. For instance
+Finally, several clusterings can be applied one after the other. For example
 
 ```
 grew grep -request dislocated.req -key N.upos -whether "M << N" -i fr_pud-ud-test.conllu
@@ -178,11 +178,11 @@ grew grep -request dislocated.req -key N.upos -whether "M << N" -i fr_pud-ud-tes
 This mode computes corpus statistics based on **Grew-match** style requests.
 
 The input data are:
- - one (**Mono** mode) or several (**Multi** mode) corpora
- - one or several requests
- - any number of clustering item (either key of whether)
+ - one (**Mono** mode) or more (**Multi** mode) corpora
+ - one or more requests
+ - any number of clustering items (either key or whether)
 
-By default, it returns a JSON describing several embedded dictionaries, counting in each corpus, each request clustered following clustering items.
+By default, it returns a JSON describing several embedded dictionaries, counting in each corpus, each request clustered according to clustering items.
 
 If the output dimension is 2, the statistics can be printed as a TSV table.
 This is the case for:
@@ -190,7 +190,7 @@ This is the case for:
  * **Multi** mode, any number of requests, no clustering items &rarr; a TSV table is built with the number of occurrences for each request in each corpus.
  * **Multi** mode, 1 request, 1 clustering item &rarr; a TSV table is built with the results of the clustering (with corpora on lines and values of the cluster key in rows).
 
-The optionnal `-config` parameter ([see here](#-config)) can also be used.
+The optional `-config` parameter ([see here](#-config)) can also be used.
 
 
 
@@ -228,13 +228,13 @@ which corresponds to the table:
 
 We can then observe that in the annotations of the 3 corpora in use:
 
- * in French, there is a weak preference for adjective position after the noun (68.9%)
- * in English, there is a strong preference for adjective position before the noun (98.9%)
+ * in French, there is a weak preference for the position of the adjective after the noun (68.9%)
+ * in English, there is a strong preference for placing the adjective before the noun (98.9%)
  * in Chinese, there is a **very** strong preference for adjective position before the noun (100%)
 
 ## Example with **Multi** mode, one request and a key clustering of the output
 
-With the same data as in the previous example, the following command:
+Using the same data as in the previous example, the following command:
 
 `grew count -request ADJ_NOUN_pre.req -key N.Number -i en_fr_zh.json -tsv`
 
@@ -273,24 +273,24 @@ which corresponds to the table:
 ## Remarks
 
  * Only one request is used in case of clustering.
- * Request syntax can be learned [here](/doc/request/) or with the online **[Grew-match](http://match.grew.fr)** tool, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with snippets given on the right of the text area.
- * If some corpus is updated, it is necessary to run again the compilation step.
+ * The Request syntax can be learned [here](/doc/request/) or with the online tool **[Grew-match](http://match.grew.fr)**, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with the snippets given to the right of the text area.
+ * If some corpus is updated, it is necessary to repeat the compilation step.
  * Some requests may take a long time to be searched in corpora.
- * ⚠️ In previous version (< `1.10`), the TSV table also contains a column with the size of corpora (in number of sentences). This column is no longer available in version `1.10`.
+ * ⚠️ In previous versions (< `1.10`), the TSV table also contains a column with the size of corpora (in number of sentences). This column is no longer available since version `1.10`.
 
 
 ---
 # Compile
 
-For the Grew-match backend (`grew_match_back`) or for the command `grew count`, it is required to first compile corpora.
+For the Grew-match backend (`grew_match_back`) or for the `grew count` command, it is necessary to first compile corpora.
 For these two usages, sets of corpora are described in a [JSON file](../../doc/corpora).
 
 For compilation, the command is:
 
 `grew compile -i <corpora.json>`
 
-Note that this produces, for each corpus, a new file with the `.marshal` extension stored in the corpus directory.
-The `.marshal` file is computed only if the corpus has changed since the last compilation.
+Note that this creates a new file with the extension `.marshal` for each corpus, which is stored in the corpus directory.
+The `.marshal` file will only be computed if the corpus has changed since the last compilation.
 
 ---
 # Clean
@@ -303,14 +303,14 @@ The commands below removes the `marshal` files produced by the `grew compile` co
 ---
 # Parameters
 
-This section describes a few command line arguments that are shared by several commands.
+This section describes some command line arguments that are common to several commands.
 
 ## `-config`
 The config value can be: `ud`, `sud`, `sequoia` or `basic`. The default value is `ud`.
 
-This parameter modifies how CoNNL-U and GRS files are interpreted.
-More precisely, it controls:
-  * How edge labels are parsed (for instance, taking `@` extension into account in SUD). See [here](../../doc/graph#edges) for a detailled description about this.
-  * How features are stored in CoNLL-U (columns FEATS or columns MISC). See [here](../../doc/conllu#how-the-misc-field-is-handled-by-grew) for details.
+This parameter changes how CoNNL-U and GRS files are interpreted.
+More specifically, it controls:
+  * How edge labels are parsed (e.g. taking into account `@` extension in SUD). See [here](../../doc/graph#edges) for a detailed description.
+  * How features are stored in CoNLL-U (FEATS column or MISC column). See [here](../../doc/conllu#how-the-misc-field-is-handled-by-grew) for details.
 
 This parameter is used in the `transform`, `grep` and `count` modes.

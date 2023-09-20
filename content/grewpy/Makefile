@@ -1,3 +1,3 @@
 run:
 	find . -name "*.ipynb" -exec jupyter nbconvert --execute --to notebook --inplace {} \;
-	python ../../tools/ipynb2md.py
+	python3 ../../tools/ipynb2md.py

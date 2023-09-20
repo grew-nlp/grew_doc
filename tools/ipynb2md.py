@@ -75,7 +75,7 @@ if __name__ == "__main__":
     ROOT_DIR = pathlib.Path('.')
     notebook_paths = ROOT_DIR.glob("*.ipynb")
     for notebook_path in notebook_paths:
-        with open(notebook_path, "r") as f:
+        with open(notebook_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         # Export to markdown via nbconvert
@@ -99,7 +99,7 @@ if __name__ == "__main__":
             md_content = filter(md_content)
 
         # Write out the new content
-        with open(md_path, "w") as f:
+        with open(md_path, "w", encoding="utf-8") as f:
             f.write(md_content.strip() + "\n")
         print(f"Wrote {md_path}")
 

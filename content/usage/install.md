@@ -101,5 +101,5 @@ you should obtain (the third line may not appear if you haven't installed the Py
 ```
 grew                          1.13.0      Grew system
 grewlib                       1.13.1      The main library for the Grew system
-grewpy_backend                0.5.0       The Ocaml backend for the `grewpy` Python lib
+grewpy_backend                0.5.1       The Ocaml backend for the `grewpy` Python lib
 ```

@@ -66,6 +66,24 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * `form = "être"` quotes are required when non-ASCII characters are used
  * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression (available since version `1.7.0`)
 
+### Disjunction in node clause
+⚠️ Since version 1.14
+
+Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47), a node can be matched with a disjunction of feature structures
+(separated by the pipe symbol `|`).
+
+#### Examples
+The following clause selects either a past particle verb or an adjective {{< tryit "http://universal.grew.fr/?request=pattern { N[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
+```grew
+N [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
+```
+
+A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with{{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.12&request=pattern { N [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
+```grew
+N [upos=ADV, !ExtPos]|[ExtPos=ADV]
+```
+
+
 ### Edge clauses
 
 All *edge clauses* below require the existence of an edge between the node selected by `N` and the node selected by `M`, eventually with additional constraints:

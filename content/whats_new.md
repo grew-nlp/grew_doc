@@ -11,20 +11,25 @@ menu = "main"
 
 * The version numbers `x.y.z` are synchronised such that `x` and `y` are identical for sub-projects.
 The third component `z` is linked to bug fixes and may vary across sub-projects.
-  * `libcaml-grew` &rarr; the Grew library, used in all other sub-projects
+  * `grewlib` &rarr; the Grew library, used in all other sub-projects
   * `grew` &rarr; the command line interface of Grew
 
 * The symbol "⚠️" indicates changes that may break backward compatibility. Check [GRS upgrading](../../doc/upgrade).
 
 
 * More detailed information in files `CHANGES.md` for each sub-project:
-[libcaml-grew](https://gitlab.inria.fr/grew/libcaml-grew/blob/master/CHANGES.md),
+[grewlib](https://github.com/grew-nlp/grewlib/blob/main/CHANGES.md),
 [grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md).
 
 ---
 ---
 
-# :new: Version 1.13 (September 16, 2023)
+# :new: Version 1.14 (November 11, 2023)
+  - add disjunction in Node definition (see [here](../doc/request#disjunction-in-node-clause))
+  - Optimise request representation
+
+---
+# Version 1.13 (September 16, 2023)
   * Change type of `cluster_key`
 
 ---

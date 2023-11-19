@@ -20,7 +20,7 @@ For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
 Tokens lines contain 10 fields, separated by tabulations.
 
-The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.12).
+The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.13).
 
 {{< input file="static/doc/conllu/n01118003.conllu" >}}
 
@@ -68,7 +68,7 @@ Unfortunately, the bracket notation in the feature value name is in conflict wit
 In **Grew**, the bracket notation is replaced by an alternative one with a double underscore: The (S)UD feature name `Number[psor]` is written `Number__psor`.
 For instance:
 
- * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { N [Number__psor=Plur] }` {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.12&pattern=pattern{N [Number__psor=Plur] }" >}}
+ * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { N [Number__psor=Plur] }` {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.13&pattern=pattern{N [Number__psor=Plur] }" >}}
  * to udate the feature `Gender[psor]` to `Fem` on node `N`, use the command `N.Gender__psor = Fem`
 
 ## How the `MISC` field is handled by **Grew**?
@@ -82,7 +82,7 @@ There are two main problems to deal with the `MISC` field in the existing (S)UD 
 
 To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature,value)* pairs.
 If this is not possible, the raw content is kept in a special feature named `__RAW_MISC__`
-({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.12&pattern=pattern { N [__RAW_MISC__] }" >}}).
+({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.13&pattern=pattern { N [__RAW_MISC__] }" >}}).
 Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
@@ -96,7 +96,7 @@ In order to be able to correctly output the features in the right field, **Grew*
 
 {{< input file="static/doc/conllu/test-12.conllu" >}}
 
-Requests for `Case` in FEATS: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.12&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.12&custom=62cc074a7ebf5" >}}.
+Requests for `Case` in FEATS: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.13&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.13&custom=62cc074a7ebf5" >}}.
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).

@@ -39,7 +39,7 @@ Possible cases are:
 
 When using only injective matching, we then have to design 10 rules (5 on the left and 5 on the right) for the `enlarge` package (see [below](.#solution-with-only-injective-matching)).
 
-With non-injective matching (introduced in version 2.11), the same package can be written with only two rules.
+With non-injective matching (introduced in version 1.11), the same package can be written with only two rules.
 
 ## Solution with non-injective matching
 

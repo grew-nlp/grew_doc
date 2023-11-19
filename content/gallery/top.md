@@ -15,7 +15,7 @@ There are two main ways for encoding of *fixed* construction in dependencies:
  * Single-headed structure where each item (but the first) is linked to the first item
  * Chained structure where each item (but the first) is linked to the previous item
 
-[This example](../flat) presents discuss **Grew** rules which can be used for the transformation on one encoding to the other.
+[This example](../flat) presents **Grew** rules which can be used for the transformation of one encoding to the other.
 
 ---
 

@@ -47,9 +47,9 @@ Note that the CoNLL-U format is very often used to describe dependency syntax co
 In these cases, a set of sentences is described in the same file using the same convention as above and a blank line as separator between sentences.
 It is also requires that each sentence is give a `sent_id` metadata which is unique in the corpus.
 
-## The special node at position 0
+## The anchor node at position 0
 
-In order to be able to manipulate the `root` relation (for instance, if some rewriting rule is designed to change the root of the structure), we need to add a special node at position 0 which is the source of the `root` relation.
+In order to be able to request or to manipulate the `root` relation (for instance, if some rewriting rule is designed to change the root of the structure), we need to add a special node at position 0 (called the "anchor" node) which is the source of the `root` relation.
 
 Hence, the 4 tokens example above produces the 5 nodes graph below:
 

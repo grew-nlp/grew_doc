@@ -12,24 +12,26 @@ aliases = [
 
 # Requests
 
-Requests are used in **Grew** to describe left part of rewriting rules and in **Grew-match** to describe queries to be executed on corpora.
+Requests are used in **Grew** to describe the left part of rewriting rules and in **Grew-match** to describe queries to be executed on corpora.
+
+The syntax of requests in **Grew** can be learnt using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
 
 ---
 ## Requests syntax
 
 A request is defined through 4 different kinds of *request items*.
 
- * global items (introduced by the keyword `global`) filter structures based on information about the whole graph or its metadata.
- * matching items (introduced by keyword `pattern`) describe nodes and relations that must be found in the graph.
- * [🆕 in 1.11] positive filtering (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only the ones which **follows** the additionnal graph constraints)
- * negative filtering (introduced by the keyword `without`) filter out matchings previously selected by other items (keeping only the ones which **do not follow** the additionnal graph constraints)
+ * Global items (introduced by the keyword `global`) filter structures based on information about the whole graph or its metadata.
+ * Matching items (introduced by keyword `pattern`) describe nodes and relations that must be found in the graph.
+ * Positive filtering items (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only the ones which **follows** the additional graph constraints).
+ * Negative filtering items (introduced by the keyword `without`) filter out matchings previously selected by other items (keeping only the ones which **do not follow** the additional graph constraints).
  
 The full matching on one graph process is:
 
  * Take a graph and a request as input.
- * Output a set of matchings; a *matching* being a function from nodes and edges defined in the mtaching items to nodes and edges of the host graph.
+ * Output a set of matchings; a *matching* being a function from nodes and edges defined in the matching items to nodes and edges of the host graph.
 
- 1. If the graph metadata does not satisfied one of the global items, the output is empty.
+ 1. If the graph metadata does not satisfy one of the global items, the output is empty.
  1. Else the set M is initialised as the set of matchings which satisfy the union of matching items.
  1. For each positive filtering item, remove from M the matchings which do not satisfy it.
  1. For each negative filtering item, remove from M the matchings which satisfy it.
@@ -41,8 +43,6 @@ On a corpus, the graph matching process is repeated on each graph.
  * If there is more than one filtering (`without` or `with`) items, there are all interpreted independently
  * The order of items in a request are irrelevant.
  * It there is no positive item, there is a trivial matching which is the empty function.
-
-The syntax of requests in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
 
 ---
 ## Matching and filtering items
@@ -64,7 +64,11 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * `Number` requires that the feature `Number` is defined whatever is its value (note that the same constraint can also be written `Number = *` )
  * `!Person` requires that the feature `Person` is not defined
  * `form = "être"` quotes are required when non-ASCII characters are used
- * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression (available since version `1.7.0`)
+ * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression
+
+### Anchor nodes
+⚠️ For dependency trees, an anchor node (position 0) is added to the structure (see [here](http://localhost:1313/doc/conllu/#the-anchor-node-at-position-0)).
+In ArboratorGrew, this node is not displayed but is still taken into account when searching requests or when applying rules.
 
 ### Disjunction in node clause
 ⚠️ Since version 1.14
@@ -73,12 +77,12 @@ Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47),
 (separated by the pipe symbol `|`).
 
 #### Examples
-The following clause selects either a past particle verb or an adjective {{< tryit "http://universal.grew.fr/?request=pattern { N[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
+The following clause selects either a past participle verb or an adjective {{< tryit "http://universal.grew.fr/?request=pattern { N[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
 ```grew
 N [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
 ```
 
-A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with{{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.13&request=pattern { N [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
+A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.13&request=pattern { N [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
 ```grew
 N [upos=ADV, !ExtPos]|[ExtPos=ADV]
 ```
@@ -100,7 +104,7 @@ Edges may also be named for usage in commands (in **Grew**) or in clustering (in
  * `e: N -[nsubj]-> M`
  * …
 
-Note that edge may refer to undeclared nodes, these nodes are then implicitly declared without constraint.
+Note that edges may refer to undeclared nodes, these nodes are then implicitly declared without constraint.
 For instance, the two requests below are equivalent:
 
 ```grew
@@ -115,14 +119,14 @@ pattern { N[]; M[]; N -[nsubj]-> M }
 
 ### Additional constraints
 
-These constrains do not bind new elements in the graph, but must be fulfilled (i.e. binding solutions which do not fulfil the constraints are filtered out).
+These constraints do not bind new elements in the graph, but must be fulfilled (i.e. binding solutions which do not fulfill the constraints are filtered out).
 
- * Constraints on features values:
+ * Constraints on feature values:
    * `N.lemma = M.lemma` two feature values must be equal
    * `N.lemma <> M.lemma` two feature values must be different
    * `N.lemma = "constant"` the feature `lemma` of node `N` must be the value `constant`
    * `N.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
-   * `N.lemma = lexicon.field` imposes that the feature `lemma` of node `N` must be the be present in the `field` of the `lexicon`. **NB**: this reduces also the current lexicon to the items for which `field` is equals to `N.lemma`.
+   * `N.lemma = lexicon.field` imposes that the feature `lemma` of node `N` must be the be present in the `field` of the `lexicon`. **NB**: this also reduces the current lexicon to the items for which `field` is equals to `N.lemma`.
 
  * Constraints on node ordering:
    * `N < M` the node `N` immediately precedes the node `M`
@@ -156,7 +160,7 @@ For instance, the request below searches for two different tokens, both having t
 pattern { N1 [ lemma="make" ]; N2 [ lemma="make" ] }
 ```
 
-[🆕 1.11] If the node identifier is suffixed by the symbol `$`, the injectify constraint is relaxed.
+If the node identifier is suffixed by the symbol `$`, the injectify constraint is relaxed.
 A node `N$` can be mapped to any node in the graph (either already mapped by another node of the request or not).
 
 ### Example
@@ -252,18 +256,17 @@ In the UD or SUD corpora, each sentence contains at least the two metadata `sent
 ## Some other tricks
 
 ### Equivalent nodes
-When two or more nodes are equivalent in a request (i.e. they can be exchanged without changing the semantics of the request), each occurrence of the request in a graph is reported several times (up to permutation in the sets of equivalent nodes).
-For instance, in the request below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
+When two or more nodes are equivalent in a request (i.e. they can be interchanged without altering the meaning of the request), each occurrence of the request in a graph is reported multiple times (up to permutation in the sets of equivalent nodes).
+For example, in the request below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
 
 ```grew
 pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
 ```
 
 This request is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
-but there are only 45 different occurrences, each one is reported 6 times with all permutations on `N1`, `N2` and `N3`.
-To avoid this, a constraint `N1.__id__ < N2.__id__` can be used.
-It imposes an ordering on some internal representation of the nodes and so avoid these permutations.
-**NB**: if a constraint `N1.__id__ < N2.__id__` is used with two non-equivalent nodes, the result is unspecified.
+but there are only 45 different occurrences; each one being reported 6 times with all permutations on `N1`, `N2` and `N3`.
+To avoid this, the constraint `N1.__id__ < N2.__id__` can be used, which imposes an ordering on some internal representation of the nodes and so avoids these permutations.
+**NB**: If a constraint `N1.__id__ < N2.__id__` is used with two non-equivalent nodes, the result is unspecified.
 
 
 The request below returns the 45 expected occurrences

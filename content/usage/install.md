@@ -5,9 +5,8 @@ title = "installation"
 
 # Grew installation
 
-**Grew** is implemented with the **[Ocaml](http://ocaml.org)** language.
-It can be installed on Linux or Mac OS&nbsp;X (installation on Windows should be possible, but this is untested).
-A Python binding is also available, see [here](../python).
+**Grew** is implemented using the **[Ocaml](http://ocaml.org)** language and can be installed on Linux or Mac OS&nbsp;X (installation on Windows should be possible, but this is untested).
+A Python binding is also available, which can be found [here](../python).
 
 You have to install:
 
@@ -15,9 +14,9 @@ You have to install:
  1. `ocaml` which can be installed by `opam`
  1. `grew` an related libraries which are available as `opam` packages
 
-If you just need to upgrade your installation, please consult the [Upgrade section](./#grew-upgrade).
+If you just need to upgrade your installation, please refer to the [Upgrade section](./#grew-upgrade).
 
-:warning: If you run into trouble using the instructions of this page, feel free to [open an issue on GitHub](https://github.com/grew-nlp/grew/issues/new).
+:warning: If you encounter any issues while using the instructions on this page, please do not hesitate to [open an issue on GitHub](https://github.com/grew-nlp/grew/issues/new).
 
 
 ## Step 1: Install opam
@@ -28,13 +27,13 @@ In case of trouble installing opam, please consult [**opam** installation page](
 
 
 ### Linux
-In most Linux recent distribution, version 2 can be installed from default packages.
+Opam version 2 can be installed from default packages in most recent Linux distributions.
 
 ```
 apt-get install opam
 ```
 
-The following commands installs a few other needed packages:
+The following commands install a few other necessary packages:
 
 ```
 apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
@@ -61,7 +60,8 @@ This should be 4.13 or higher.
 **Note:** There are more recent version of Ocaml (5.0 and 5.1).
 These versions are experimental and they are not supported (some Grew web service don't work with ocaml 5).
 
-Run the following command to add the grew specific opam repository:
+To add the Grew-specific opam repository, run the following command:
+
 ```
 opam remote add grew "http://opam.grew.fr"
 ```
@@ -75,22 +75,22 @@ opam install grew
 
 To verify your installation:
 
-  * Try the command `grew version`. You should have 1.13 (see [Upgrade page](../upgrade) if needed)
-  * In case of trouble, try `eval $(opam env)` and `opam install grew` again.
-  * If trouble persists, please [fill an issue](https://github.com/grew-nlp/grew/issues/new)
+  * Try running command `grew version`. Ensure that the version is 1.14 (refer to the [Upgrade page](../upgrade) if necessary)
+  * If you encounter any issues, try running `eval $(opam env)` and then reinstalling grew using `opam install grew`.
+  * If the issue persists, please [submit an issue](https://github.com/grew-nlp/grew/issues/new)
 
 **NB:** If you want to install the Python library, see [here](../python).
 
 # Grew upgrade
 
-To upgrade to a new version of **Grew**, run the commands:
+To upgrade to a newer version of **Grew**, run the following commands:
 
 ```
 opam update
 opam upgrade
 ```
 
-The latest version is 1.13. You can check your version with
+The latest version is 1.14. You can check your version with
 
 ```
 opam list | grep grew
@@ -99,7 +99,7 @@ opam list | grep grew
 you should obtain (the third line may not appear if you haven't installed the Python library backend):
 
 ```
-grew                          1.13.0      Grew system
-grewlib                       1.13.1      The main library for the Grew system
-grewpy_backend                0.5.1       The Ocaml backend for the `grewpy` Python lib
+grew                          1.14.0      Grew system
+grewlib                       1.14.1      The main library for the Grew system
+grewpy_backend                0.5.2       The Ocaml backend for the `grewpy` Python lib
 ```

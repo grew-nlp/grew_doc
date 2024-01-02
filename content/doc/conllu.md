@@ -10,7 +10,7 @@ Categories = ["Development","GoLang"]
 
 # CoNLL-U format
 
-**NB:** The doc given here correspond to **Grew** version 1.14.0 (linked to **conll** version 1.17.2). You can check your versions with `opam list | grep grew` and `opam list | grep conll`.
+**NB:** The doc given here correspond to **Grew** version 1.15 (linked to **conll** version 1.17.3). You can check your versions with `opam list | grep grew` and `opam list | grep conll`.
 
 The most common way to store dependency structures is the CoNLL format.
 Several extensions were proposed and we describe here the one which is used by **Grew**, known as [CoNLL-U](http://universaldependencies.org/format.html) format defined in the Universal Dependency project.

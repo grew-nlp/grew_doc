@@ -24,6 +24,11 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
+# :new: Version 1.15 (Jnauary 2, 2024)
+  - compatible with Ocaml 5
+  - Fix bug in Graph.to_json
+
+---
 # :new: Version 1.14 (November 11, 2023)
   - add disjunction in Node definition (see [here](../doc/request#disjunction-in-node-clause))
   - Optimise request representation

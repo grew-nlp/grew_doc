@@ -20,11 +20,10 @@ See [here to subscribe](https://sympa.inria.fr/sympa/info/grew).
 
 ## News
 
- * 🆕 **2023/11/11:** Version **1.14**. See [What's new](/whats_new/) for changes.
- 
- * **2023/09/16:** Version **1.13**.
+ * 🆕 **2024/01/02:** Version **1.15**. See [What's new](/whats_new/) for changes.
 
- 
+ * **2023/11/11:** Version **1.14**.
+
 ## A first taste of Grew
 The easiest way to try out **Grew** is to use one of the online interfaces.
 

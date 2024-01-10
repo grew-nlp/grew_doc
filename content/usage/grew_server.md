@@ -7,7 +7,9 @@ title = "grew_server"
 This documentation corresponds to the [Inria GitLab](https://gitlab.inria.fr/grew/grew_server).
 By default the doc applies to branch `master`
 
-New features available only on the Prod serveur are identified by the flag **[⚠️DEV⚠️]**
+New features available only on the Dev serveur are identified by the flag **[⚠️DEV⚠️]**
+
+Some services or features are marked with **[❌DEPRECATED❌]**, they will be removed soon and must not be used.
 
 ---
 
@@ -48,15 +50,28 @@ This service is used to initialise a new empty project. An error is returned if 
 ### `getProjects`
  * `()`
 
-This service returns the list of existing projects.
-
+This service returns the list of existing projects and some metadata for each project.
 
 The returned value is a list of dict:
 
 ```json_alt
 [
-    { "name": "project_1", "number_samples": 23, "number_sentences": 45, "number_tokens": 574, "number_trees": 79 },
-    { "name": "project_2", "number_samples": 2, "number_sentences": 4, "number_tokens": 54, "number_trees": 9 }
+  { 
+    "name": "project_1", 
+    "number_samples": 23,
+    "number_sentences": 45,
+    "number_tokens": 574,
+    "number_trees": 79,
+    "users": [ "Alice", "Bob", "Charlie" ],
+  },
+  { 
+    "name": "project_2"
+    "number_samples": 2
+    "number_sentences": 4
+    "number_tokens": 54
+    "number_trees": 9
+    "users": [ "Alice", "Bob" ]
+  }
 ]
 ```
 
@@ -78,7 +93,7 @@ An error is produced either if `project_id` does not exists or if `new_project_i
 ## Samples
 All services about samples return an error if the requested project does not exist.
 
-### `newSample`
+### `newSample` **[❌DEPRECATED❌]** &rarr; use `newSamples`
  * `(<string> project_id, <string> sample_id)`
 
 This service is used to initialise a new empty sample in a given project.
@@ -86,10 +101,9 @@ An error is returned if the sample already exists.
 
 
 ### `newSamples`
- * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids)`
+ * `(<string> project_id, <string> sample_ids)`
 
 This service is used to initialise a list of new empty samples in a given project.
-
 
 The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 If one of the given `sample_id` already exists in the project, an error is reported and the project is unchanged (no new sample is created).
@@ -106,7 +120,7 @@ This service returns the list of existing samples in a given project.
     "number_sentences": 2,
     "number_tokens": 23,
     "number_trees": 4,
-    "users": ["alice", "bob", "charlie"],
+    "users": ["alice", "bob", "charlie"],  [❌DEPRECATED: this is redondant with next line❌]
     "tree_by_user": {"charlie": 1, "bob": 2, "alice": 1}
   }
 ]
@@ -114,14 +128,14 @@ This service returns the list of existing samples in a given project.
 
 The field `tree_by_user` was added in February 2023 [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758).
 
-### `eraseSample`
+### `eraseSample` **[❌DEPRECATED❌]** &rarr; use `eraseSamples`
  * `(<string> project_id, <string> sample_id)`
 
 This service is used to remove a sample. If the sample does not exist, nothing happens.
 
 
 ### `eraseSamples`
- * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids)`
+ * `(<string> project_id, <string> sample_ids)`
 
 This service is used to remove a list of samples.
 For sample which does not exist, nothing happens.
@@ -147,11 +161,11 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 
 ## Graphs
 
-### `eraseGraph`
+### `eraseGraph` **[❌DEPRECATED❌]** &rarr; use `eraseGraphs`
  * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
 
 ### `eraseGraphs`
- * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> sent_ids, <string> user_id)`
+ * `(<string> project_id, <string> sample_id, <string> sent_ids, <string> user_id)`
 
 This service is used to remove a list of graphs, in a given `sample_id` and for a given `user_id`.
 The string `sent_ids` must be a JSON encoding of a list of strings (like `["sent_1", "sent_2"]`).
@@ -183,15 +197,15 @@ If `sent_ids` is the empty list, all graphs for the given user in the sample are
 ## Save annotations
 
 ### `saveConll`
- * `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
+ * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
  * `(<string> project_id, <string> sample_id, <file> conll_file)`
 
 ### `saveGraph`
  * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
- * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graph)`
+ * `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graph)`
 
-### `saveGraphs`
- * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graphs)`
+### `saveGraphs` **[❌DEPRECATED❌]**
+ * `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graphs)`
 
 This service saves (updates or creates) each graph described in `conll_graphs` under `user_id` name.
 The argument `conll_graphs` must be one string with all graphs separated by an empty line (as in usual CoNLL-U files for corpora).
@@ -229,9 +243,9 @@ The same service is avalaible with clustering:
  For instance: If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
 
 
-### `searchPatternInGraphs`
- * **[❌DEPRECATED❌]** `(<string> project_id, <string> user_ids, <string> pattern)`
- * **[❌DEPRECATED❌]** `(<string> project_id, <string> user_ids, <string> pattern, <string> clusters)`
+### `searchPatternInGraphs` **[❌DEPRECATED❌]** &rarr; use `searchRequestInGraphs`
+ * `(<string> project_id, <string> user_ids, <string> pattern)`
+ * `(<string> project_id, <string> user_ids, <string> pattern, <string> clusters)`
 
 ---
 
@@ -290,7 +304,7 @@ pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `user_ids` arguments.
 
-**[⚠️DEV⚠️]** For `user_ids`, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
+For `user_ids`, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
 
 The `package` parameter must be a JSON string encoding a list of rules.
 For instance:
@@ -323,8 +337,8 @@ and the output data returned by the service (with CoNLL code skipped):
 {{< json file="/static/usage/grew_server/_build/output.json" >}}  
 
 
-### `applyPackage`
- * **[⚠️DEV⚠️]** `(<string> project_id, <string> sample_ids, <string> source_user_ids, <string> target_user_id, <string> package)`
+### `applyPackage` **[❌DEPRECATED❌]**
+ * `(<string> project_id, <string> sample_ids, <string> source_user_ids, <string> target_user_id, <string> package)`
 
 See [here](#generic-arguments-usage) for the usage of `sample_ids` and `source_user_ids` arguments.
 

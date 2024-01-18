@@ -200,6 +200,18 @@ If `sent_ids` is the empty list, all graphs for the given user in the sample are
  * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
  * `(<string> project_id, <string> sample_id, <file> conll_file)`
 
+### **[⚠️DEV⚠️]** `insertConll`
+ * `(<string> project_id, <string> sample_id, <file> conll_file, <string> pivot_sent_id)`
+
+Insert data from `conll_file` in the `sample_id`. Sentences that do not already exists before are inserted right after sentence `pivot_sent_id`.
+If no sentence `pivot_sent_id` exists, new sentences are inserted at the beginning of `sample_id`.
+
+**NB** This service can be use for sentence splitting.
+If a sample containts 3 sentences with `sent_id`s: `s1`, `s2` and `s3`; the splitting of `s2` in `s2a` and `s2b` can be done with two operations:
+ 1. `insertConll` with `conll_file` containing new data for `s2a`, `s2b` and `pivot_sent_id` = `s2`
+ 1. `eraseSentence` with `sent_id` = `s2`
+
+
 ### `saveGraph`
  * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
  * `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graph)`

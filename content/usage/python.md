@@ -17,19 +17,19 @@ If you do not have any software or libraries related to **Grew** installed, plea
 
  - `opam update`
  - `opam install grewpy_backend`
- - `pip install grewpy` (`pip3` may be used instead of `pip` depending on your local installation.)
+ - `pip install grewpy` (`pip3` may be used instead of `pip` depending on your local installation).
 
 To test the installation, run the command `echo "import grewpy" | python`.
-The expected output is `connected to port: 8888` (or a higher port number if `8888` is already in use).
+The expected output is `connected to port: …` (The port number is selected dynamically).
 
 ## Upgrade
 
 1. `opam update && opam upgrade`
 2. `pip install grewpy --upgrade`
 
-The current version of `grewpy_backend` is **0.5.2**. You can verify your version by running `opam list | grep grewpy`.
+The current version of `grewpy_backend` is **0.5.3**. You can verify your version by running `opam list | grep grewpy`.
 
-The current version of `grewpy` is **0.4.3**. You can verify your version by running `pip show grewpy`.
+The current version of `grewpy` is **0.4.4**. You can verify your version by running `pip show grewpy`.
 
 
 ## Usage

@@ -18,6 +18,7 @@ Another well-known issue with rewriting is the problem of confluence.
 
 ## Two concurrent rules
 
+
 As said earlier, the Sequoia tag `V` may be converted to `AUX` or `VERB`.
 A naive way to encode this in rules is to write (file: [`aux_verb.grs`](/tutorial/05_confluence/aux_verb.grs)) the package:
 
@@ -32,7 +33,6 @@ grew transform -config sequoia -grs aux_verb.grs -strat "Onf(v)" -i frwiki_50.10
 ```
 
 Let's try it:
-
 {{< input file="static/tutorial/05_confluence/_build/onf_aux_verb.conll" >}}
 
 Well, it produced exactly one graph output by choosing (in a way which cannot be controlled) one of the possible ways to rewrite.
@@ -64,7 +64,7 @@ Of course, in our POS tags conversion example, the correct solution is to design
 
 {{< grew file="/static/tutorial/05_confluence/aux_verb_confluent.grs" >}}
 
-Here, the two rules are clearly separated: the same clause `M -[aux.pass]-> N` is used first the `pattern` part for rule `aux` and in the `without` part for the rule `verb`.
+Here, the two rules are clearly separated: the same clause `Y -[aux.pass]-> X` is used first the `pattern` part for rule `aux` and in the `without` part for the rule `verb`.
 For each occurence of `V` in the sentence, exactly one of the two rules can be used.
 
 With these two new rules, the system is confluent, and there is only one possible output.

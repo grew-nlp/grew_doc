@@ -13,5 +13,5 @@ This page is used for internal testing and does not contain any serious material
 test of syntax highlighting
 ~~~grew
 % comment
-match { N [lemma = "écouter"]; N -[suj]-> M; }
+match { X [lemma = "écouter"]; X -[suj]-> Y; }
 ~~~

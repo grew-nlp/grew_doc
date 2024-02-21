@@ -1,16 +1,16 @@
 package POS {
   rule adj {
-    pattern { N [upos=A] }
-    commands { N.upos = ADJ }
+    pattern { X [upos=A] }
+    commands { X.upos = ADJ }
   }
 
   rule noun {
-    pattern { N [upos=N] }
-    commands { N.upos = NOUN }
+    pattern { X [upos=N] }
+    commands { X.upos = NOUN }
   }
 
   rule prep {
-    pattern { N [upos=P] }
-    commands { N.upos = ADP }
+    pattern { X [upos=P] }
+    commands { X.upos = ADP }
   }
 }

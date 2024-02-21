@@ -95,7 +95,7 @@ With the following files:
 
 {{< grew file="static/usage/cli/dislocated.req" >}}
 
-**NB**: the fact the edge from `M` to `N` is given an identifier `e` will give the information about this edge in the output (see below).
+**NB**: the fact the edge from `X` to `Y` is given an identifier `e` will give the information about this edge in the output (see below).
 
 The command:
 
@@ -141,19 +141,19 @@ See the [Clustering documentation page](../../doc/clustering) for details of the
 
 With the same files as in the *without clustering* example above.
 
-With `-key`, we can cluster the results according to the `upos` of the node `N` (the dependent).
+With `-key`, we can cluster the results according to the `upos` of the node `Y` (the dependent).
 
 ```
-grew grep -request dislocated.req -key N.upos -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -key Y.upos -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key" >}}
 
 With `-whether`, we can cluster the results according to the fact that the relation is left-headed.
-We see that in two cases, the governor `M` is before `N`.
+We see that in two cases, the governor `X` is before `Y`.
 
 ```
-grew grep -request dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -whether "X << Y" -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_whether" >}}
@@ -162,15 +162,15 @@ grew grep -request dislocated.req -whether "M << N" -i fr_pud-ud-test.conllu
 Finally, several clusterings can be applied one after the other. For example
 
 ```
-grew grep -request dislocated.req -key N.upos -whether "M << N" -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -key Y.upos -whether "X << Y" -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key_whether" >}}
 
 ### Remarks:
  * any longer sequence of `-key …` or `-whether …` can be used
- * the relative order of clutering items is relevant (try `grew grep -request dislocated.req -whether "M << N" -key N.upos -i fr_pud-ud-test.conllu`)
- * it is possible to combine **Multi** mode and clustering: `grew grep -request dislocated.req -key N.upos -whether "M << N" -i en_fr_zh.json`
+ * the relative order of clutering items is relevant (try `grew grep -request dislocated.req -whether "X << Y" -key Y.upos -i fr_pud-ud-test.conllu`)
+ * it is possible to combine **Multi** mode and clustering: `grew grep -request dislocated.req -key Y.upos -whether "X << Y" -i en_fr_zh.json`
 
 ---
 # Count

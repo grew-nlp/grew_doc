@@ -304,7 +304,7 @@ Note the the `mod` relation has `ADV` as the POS for the dependant, because of t
 The Grew request corresponding to the `mod` line is: 
 
 ```grew
-pattern { GOV -[mod]-> DEP; GOV [upos="ADJ"]; DEP [ExtPos="ADV"/upos="ADV"]; }
+pattern { X -[mod]-> Y; X [upos="ADJ"]; Y [ExtPos="ADV"/upos="ADV"]; }
 ```
 
 ---
@@ -322,8 +322,8 @@ The `package` parameter must be a JSON string encoding a list of rules.
 For instance:
 
 ```
-"rule r1 { pattern { N [upos=VERB] } commands { N.upos = V } }
-rule r2 { pattern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[subj]-> M }"
+"rule r1 { pattern { X [upos=VERB] } commands { X.upos = V } }
+rule r2 { pattern { e: X -[nsubj]-> Y } commands { del_edge e; add_edge X -[subj]-> Y }"
 ```
 
 See **Grew** [command syntax](../../doc/commands) for doc about the `commands` part.
@@ -339,8 +339,8 @@ The output is the list of new graphs produced by the package applications (note 
 
 Below, an example of output after a rewrite with the two rules:
 
-* `pattern { N [upos=VERB] } commands { N.upos=V }`
-* `pattern { e: N -[nsubj]-> M } commands { del_edge e; add_edge N -[NSUBJ]-> M }`
+* `pattern { X [upos=VERB] } commands { X.upos=V }`
+* `pattern { e: X -[nsubj]-> Y } commands { del_edge e; add_edge X -[NSUBJ]-> Y }`
 
 {{< input file="static/usage/grew_server/_build/output.conllu" >}}
 

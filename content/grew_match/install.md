@@ -10,6 +10,8 @@ menu = "main"
 
 # Local installation of Grew-match
 
+This page is outdated. A new page will be provided later.
+
 **Grew-match** is available [online](http://match.grew.fr) on a set of corpora (UD, SUD, Parseme…).
 If you want to use **Grew-match** on your own corpus, you have to install it locally, following the instructions on this page.
 

@@ -1,8 +1,8 @@
 package S {
-  rule B2A { pattern { e: N -[B]-> M } commands { del_edge e; add_edge N -[A]-> M } }
-  rule B2C { pattern { e: N -[B]-> M } commands { del_edge e; add_edge N -[C]-> M } }
-  rule C2B { pattern { e: N -[C]-> M } commands { del_edge e; add_edge N -[B]-> M } }
-  rule C2D { pattern { e: N -[C]-> M } commands { del_edge e; add_edge N -[D]-> M } }
+  rule B2A { pattern { e: X -[B]-> Y } commands { del_edge e; add_edge X -[A]-> Y } }
+  rule B2C { pattern { e: X -[B]-> Y } commands { del_edge e; add_edge X -[C]-> Y } }
+  rule C2B { pattern { e: X -[C]-> Y } commands { del_edge e; add_edge X -[B]-> Y } }
+  rule C2D { pattern { e: X -[C]-> Y } commands { del_edge e; add_edge X -[D]-> Y } }
 }
 
 strat iter { Iter (S) }

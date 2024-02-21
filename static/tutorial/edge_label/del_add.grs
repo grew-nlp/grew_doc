@@ -1,7 +1,7 @@
 rule del_add {
-  pattern { GOV -[obj:lvc]-> DEP } 
+  pattern { X -[obj:lvc]-> Y } 
   commands { 
-    del_edge GOV -[obj:lvc]-> DEP;      % remove the edge matched by the request
-    add_edge GOV -[comp:obj@lvc]-> DEP  % add a new edge with the new label
+    del_edge X -[obj:lvc]-> Y;      % remove the edge matched by the request
+    add_edge X -[comp:obj@lvc]-> Y  % add a new edge with the new label
   }
 }

@@ -35,10 +35,10 @@ The node content can be in one of the two following forms:
 The string form is used when the node does not have a complex structure. In this case, the given string is interpreted as a feature structure with only one feature named `label`. Hence we have an equivalence between these two lines:
 
 ```json_alt
-"nodes": { "N": "A" }
+"nodes": { "X": "A" }
 ```
 ```json_alt
-"nodes": { "N": { "label" : "A" } }
+"nodes": { "X": { "label" : "A" } }
 ```
 
 

@@ -56,7 +56,7 @@ We can propose the rule (file: [`aux_1.grs`](/tutorial/04_termination/aux_1.grs)
 
 {{< grew file="/static/tutorial/04_termination/aux_1.grs" >}}
 
-but this rule will also produce an error if it is iterated: after the first application, the request `{ M -[aux.pass]-> N }` is still present in the graph and the rules can be applied again and again.
+but this rule will also produce an error if it is iterated: after the first application, the request `{ X -[aux.pass]-> Y }` is still present in the graph and the rules can be applied again and again.
 
 ### Solution 1: make a stricter request
 

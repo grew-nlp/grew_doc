@@ -1,4 +1,4 @@
 rule noun {
-  pattern { N [upos=N] }
-  commands { N.upos = NOUN }
+  pattern { X [upos=N] }
+  commands { X.upos = NOUN }
 }

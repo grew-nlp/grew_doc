@@ -50,10 +50,10 @@ Matching and filtering items both follow the same syntax.
 They are described by a list of clauses: node clauses, edge clauses and additional constraints
 
 ### Node clauses
-In a *node clause*, a node is described by an identifier (`N` in the example below) and some constraints on its feature structure.
+In a *node clause*, a node is described by an identifier (`X` in the example below) and some constraints on its feature structure.
 
 ```grew
-N [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, form = "être", lemma = re"s.*" ]
+X [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, form = "être", lemma = re"s.*" ]
 ```
 
 The clause above illustrates the syntax of constraint that can be expressed, in turn:
@@ -77,42 +77,42 @@ Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47),
 (separated by the pipe symbol `|`).
 
 #### Examples
-The following clause selects either a past participle verb or an adjective {{< tryit "http://universal.grew.fr/?request=pattern { N[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
+The following clause selects either a past participle verb or an adjective {{< tryit "http://universal.grew.fr/?request=pattern { X[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
 ```grew
-N [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
+X [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
 ```
 
-A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.13&request=pattern { N [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
+A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.13&request=pattern { X [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
 ```grew
-N [upos=ADV, !ExtPos]|[ExtPos=ADV]
+X [upos=ADV, !ExtPos]|[ExtPos=ADV]
 ```
 
 
 ### Edge clauses
 
-All *edge clauses* below require the existence of an edge between the node selected by `N` and the node selected by `M`, eventually with additional constraints:
+All *edge clauses* below require the existence of an edge between the node selected by `X` and the node selected by `Y`, eventually with additional constraints:
 
- * `N -> M`: no additional constrains
- * `N -[nsubj]-> M`: the edge label is `nsubj`
- * `N -[nsubj|obj]-> M`: the edge label is either `nsubj` or `obj`
- * `N -[^nsubj|obj]-> M`: the edge label is different from `nsubj` and `obj`
- * `N -[re".*subj"]-> M`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
+ * `X -> Y`: no additional constrains
+ * `X -[nsubj]-> Y`: the edge label is `nsubj`
+ * `X -[nsubj|obj]-> Y`: the edge label is either `nsubj` or `obj`
+ * `X -[^nsubj|obj]-> Y`: the edge label is different from `nsubj` and `obj`
+ * `X -[re".*subj"]-> Y`: the edge follows the regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
 
 Edges may also be named for usage in commands (in **Grew**) or in clustering (in **Grew-match**) with an identifier:
 
- * `e: N -> M`
- * `e: N -[nsubj]-> M`
+ * `e: X -> Y`
+ * `e: X -[nsubj]-> Y`
  * …
 
 Note that edges may refer to undeclared nodes, these nodes are then implicitly declared without constraint.
 For instance, the two requests below are equivalent:
 
 ```grew
-pattern { N -[nsubj]-> M }
+pattern { X -[nsubj]-> Y }
 ```
 
 ```grew
-pattern { N[]; M[]; N -[nsubj]-> M }
+pattern { X[]; Y[]; X -[nsubj]-> Y }
 ```
 
 
@@ -122,19 +122,19 @@ pattern { N[]; M[]; N -[nsubj]-> M }
 These constraints do not bind new elements in the graph, but must be fulfilled (i.e. binding solutions which do not fulfill the constraints are filtered out).
 
  * Constraints on feature values:
-   * `N.lemma = M.lemma` two feature values must be equal
-   * `N.lemma <> M.lemma` two feature values must be different
-   * `N.lemma = "constant"` the feature `lemma` of node `N` must be the value `constant`
-   * `N.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
-   * `N.lemma = lexicon.field` imposes that the feature `lemma` of node `N` must be the be present in the `field` of the `lexicon`. **NB**: this also reduces the current lexicon to the items for which `field` is equals to `N.lemma`.
+   * `X.lemma = Y.lemma` two feature values must be equal
+   * `X.lemma <> Y.lemma` two feature values must be different
+   * `X.lemma = "constant"` the feature `lemma` of node `X` must be the value `constant`
+   * `X.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
+   * `X.lemma = lexicon.field` imposes that the feature `lemma` of node `X` must be the be present in the `field` of the `lexicon`. **NB**: this also reduces the current lexicon to the items for which `field` is equals to `X.lemma`.
 
  * Constraints on node ordering:
-   * `N < M` the node `N` immediately precedes the node `M`
-   * `N << M` the node `N` precedes the node `M`
+   * `X < Y` the node `X` immediately precedes the node `Y`
+   * `X << Y` the node `X` precedes the node `Y`
 
  * Constraints on in or out edges on bound nodes:
-   * `* -[nsubj]-> M` there is an incoming edge with label `nsubj` with target `M` (**NB**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not))
-   * `M -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `M` (**NB**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not))
+   * `* -[nsubj]-> Y` there is an incoming edge with label `nsubj` with target `Y` (**NB**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not))
+   * `Y -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `Y` (**NB**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not))
 
  * Constraints on edge labels:
    * `e1.label = e2.label` the labels of the two edges `e1` and `e2` are equal
@@ -146,7 +146,7 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
    * `e1 <> e2` the two edges are disjoint
 
  * Position of a node with respect to an edge
-   * `N << e` the node `N` is strictly included between source and target of edge `e`.
+   * `X << e` the node `X` is strictly included between the source and the target of edge `e`.
 
 ---
 
@@ -154,35 +154,35 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
 
 By default the matching of nodes is injective, this means that two different nodes in the request are mapped to two different nodes in the graph.
 
-For instance, the request below searches for two different tokens, both having the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.13&pattern=pattern%20{%20N1%20[%20lemma=%22make%22%20];%20N2%20[%20lemma=%22make%22%20]%20}" >}}
+For instance, the request below searches for two different tokens, both having the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.13&pattern=pattern%20{%20X1%20[%20lemma=%22make%22%20];%20X2%20[%20lemma=%22make%22%20]%20}" >}}
 
 ```grew
-pattern { N1 [ lemma="make" ]; N2 [ lemma="make" ] }
+pattern { X1 [ lemma="make" ]; X2 [ lemma="make" ] }
 ```
 
 If the node identifier is suffixed by the symbol `$`, the injectify constraint is relaxed.
-A node `N$` can be mapped to any node in the graph (either already mapped by another node of the request or not).
+A node `X$` can be mapped to any node in the graph (either already mapped by another node of the request or not).
 
 ### Example
 For a more complex example with non-injective matching, you can see [this example](../../gallery/span).
 
 In AMR graphs, if we look for a predicate (with `concept=judge-01` in the example) with two arguments `ARG0` and `ARG1`, there are two dictinct cases:
- * two different nodes `A0` and `A1` are respectively `ARG0` and `ARG1` &rarr; 1 occurence {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20N%20[concept=%22judge-01%22];%20N%20-[ARG0]-%3E%20A0;%20N%20-[ARG1]-%3E%20A1;%20}" >}}
+ * two different nodes `A0` and `A1` are respectively `ARG0` and `ARG1` &rarr; 1 occurence {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20X%20[concept=%22judge-01%22];%20X%20-[ARG0]-%3E%20A0;%20X%20-[ARG1]-%3E%20A1;%20}" >}}
 
 ```grew
-pattern { N [concept="judge-01"]; N -[ARG0]-> A0; N -[ARG1]-> A1; }
+pattern { X [concept="judge-01"]; X -[ARG0]-> A0; X -[ARG1]-> A1; }
 ```
- * the same node `A`is both `ARG0` and `ARG1` &rarr; 4 occurences {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20N%20[concept=%22judge-01%22];%20N%20-[ARG0]-%3E%20A;%20N%20-[ARG1]-%3E%20A;%20}" >}}
+ * the same node `A`is both `ARG0` and `ARG1` &rarr; 4 occurences {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20X%20[concept=%22judge-01%22];%20X%20-[ARG0]-%3E%20A;%20X%20-[ARG1]-%3E%20A;%20}" >}}
 
 ```grew
-pattern { N [concept="judge-01"]; N -[ARG0]-> A; N -[ARG1]-> A; }
+pattern { X [concept="judge-01"]; X -[ARG0]-> A; X -[ARG1]-> A; }
 ```
 
-If we do not require the injectivity on one of the two arguments, then both cases above are returned &rarr; 5 occurences  {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20N%20[concept=%22judge-01%22];%20N%20-[ARG0]-%3E%20A;%20N%20-[ARG1]-%3E%20B$;%20}" >}}
+If we do not require the injectivity on one of the two arguments, then both cases above are returned &rarr; 5 occurences  {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20X%20[concept=%22judge-01%22];%20X%20-[ARG0]-%3E%20A;%20X%20-[ARG1]-%3E%20B$;%20}" >}}
 
 
 ```grew
-pattern { N [concept="judge-01"]; N -[ARG0]-> A; N -[ARG1]-> B$; }
+pattern { X [concept="judge-01"]; X -[ARG0]-> A; X -[ARG1]-> B$; }
 ```
 
 
@@ -191,8 +191,8 @@ pattern { N [concept="judge-01"]; N -[ARG0]-> A; N -[ARG1]-> B$; }
 
 As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
 
- * `N -[1=subj]-> M` the edge must match the edge feature constraints (more examples below).
- * [Since version `1.9.1`] `N -[2="зад"]-> M` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.13&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
+ * `X -[1=subj]-> Y` the edge must match the edge feature constraints (more examples below).
+ * [Since version `1.9.1`] `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.13&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 
 
@@ -228,7 +228,7 @@ We describe below 4 of the constraints available.
 For each one, its negation is available by changing the `is_` prefix by the `is_not_` prefix.
 
   * `is_cyclic`: the graph satisfied this constraint if and only if it contains a cycle.
-  A cycle is a list of nodes `N1`, `N2` … `N(k-1)`, `Nk` such that there are edges `N1 -> N2`, `N2 -> N3`, `N(k-1) -> Nk`, `Nk -> N1`.
+  A cycle is a list of nodes `X1`, `X2` … `X(k-1)`, `Xk` such that there are edges `X1 -> X2`, `X2 -> X3`, `X(k-1) -> Xk`, `Xk -> X1`.
   In graph theory, a non cyclic graph is also called a Directed Acyclic Graph (DAG).
 
   * `is_forest`: the graph satisfied this constraint if and only it is acyclic and if there are no couples of edges with the same target.
@@ -257,16 +257,16 @@ In the UD or SUD corpora, each sentence contains at least the two metadata `sent
 
 ### Equivalent nodes
 When two or more nodes are equivalent in a request (i.e. they can be interchanged without altering the meaning of the request), each occurrence of the request in a graph is reported multiple times (up to permutation in the sets of equivalent nodes).
-For example, in the request below, the 3 nodes `N1`, `N2` and `N3` are equivalent.
+For example, in the request below, the 3 nodes `X1`, `X2` and `X3` are equivalent.
 
 ```grew
-pattern { N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N; }
+pattern { X1 -[ARG1]-> X; X2 -[ARG1]-> X; X3 -[ARG1]-> X; }
 ```
 
 This request is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
-but there are only 45 different occurrences; each one being reported 6 times with all permutations on `N1`, `N2` and `N3`.
-To avoid this, the constraint `N1.__id__ < N2.__id__` can be used, which imposes an ordering on some internal representation of the nodes and so avoids these permutations.
-**NB**: If a constraint `N1.__id__ < N2.__id__` is used with two non-equivalent nodes, the result is unspecified.
+but there are only 45 different occurrences; each one being reported 6 times with all permutations on `X1`, `X2` and `X3`.
+To avoid this, the constraint `X1.__id__ < X2.__id__` can be used, which imposes an ordering on some internal representation of the nodes and so avoids these permutations.
+**NB**: If a constraint `X1.__id__ < X2.__id__` is used with two non-equivalent nodes, the result is unspecified.
 
 
 The request below returns the 45 expected occurrences
@@ -274,7 +274,7 @@ The request below returns the 45 expected occurrences
 
 ```grew
 pattern {
-  N1 -[ARG1]-> N; N2 -[ARG1]-> N; N3 -[ARG1]-> N;
-  N1.__id__ < N2.__id__; N2.__id__ < N3.__id__;
+  X1 -[ARG1]-> X; X2 -[ARG1]-> X; X3 -[ARG1]-> X;
+  X1.__id__ < X2.__id__; X2.__id__ < X3.__id__;
 }
 ```

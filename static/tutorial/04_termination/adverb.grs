@@ -1,4 +1,4 @@
 rule adv {
-  pattern { N [upos=ADV] }
-  commands { N.upos = ADV }
+  pattern { X [upos=ADV] }
+  commands { X.upos = ADV }
 }

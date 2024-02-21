@@ -39,9 +39,9 @@ We explain here how **Grew** deals with the 10 fields if CoNLL-U files:
 
 A few examples of usage in **Grew** requests:
 
-  * matching the word _is_ &rarr; `pattern { N [form="is"] }`
-  * matching the lemma _be_ &rarr;  `pattern { N [lemma="be"] }`
-  * matching the Part Of Speech _VERB_ &rarr; `pattern { N [upos=VERB] }`
+  * matching the word _is_ &rarr; `pattern { X [form="is"] }`
+  * matching the lemma _be_ &rarr;  `pattern { X [lemma="be"] }`
+  * matching the Part Of Speech _VERB_ &rarr; `pattern { X [upos=VERB] }`
 
 Note that the CoNLL-U format is very often used to describe dependency syntax corpora.
 In these cases, a set of sentences is described in the same file using the same convention as above and a blank line as separator between sentences.
@@ -56,7 +56,7 @@ Hence, the 4 tokens example above produces the 5 nodes graph below:
 ![Dependency structure](/doc/conllu/_build/n01118003.svg)
 
 This special node has only the `form` feature defined to be `__0__` and no other feature. In a **Grew** request, to avoid the special node the be matched, one can add a `upos` contraint.
-For instance, with the request `pattern { N [] }` all the 5 nodes of the above graph can be matched, whereas with the request `pattern { N [upos] }` only the 4 nodes associated with real tokens can be matched.
+For instance, with the request `pattern { X [] }` all the 5 nodes of the above graph can be matched, whereas with the request `pattern { X [upos] }` only the 4 nodes associated with real tokens can be matched.
 
 ## Layered features
 
@@ -68,8 +68,8 @@ Unfortunately, the bracket notation in the feature value name is in conflict wit
 In **Grew**, the bracket notation is replaced by an alternative one with a double underscore: The (S)UD feature name `Number[psor]` is written `Number__psor`.
 For instance:
 
- * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { N [Number__psor=Plur] }` {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.13&pattern=pattern{N [Number__psor=Plur] }" >}}
- * to udate the feature `Gender[psor]` to `Fem` on node `N`, use the command `N.Gender__psor = Fem`
+ * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { X [Number__psor=Plur] }` {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.13&pattern=pattern{X [Number__psor=Plur] }" >}}
+ * to udate the feature `Gender[psor]` to `Fem` on node `X`, use the command `X.Gender__psor = Fem`
 
 ## How the `MISC` field is handled by **Grew**?
 
@@ -82,7 +82,7 @@ There are two main problems to deal with the `MISC` field in the existing (S)UD 
 
 To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature,value)* pairs.
 If this is not possible, the raw content is kept in a special feature named `__RAW_MISC__`
-({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.13&pattern=pattern { N [__RAW_MISC__] }" >}}).
+({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.13&pattern=pattern { X [__RAW_MISC__] }" >}}).
 Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).

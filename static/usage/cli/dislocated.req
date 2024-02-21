@@ -1,1 +1,1 @@
-pattern { e: M -[dislocated]-> N }
+pattern { e: X -[dislocated]-> Y }

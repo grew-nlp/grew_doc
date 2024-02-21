@@ -32,7 +32,7 @@ Once you have selected an instance,
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
- * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.13&pattern=pattern { GOV -[nsubj]-> DEP }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.28% of the corpus`, This means that the first 1000 items were found in 5.28% of the 16,342 sentences of the **UD_French-GSD** corpus.
+ * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.13&pattern=pattern { X -[nsubj]-> Y }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.09% of the corpus`, This means that the first 1000 items were found in 5.09% of the 16,342 sentences of the **UD_French-GSD** corpus.
 )
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
@@ -85,8 +85,8 @@ The fields 2, 3, 4 and 5 of CoNLL-U files are considered as features with the fo
 
 For instance:
 
-  * searching for the word _is_ &rarr; `pattern { N [form="is"] }`
-  * searching for the lemma _be_ &rarr;  `pattern { N [lemma="be"] }`
+  * searching for the word _is_ &rarr; `pattern { X [form="is"] }`
+  * searching for the lemma _be_ &rarr;  `pattern { X [lemma="be"] }`
 
 For other features, defined in CoNLL-U fields `FEATS` (col 6) and `MISC` (col 10), the name of the feature can be used directly with exceptions:
   * for layered features: see [here](../../doc/conllu#layered-features)
@@ -96,17 +96,17 @@ For other features, defined in CoNLL-U fields `FEATS` (col 6) and `MISC` (col 10
 ---
 
 ## Enhanced dependencies
-In the UD framework, a few corpora are also provided with another annotation layer EUD ([Enhanced dependencies](https://universaldependencies.org/u/overview/enhanced-syntax.html)).
-For these corpora, a switch button is available (above the text area) where the user can chose between UD (only basic UD syntactic relations) and EUD (all relations, basic and enhanced).
+In the UD framework, a few corpora are also provided with another annotation layer ([Enhanced dependencies](https://universaldependencies.org/u/overview/enhanced-syntax.html)).
+For these corpora, they are available by default with the enhanced layer and another corpora (with prefix `bUD`, for "basic" UD) is also available
 
-If EUD is selected, enhanced dependencies are displayed in blue below the sentence.
+If the default treebank is selected, enhanced dependencies are displayed in blue below the sentence.
 In the pattern, an enhanced dependency can be searched with the prefix `E:`.
-For instance, the pattern below {{< tryit "http://match.grew.fr/?corpus=UD_English-EWT@2.13&pattern=pattern { N -[E:obj]-> M }%0Dwithout { N -[obj]-> M }&eud=yes" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
+For instance, the pattern below {{< tryit "http://match.grew.fr/?corpus=UD_English-EWT@2.13&pattern=pattern { X -[E:obj]-> Y }%0Dwithout { X -[obj]-> Y }" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
 :
 
 ```grew
-pattern { N -[E:obj]-> M }
-without { N -[obj]-> M }
+pattern { X -[E:obj]-> Y }
+without { X -[obj]-> Y }
 ```  
 
 

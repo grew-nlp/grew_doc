@@ -1,5 +1,5 @@
 rule aux_3 {
-  pattern { M -[aux.pass]-> N }
-  without { N [upos=AUX] }
-  commands { N.upos = AUX }
+  pattern { X -[aux.pass]-> Y }
+  without { Y [upos=AUX] }
+  commands { Y.upos = AUX }
 }

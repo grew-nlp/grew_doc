@@ -1,19 +1,19 @@
 package iter_package {
   rule A1 {
-    pattern { N[label="A"] }
-    commands { N.label="A1" }
+    pattern { X[label="A"] }
+    commands { X.label="A1" }
   }
   rule A2 {
-    pattern { N[label="A"] }
-    commands { N.label="A2" }
+    pattern { X[label="A"] }
+    commands { X.label="A2" }
   }
   rule B1 {
-    pattern { N[label="B"] }
-    commands { N.label="B1" }
+    pattern { X[label="B"] }
+    commands { X.label="B1" }
   }
   rule B2 {
-    pattern { N[label="B"] }
-    commands { N.label="B2" }
+    pattern { X[label="B"] }
+    commands { X.label="B2" }
   }
 }
 

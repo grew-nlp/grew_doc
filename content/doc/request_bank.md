@@ -38,21 +38,21 @@ As JSON does not support multiline strings, a multiline request is given as a li
 A few examples of such JSON encodings of request:
 
 ```json_alt
-"pattern { N[upos=VERB] }"
+"pattern { X[upos=VERB] }"
 ```
 
 ```json_alt
-["pattern { N[upos=VERB] }"]
+["pattern { X[upos=VERB] }"]
 ```
 
 ```json_alt
-["pattern {", "  N[upos=VERB]", "}"]
+["pattern {", "  X[upos=VERB]", "}"]
 ```
 
-The first two examples just encode the one line request `pattern { N[upos=VERB] }` and the last one a multiline equivalent request:
+The first two examples just encode the one line request `pattern { X[upos=VERB] }` and the last one a multiline equivalent request:
 ```grew
 pattern { 
-  N[upos=VERB] 
+  X[upos=VERB] 
 }
 ```
 
@@ -63,7 +63,7 @@ A request is then encoded as a list of one-key dictionaries, this key can be: `p
 The example above becomes:
 
 ```json_alt
-[{"pattern": ["N [upos = VERB]"] }]
+[{"pattern": ["X [upos = VERB]"] }]
 ```
 
 ### A more complex example

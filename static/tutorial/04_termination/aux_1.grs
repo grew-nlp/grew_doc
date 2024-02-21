@@ -1,4 +1,4 @@
 rule aux_1 {
-  pattern { M -[aux.pass]-> N }
-  commands { N.upos = AUX }
+  pattern { X -[aux.pass]-> Y }
+  commands { Y.upos = AUX }
 }

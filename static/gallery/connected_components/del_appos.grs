@@ -1,2 +1,2 @@
-rule r { pattern { e: M -[appos]-> N} commands {del_edge e }}
+rule r { pattern { e: X -[appos]-> Y} commands {del_edge e }}
 strat main { Onf (r) }

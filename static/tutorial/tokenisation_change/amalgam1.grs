@@ -1,9 +1,9 @@
 rule amalgam {
-  pattern { N [form = "du", upos = "P+D"] }
+  pattern { X [form = "du", upos = "P+D"] }
   commands {
-    add_node D :> N;    % Create a new node called `D` and place it just after `N`
-    N.form = "de";      % Change the form of `N` to `de`
-    N.upos = ADP;       % Set the `ADP` tag for the preposition "de"
+    add_node D :> X;    % Create a new node called `D` and place it just after `X`
+    X.form = "de";      % Change the form of `X` to `de`
+    X.upos = ADP;       % Set the `ADP` tag for the preposition "de"
     D.form = "le";      % Add the form feature of `D` to `le`
     D.upos = DET;       % Set the `DET` tag for the determiner "le"
   }

@@ -41,8 +41,8 @@ check_reply (reply, None)
 
 sample_ids = "[\"single\"]"
 user_ids = '{ "one": ["ud"] }'
-rule1 = "rule r1 { pattern { N [upos=VERB] } commands { N.upos=V } }"
-rule2 = "rule r2 { pattern { e: N -[subj]-> M } commands { del_edge e; add_edge N -[SUBJ]-> M } }"
+rule1 = "rule r1 { pattern { X [upos=VERB] } commands { X.upos=V } }"
+rule2 = "rule r2 { pattern { e: X -[subj]-> Y } commands { del_edge e; add_edge X -[SUBJ]-> Y } }"
 package = "\n".join ([rule1, rule2])
 
 print('========== [tryPacakge]')

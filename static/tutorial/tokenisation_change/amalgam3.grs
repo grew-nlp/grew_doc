@@ -1,17 +1,17 @@
 rule amalgam {
   pattern {
-    N [form = "du", upos = "P+D"];    % match the amalgam word "du";
-    N -[obj.p]-> M;                   % match the node linked to "du" with the `obj.p` relation
+    X [form = "du", upos = "P+D"];    % match the amalgam word "du";
+    X -[obj.p]-> Y;                   % match the node linked to "du" with the `obj.p` relation
   }
   commands {
-    add_node D :> N;        % Create a new node called `D` and place it just after `N`
-    N.form = "de";          % Change the form of `N` to `de`
-    N.upos = ADP;           % Set the `ADP` tag for the preposition "de"
+    add_node D :> X;        % Create a new node called `D` and place it just after `X`
+    X.form = "de";          % Change the form of `X` to `de`
+    X.upos = ADP;           % Set the `ADP` tag for the preposition "de"
     D.form = "le";          % Add the form feature of `D` to `le`
     D.upos = DET;           % Set the `DET` tag for the determiner "le"
-    add_edge M -[det]-> D;  % Add the dependency linked to the new node `D`
-    N.wordform="de";        % The wordform of `N` is identical to the from
-    N.textform="du";        % [1/2] textform "du" and "_" on two consecutive tokens encode MWT lines
+    add_edge Y -[det]-> D;  % Add the dependency linked to the new node `D`
+    X.wordform="de";        % The wordform of `X` is identical to the from
+    X.textform="du";        % [1/2] textform "du" and "_" on two consecutive tokens encode MWT lines
     D.textform="_";         % [2/2] textform "du" and "_" on two consecutive tokens encode MWT lines 
   }
 }

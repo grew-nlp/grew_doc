@@ -79,7 +79,7 @@ the output contains two graphs, one with the first noun *photos* with the new ta
 
 {{< input file="static/tutorial/02_first_rule/_build/one_step_noun.conll" >}}
 
-In fact, the result of the application of a rule on a graph is a set of graphs, one for each occurence of the request found in the input graph. This set is then empty if the the request is not found (like `pattern { N [upos=P] }`) or contains two graphs if the request is found twice (like `pattern { N [upos=N] }`).
+In fact, the result of the application of a rule on a graph is a set of graphs, one for each occurence of the request found in the input graph. This set is then empty if the the request is not found (like `pattern { X [upos=P] }`) or contains two graphs if the request is found twice (like `pattern { X [upos=N] }`).
 To iterate the application of a rule, one has to use the strategy `Onf`.
 
 ## The strategy `Onf`

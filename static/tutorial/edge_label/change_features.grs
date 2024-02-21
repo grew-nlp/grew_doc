@@ -1,5 +1,5 @@
 rule change_features {
-  pattern { e: GOV -[obj:lvc]-> DEP } 
+  pattern { e: X -[obj:lvc]-> Y } 
   commands {
     e.1 = comp;    % change the edge feature '1' 
     e.2 = obj;     % change the edge feature '2'

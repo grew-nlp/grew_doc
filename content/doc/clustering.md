@@ -52,15 +52,14 @@ As suggested in [#28](https://github.com/grew-nlp/grew/issues/28), in case of co
  * `X.feat[gap=g, min=a, max=b]` will cluster the values between a and b by pack of size g, with two packs for all values < a and > b.
 
 #### Example
-There are not many examples of numerical features in the current version of UD.
-The following example is not linguistically pertinent but it shows the mechanism.
+The Naija treebank has a version with prosodic information.
 
-{{< tryit "http://universal.grew.fr/?corpus=UD_Naija-NSC@2.13&request=pattern { X [AlignBegin] }&clustering=X.AlignBegin[gap=1000, min=10000, max=20000]" >}} on `UD_Naija-NSC` with clustering key `X.AlignBegin[gap=1000, min=10000, max=20000]` and request:
+{{< tryit "https://naija.grew.fr/?corpus=SUD_Naija-NSC-prosody&request=pattern { S [SylForm = \"wO~\", Duration] }&clustering=S.Duration[gap=100]" >}} on `UD_Naija-NSC` with clustering key `S.Duration[gap=100]` and request:
 ```grew
-pattern { X [AlignBegin] }
+pattern { S [SylForm = "wO~", Duration] }
 ```
 
-There are (up to) 12 clusters, named `]-∞, 10000[`, `[10000, 11000[`, … `[19000, 20000[` and `[20000, +∞[`.
+There are 8 clusters, named `[0, 100[`, `[100, 200[`, … `[700, 800[`.
 
 ### Clustering on successive feature names
 The feature name [`ExtPos`](https://surfacesyntacticud.github.io/guidelines/u/extpos/) is mainly used when the *external POS* is different from the regular `upos`.

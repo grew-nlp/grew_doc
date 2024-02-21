@@ -29,7 +29,7 @@ The expected output is `connected to port: …` (The port number is selected dyn
 
 The current version of `grewpy_backend` is **0.5.3**. You can verify your version by running `opam list | grep grewpy`.
 
-The current version of `grewpy` is **0.4.4**. You can verify your version by running `pip show grewpy`.
+The current version of `grewpy` is **0.4.5**. You can verify your version by running `pip show grewpy`.
 
 
 ## Usage

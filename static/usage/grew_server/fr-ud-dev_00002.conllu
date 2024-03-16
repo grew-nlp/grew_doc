@@ -1,4 +1,5 @@
 # sent_id = fr-ud-dev_00002
+# user_id = ud
 # text = Les études durent six ans mais leur contenu diffère donc selon les Facultés.
 1	Les	le	DET	_	Definite=Def|Number=Plur|PronType=Art	2	det	_	wordform=les
 2	études	étude	NOUN	_	Gender=Fem|Number=Plur|Shared=No	3	subj	_	_

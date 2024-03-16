@@ -7,8 +7,8 @@ ping ()
 
 project_id = "__gst__package"
 sample_id = "single"
+sample_ids = f'["{sample_id}"]'
 conll_file = "fr-ud-dev_00002.conllu"
-user_id = "ud"
 
 print ('========== [eraseProject]')
 print ('       ... project_id -> ' + project_id)
@@ -20,21 +20,20 @@ print ('       ... project_id -> ' + project_id)
 reply = send_request ('newProject', data={'project_id': project_id})
 check_reply (reply, None)
 
-print ('========== [newSample]')
+print ('========== [newSamples]')
 print ('       ... project_id -> ' + project_id)
-print ('       ... sample_id -> ' + sample_id)
-reply = send_request ('newSample', data={'project_id': project_id, 'sample_id': sample_id })
+print ('       ... sample_ids -> ' + sample_ids)
+reply = send_request ('newSamples', data={'project_id': project_id, 'sample_ids': sample_ids })
 check_reply (reply, None)
 
 print ('========== [saveConll] ')
 print ('       ... project_id -> ' + project_id)
 print ('       ... sample_id -> ' + sample_id)
-print ('       ... user_id -> ' + user_id)
 print ('       ... conll_file -> ' + conll_file)
 with open(conll_file, 'rb') as f:
     reply = send_request (
         'saveConll',
-        data = {'project_id': project_id, 'sample_id': sample_id, 'user_id': user_id },
+        data = {'project_id': project_id, 'sample_id': sample_id },
         files={'conll_file': f},
     )
 check_reply (reply, None)

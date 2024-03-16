@@ -1,17 +1,15 @@
 import pprint
 
-import grew
-grew.init()
+from grewpy import Graph, GRS
 
-g = grew.graph('''graph {
-  W1 [form="le", lemma="le", cat=DET];
-  W2 [form="garçon", lemma="garçon", cat=NOUN];
-  W3 [form="voit", lemma="voir", cat=VERB];
-  W4 [form="la", lemma="le", cat=DET];
-  W5 [form="maison", lemma="maison", cat=NOUN];
-  }''')
+graph = Graph("""1\tle\tle\tDET\t_\t_\t2\tdet\t_\t_
+2\tgarçon\tgarçon\tNOUN\t_\t_\t3\tsubj\t_\t_
+3\tvoit\tvoir\tVERB\t_\t_\t0\troot\t_\t_
+4\tla\tle\tDET\t_\t_\t5\tdet\t_\t_
+5\tmaison\tmaison\tNOUN\t_\t_\t3\tcomp:obj\t_\t_
+""")
 
-r = grew.grs('''
+rule = GRS("""
 rule set_gender {
   pattern { N [upos=NOUN, !Gender, lemma=lex.noun] }
   commands { N.Gender = lex.Gender }
@@ -21,10 +19,9 @@ noun\tGender
 %-------------
 garçon\tMasc
 maison\tFem
-maison\tMasc
 #END
-''')
+""")
 
-output = grew.run(r, g, 'Iter(set_gender)')
+output = rule.apply(graph, strat = "Onf(set_gender)")
 
-pprint.pprint (output)
+print (output.to_conll())

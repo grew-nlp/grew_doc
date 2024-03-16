@@ -1,0 +1,15 @@
+rule sh2c {
+  pattern {
+    H -[fixed]-> N1;
+    e:H -[fixed]-> N2;
+    N1 < N2;
+    }
+  without {
+    H -[fixed]-> N3;
+    N2 < N3;
+  }
+  commands {
+    del_edge e;
+    add_edge N1 -[fixed]-> N2;
+  }
+}

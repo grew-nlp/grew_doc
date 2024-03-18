@@ -377,9 +377,9 @@ If the `prune` integer argument is set as `n`, only the subset of unambiguous st
 With a corpus containing the following sentence:
 
 ```
-1	moule	moule	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
-2	moule	moule	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
-3	moule	moule	NOUN	_	Gender=Masc|Number=Sing	_	_	_	_
+1	espace	espace	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
+2	espace	espace	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
+3	espace	espace	NOUN	_	Gender=Masc|Number=Sing	_	_	_	_
 4	maison	maison	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
 5	maison	maison	NOUN	_	Gender=Fem|Number=Sing	_	_	_	_
 6	souris	souris	NOUN	_	Gender=Fem	_	_	_	_
@@ -393,9 +393,9 @@ The `getLexicon` with features `["form", "lemma", "upos", "Gender", "Number"]` r
 [
   { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur" }, "freq": 1 },
   { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null }, "freq": 1 },
-  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing" }, "freq": 1 },
-  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 },
-  { "feats": {  "form": "maison", "lemma": "maison", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 }
+  { "feats": { "form": "espace", "lemma": "espace", "upos": "NOUN", "Gender": "Masc", "Number": "Sing" }, "freq": 1 },
+  { "feats": { "form": "espace", "lemma": "espace", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 },
+  { "feats": { "form": "maison", "lemma": "maison", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 }
 ]
 ```
 
@@ -405,8 +405,8 @@ and with the additional argument `prune` with value 3, the line about `maison` i
 [
   { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": "Plur" }, "freq": 1 },
   { "feats": { "form": "souris", "lemma": "souris", "upos": "NOUN", "Gender": "Fem", "Number": null }, "freq": 1 },
-  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Masc", "Number": "Sing" }, "freq": 1 },
-  { "feats": { "form": "moule", "lemma": "moule", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 },
+  { "feats": { "form": "espace", "lemma": "espace", "upos": "NOUN", "Gender": "Masc", "Number": "Sing" }, "freq": 1 },
+  { "feats": { "form": "espace", "lemma": "espace", "upos": "NOUN", "Gender": "Fem", "Number": "Sing" }, "freq": 2 },
 ]
 ```
 

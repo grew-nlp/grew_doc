@@ -7,9 +7,9 @@ title = "grew_server"
 This documentation corresponds to the [Inria GitLab](https://gitlab.inria.fr/grew/grew_server).
 By default the doc applies to branch `master`
 
-New features available only on the Dev serveur are identified by the flag **[⚠️DEV⚠️]**
+New features available only on the Dev server are identified by the flag **[⚠️DEV⚠️]**
 
-Some services or features are marked with **[❌DEPRECATED❌]**, they will be removed soon and must not be used.
+Some services or features may be marked with **[❌DEPRECATED❌]**, they will be removed in an upcoming server update.
 
 ---
 
@@ -93,13 +93,6 @@ An error is produced either if `project_id` does not exists or if `new_project_i
 ## Samples
 All services about samples return an error if the requested project does not exist.
 
-### `newSample` **[❌DEPRECATED❌]** &rarr; use `newSamples`
- * `(<string> project_id, <string> sample_id)`
-
-This service is used to initialise a new empty sample in a given project.
-An error is returned if the sample already exists.
-
-
 ### `newSamples`
  * `(<string> project_id, <string> sample_ids)`
 
@@ -120,19 +113,12 @@ This service returns the list of existing samples in a given project.
     "number_sentences": 2,
     "number_tokens": 23,
     "number_trees": 4,
-    "users": ["alice", "bob", "charlie"],  [❌DEPRECATED: this is redondant with next line❌]
     "tree_by_user": {"charlie": 1, "bob": 2, "alice": 1}
   }
 ]
 ```
 
 The field `tree_by_user` was added in February 2023 [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758).
-
-### `eraseSample` **[❌DEPRECATED❌]** &rarr; use `eraseSamples`
- * `(<string> project_id, <string> sample_id)`
-
-This service is used to remove a sample. If the sample does not exist, nothing happens.
-
 
 ### `eraseSamples`
  * `(<string> project_id, <string> sample_ids)`
@@ -160,9 +146,6 @@ An error is returned either if `sample_id` does not exist or if `new_sample_id` 
 ---
 
 ## Graphs
-
-### `eraseGraph` **[❌DEPRECATED❌]** &rarr; use `eraseGraphs`
- * `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id)`
 
 ### `eraseGraphs`
  * `(<string> project_id, <string> sample_id, <string> sent_ids, <string> user_id)`
@@ -197,27 +180,22 @@ If `sent_ids` is the empty list, all graphs for the given user in the sample are
 ## Save annotations
 
 ### `saveConll`
- * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> user_id, <file> conll_file)`
  * `(<string> project_id, <string> sample_id, <file> conll_file)`
 
-### **[⚠️DEV⚠️]** `insertConll`
+### `insertConll`
  * `(<string> project_id, <string> sample_id, <file> conll_file, <string> pivot_sent_id)`
 
 Insert data from `conll_file` in the `sample_id`. Sentences that do not already exists before are inserted right after sentence `pivot_sent_id`.
 If no sentence `pivot_sent_id` exists, new sentences are inserted at the beginning of `sample_id`.
 
-**NB** This service can be use for sentence splitting.
+**NB** This service can be used for sentence splitting.
 If a sample containts 3 sentences with `sent_id`s: `s1`, `s2` and `s3`; the splitting of `s2` in `s2a` and `s2b` can be done with two operations:
  1. `insertConll` with `conll_file` containing new data for `s2a`, `s2b` and `pivot_sent_id` = `s2`
  1. `eraseSentence` with `sent_id` = `s2`
 
 
 ### `saveGraph`
- * **[❌DEPRECATED❌]** `(<string> project_id, <string> sample_id, <string> sent_id, <string> user_id, <string> conll_graph)`
  * `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graph)`
-
-### `saveGraphs` **[❌DEPRECATED❌]**
- * `(<string> project_id, <string> sample_id, <string> user_id, <string> conll_graphs)`
 
 This service saves (updates or creates) each graph described in `conll_graphs` under `user_id` name.
 The argument `conll_graphs` must be one string with all graphs separated by an empty line (as in usual CoNLL-U files for corpora).
@@ -253,11 +231,6 @@ The same service is avalaible with clustering:
  The set of occurrences of the `request` in `project_id` are clustered with the first key of the list;
  each cluster is further clustered recursively with the remaining keys.
  For instance: If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
-
-
-### `searchPatternInGraphs` **[❌DEPRECATED❌]** &rarr; use `searchRequestInGraphs`
- * `(<string> project_id, <string> user_ids, <string> pattern)`
- * `(<string> project_id, <string> user_ids, <string> pattern, <string> clusters)`
 
 ---
 
@@ -347,17 +320,6 @@ Below, an example of output after a rewrite with the two rules:
 and the output data returned by the service (with CoNLL code skipped): 
 
 {{< json file="/static/usage/grew_server/_build/output.json" >}}  
-
-
-### `applyPackage` **[❌DEPRECATED❌]**
- * `(<string> project_id, <string> sample_ids, <string> source_user_ids, <string> target_user_id, <string> package)`
-
-See [here](#generic-arguments-usage) for the usage of `sample_ids` and `source_user_ids` arguments.
-
-For `source_user_ids`, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
-
-This service tries to apply the package to the graphs described by `sample_ids` and `source_user_ids` and for each case where a new graph is produced by the rewriting, this new graph is saved (updated or created) for the user `target_user_id`.
-This implies that no new graphs will be created for `target_user_id` where no rules applies.
 
 ---
 
@@ -480,24 +442,21 @@ Several services use a `string` argument named `sample_ids`.
 The string `sample_ids` must be a JSON encoding of a list of strings (like `["sample_1", "sample_2"]`).
 
   * If the `sample_ids` list is not empty, only sentences from a `sample_id` in the list are considered.
-  * If the `sample_ids` list is empty, all sentences are considered.
+  * If the `sample_ids` list is empty, all sentences are considered (except for the service `eraseSamples`).
 
 :warning: If the list contains an unused `sample_id`, no error is returned and the `sample_id` is ignored.
 
 ## `user_ids`
 
-The string `user_ids` (or `source_user_id` in `applyPackage`) must be a JSON encoding of one of these forms:
-
-NB: this was changed in ([commit](https://gitlab.inria.fr/grew/grew_server/-/commit/1b61650dcdb42cb00f524775c4fe8829cd6aeaae), January 2022).
-
+The string `user_ids` must be a JSON encoding of one of these forms:
   * The string `"all"`: all users are taken into account for each sentence
   * The object `{ "multi" : ["user_1", "user_2", …] }`: all users explicitly mentioned in the list are taken into account for each sentence
   * The object `{ "one" : ["user_1", "user_2", …] }`: for each sentence, only one graph (at most) is returned; the one for the first user of the list for which the graph is defined. In the list, the pseudo-user `__last__` can be used. It selects the graph with the most recent timestamp.
 
 This parameter is used for the services:
- * `searchPatternInGraphs`
+ * `searchRequestInGraphs`
  * `getLexicon`
- * `tryPackage` and `applyPackage`: in this case, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
+ * `tryPackage`: in this case, only the value `{ "one" : […] }` is accepted in order to ensure that only at most one new graph can be returned for each sentence.
 
 This fulfils the request [#110](https://github.com/Arborator/arborator-frontend/issues/110):
 

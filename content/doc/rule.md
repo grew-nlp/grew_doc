@@ -18,7 +18,9 @@ A **rewrite rule** in **Grew** is defined by:
 
 ## Example
 
-{{< grew file="/static/doc/rule/accuser.grs" >}}
+Here is an example of rule taken from a gallery page (see [this gallery example for an explanation](../../gallery/flat)).
+
+{{< grew file="/static/doc/rule/example.grs" >}}
 
 # Using lexicons in Grew rules
 
@@ -27,7 +29,7 @@ A **rewrite rule** in **Grew** is defined by:
 ## Lexicon
 A lexicon is defined by:
 
-  * a list in *n* different field identifiers
+  * a list of *n* different field identifiers
   * a list of lexicon items, each item is a *n*-tuple
 
 For instance, the table below describes a tiny lexicon for French nouns where each noun is associated with its gender.
@@ -40,10 +42,10 @@ For instance, the table below describes a tiny lexicon for French nouns where ea
 A lexicon is written as text where:
 
  * Blank lines and lines starting with `%` symbol are ignored
- * Each line is a list of elements separated by tabulations.
- * The first line defines the field  identifiers.
- * All other lines define the lexicon items that are n-tuples of strings.
- * All lines contain the same number of elements.
+ * Each line is a list of elements separated by tabulations
+ * The first line defines the field  identifiers
+ * All other lines define the lexicon items that are *n*-uples of strings.
+ * All lines must contain the same number of elements.
 
 The lexicon above can be then written in the file [`nouns.lex`](nouns.lex)
 {{< grew file="/static/doc/rule/nouns.lex" >}}
@@ -56,8 +58,8 @@ Note that the lexicon is named in the rule (`lex` in the example), this will all
 
 ~~~grew
 rule set_gender (lex from "nouns.lex") {
-  pattern { N [upos=NOUN, !Gender, lemma=lex.noun] }
-  commands { N.Gender = lex.Gender }
+  pattern { X [upos=NOUN, !Gender, lemma=lex.noun] }
+  commands { X.Gender = lex.Gender }
 }
 ~~~
 
@@ -83,12 +85,16 @@ maison	Fem
 ### Try it!
 
 The file [`set_gender.py`](set_gender.py) below presents a self-contained example of rewriting with the lexical rule above.
-It supposes that the grew Python library is installed (see [Installation page](../../usage/install)).
+It supposes that the grew Python library is installed (see [Installation page](../../usage/python)).
 
 :warning: The tabulation is not well interpreted when using copy/paste into interactive Python session.
 That's why tabulations are replaced by explicit `\t` in the Python code below.
 
 {{< python file="/static/doc/rule/set_gender.py" >}}
+
+The code above outputs the following structure where the two nouns have their gender values.
+
+![with_gender](/doc/rule/_build/with_gender.svg)
 
 ## Using several lexicons
 
@@ -110,6 +116,7 @@ If the file [`transitive_verbs.lex`](transitive_verbs.lex) contains a list of tr
 {{< grew file="/static/doc/rule/transitive_coord.grs" >}}
 
 This rule can be used to turn the left part below into the right part:
+
 
 | ![pomme](/doc/rule/_build/pomme.svg) | ![pomme_enhanced](/doc/rule/_build/pomme_enhanced.svg) |
 |:---:|:---:|

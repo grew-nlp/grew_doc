@@ -1,14 +1,20 @@
 # Grewpy tutorial
 
+In this tutorial, a few pages show some `grewpy` Python library usages.
 
-A tutorial for some of Grewpy features, but not for all of them.
+Several examples below suppose that the corpus `SUD_English-PUD` is available locally. It can be downloaded [here](https://grew.fr/download/SUD_2.13/SUD_English-PUD.tgz).
 
-Based on [Grewpy documentation](https://grew.fr/python/) and [general Grew tutorial](https://grew.fr/tutorial/top/).
-
-
-For more, see the docs.
-Ask for more features [here ](https://github.com/grew-nlp/grewpy/issues) 🙂
-
- - [Graph module](../graph)
  - [Request module](../request)
+ - [Drawing data](../drawing_dep)
  - [Modifying data](../modify_data)
+ - [Graph module](../graph)
+
+
+## Prepare data
+
+
+## Other links and resources:
+ - [Grewpy page](../../usage/python/)
+ - [Grewpy documentation](https://grew.fr/python/) (generated from the code)
+ - [Grew tutorial](../../tutorial/top/)
+ - [GitHub issues for `grewpy`](https://github.com/grew-nlp/grewpy/issues)

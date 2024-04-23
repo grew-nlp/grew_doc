@@ -9,17 +9,17 @@ date: 2023-08-14
 
 First, we import the `Graph` module from `grewpy`.
 
-**NB:** The port number is different at each execution. If you don't have this kind of output, see [here](http://localhost:1313/usage/python/#install).
+**NB:** The port number is different at each execution. If you don't have the message `connected to port: …`, see [here](../../usage/python/#install).
 
 ```python_alt
 from grewpy import Graph
 ```
 
-    connected to port: 49425
+    connected to port: 53917
 
 ## Build a graph
 
-A graph can be built from its JSON encoding (see [here](../../doc/json) for more info about this format)
+A graph can be built from its JSON encoding (see [here](../../doc/json) for more info about this format).
 
 ```python_alt
 g1_str = """
@@ -41,7 +41,7 @@ g1_str = """
 g1 = Graph(g1_str)
 ```
 
-A graph can be built from its CoNLL data.
+A graph can also be built from CoNLL data.
 
 ```python_alt
 g2_conll = """# sent_id = en_partut-ud-202
@@ -174,7 +174,7 @@ g2["2"]
 ### `sucs`
 
 Each node is given a list of *successors* decribed by pairs of the target node and the edge label. 
-Edga label are dictionaries (see [here](../../doc/graph/#edges) for details about edge label encoding.)
+Edge label are dictionaries (see [here](../../doc/graph/#edges) for details about edge label encoding.)
 
 ```python_alt
 g1.sucs["A"]

@@ -6,7 +6,6 @@ date: 2024-04-22
 [`grewpy` Tutorial](../top)
 
 # Grewpy tutorial: Modify data
-See [requests](../requests) for data initialisation
 
 ```python_alt
 import grewpy
@@ -15,7 +14,7 @@ grewpy.set_config("sud") # ud or basic
 corpus = Corpus("SUD_English-PUD")
 ```
 
-    connected to port: 49370
+    connected to port: 54039
 
 ## Access data in a corpus
 
@@ -47,7 +46,7 @@ print(sentence.order)
     ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
 
 ```python_alt
-# Token features, which make possible to acces every token feature
+# Token features, which make possible to access every token feature
 print(sentence.features)
 
 # e.g get all upos of the sentence
@@ -68,17 +67,13 @@ print(sentence.sucs)
 `Corpus` is an abstract object which cannot be modified directly:
 
 ```python_alt
-corpus[0] = corpus[1]
+try:
+	corpus[0] = corpus[1]
+except TypeError as error_message:
+	print (f"{error_message}")
 ```
 
-    ---------------------------------------------------------------------------
-
-    TypeError                                 Traceback (most recent call last)
-
-    Cell In [7], line 1
-    ----> 1 corpus[0] = corpus[1]
-
-    TypeError: 'Corpus' object does not support item assignment
+    'Corpus' object does not support item assignment
 
 `CorpusDraft` is an object similar to `Corpus` (all methods above can be applied to `CorpusDraft`) but which is mutable.
 Below, we add the feature `Transitive=Yes` to all occurrences of verbs with a direct object.
@@ -98,6 +93,8 @@ corpus2 = Corpus(draft)
 corpus2.count(Request("X[Transitive=Yes]"))
 ```
 
+    702
+
 It's possible to modify a whole corpus with a function getting a graph as input.
 
 ```python_alt
@@ -111,6 +108,8 @@ draft3 = draft.apply(relabel_noun)
 corpus3 = Corpus(draft3)
 corpus3.count(Request("X[upos=N]"))
 ```
+
+    4036
 
 ## Modifying a corpus using a GRS (Graph Rewriting System)
 In many cases, it is not required to uses a `CorpusDraft` and the modification of a corpus can be encoded with graph rewriting rules.
@@ -135,6 +134,8 @@ corpus2bis = grs.apply(corpus)
 corpus2bis.count(Request("X[Transitive=Yes]"))
 ```
 
+    702
+
 For the example, where the upos tag `NOUN` is changed to `N`, this can be done with a GRS:
 
 ```python_alt
@@ -150,7 +151,9 @@ corpus3bis = grs3.apply(corpus)
 corpus3bis.count(Request("X[upos=N]"))
 ```
 
-Similarily to the `CorpusDraft` above, there are `GRSDraft` which can be inspected and which are mutable.
+    4036
+
+Similarily to the `CorpusDraft` above, there is a mmodule `GRSDraft` which can be inspected and which is mutable.
 
 ```python_alt
 from grewpy import GRSDraft
@@ -172,6 +175,8 @@ for rule in grs_draft['cxns'].rules():
     print(f"{rule=}")
 ```
 
+    rule='existential'
+
 A `GRSDraft` cannot be applied to a corpus, it should be turned into a `GRS`:
 
 ```python_alt
@@ -181,30 +186,4 @@ n_existentials = corpus.count(Request("X[Cxn=Existential]"))
 print(f"{n_existentials=}")
 ```
 
-### Extras
-
-```python_alt
-# Grewpy give access to svg or dot formats to display graphs
-from IPython.display import display_svg
-
-sentence = corpus[6]
-
-g = sentence.to_svg() #.to_dot()
-display_svg(g, raw=True)
-```
-
-```python_alt
-# the conllu is easy to get of recover
-
-conll_string= sentence.to_conll()
-print(conll_string)
-```
-
-```python_alt
-# Working with really big corpus could be a little bit painful. 
-# To remove the corpus from memory use:
-corpus.clean()
-
-# Grew errors can be capture using:
-grewpy.grew.GrewError("Oups!")
-```
+    n_existentials=26

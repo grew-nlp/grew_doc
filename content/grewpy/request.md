@@ -14,21 +14,14 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 49461
-
-## Prepare data
-The examples below suppose that the corpus `SUD_English-PUD` is available locally.
-It can be downloaded from https://grew.fr/download/SUD_2.13/SUD_English-PUD.tgz
+    connected to port: 53951
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.
-A `Corpus` allows to make queries and to count occurrences, 
-
-Note that it doesn't allow a direct acces to the corpus. For that, use `CorpusDraft` object (TODO: add link)
+A `Corpus` allows to make queries and to count occurrences.
 
 ```python_alt
 treebank_path = "SUD_English-PUD"
-
 corpus = Corpus(treebank_path)
 print(type(corpus))
 ```
@@ -39,12 +32,12 @@ print(type(corpus))
 n_sentencens = len(corpus)
 sent_ids = corpus.get_sent_ids()
 
-print(f"{n_sentencens=}")
-print(f"{sent_ids[0]=}")
+print(f"{n_sentencens = }")
+print(f"{sent_ids[0] = }")
 ```
 
-    n_sentencens=1000
-    sent_ids[0]='n01001011'
+    n_sentencens = 1000
+    sent_ids[0] = 'n01001011'
 
 ## Explore data
 See [Grew-match tutorial](https://universal.grew.fr/?corpus=UD_English-ParTUT@2.13) to practice how to write Grew requests
@@ -77,7 +70,7 @@ corpus.count(req3)
 
     752
 
-### with and without items can be stacked 
+### `with` and `without` items can be stacked 
 
 ```python_alt
 req4 = Request("X-[subj]->Y").with_("Y->Z").without("Y[upos=PRON]").without("X[upos=VERB]")
@@ -184,41 +177,3 @@ result.keys()
 ```
 
     dict_keys(['Yes', 'No'])
-
-### Extras
-
-```python_alt
-# Grewpy give access to svg or dot formats to display graphs
-from IPython.display import display_svg
-
-sentence = corpus[6]
-
-g = sentence.to_svg() #.to_dot()
-display_svg(g, raw=True)
-```
-
-    
-![svg](output_34_0.svg)
-    
-
-```python_alt
-# the conllu is easy to get of recover
-
-conll_string= corpus.to_conll()
-print(conll_string[:106])
-```
-
-    # newdoc id = n01001
-    # sent_id = n01001011
-    # text = “While much of the digital transition is unprecedented
-
-```python_alt
-# Working with really big corpus could be a little bit painful. 
-# To remove the corpus from memory use:
-corpus.clean()
-
-# Grew errors can be capture using:
-grewpy.grew.GrewError("Oups!")
-```
-
-    grewpy.grew.GrewError('Oups!')

@@ -3,6 +3,8 @@ title: "Grewpy • graph"
 date: 2023-08-14
 ---
 
+[`grewpy` Tutorial](../top)
+
 # `grewpy` library: Graph module
 
 First, we import the `Graph` module from `grewpy`.
@@ -13,7 +15,7 @@ First, we import the `Graph` module from `grewpy`.
 from grewpy import Graph
 ```
 
-    connected to port: 60202
+    connected to port: 49425
 
 ## Build a graph
 
@@ -89,11 +91,11 @@ print (g2.to_dot())
     3[label="Mood:Ind,Number:Sing,Person:3,Tense:Pres,VerbForm:Fin,form:is,lemma:be,textform:is,upos:AUX,wordform:is,xpos:VA"];
     4[label="SpaceAfter:No,Tense:Past,VerbForm:Part,form:done,lemma:do,textform:done,upos:VERB,wordform:done,xpos:V"];
     5[label="form:.,lemma:.,textform:.,upos:PUNCT,wordform:.,xpos:FS"];
-    4 -> {'1': 'punct'}[label="5"];
-    4 -> {'1': 'aux', '2': 'pass'}[label="3"];
-    4 -> {'1': 'nsubj', '2': 'pass'}[label="2"];
-    2 -> {'1': 'det'}[label="1"];
-    0 -> {'1': 'root'}[label="4"];
+    4 -> punct[label="5"];
+    4 -> aux:pass[label="3"];
+    4 -> nsubj:pass[label="2"];
+    2 -> det[label="1"];
+    0 -> root[label="4"];
     }
 
 ```python_alt

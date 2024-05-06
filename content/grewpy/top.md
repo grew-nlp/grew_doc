@@ -1,3 +1,9 @@
+---
+title: "Grewpy • tutorial"
+date: 2024-04-22
+---
+
+
 # Grewpy tutorial
 
 In this tutorial, a few pages show some `grewpy` Python library usages.

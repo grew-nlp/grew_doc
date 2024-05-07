@@ -22,13 +22,13 @@ The table below describes the main changes required to existing code:
 
 ## 2) Build a request from a string
 
-As a consequence of the previous point, the previous way f building a request from a clause or a clause list is no longer available.
+As a consequence of the previous point, the previous way of building a request from a clause or a clause list is no longer available.
 The easier way to patch the code is to start with an empty request with `Request()` and to append clauses with the `pattern` method.
 
 The table below describes the main changes required to existing code:
 
 | Version < 0.5.0 | Version ≥ 0.5.0 |
 |-----------------|-----------------|
-| `Request ("X -[subj]-> Y", "X[upos=VERB]")` | `Request().pattern("X -[subj]-> Y; X[upos=VERB]")`or</br>`Request().pattern("X -[subj]-> Y", "X[upos=VERB]")` |
+| `Request ("X -[subj]-> Y", "X[upos=VERB]")` | `Request().pattern("X -[subj]-> Y", "X[upos=VERB]")` |
 
 

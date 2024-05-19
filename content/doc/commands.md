@@ -180,8 +180,10 @@ A new edge `copy` is added from `Y` to its clone.
 ~~~grew
 rule clone {
   pattern { X [form, lemma, upos=VERB]; }
+  without { X -[copy]-> * } % to avoid loop: do not clone twice the same node
+  without { * -[copy]-> X } % to avoid loop: do not clone a clone
   commands {
-    add_node M :> X;
+    add_node Y :> X;
     append_feats X ==> Y;
     Y.form = X.form; Y.lemma = X.lemma; Y.upos = X.upos;
     add_edge X -[copy]-> Y;

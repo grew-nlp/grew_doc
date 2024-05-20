@@ -185,7 +185,10 @@ rule clone {
   commands {
     add_node Y :> X;
     append_feats X ==> Y;
-    Y.form = X.form; Y.lemma = X.lemma; Y.upos = X.upos;
+    Y.form = X.form;
+    Y.textform = X.textform;
+    Y.lemma = X.lemma;
+    Y.upos = X.upos;
     add_edge X -[copy]-> Y;
   }
 }

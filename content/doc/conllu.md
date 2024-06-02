@@ -10,36 +10,37 @@ Categories = ["Development","GoLang"]
 
 # CoNLL-U format
 
-**NB:** The doc given here correspond to **Grew** version 1.15 (linked to **conll** version 1.17.3). You can check your versions with `opam list | grep grew` and `opam list | grep conll`.
+**NB:** The doc given here correspond to **Grew** version 1.16 (linked to **conll** version 1.18.1).
+You can check your versions with `opam list | grep grew` and `opam list | grep conll`.
 
 The most common way to store dependency structures is the CoNLL format.
-Several extensions were proposed and we describe here the one which is used by **Grew**, known as [CoNLL-U](http://universaldependencies.org/format.html) format defined in the Universal Dependency project.
-Grew also handles the CoNLL-U plus format, see [CoNLL-U plus page](../conllup)
+Several extensions were proposed and we describe here the one which is used by **Grew**, known as [CoNLL-U](http://universaldependencies.org/format.html) format defined in the UD (Universal Dependencies) project.
+Grew also handles the CoNLL-U plus format, see [CoNLL-U plus page](../conllup).
 
 For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
-Tokens lines contain 10 fields, separated by tabulations.
+Token lines contain 10 fields, separated by tabulations.
 
 The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.13).
 
 {{< input file="static/doc/conllu/n01118003.conllu" >}}
 
-We explain here how **Grew** deals with the 10 fields if CoNLL-U files:
+We explain here how **Grew** deals with the 10 fields of CoNLL-U files:
 
 1. `ID`: This field is a number used as an internal identifier for the corresponding lexical unit (LU), it can not be accessed from directly from **Grew**.
 2. `FORM`: The phonological form of the LU; in **Grew**, the value of this field is available through a feature named `form`
-3. `LEMMA`: The lemma of the LU. In **Grew**, this corresponds to the feature named `lemma`.
+3. `LEMMA`: The lemma of the LU; in **Grew**, this corresponds to the feature named `lemma`
 4. `UPOS`: The universal POS; in **Grew**, it is encoded as feature named `upos`
 5. `XPOS`: A language-specific part-of-speech tag; in **Grew**, it is encoded as feature named `xpos`
-6. `FEATS`. List of morphological features; each feature is turned into a **Grew** node feature.
-7. `HEAD`. Head of the current word, which is either a value of ID or `0` for the root node.
-8. `DEPREL`. Dependency relation to the HEAD (`root` iff HEAD = `0`).
-9. `DEPS`. (UD only) Enhanced dependency graph in the form of a list of head-deprel pairs. In **Grew**, these relations are encoded with the edge feature `enhanced=yes`.
-10. `MISC`. Any other annotation. See below for the way **Grew** parses this field.
+6. `FEATS`: List of morphological features; each feature is turned into a **Grew** node feature.
+7. `HEAD`: Head of the current word, which is either a value of ID or `0` for the root node.
+8. `DEPREL`: Dependency relation to the HEAD (`root` iff HEAD = `0`).
+9. `DEPS`: (UD only) Enhanced dependency graph in the form of a list of head-deprel pairs. In **Grew**, these relations are encoded with the edge feature `enhanced=yes`.
+10. `MISC`: Any other annotation. See below for the way **Grew** parses this field.
 
 A few examples of usage in **Grew** requests:
 
-  * matching the word _is_ &rarr; `pattern { X [form="is"] }`
+  * matching the word form _is_ &rarr; `pattern { X [form="is"] }`
   * matching the lemma _be_ &rarr;  `pattern { X [lemma="be"] }`
   * matching the Part Of Speech _VERB_ &rarr; `pattern { X [upos=VERB] }`
 
@@ -80,7 +81,7 @@ There are two main problems to deal with the `MISC` field in the existing (S)UD 
    * to keep it unchanged in the other cases
  2. When a **Grew** node contains a feature like `Case=Gen`, there is no canonical way to decide if it must be output in the `FEATS` or in the `MISC` field.
 
-To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature,value)* pairs.
+To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature, value)* pairs.
 If this is not possible, the raw content is kept in a special feature named `__RAW_MISC__`
 ({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.13&pattern=pattern { X [__RAW_MISC__] }" >}}).
 Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
@@ -88,7 +89,7 @@ Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
 
  * If the config is `basic` or `sequoia`, all features are written in the `FEATS` field (and the `MISC` field is always `_`);
- * If the config is `ud` or `sud`, there is a fixed list of features used in the `FEATS` field (list given at the bottom of the page).
+ * If the config is `ud` or `sud`, there is a fixed list of features used in the `FEATS` field (list given at the bottom of this page).
 
 Unfortunately, in practice, the same feature may be used in both fields `FEATS` and `MISC`.
 For instance, in the sentence `test-12` from `UD_Polish-LFG` (below), the feature `Case` appear in `FEATS` in tokens 2, 5, 6 and in `MISC` in token 4!
@@ -137,10 +138,10 @@ Note that this applies to the examples given in the book "Application of Graph R
 
 ## List of features put in the `FEATS` field
 
-This list in defined in the `conll` library (version 1.17.2).
+This list in defined in the `conll` library (version 1.18.1).
 
 If the config is `ud` or `sud`, the following list of features is used to decide which features should be written into the `FEATS` field.
-The list is based on the data available in UD 2.13 (plus the `Shared` feature specific to SUD):
+The list is based on the data available in UD 2.14 (plus the `Shared` feature specific to SUD):
 
   - `Abbr`
   - `Accomp`
@@ -188,6 +189,7 @@ The list is based on the data available in UD 2.13 (plus the `Shared` feature sp
   - `Dev`
   - `Dialect`
   - `Dist`
+  - `Dyn`
   - `Echo`
   - `Ego`
   - `Emph`
@@ -248,13 +250,18 @@ The list is based on the data available in UD 2.13 (plus the `Shared` feature sp
   - `NumValue`
   - `Number`
   - `Number[abs]`
+  - `Number[cs]`
   - `Number[dat]`
   - `Number[erg]`
   - `Number[grnd]`
   - `Number[io]`
+  - `Number[lo]`
   - `Number[obj]`
+  - `Number[po]`
   - `Number[psed]`
   - `Number[psor]`
+  - `Number[refl]`
+  - `Number[ro]`
   - `Number[subj]`
   - `Obl`
   - `Orth`
@@ -264,12 +271,17 @@ The list is based on the data available in UD 2.13 (plus the `Shared` feature sp
   - `Pcl`
   - `Person`
   - `Person[abs]`
+  - `Person[cs]`
   - `Person[dat]`
   - `Person[erg]`
   - `Person[grnd]`
   - `Person[io]`
+  - `Person[lo]`
   - `Person[obj]`
+  - `Person[po]`
   - `Person[psor]`
+  - `Person[refl]`
+  - `Person[ro]`
   - `Person[subj]`
   - `Polarity`
   - `Polite`
@@ -300,6 +312,7 @@ The list is based on the data available in UD 2.13 (plus the `Shared` feature sp
   - `Reflex[subj]`
   - `Rel`
   - `RelType`
+  - `Reln`
   - `Report`
   - `Shared` (Specific to SUD)
   - `Speech`

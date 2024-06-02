@@ -24,7 +24,13 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
-# :new: Version 1.15 (January 2, 2024)
+# Version 1.16 (June 2, 2024)
+  - New syntax in request and key clustering (`length` and `delta` between two nodes)
+  - Corpusbank handling (WIP)
+
+---
+
+# Version 1.15 (January 2, 2024)
   - compatible with Ocaml 5
   - Fix bug in Graph.to_json
 

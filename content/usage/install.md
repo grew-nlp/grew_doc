@@ -72,7 +72,7 @@ opam install grew
 
 To verify your installation:
 
-  * Try running command `grew version`. Ensure that the version is 1.15 (refer to the [Upgrade page](../upgrade) if necessary)
+  * Try running command `grew version`. Ensure that the version is 1.16 (refer to the [Upgrade page](../upgrade) if necessary)
   * If you encounter any issues, try running `eval $(opam env)` and then reinstalling grew using `opam install grew`.
   * If the issue persists, please [submit an issue](https://github.com/grew-nlp/grew/issues/new)
 
@@ -87,7 +87,7 @@ opam update
 opam upgrade
 ```
 
-The latest version is 1.15. You can check your version with
+The latest version is 1.16. You can check your version with
 
 ```
 opam list | grep grew
@@ -96,7 +96,7 @@ opam list | grep grew
 you should obtain (the third line may not appear if you haven't installed the Python library backend):
 
 ```
-grew                          1.15.0      Grew system
-grewlib                       1.15.0      The main library for the Grew system
-grewpy_backend                0.5.2       The Ocaml backend for the `grewpy` Python lib
+grew                          1.16.0      Grew system
+grewlib                       1.16.0      The main library for the Grew system
+grewpy_backend                0.5.3       The Ocaml backend for the `grewpy` Python lib
 ```

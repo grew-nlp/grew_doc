@@ -14,7 +14,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 53951
+    connected to port: 56002
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.
@@ -40,7 +40,7 @@ print(f"{sent_ids[0] = }")
     sent_ids[0] = 'n01001011'
 
 ## Explore data
-See [Grew-match tutorial](https://universal.grew.fr/?corpus=UD_English-ParTUT@2.13) to practice how to write Grew requests
+See [Grew-match tutorial](https://universal.grew.fr/?corpus=UD_English-ParTUT@2.14) to practice how to write Grew requests
 
 ### Count the number of subjets in the corpus
 

@@ -6,12 +6,12 @@ title = "Tuto • Relation table"
 
 # Building relation tables on your treebank
 
-We call here "relation table" a table like the ones which are available through Grew-match: [example on UD_French-PUD, version 2.13](http://universal.grew.fr/meta/UD_French-PUD@2.13_table.html) (select a relation on the left).
+We call here "relation table" a table like the ones which are available through Grew-match: [example on UD_French-PUD, version 2.14](http://universal.grew.fr/meta/UD_French-PUD@2.14_table.html) (select a relation on the left).
 
 The simplest way to compute this kind of table on your own corpus is to use the Python library [grewpy](../../usage/python).
 It is also possible to do the same with the [Command Line Interface](../../usage/cli).
 
-For this example, we suppose that we have a subfolder `data` which contains the file `fr_pud-ud-test.conllu` (the version 2.13 of the corpus **UD_French-PUD** which can be downloaded [here](https://raw.githubusercontent.com/UniversalDependencies/UD_French-PUD/r2.13/fr_pud-ud-test.conllu)).
+For this example, we suppose that we have a subfolder `data` which contains the file `fr_pud-ud-test.conllu` (the version 2.14 of the corpus **UD_French-PUD** which can be downloaded [here](https://raw.githubusercontent.com/UniversalDependencies/UD_French-PUD/r2.14/fr_pud-ud-test.conllu)).
 
 ```
 .

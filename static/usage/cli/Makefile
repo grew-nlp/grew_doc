@@ -2,9 +2,9 @@ GREW?=grew
 
 run:
 	mkdir -p _build
-	# wget https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.13/fr_pud-ud-test.conllu?raw=true -O _build/fr_pud-ud-test.conllu
-	# wget https://github.com/UniversalDependencies/UD_English-PUD/blob/r2.13/en_pud-ud-test.conllu?raw=true -O _build/en_pud-ud-test.conllu
-	# wget https://github.com/UniversalDependencies/UD_Chinese-PUD/blob/r2.13/zh_pud-ud-test.conllu?raw=true -O _build/zh_pud-ud-test.conllu
+	# wget https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.14/fr_pud-ud-test.conllu?raw=true -O _build/fr_pud-ud-test.conllu
+	# wget https://github.com/UniversalDependencies/UD_English-PUD/blob/r2.14/en_pud-ud-test.conllu?raw=true -O _build/en_pud-ud-test.conllu
+	# wget https://github.com/UniversalDependencies/UD_Chinese-PUD/blob/r2.14/zh_pud-ud-test.conllu?raw=true -O _build/zh_pud-ud-test.conllu
 	${GREW} compile -force -i en_fr_zh.json
 	${GREW} grep -request dislocated.req -i _build/fr_pud-ud-test.conllu > _build/output_grep
 	${GREW} grep -request dislocated.req -i en_fr_zh.json > _build/output_grep_multi

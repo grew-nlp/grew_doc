@@ -82,7 +82,7 @@ The following clause selects either a past participle verb or an adjective {{< t
 X [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
 ```
 
-A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.13&request=pattern { X [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
+A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.14&request=pattern { X [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
 ```grew
 X [upos=ADV, !ExtPos]|[ExtPos=ADV]
 ```
@@ -154,7 +154,7 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
 
 By default the matching of nodes is injective, this means that two different nodes in the request are mapped to two different nodes in the graph.
 
-For instance, the request below searches for two different tokens, both having the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.13&pattern=pattern%20{%20X1%20[%20lemma=%22make%22%20];%20X2%20[%20lemma=%22make%22%20]%20}" >}}
+For instance, the request below searches for two different tokens, both having the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.14&pattern=pattern%20{%20X1%20[%20lemma=%22make%22%20];%20X2%20[%20lemma=%22make%22%20]%20}" >}}
 
 ```grew
 pattern { X1 [ lemma="make" ]; X2 [ lemma="make" ] }
@@ -192,7 +192,7 @@ pattern { X [concept="judge-01"]; X -[ARG0]-> A; X -[ARG1]-> B$; }
 As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
 
  * `X -[1=subj]-> Y` the edge must match the edge feature constraints (more examples below).
- * [Since version `1.9.1`] `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.13&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
+ * [Since version `1.9.1`] `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.14&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 
 

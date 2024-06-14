@@ -40,11 +40,20 @@ With the clustering key `e.label`, the matchings are clustered according to the 
 
 
 ### Clustering on an edge length
-The clustering key `e.length` make clusters following the length of edge `e`; the clustering key `e.delta` make clusters following the relative positions of governor and dependent of edge `e`.
+The clustering key `e.length` makes clusters according to the length of the edge `e`;
+the clustering key `e.delta` makes clusters according to the relative positions of the governor and the dependent of the edge `e`.
 
 #### Examples
   * Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "http://universal.grew.fr/?corpus=UD_Korean-PUD@2.14&pattern=pattern { e: X -[amod]-> Y }&clust1_key=e.length">}}
   * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "http://match.grew.fr/?corpus=UD_Naija-NSC@2.14&pattern=pattern { e: X -[nsubj]-> Y }&clust1_key=e.delta">}}
+
+### Clustering on distance between nodes
+🆕 in Version 1.16. Similarly to the [new syntax for request](../request#constraints-on-distance-between-two-nodes), it is possible to cluster on the distance between two nodes:
+ - `length(X,Y)` absolute distance between `X` and `Y` {{< tryit "http://universal.grew.fr/?corpus=UD_Galician-PUD@2.14&request=pattern { X -[amod]-> Y }&clustering=length(X,Y)" >}}
+ - `delta(X,Y)` relative distance between `X` and `Y` {{< tryit "http://universal.grew.fr/?corpus=UD_Galician-PUD@2.14&request=pattern { X -[amod]-> Y }&clustering=delta(X,Y)" >}}
+
+Note that this is partly redondant with the previous point (clustering on an edge length), but it can also be used on a pair of nodes that are not connected.
+For example, you can cluster on the relative distance between a subject and an object that depend on the same governor: {{< tryit "http://universal.grew.fr/?corpus=UD_Galician-PUD@2.14&request=pattern { X -[nsubj]-> S; X -[obj]-> O }&clustering=delta(S,O)" >}}
 
 ### Clustering of continuous numeric features
 As suggested in [#28](https://github.com/grew-nlp/grew/issues/28), in case of continuous numeric feature, it is sensible to cluster by value intervals.

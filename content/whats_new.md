@@ -25,7 +25,7 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 
 # Version 1.16 (June 2, 2024)
-  - New syntax in request and key clustering (`length` and `delta` between two nodes)
+  - New syntax for relative position (absolute with `length` or relative with `delta`) between two nodes in [requests](../doc/request#constraints-on-distance-between-two-nodes) and [key clustering](../doc/clustering#clustering-on-distance-between-nodes)
   - Corpusbank handling (WIP)
 
 ---

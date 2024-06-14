@@ -121,32 +121,42 @@ pattern { X[]; Y[]; X -[nsubj]-> Y }
 
 These constraints do not bind new elements in the graph, but must be fulfilled (i.e. binding solutions which do not fulfill the constraints are filtered out).
 
- * Constraints on feature values:
-   * `X.lemma = Y.lemma` two feature values must be equal
-   * `X.lemma <> Y.lemma` two feature values must be different
-   * `X.lemma = "constant"` the feature `lemma` of node `X` must be the value `constant`
-   * `X.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
-   * `X.lemma = lexicon.field` imposes that the feature `lemma` of node `X` must be the be present in the `field` of the `lexicon`. **NB**: this also reduces the current lexicon to the items for which `field` is equals to `X.lemma`.
+#### Constraints on feature values:
+ - `X.lemma = Y.lemma` two feature values must be equal
+ - `X.lemma <> Y.lemma` two feature values must be different
+ - `X.lemma = "constant"` the feature `lemma` of node `X` must be the value `constant`
+ - `X.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
+ - `X.lemma = lexicon.field` imposes that the feature `lemma` of node `X` must be the be present in the `field` of the `lexicon`. **NB**: this also reduces the current lexicon to the items for which `field` is equals to `X.lemma`.
 
- * Constraints on node ordering:
-   * `X < Y` the node `X` immediately precedes the node `Y`
-   * `X << Y` the node `X` precedes the node `Y`
+#### Constraints on node ordering:
+ - `X < Y` the node `X` immediately precedes the node `Y`
+ - `X << Y` the node `X` precedes the node `Y`
 
- * Constraints on in or out edges on bound nodes:
-   * `* -[nsubj]-> Y` there is an incoming edge with label `nsubj` with target `Y` (**NB**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not))
-   * `Y -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `Y` (**NB**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not))
+#### Constraints on in or out edges on bound nodes:
+ - `* -[nsubj]-> Y` there is an incoming edge with label `nsubj` with target `Y` (**NB**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not))
+ - `Y -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `Y` (**NB**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not))
 
- * Constraints on edge labels:
-   * `e1.label = e2.label` the labels of the two edges `e1` and `e2` are equal
-   * `e1.label <> e2.label` the labels of the two edges `e1` and `e2` are different
+#### Constraints on edge labels:
+ - `e1.label = e2.label` the labels of the two edges `e1` and `e2` are equal
+ - `e1.label <> e2.label` the labels of the two edges `e1` and `e2` are different
 
- * Constraints on edges relative positions (these constraints impose that the source and the target of both edges are ordered)
-   * `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered) {{< tryit "http://universal.grew.fr/?custom=6370168c3a22e" >}}
-   * `e1 << e2` the edge `e1` is covered by `e2`
-   * `e1 <> e2` the two edges are disjoint
+#### Constraints on edges relative positions
+These constraints impose that the source and the target of both edges are ordered)
+ - `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered) {{< tryit "http://universal.grew.fr/?custom=6370168c3a22e" >}}
+ - `e1 << e2` the edge `e1` is covered by `e2`
+ - `e1 <> e2` the two edges are disjoint
 
- * Position of a node with respect to an edge
-   * `X << e` the node `X` is strictly included between the source and the target of edge `e`.
+#### Position of a node with respect to an edge
+ - `X << e` the node `X` is strictly included between the source and the target of edge `e`.
+
+####  Constraints on distance between two nodes
+🆕 in Version 1.16. These constraints impose both `X` and `Y` are ordered nodes
+ - `length(X,Y) = 4` the length of the dependency relation is 4 (i.e. there are exactly 3 other nodes between `X` and `Y`), whatever is the relative position of `X` and `Y`
+ - `delta(X,Y) = 4` the length of the dependency relation is 4 and `Y`is after `X` in the linear order
+ - `delta(X,Y) = -4` the length of the dependency relation is 4 and `Y`is before `X` in the linear order
+
+In the previous constraints, `=` can be replaced by `<`, `<=`,  `>` or `>=` with an obvious meaning!
+The keywords `length` and `delta` are also [available as clustering keys](../clustering#clustering-on-distance-between-nodes).
 
 ---
 

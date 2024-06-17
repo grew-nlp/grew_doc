@@ -10,240 +10,212 @@ menu = "main"
 
 # Local installation of Grew-match
 
-This page is outdated. A new page will be provided later.
-
-**Grew-match** is available [online](http://match.grew.fr) on a set of corpora (UD, SUD, Parseme…).
+**Grew-match** is available [online](http://match.grew.fr) for a number of corpora (UD, SUD, Parseme…).
 If you want to use **Grew-match** on your own corpus, you have to install it locally, following the instructions on this page.
 
-Please report any issue [here](https://github.com/grew-nlp/grew/issues) in case of trouble.
+Please report any problems [here](https://github.com/grew-nlp/grew/issues) in case of trouble.
 
-## Step 1: Install the webpage
+---
 
-All the needed files and data will be installed in a local directory, named `$DIR` in all this page.
+## Step 0: Prerequisites
+Follow the **Grew** [installation instructions](../../usage/install/) (steps 1 and 2), in order to install and set up Ocaml & Opam.
 
-### Download
-The code for the main Grew-match webpage itself is available on [`gitlab.inria.fr/grew/grew_match`](https://gitlab.inria.fr/grew/grew_match):
+:warning: only for Mac (see [#16](https://github.com/ocaml/dbm/pull/16))
+  - `opam pin dbm https://github.com/ocaml/dbm.git#master`
 
-#### First time install
+Install the required Ocaml libraries:
 
 ```
-cd $DIR
+opam install ssl ocsipersist-dbm fileutils eliom
+opam remote add grew "http://opam.grew.fr"
+opam install dep2pictlib grew
+```
+
+---
+## Step 1: Create a new directory
+Create a new directory where all the necessary files and data will be installed.
+Replace the string `__DIR__` with this new directory throughout this documentation, in commands or parameter files.
+
+---
+
+## Step 2: Installing data and corpusbank
+
+For this example, we will install three treebanks in `__DIR__/data` :
+
+```
+cd __DIR__
+mkdir data && cd data
+git clone https://github.com/UniversalDependencies/UD_Arabic-PUD.git
+git clone https://github.com/UniversalDependencies/UD_French-PUD.git
+git clone https://github.com/UniversalDependencies/UD_Spanish-PUD.git
+```
+
+### Configuring the `corpusbank`
+
+The set of corpora to be served is described in a folder called `corpusbank` which contains JSON files.
+
+```
+cd __DIR__
+mkdir corpusbank
+```
+
+In this new folder, add the JSON file `pud.json`:
+
+```json_alt
+[
+  {
+    "id": "UD_Arabic-PUD",
+    "config": "ud",
+    "lang": "ar",
+    "rtl": true,
+    "directory": "__DIR__/data/UD_Arabic-PUD"
+  },
+  {
+    "id": "UD_French-PUD",
+    "config": "ud",
+    "lang": "fr",
+    "directory": "__DIR__/data/UD_French-PUD"
+  },
+  {
+    "id": "UD_Spanish-PUD",
+    "config": "ud",
+    "lang": "es",
+    "directory": "__DIR__/data/UD_Spanish-PUD"
+  }
+
+]
+```
+
+### Compiling the corpora
+The following command compiles all the corpora defined in the `corpusbank`. 
+It should be run before the first use and each time a corpus is modified.
+
+```
+grew compile -CORPUSBANK __DIR__/corpusbank
+```
+
+
+## Step 3: Install and configure the backend
+
+
+download the code:
+```
+cd __DIR__
+git clone https://gitlab.inria.fr/grew/grew_match_back.git
+```
+
+### Configuring `grew_match_back`
+In the grew-match_back folder (`__DIR__/grew_match_back`), edit the file `gmb.conf.in` (lines 28 to 31) with the real `__DIR__` value:
+
+```
+  <LOG>__DIR__/grew_match_back/log</LOG>
+  <CORPUSBANK>__DIR__/corpusbank</CORPUSBANK>
+  <RESOURCES>__DIR__/data</RESOURCES>
+  <STORAGE>__DIR__/grew_match_back/static</STORAGE>
+```
+
+## Step 5: Starting the backend
+The command below should be run in the background (or in a separate terminal) so that the backend remains available during use.
+
+```
+cd __DIR__/grew_match_back
+make GMB_PORT=4758 test.opt
+```
+
+Of course, the port number (4758) can be changed to another value, but it must be the same as the one defined in the `instance.json` file below.
+
+---
+
+
+## Step 4: Install and configure the frontend webpage
+
+### Download
+The code for the main Grew-match website itself is available at [`gitlab.inria.fr/grew/grew_match`](https://gitlab.inria.fr/grew/grew_match):
+
+```
+cd __DIR__
 git clone https://gitlab.inria.fr/grew/grew_match.git
 ```
 
 #### Update
 
 ```
-cd $DIR/grew_match
+cd __DIR__/grew_match
 git pull
 ```
 
 --- 
 
-## Step 2: Start an http server
 
-With Python 3, you can start a web server with the commands:
+### Configure `grew_match`
+In the grew-match folder (`__DIR__/grew_match`), add a `instance.json` file with the following code:
+```json_alt
+{
+	"backend": "http://localhost:4758/",
+	"groups": 
+	[
+		{
+			"id": "PUD",
+			"mode": "syntax",
+			"style": "dropdown",
+			"corpora": [
+				"UD_Arabic-PUD",
+				"UD_French-PUD",
+				"UD_Spanish-PUD"
+			]
+		}
+	]
+}
+```
+
+
+## Step 5: Start an http server
+
+With Python 3, you can start a web server with the following commands:
 
 ```
-cd $DIR/grew_match
+cd __DIR__/grew_match
 python -m http.server
 ```
 
-:warning: the last command should be running during Grew-match usage: run it in the background (or in another terminal).
+:warning: the last command should be kept running while using Grew-match: run it in the background (or in another terminal).
 
-You can check that the URL [`http://localhost:8000`](http://localhost:8000) shows an empty Grew-match interface.
+You can check that the URL [`http://localhost:8000`](http://localhost:8000) shows the Grew-match interface.
 
-> The PORT 8000 can be changed to another value (ex: 12345) with the command `python -m http.server 12345` to start the sever and URL [`http://localhost:12345`](http://localhost:12345) to connect.
-
----
-
-## Step 3: Install the backend
-
-This has been tested with Ocaml _Long Term Support release_ [4.14.1](https://ocaml.org/releases/4.14.1).
-It does not work with Ocaml 5.0.0.
-
-Follow the **Grew** [install instruction](../../usage/install/) (Steps 1 and 2), in order to install and setup Ocaml & opam.
-
-:warning: only for Mac (see [#16](https://github.com/ocaml/dbm/pull/16))
-  - `opam pin dbm https://github.com/ocaml/dbm.git#master`
-
-Install prerequisites:
-
-```
-opam install ssl ocsipersist-dbm fileutils eliom
-opam install dep2pictlib grew
-```
-
-download the code:
-```
-cd $DIR
-git clone https://gitlab.inria.fr/grew/grew_match_back.git
-```
+> The PORT 8000 can be changed to another value (e.g. 12345) with the command `python -m http.server 12345` to start the server and URL [`http://localhost:12345`](http://localhost:12345) to connect.
 
 ---
 
-## Step 4: configure the corpora
-
-There are four places to describe the configuration:
- 1. a JSON file describing the corpora
- 2. a JSON file describing how the grew-match interface looks like
- 3. the config file of the backend `gmb.conf.in`
- 4. the config file of the backend `Makefile.options`
-
-In this example, we configure only one corpus (see [here](./#more-complex-interfaces) for more complex usages).
-We take the corpus `UD_French-PUD` as our example.
-
-```
-cd $DIR
-git clone https://github.com/UniversalDependencies/UD_French-PUD.git
-```
-
-### Step 4-1: describe the corpora
-
-Build a folder `$DIR/corpora`:
-
-```
-mkdir -p $DIR/corpora
-```
-
-and put inside the JSON data below in a file `french.json` (replace `$DIR` by your local path):
-
-```json_alt
-{
-  "corpora": [{
-    "id": "UD_French-PUD",
-    "config": "sud",
-    "directory": "$DIR/UD_French-PUD"
-  }]
-}
-```
-
-### Step 4-2: interface description 
-
-Put the json data below in a file `config.json` in the folder `$DIR/grew_match`
-
-```json_alt
-{
-  "backend_server": "http://localhost:8899/",
-  "default": "UD_French-PUD",
-  "groups": [{
-    "id": "French",
-    "name": "French",
-    "mode": "syntax",
-    "style": "single",
-    "corpora": [{
-      "id": "UD_French-PUD"
-    }]
-  }]
-}
-```
-
-:warning: It is required that the file name is `config.json` here. Do not change it.
-
-### Step 4-3
-
-Setup the config file `gmb.conf.in`, starting from the template
-```
-cd $DIR/grew_match_back
-cp gmb.conf.in__TEMPLATE gmb.conf.in
-```
-
-Edit the file `gmb.conf.in` (line 28 to 31) with:
-
-```
-  <log>$DIR/grew_match_back/log</log>
-  <extern>$DIR/grew_match_back/static</extern>
-  <corpora>$DIR/corpora</corpora>
-  <config>$DIR/grew_match/config.json</config>
-```
-
-### Step 4-4
-
-Setup the config file `Makefile.options`, starting from the template
-
-```
-cd $DIR/grew_match_back
-cp Makefile.options__TEMPLATE Makefile.options
-```
-
-Edit the file `Makefile.options` (line 39) with the port number given in `config.json` above (8899 in the example).
-
-```
-TEST_PORT := 8899
-```
-
-Now the URL [`http://localhost:8000`](http://localhost:8000) should appear with the corpus `UD_French-PUD` selected.
 
 
-## Step 5: compile the corpora
+## Step 6: Grew-match is ready!
 
-For a more efficient access corpora are compiled.
-
-```
-grew compile -grew_match_server $DIR/grew_match/meta -i $DIR/corpora/french.json
-```
-
-A new file with the name of the corpus and the extension `.marshal` is created in the corpus directory.
-Of course, you will have to compile again if a corpus is modified.
-
-> You can clean the compiled files with: `grew clean -i $DIR/corpora/french.json`
-
-## Step 6: start the backend
-
-```
-cd $DIR/grew_match_back
-make test.opt
-```
-
-:warning: the last command should be running during Grew-match usage: run it in the background (or in another terminal).
-
-You're done! At the URL [`http://localhost:8000`](http://localhost:8000) we should be able to make a request on your corpus. 
-
- * {{< tryit "http://localhost:8000?request=%20" >}}: search an empty request (it will just display the trees fo the corpus)
- * {{< tryit "http://localhost:8000?relation=nsubj" >}}: search the `nsubj` relation
+You're done! At the URL [`http://localhost:8000`](http://localhost:8000), you should be able to make a request on your corpora. 
+ * {{< tryit "http://localhost:8000?corpus=UD_Spanish-PUD&request=%20" >}}: search an empty request (it will only display the trees of the corpus)
+ * {{< tryit "http://localhost:8000?corpus=UD_French-PUD&relation=nsubj" >}}: search the `nsubj` relation
 
 
-## Next steps
+Note: Once everything is configured as explained above, you should run the two commands in the background to restart Grew-match:
+ - `cd __DIR__/grew_match && python -m http.server`
+ - `cd __DIR__/grew_match_back && make GMB_PORT=4758 test.opt`
 
-To start again when everything is installed, you have to:
- * from `$DIR/grew_match`, start in background `python -m http.server`
- * from `$DIR/grew_match_back`, start in background `make test.opt`
-
-To restart the backend when a corpus is updated:
- * kill the running backend (you can use the command `killall ocsigenserver.opt` if the daemon is running in the background)
- * Run the compile operation again: Step 5
- * Restart the backend: Step 6
-
-
----
 ---
 
 # Going further
 
-## Run a web server
+## After a corpus update
+ - Re-compile the corpora again: `grew compile -CORPUSBANK __DIR__/corpusbank`
+ - Force the backend to reload the new data: `curl --location --request POST 'http://localhost:4758/reload'`
 
-If the Python-based solution proposed above is not enough, a web server is required.
+Note: There is no need to restart the Python http server for the frontend.
 
-You can install [apache](https://www.apache.org), [nginx](https://nginx.org/) or one of the easy to install distribution like [LAMP on Linux](https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29) or [MAMP on Mac OSX](https://www.mamp.info).
 
-We call `$DOCUMENT_ROOT` the main folder accessible from your local website:
- * with apache, it is defined in the `httpd.conf` file
- * with LAMP, it should be `/opt/lampp/htdocs/`
- * with MAMP, it should be `/Applications/MAMP/htdocs`
+## Web interface configuration
+If you have a long list of corpora and want to put them in a pane on the left (like for UD treebanks),
+change in `instance.json` the line `"style": "dropdown",` by `"style": "left_pane",`.
 
-If needed, refer to the documentation of the corresponding web server.
 
-The folder `grew_match` must be accessible from the server.
-You can install it in `$DOCUMENT_ROOT` or use a symbolic link:
+## More complex examples
 
-```
-cd $DOCUMENT_ROOT
-ln -s $DIR/grew_match 
-```
+For larger examples of corpusbank definition: see [https://github.com/grew-nlp/corpusbank](https://github.com/grew-nlp/corpusbank)
 
-## More complex interfaces
-
-On [gitlab.inria.fr/grew/grew_match_config](https://gitlab.inria.fr/grew/grew_match_config), you can find all the configuration files used in the instances available through [match.grew.fr](http://match.grew.fr).
-
- * In folder `corpora`, all JSON files describes some set of corpora (like in Step 4-1 above)
- * Each other folder (`universal`, `parseme`…) describes the interface of the corresponding instance ([universal.grew.fr](http://universal.grew.fr), [parseme.grew.fr](http://parseme.grew.fr)…) in the file `config.json`. Other files in these folders describe the snippets appearing on the right side of the textarea (TODO: document the snippets description!).

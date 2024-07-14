@@ -16,5 +16,5 @@
 12	mené	mener	VERB	_	Gender=Masc|Number=Sing|Tense=Past|VerbForm=Part|Voice=Act	11	comp:aux@tense	_	_
 13	une	un	DET	_	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
 14	double	double	ADJ	_	Gender=Fem|Number=Sing	15	mod	_	_
-15	vie.	vie	NOUN	_	Gender=Fem|Number=Sing	12	comp:obj	_	.
+15	vie.	vie	NOUN	_	Gender=Fem|Number=Sing	12	comp:obj	_	_
 

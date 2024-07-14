@@ -1,3 +1,7 @@
+strat main { Onf (tok_punct) }
+% By default, rules are applied with the "Onf" strategies in ArboratorGrew.
+% The above line is not necessary if the rule is used in it.
+
 rule tok_punct {
 	pattern {
 		% The rule applies to any form that ends with one of the punctuation marks: comma, period, exclamation mark, question mark.
@@ -19,6 +23,7 @@ rule tok_punct {
 		Y.form = X.form[-1:]; % Python-like slicing, see http://grew.fr/doc/commands/#add-or-update-a-node-feature
 		Y.lemma = Y.form;     % Copy the form created above into the lemma annotation
 		Y.upos = PUNCT;       % Set Y' upos
-		X.form = X.form[:-1]  % Remove the last character from X.form
+		X.form = X.form[:-1]; % Remove the last character from X.form
+		X.SpaceAfter = "No";
 	}
 }

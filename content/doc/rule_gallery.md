@@ -33,5 +33,5 @@ See **TODO** for a more general rule parametrized by a lexicon.
 
 {{< grew file="/static/doc/rule_gallery/mwt.grs" >}}
 
-{{< tryit "http://web.grew.fr/?corpus=https://grew.fr/doc/rule_gallery/tok_punct.conllu&grs=https://grew.fr/doc/rule_gallery/mwt_gw.grs" >}}
+{{< tryit "http://web.grew.fr/?corpus=https://grew.fr/doc/rule_gallery/mwt.conllu&grs=https://grew.fr/doc/rule_gallery/mwt_gw.grs" >}}
 

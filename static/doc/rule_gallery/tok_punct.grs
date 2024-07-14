@@ -19,6 +19,7 @@ rule tok_punct {
 		Y.form = X.form[-1:]; % Python-like slicing, see http://grew.fr/doc/commands/#add-or-update-a-node-feature
 		Y.lemma = Y.form;     % Copy the form created above into the lemma annotation
 		Y.upos = PUNCT;       % Set Y' upos
-		X.form = X.form[:-1]  % Remove the last character from X.form
+		X.form = X.form[:-1]; % Remove the last character from X.form
+		X.SpaceAfter = "No";
 	}
 }

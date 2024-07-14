@@ -12,7 +12,7 @@ rule tok_punct {
 	}
 	without {
 		% Other forms may need to be retained: to be completed
-		X.form = "Dr." | "Jr.";
+		X[form = "M." | "Dr." | "Jr."];
 	}
 	commands {
 		add_node Y :> X;      % Add a new node (called Y in the following commands) directly after X

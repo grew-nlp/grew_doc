@@ -10,6 +10,6 @@ rule mwt {
 		Y.upos = DET;                % Set the POS on sub-token 2
 		% Next lines are dedicated to the multiword tokens.
 		% See https://grew.fr/doc/conllu/#additional-features-textform-and-wordform for explanation
-		X.wordform = "au"; Y.wordform = "_":
+		X.wordform = "au"; Y.wordform = "_";
 	}
 }

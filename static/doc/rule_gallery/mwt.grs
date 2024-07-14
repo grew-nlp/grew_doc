@@ -1,0 +1,15 @@
+rule mwt {
+	pattern {
+		X [ form = "au" ]
+	}
+	commands {
+		add_node Y :> X;             % add a new node (called Y in following commands) directly after X
+		X.form = "à"; X.lemma="à";   % Set the new form and lemma on sub-token 1
+		X.upos = ADP;                % Set the new POS on sub-token 1
+		Y.form = "le"; Y.lemma="le"; % Set the new form and lemma on sub-token 2
+		Y.upos = DET;                % Set the POS on sub-token 2
+		% Next lines are dedicated to the multiword tokens.
+		% See https://grew.fr/doc/conllu/#additional-features-textform-and-wordform for explanation
+		X.wordform = "au"; Y.wordform = "_":
+	}
+}

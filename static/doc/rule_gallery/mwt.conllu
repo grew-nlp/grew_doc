@@ -1,0 +1,14 @@
+# sent_id = fr-ud-train_10708
+# text = Il évolue au poste d'attaquant au FC Mantois 78.
+1	Il	lui	PRON	_	Emph=No|Gender=Masc|Number=Sing|Person=3|PronType=Prs	2	subj	_	wordform=il
+2	évolue	évoluer	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	au	au	ADP	_	_	2	comp:obl	_	_
+4	poste	poste	NOUN	_	Gender=Masc|Number=Sing	3	comp:obj	_	_
+5	d'	de	ADP	_	_	4	udep	_	SpaceAfter=No
+6	attaquant	attaquant	NOUN	_	Gender=Masc|Number=Sing	5	comp:obj	_	_
+7	au	au	ADP	_	_	2	mod	_	_
+8	FC	FC	PROPN	_	Gender=Masc|Number=Sing	7	comp:obj	_	_
+9	Mantois	Mantois	PROPN	_	_	8	flat@name	_	_
+10	78	78	NUM	_	Number=Plur	8	mod	_	SpaceAfter=No
+11	.	.	PUNCT	_	_	2	punct	_	_
+

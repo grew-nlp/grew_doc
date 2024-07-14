@@ -1,0 +1,20 @@
+# global.columns = ID FORM LEMMA UPOS XPOS FEATS HEAD DEPREL DEPS MISC
+# sent_id = fr-ud-train_07722
+# text = M. Saint-Clair passe alors aux aveux, expliquant qu'il a mené une double vie.
+1	M.	M.	NOUN	_	Gender=Masc|Number=Sing	3	subj	_	_
+2	Saint-Clair	Saint-Clair	PROPN	_	_	1	flat@name	_	_
+3	passe	passer	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+4	alors	alors	ADV	_	_	3	mod	_	_
+5-6	aux	_	_	_	_	_	_	_	_
+5	à	à	ADP	_	_	3	comp:obl	_	_
+6	les	le	DET	_	Definite=Def|Number=Plur|PronType=Art	7	det	_	_
+7	aveux,	aveu	NOUN	_	Gender=Masc|Number=Plur	5	comp:obj	_	_
+8	expliquant	expliquer	VERB	_	Tense=Pres|VerbForm=Part	3	mod	_	Subject=Instantiated
+9	qu'	que	SCONJ	_	_	8	comp:obj	_	SpaceAfter=No
+10	il	lui	PRON	_	Emph=No|Gender=Masc|Number=Sing|Person=3|PronType=Prs	11	subj	_	_
+11	a	avoir	AUX	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	comp:obj	_	_
+12	mené	mener	VERB	_	Gender=Masc|Number=Sing|Tense=Past|VerbForm=Part|Voice=Act	11	comp:aux@tense	_	_
+13	une	un	DET	_	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
+14	double	double	ADJ	_	Gender=Fem|Number=Sing	15	mod	_	_
+15	vie.	vie	NOUN	_	Gender=Fem|Number=Sing	12	comp:obj	_	.
+

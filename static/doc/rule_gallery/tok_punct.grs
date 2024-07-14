@@ -1,0 +1,24 @@
+rule tok_punct {
+	pattern {
+		% The rule applies to any form that ends with one of the punctuation marks: comma, period, exclamation mark, question mark.
+		X [ form = re".+[,.!?]" ]
+		% RegExp explanation: 
+		%  "..*" ➔ a non-empty prefix ("." is any character, "+" means repeated a non-zero number of time)
+		%  "[,.!?]" ➔ the last character is one of the characters we want to split.
+	}
+	without {
+		% A token that contains only punctuation marks must be spared (e.g. "!!!" or "...").
+		X.form = re"[,.!?]+";
+	}
+	without {
+		% Other forms may need to be retained: to be completed
+		X.form = "Dr." | "Jr.";
+	}
+	commands {
+		add_node Y :> X;      % Add a new node (called Y in the following commands) directly after X
+		Y.form = X.form[-1:]; % Python-like slicing, see http://grew.fr/doc/commands/#add-or-update-a-node-feature
+		Y.lemma = Y.form;     % Copy the form created above into the lemma annotation
+		Y.upos = PUNCT;       % Set Y' upos
+		X.form = X.form[:-1]  % Remove the last character from X.form
+	}
+}

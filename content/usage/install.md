@@ -57,14 +57,14 @@ Check that `ocaml` is installed with `ocamlc -v`.
 This gives you the version of Ocaml installed.
 This should be 4.13 or higher.
 
+
+## Step 3: Install the Grew software
+
 To add the Grew-specific opam repository, run the following command:
 
 ```
 opam remote add grew "http://opam.grew.fr"
 ```
-
-## Step 3: Install the Grew software
-
 
 ```
 opam install grew

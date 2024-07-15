@@ -15,13 +15,13 @@ If you want to use **Grew-match** on your own corpus, you have to install it loc
 
 Please report any problems [here](https://github.com/grew-nlp/grew/issues) in case of trouble.
 
+You may also consider using [grew_match_quick](https://github.com/grew-nlp/grew_match_quick).
+This a Python script that automatizes the steps depscribed here.
+
 ---
 
 ## Step 0: Prerequisites
 Follow the **Grew** [installation instructions](../../usage/install/) (steps 1 and 2), in order to install and set up Ocaml & Opam.
-
-:warning: only for Mac (see [#16](https://github.com/ocaml/dbm/pull/16))
-  - `opam pin dbm https://github.com/ocaml/dbm.git#master`
 
 Install the required Ocaml libraries:
 
@@ -114,7 +114,7 @@ In the grew-match_back folder (`__DIR__/grew_match_back`), edit the file `gmb.co
   <STORAGE>__DIR__/grew_match_back/static</STORAGE>
 ```
 
-## Step 5: Starting the backend
+## Step 4: Starting the backend
 The command below should be run in the background (or in a separate terminal) so that the backend remains available during use.
 
 ```
@@ -127,7 +127,7 @@ Of course, the port number (4758) can be changed to another value, but it must b
 ---
 
 
-## Step 4: Install and configure the frontend webpage
+## Step 5: Install and configure the frontend webpage
 
 ### Download
 The code for the main Grew-match website itself is available at [`gitlab.inria.fr/grew/grew_match`](https://gitlab.inria.fr/grew/grew_match):

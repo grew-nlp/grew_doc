@@ -50,8 +50,8 @@ apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 
 Run: 
   * `opam init`
-  * `opam switch create 5.1.1` Install a recent version of Ocaml (released on Dec 8, 2023)
-  * as adviced by the previous command: `eval $(opam env)`
+  * `opam switch create 5.2.0` Install a recent version of Ocaml (5.2.0 was released on 2024-05-13)
+  * as adviced by the previous command: `eval $(opam env)` or start a new terminal
 
 Check that `ocaml` is installed with `ocamlc -v`.
 This gives you the version of Ocaml installed.
@@ -98,5 +98,5 @@ you should obtain (the third line may not appear if you haven't installed the Py
 ```
 grew                          1.16.0      Grew system
 grewlib                       1.16.0      The main library for the Grew system
-grewpy_backend                0.5.3       The Ocaml backend for the `grewpy` Python lib
+grewpy_backend                0.5.4       The Ocaml backend for the `grewpy` Python lib
 ```

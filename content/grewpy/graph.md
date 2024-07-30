@@ -17,7 +17,7 @@ First, we import the `Graph` module from `grewpy`.
 from grewpy import Graph
 ```
 
-    connected to port: 55129
+    connected to port: 55596
 
 ## Build a graph
 

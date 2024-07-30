@@ -7,6 +7,8 @@ date: 2023-09-19
 
 # `grewpy` library: Drawing dependencies
 
+Download the notebook [here](../drawing_dep.ipynb).
+
 The code below initializes Grewpy, load a `corpus` and a `graph` from the `corpus`.
 
 ```python_alt
@@ -18,7 +20,7 @@ sent_id = "n01003007"
 graph = corpus[sent_id]
 ```
 
-    connected to port: 55222
+    connected to port: 55685
 
 ## Build the SVG picture for a graph
 

@@ -7,7 +7,7 @@ date: 2024-04-22
 
 # Grewpy tutorial: Run requests on a corpus
 
-Download the notebook [here](../request.ipynb)
+Download the notebook [here](../request.ipynb).
 
 ```python_alt
 import grewpy
@@ -16,7 +16,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 55170
+    connected to port: 55635
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.

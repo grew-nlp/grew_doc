@@ -27,7 +27,7 @@ Install the required Ocaml libraries:
 
 ```
 opam install ssl ocsipersist-dbm fileutils eliom
-opam remote add grew "http://opam.grew.fr"
+opam remote add grew "https://opam.grew.fr"
 opam install dep2pictlib grew
 ```
 

@@ -63,7 +63,7 @@ This should be 4.13 or higher.
 To add the Grew-specific opam repository, run the following command:
 
 ```
-opam remote add grew "http://opam.grew.fr"
+opam remote add grew "https://opam.grew.fr"
 ```
 
 ```

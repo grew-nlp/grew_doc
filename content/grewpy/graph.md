@@ -7,6 +7,8 @@ date: 2023-08-14
 
 # `grewpy` library: Graph module
 
+Download the notebook [here](../graph.ipynb).
+
 First, we import the `Graph` module from `grewpy`.
 
 **NB:** The port number is different at each execution. If you don't have the message `connected to port: …`, see [here](../../usage/python/#install).
@@ -15,7 +17,7 @@ First, we import the `Graph` module from `grewpy`.
 from grewpy import Graph
 ```
 
-    connected to port: 55967
+    connected to port: 55129
 
 ## Build a graph
 
@@ -84,19 +86,85 @@ print (g2.to_conll())
 print (g2.to_dot())
 ```
 
-    digraph G{
-    0[label="form:__0__"];
-    1[label="Definite:Def,PronType:Art,form:The,lemma:the,textform:The,upos:DET,wordform:The,xpos:RD"];
-    2[label="Number:Sing,form:work,lemma:work,textform:work,upos:NOUN,wordform:work,xpos:S"];
-    3[label="Mood:Ind,Number:Sing,Person:3,Tense:Pres,VerbForm:Fin,form:is,lemma:be,textform:is,upos:AUX,wordform:is,xpos:VA"];
-    4[label="SpaceAfter:No,Tense:Past,VerbForm:Part,form:done,lemma:do,textform:done,upos:VERB,wordform:done,xpos:V"];
-    5[label="form:.,lemma:.,textform:.,upos:PUNCT,wordform:.,xpos:FS"];
-    4 -> punct[label="5"];
-    4 -> aux:pass[label="3"];
-    4 -> nsubj:pass[label="2"];
-    2 -> det[label="1"];
-    0 -> root[label="4"];
+    digraph G {
+      node [shape=box];
+      N_5 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="3"><B>.</B></TD></TR>
+    <TR><TD ALIGN="right">upos</TD><TD>=</TD><TD ALIGN="left">PUNCT</TD></TR>
+    <TR><TD ALIGN="right">lemma</TD><TD>=</TD><TD ALIGN="left">.</TD></TR>
+    <TR><TD ALIGN="right">xpos</TD><TD>=</TD><TD ALIGN="left">FS</TD></TR>
+    <TR><TD ALIGN="right">textform</TD><TD>=</TD><TD ALIGN="left">.</TD></TR>
+    <TR><TD ALIGN="right">wordform</TD><TD>=</TD><TD ALIGN="left">.</TD></TR>
+    </TABLE>
+    >]
+      N_4 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="3"><B>done</B></TD></TR>
+    <TR><TD ALIGN="right">upos</TD><TD>=</TD><TD ALIGN="left">VERB</TD></TR>
+    <TR><TD ALIGN="right">lemma</TD><TD>=</TD><TD ALIGN="left">do</TD></TR>
+    <TR><TD ALIGN="right">xpos</TD><TD>=</TD><TD ALIGN="left">V</TD></TR>
+    <TR><TD ALIGN="right">SpaceAfter</TD><TD>=</TD><TD ALIGN="left">No</TD></TR>
+    <TR><TD ALIGN="right">Tense</TD><TD>=</TD><TD ALIGN="left">Past</TD></TR>
+    <TR><TD ALIGN="right">VerbForm</TD><TD>=</TD><TD ALIGN="left">Part</TD></TR>
+    <TR><TD ALIGN="right">textform</TD><TD>=</TD><TD ALIGN="left">done</TD></TR>
+    <TR><TD ALIGN="right">wordform</TD><TD>=</TD><TD ALIGN="left">done</TD></TR>
+    </TABLE>
+    >]
+      N_3 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="3"><B>is</B></TD></TR>
+    <TR><TD ALIGN="right">upos</TD><TD>=</TD><TD ALIGN="left">AUX</TD></TR>
+    <TR><TD ALIGN="right">lemma</TD><TD>=</TD><TD ALIGN="left">be</TD></TR>
+    <TR><TD ALIGN="right">xpos</TD><TD>=</TD><TD ALIGN="left">VA</TD></TR>
+    <TR><TD ALIGN="right">Mood</TD><TD>=</TD><TD ALIGN="left">Ind</TD></TR>
+    <TR><TD ALIGN="right">Number</TD><TD>=</TD><TD ALIGN="left">Sing</TD></TR>
+    <TR><TD ALIGN="right">Person</TD><TD>=</TD><TD ALIGN="left">3</TD></TR>
+    <TR><TD ALIGN="right">Tense</TD><TD>=</TD><TD ALIGN="left">Pres</TD></TR>
+    <TR><TD ALIGN="right">VerbForm</TD><TD>=</TD><TD ALIGN="left">Fin</TD></TR>
+    <TR><TD ALIGN="right">textform</TD><TD>=</TD><TD ALIGN="left">is</TD></TR>
+    <TR><TD ALIGN="right">wordform</TD><TD>=</TD><TD ALIGN="left">is</TD></TR>
+    </TABLE>
+    >]
+      N_2 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="3"><B>work</B></TD></TR>
+    <TR><TD ALIGN="right">upos</TD><TD>=</TD><TD ALIGN="left">NOUN</TD></TR>
+    <TR><TD ALIGN="right">lemma</TD><TD>=</TD><TD ALIGN="left">work</TD></TR>
+    <TR><TD ALIGN="right">xpos</TD><TD>=</TD><TD ALIGN="left">S</TD></TR>
+    <TR><TD ALIGN="right">Number</TD><TD>=</TD><TD ALIGN="left">Sing</TD></TR>
+    <TR><TD ALIGN="right">textform</TD><TD>=</TD><TD ALIGN="left">work</TD></TR>
+    <TR><TD ALIGN="right">wordform</TD><TD>=</TD><TD ALIGN="left">work</TD></TR>
+    </TABLE>
+    >]
+      N_1 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="3"><B>The</B></TD></TR>
+    <TR><TD ALIGN="right">upos</TD><TD>=</TD><TD ALIGN="left">DET</TD></TR>
+    <TR><TD ALIGN="right">lemma</TD><TD>=</TD><TD ALIGN="left">the</TD></TR>
+    <TR><TD ALIGN="right">xpos</TD><TD>=</TD><TD ALIGN="left">RD</TD></TR>
+    <TR><TD ALIGN="right">Definite</TD><TD>=</TD><TD ALIGN="left">Def</TD></TR>
+    <TR><TD ALIGN="right">PronType</TD><TD>=</TD><TD ALIGN="left">Art</TD></TR>
+    <TR><TD ALIGN="right">textform</TD><TD>=</TD><TD ALIGN="left">The</TD></TR>
+    <TR><TD ALIGN="right">wordform</TD><TD>=</TD><TD ALIGN="left">The</TD></TR>
+    </TABLE>
+    >]
+      N_0 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="3"><B>__0__</B></TD></TR>
+    </TABLE>
+    >]
+      N_0 -> N_4[label="root", ];
+      N_2 -> N_1[label="det", ];
+      N_4 -> N_2[label="nsubj:pass", ];
+      N_4 -> N_3[label="aux:pass", ];
+      N_4 -> N_5[label="punct", ];
+     { rank=same; N_0; N_1; }
+      N_0 -> N_1 [label="SUCC", style=dotted, fontcolor=white, color=white];
+     { rank=same; N_1; N_2; }
+      N_1 -> N_2 [label="SUCC", style=dotted, fontcolor=white, color=white];
+     { rank=same; N_2; N_3; }
+      N_2 -> N_3 [label="SUCC", style=dotted, fontcolor=white, color=white];
+     { rank=same; N_3; N_4; }
+      N_3 -> N_4 [label="SUCC", style=dotted, fontcolor=white, color=white];
+     { rank=same; N_4; N_5; }
+      N_4 -> N_5 [label="SUCC", style=dotted, fontcolor=white, color=white];
     }
+    
 
 ```python_alt
 import json
@@ -180,15 +248,15 @@ Edge label are dictionaries (see [here](../../doc/graph/#edges) for details abou
 g1.sucs["A"]
 ```
 
-    [('B', {'1': 'X'}), ('B', {'1': 'XX'})]
+    [('B', Fs_edge({'1': 'X'})), ('B', Fs_edge({'1': 'XX'}))]
 
 ```python_alt
 g2.sucs["4"]
 ```
 
-    [('5', {'1': 'punct'}),
-     ('3', {'1': 'aux', '2': 'pass'}),
-     ('2', {'1': 'nsubj', '2': 'pass'})]
+    [('5', Fs_edge({'1': 'punct'})),
+     ('3', Fs_edge({'1': 'aux', '2': 'pass'})),
+     ('2', Fs_edge({'1': 'nsubj', '2': 'pass'}))]
 
 Note that a node without successors is not defined the `sucs` dictionary.
 

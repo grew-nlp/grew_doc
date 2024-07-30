@@ -1,6 +1,8 @@
 ---
 title: "Grewpy • tutorial"
 date: 2024-04-22
+aliases:
+- /grewpy/top
 ---
 
 
@@ -17,6 +19,7 @@ Several examples below suppose that the corpus `SUD_English-PUD` is available lo
 
 
 ## Prepare data
+
 
 
 ## Other links and resources:

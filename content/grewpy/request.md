@@ -7,6 +7,8 @@ date: 2024-04-22
 
 # Grewpy tutorial: Run requests on a corpus
 
+Download the notebook [here](../request.ipynb)
+
 ```python_alt
 import grewpy
 from grewpy import Corpus, Request
@@ -14,7 +16,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 56002
+    connected to port: 55170
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.
@@ -40,13 +42,23 @@ print(f"{sent_ids[0] = }")
     sent_ids[0] = 'n01001011'
 
 ## Explore data
-See [Grew-match tutorial](https://universal.grew.fr/?corpus=UD_English-ParTUT@2.14) to practice how to write Grew requests
+See the [Grew-match tutorial](https://universal.grew.fr/?corpus=UD_English-ParTUT@2.14) to practice writing Grew requests
 
 ### Count the number of subjets in the corpus
 
 ```python_alt
-req1 = Request("X-[subj]->Y")
+req1 = Request("pattern { X-[subj]->Y }")
 corpus.count(req1)
+```
+
+    1420
+
+It is possible to extend an already existing request with the methods `pattern`, `without` and `with_` (because `with` is a Python keyword).
+Hence, the request `req1bis` below is equivalent to `req1`.
+
+```python_alt
+req1bis = Request().pattern("X-[subj]->Y")
+corpus.count(req1bis)
 ```
 
     1420
@@ -54,7 +66,7 @@ corpus.count(req1)
 ### Count the number of subjects such that the subject's head is not a pronoun
 
 ```python_alt
-req2 = Request("X-[subj]->Y").without("Y[upos=PRON]")
+req2 = Request().pattern("X-[subj]->Y").without("Y[upos=PRON]")
 corpus.count(req2)
 ```
 
@@ -64,7 +76,7 @@ corpus.count(req2)
 Note the usage of `with_` (because `with` is a Python keyword)
 
 ```python_alt
-req3 = Request("X-[subj]->Y").with_("Y->Z")
+req3 = Request().pattern("X-[subj]->Y").with_("Y->Z")
 corpus.count(req3)
 ```
 
@@ -73,18 +85,18 @@ corpus.count(req3)
 ### `with` and `without` items can be stacked 
 
 ```python_alt
-req4 = Request("X-[subj]->Y").with_("Y->Z").without("Y[upos=PRON]").without("X[upos=VERB]")
+req4 = Request().pattern("X-[subj]->Y").with_("Y->Z").without("Y[upos=PRON]").without("X[upos=VERB]")
 corpus.count(req4)
 ```
 
     320
 
 ### Building a request with the raw Grew syntax
-It is possible to build request directly from the concrete syntax used in Grew-match or in Grew rules, with the `parse` function.
+It is possible to build request directly from the concrete syntax used in Grew-match or in Grew rules.
 The `req4` can be written:
 
 ```python_alt
-req4bis = Request.parse("""
+req4bis = Request("""
 pattern { X-[subj]->Y }
 with { Y->Z }
 without { Y[upos=PRON] }
@@ -100,7 +112,7 @@ See [Clustering](../../doc/clustering) for more documentation.
 Below, we cluster the subject relation, according to the POS of the governor.
 
 ```python_alt
-req5 = Request("X-[subj]->Y")
+req5 = Request("pattern {X-[subj]->Y}")
 corpus.count(req5, clustering_parameter=["X.upos"])
 ```
 
@@ -111,7 +123,6 @@ The clustering is done on the relative position of `X` and `Y`.
 It answers to the question: _How many subjects are in a pre-verbal position?_
 
 ```python_alt
-req5 = Request("X-[subj]->Y")
 corpus.count(req5, clustering_parameter=["{X << Y}"])
 ```
 
@@ -159,7 +170,7 @@ occurrences[0]
 The edge is named `e`, and the label of the dependency is reported in the output
 
 ```python_alt
-req6 = Request("e: X->Y; X[upos=VERB]")
+req6 = Request().pattern("e: X->Y; X[upos=VERB]")
 corpus.search(req6)[3]
 ```
 

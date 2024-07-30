@@ -3,7 +3,7 @@ title: "Grewpy • request"
 date: 2024-04-22
 ---
 
-[`grewpy` Tutorial](../top)
+[`grewpy` Tutorial](../tutorial)
 
 # Grewpy tutorial: Modify data
 

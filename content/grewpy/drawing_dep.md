@@ -3,7 +3,7 @@ title: "Grewpy • drawing dependencies"
 date: 2023-09-19
 ---
 
-[`grewpy` Tutorial](../top)
+[`grewpy` Tutorial](../tutorial)
 
 # `grewpy` library: Drawing dependencies
 

@@ -3,7 +3,7 @@ title: "Grewpy • graph"
 date: 2023-08-14
 ---
 
-[`grewpy` Tutorial](../top)
+[`grewpy` Tutorial](../tutorial)
 
 # `grewpy` library: Graph module
 

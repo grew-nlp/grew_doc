@@ -21,7 +21,6 @@ If you just need to upgrade your installation, please refer to the [Upgrade sect
 
 ## Step 1: Install opam
 
-
 **Grew** requires **opam** version **2.0.0** or higher.
 In case of trouble installing opam, please consult [**opam** installation page](https://opam.ocaml.org/doc/Install.html).
 
@@ -97,6 +96,6 @@ you should obtain (the third line may not appear if you haven't installed the Py
 
 ```
 grew                          1.16.0      Grew system
-grewlib                       1.16.0      The main library for the Grew system
+grewlib                       1.16.2      The main library for the Grew system
 grewpy_backend                0.5.4       The Ocaml backend for the `grewpy` Python lib
 ```

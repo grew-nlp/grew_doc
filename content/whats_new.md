@@ -24,6 +24,11 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 ---
 
+## Version 1.16.2 of `grewlib` (July 31, 2024)
+ - New syntax for large dominance `X ->> Y` (see [doc](../../doc/request/#constraints-on-large-dominance))
+ - New syntax for PCRE regexp (see doc [here](../../doc/request/#constraints-on-feature-values) and [here](../../doc/request/#node-clauses))
+
+
 # Version 1.16 (June 2, 2024)
   - New syntax for relative position (absolute with `length` or relative with `delta`) between two nodes in [requests](../doc/request#constraints-on-distance-between-two-nodes) and [key clustering](../doc/clustering#clustering-on-distance-between-nodes)
   - Corpusbank handling (WIP)

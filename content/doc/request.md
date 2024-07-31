@@ -14,7 +14,7 @@ aliases = [
 
 Requests are used in **Grew** to describe the left part of rewriting rules and in **Grew-match** to describe queries to be executed on corpora.
 
-The syntax of requests in **Grew** can be learnt using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
+The syntax of requests in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
 
 ---
 ## Requests syntax
@@ -22,38 +22,38 @@ The syntax of requests in **Grew** can be learnt using the [tutorial part](http:
 A request is defined through 4 different kinds of *request items*.
 
  * Global items (introduced by the keyword `global`) filter structures based on information about the whole graph or its metadata.
- * Matching items (introduced by keyword `pattern`) describe nodes and relations that must be found in the graph.
- * Positive filtering items (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only the ones which **follows** the additional graph constraints).
- * Negative filtering items (introduced by the keyword `without`) filter out matchings previously selected by other items (keeping only the ones which **do not follow** the additional graph constraints).
+ * Matching items (introduced by the keyword `pattern`) describe nodes and relations that must be found in the graph.
+ * Positive filtering items (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only those that **follow** the additional graph constraints).
+ * Negative filtering items (introduced by the keyword `without`) filter out matchings previously selected by other items (keeping only those that **do not follow** the additional graph constraints).
  
-The full matching on one graph process is:
+The full matching process on a graph is:
 
  * Take a graph and a request as input.
- * Output a set of matchings; a *matching* being a function from nodes and edges defined in the matching items to nodes and edges of the host graph.
+ * Output a set of matchings; where a *matching* is a function from nodes and edges defined in the matching items to nodes and edges of the host graph.
 
- 1. If the graph metadata does not satisfy one of the global items, the output is empty.
- 1. Else the set M is initialised as the set of matchings which satisfy the union of matching items.
- 1. For each positive filtering item, remove from M the matchings which do not satisfy it.
- 1. For each negative filtering item, remove from M the matchings which satisfy it.
+ 1. If the graph metadata does not satisfy any of the global items, the output is empty.
+ 1. Else the set M is initialised as the set of matchings that satisfy the union of matching items.
+ 1. For each positive filtering item, remove from M the matchings that do not satisfy it.
+ 1. For each negative filtering item, remove from M the matchings that satisfy it.
 
 On a corpus, the graph matching process is repeated on each graph.
 
 ### Remarks
- * If there is more than one matching `pattern` items, the union is considered.
- * If there is more than one filtering (`without` or `with`) items, there are all interpreted independently
+ * If there is more than one matching `pattern` items, the union is taken into account.
+ * If there is more than one filtering (`without` or `with`) items, there are all interpreted independently.
  * The order of items in a request are irrelevant.
- * It there is no positive item, there is a trivial matching which is the empty function.
+ * It there is no matching item (`pattern`), there is a trivial matching which is the empty function.
 
 ---
 ## Matching and filtering items
-Matching and filtering items both follow the same syntax.
-They are described by a list of clauses: node clauses, edge clauses and additional constraints
+Both matching and filtering items both follow the same syntax.
+They are described by a list of clauses: node clauses, edge clauses and additional constraints.
 
 ### Node clauses
 In a *node clause*, a node is described by an identifier (`X` in the example below) and some constraints on its feature structure.
 
 ```grew
-X [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, form = "être", lemma = re"s.*" ]
+X [upos = VERB, Mood = Ind|Imp, Tense <> Fut, Number, !Person, form = "être", lemma = re"s.*", Gloss = /.*POSS.*/i] ]
 ```
 
 The clause above illustrates the syntax of constraint that can be expressed, in turn:
@@ -65,10 +65,11 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * `!Person` requires that the feature `Person` is not defined
  * `form = "être"` quotes are required when non-ASCII characters are used
  * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression
+ * [🆕 `1.16.2`] `Gloss = /.*POSS.*/i` PCRE style regular expression (the optional suffix `i` is for case insensitive matching).
 
 ### Anchor nodes
 ⚠️ For dependency trees, an anchor node (position 0) is added to the structure (see [here](http://localhost:1313/doc/conllu/#the-anchor-node-at-position-0)).
-In ArboratorGrew, this node is not displayed but is still taken into account when searching requests or when applying rules.
+In **ArboratorGrew**, this node is not displayed but is still taken into account when searching requests or when applying rules.
 
 ### Disjunction in node clause
 ⚠️ Since version 1.14
@@ -115,8 +116,6 @@ pattern { X -[nsubj]-> Y }
 pattern { X[]; Y[]; X -[nsubj]-> Y }
 ```
 
-
-
 ### Additional constraints
 
 These constraints do not bind new elements in the graph, but must be fulfilled (i.e. binding solutions which do not fulfill the constraints are filtered out).
@@ -126,15 +125,23 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
  - `X.lemma <> Y.lemma` two feature values must be different
  - `X.lemma = "constant"` the feature `lemma` of node `X` must be the value `constant`
  - `X.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
+ - [🆕 `1.16.2`] `X.lemma = /.*ing/` the value of a feature must follow a PCRE style regular expression
+ - [🆕 `1.16.2`] `X.lemma = /.*ing/i` the value of a feature must follow a case insensitive PCRE style regular expression
  - `X.lemma = lexicon.field` imposes that the feature `lemma` of node `X` must be the be present in the `field` of the `lexicon`. **NB**: this also reduces the current lexicon to the items for which `field` is equals to `X.lemma`.
 
 #### Constraints on node ordering:
  - `X < Y` the node `X` immediately precedes the node `Y`
  - `X << Y` the node `X` precedes the node `Y`
 
+#### Constraints on large dominance
+ - [🆕 `1.16.2`]  `X ->> Y`: there is a path (of unbounded length) from `X` to `Y` (see [#49](https://github.com/grew-nlp/grew/issues/49)).
+   - {{< tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X [concept = \"see-01\"]; Y [concept = \"name\"]; X ->> Y }" >}} on AMR
+   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.14&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }" >}} on `bUD_English-EWT@2.14`, search for a `VERB` which dominates a reative pronoun
+   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.14&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }%0Awithout { V2 [upos=VERB]; V1 ->> V2; V2 ->> P; }" >}} on `bUD_English-EWT@2.14`, search for a `VERB` which dominates a reative pronoun without another `VERB` on the path.
+
 #### Constraints on in or out edges on bound nodes:
- - `* -[nsubj]-> Y` there is an incoming edge with label `nsubj` with target `Y` (**NB**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not))
- - `Y -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `Y` (**NB**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not))
+ - `* -[nsubj]-> Y` there is an incoming edge with label `nsubj` with target `Y`. **NB**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not)
+ - `Y -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `Y`. **NB**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not)
 
 #### Constraints on edge labels:
  - `e1.label = e2.label` the labels of the two edges `e1` and `e2` are equal
@@ -172,9 +179,9 @@ pattern { X1 [ lemma="make" ]; X2 [ lemma="make" ] }
 
 If the node identifier is suffixed by the symbol `$`, the injectify constraint is relaxed.
 A node `X$` can be mapped to any node in the graph (either already mapped by another node of the request or not).
+Note that `X$` is a new name not related to a potential node named `X`.
 
 ### Example
-For a more complex example with non-injective matching, you can see [this example](../../gallery/span).
 
 In AMR graphs, if we look for a predicate (with `concept=judge-01` in the example) with two arguments `ARG0` and `ARG1`, there are two dictinct cases:
  * two different nodes `A0` and `A1` are respectively `ARG0` and `ARG1` &rarr; 1 occurence {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20X%20[concept=%22judge-01%22];%20X%20-[ARG0]-%3E%20A0;%20X%20-[ARG1]-%3E%20A1;%20}" >}}
@@ -195,6 +202,8 @@ If we do not require the injectivity on one of the two arguments, then both case
 pattern { X [concept="judge-01"]; X -[ARG0]-> A; X -[ARG1]-> B$; }
 ```
 
+For a more complex example with non-injective matching, you can see [this example](../../gallery/span).
+
 
 ---
 ## Complex edges
@@ -202,7 +211,7 @@ pattern { X [concept="judge-01"]; X -[ARG0]-> A; X -[ARG1]-> B$; }
 As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
 
  * `X -[1=subj]-> Y` the edge must match the edge feature constraints (more examples below).
- * [Since version `1.9.1`] `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.14&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
+ * `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.14&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 
 
@@ -224,7 +233,7 @@ It is important to note that from the request point of view, the two clauses `X 
 ### Difference with node features matching
 
 Note that we would expect that the syntax `X -[1=comp, 2]-> Y` should be equivalent to `X -[1=comp, 2=*]-> Y` but it will bring an ambiguity for `X -[lab]-> Y` that can be interpreted as the atomic label `X -[lab]-> Y` or as `X -[lab=*]-> Y`.
-To avoid this ambiguity, the syntax `X -[1=comp, 2]-> Y` in not allowed.
+To avoid this ambiguity, the syntax `X -[1=comp, 2]-> Y` in not allowed and you should write `X -[1=comp, 2=*]-> Y`.
 
 ---
 ## Global request

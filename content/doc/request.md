@@ -65,7 +65,7 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * `!Person` requires that the feature `Person` is not defined
  * `form = "être"` quotes are required when non-ASCII characters are used
  * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression
- * [🆕 `1.16.2`] `Gloss = /.*POSS.*/i` PCRE style regular expression (the optional suffix `i` is for case insensitive matching).
+ * [🆕 `1.16.2`] `Gloss = /.*POSS.*/i` PCRE-style regular expression (the optional suffix `i` is for case-insensitive matching).
 
 ### Anchor nodes
 ⚠️ For dependency trees, an anchor node (position 0) is added to the structure (see [here](http://localhost:1313/doc/conllu/#the-anchor-node-at-position-0)).
@@ -121,46 +121,46 @@ pattern { X[]; Y[]; X -[nsubj]-> Y }
 These constraints do not bind new elements in the graph, but must be fulfilled (i.e. binding solutions which do not fulfill the constraints are filtered out).
 
 #### Constraints on feature values:
- - `X.lemma = Y.lemma` two feature values must be equal
- - `X.lemma <> Y.lemma` two feature values must be different
- - `X.lemma = "constant"` the feature `lemma` of node `X` must be the value `constant`
- - `X.lemma = re".*ing"` the value of a feature must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted)
- - [🆕 `1.16.2`] `X.lemma = /.*ing/` the value of a feature must follow a PCRE style regular expression
- - [🆕 `1.16.2`] `X.lemma = /.*ing/i` the value of a feature must follow a case insensitive PCRE style regular expression
- - `X.lemma = lexicon.field` imposes that the feature `lemma` of node `X` must be the be present in the `field` of the `lexicon`. **NB**: this also reduces the current lexicon to the items for which `field` is equals to `X.lemma`.
+ - `X.lemma = Y.lemma` &rarr; The `lemma` of nodes `X` and `Y` must be the same
+ - `X.lemma <> Y.lemma` &rarr; The `lemma` of nodes `X` and `Y` must be different
+ - `X.lemma = "constant"` &rarr; The feature `lemma` of node `X` must be equal to the value `constant`
+ - `X.lemma = re".*ing"` &rarr; The feature `lemma` of node `X` must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for accepted regular expressions)
+ - [🆕 `1.16.2`] `X.lemma = /.*ing/` &rarr; The feature `lemma` of node `X` must follow a PCRE-style regular expression
+ - [🆕 `1.16.2`] `X.lemma = /.*ing/i` &rarr; The feature `lemma` of node `X` must follow a case-insensitive PCRE-style regular expression
+ - `X.lemma = lexicon.field` &rarr; The feature `lemma` of node `X` must be present in the `field` of the `lexicon`. **Note**: this also reduces the current lexicon to the items for which `field` is equal to `X.lemma`.
 
 #### Constraints on node ordering:
- - `X < Y` the node `X` immediately precedes the node `Y`
- - `X << Y` the node `X` precedes the node `Y`
+ - `X < Y` &rarr; The node `X` immediately precedes the node `Y`
+ - `X << Y` &rarr; The node `X` precedes the node `Y`
 
 #### Constraints on large dominance
- - [🆕 `1.16.2`]  `X ->> Y`: there is a path (of unbounded length) from `X` to `Y` (see [#49](https://github.com/grew-nlp/grew/issues/49)).
+ - [🆕 `1.16.2`]  `X ->> Y`: there is a path, regardless of its length, from `X` to `Y` (see [#49](https://github.com/grew-nlp/grew/issues/49)).
    - {{< tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X [concept = \"see-01\"]; Y [concept = \"name\"]; X ->> Y }" >}} on AMR
-   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.14&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }" >}} on `bUD_English-EWT@2.14`, search for a `VERB` which dominates a reative pronoun
-   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.14&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }%0Awithout { V2 [upos=VERB]; V1 ->> V2; V2 ->> P; }" >}} on `bUD_English-EWT@2.14`, search for a `VERB` which dominates a reative pronoun without another `VERB` on the path.
+   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.14&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }" >}} on `bUD_English-EWT@2.14` &rarr; Find a `VERB` that dominates a relative pronoun.
+   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.14&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }%0Awithout { V2 [upos=VERB]; V1 ->> V2; V2 ->> P; }" >}} on `bUD_English-EWT@2.14` &rarr; Find a `VERB` that dominates a relative pronoun without another `VERB` on the path.
 
 #### Constraints on in or out edges on bound nodes:
- - `* -[nsubj]-> Y` there is an incoming edge with label `nsubj` with target `Y`. **NB**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not)
- - `Y -[nsubj]-> *` there is an outgoing edge with label `nsubj` with source `Y`. **NB**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not)
+ - `* -[nsubj]-> Y` &rarr; There is an incoming edge with label `nsubj` with target `Y`. **Note**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not).
+ - `Y -[nsubj]-> *` &rarr; There is an outgoing edge with label `nsubj` with source `Y`. **Note**: the target node of the outcoming edge is not bound; it can be equals to any other node (bound or not).
 
 #### Constraints on edge labels:
- - `e1.label = e2.label` the labels of the two edges `e1` and `e2` are equal
- - `e1.label <> e2.label` the labels of the two edges `e1` and `e2` are different
+ - `e1.label = e2.label` &rarr; The labels of the two edges `e1` and `e2` are equal.
+ - `e1.label <> e2.label` &rarr; The labels of the two edges `e1` and `e2` are different.
 
 #### Constraints on edges relative positions
-These constraints impose that the source and the target of both edges are ordered)
- - `e1 >< e2` the two edges intersect (this implies that the 4 nodes are all ordered) {{< tryit "http://universal.grew.fr/?custom=6370168c3a22e" >}}
- - `e1 << e2` the edge `e1` is covered by `e2`
- - `e1 <> e2` the two edges are disjoint
+These constraints impose that the source and the target of both edges are ordered).
+ - `e1 >< e2` &rarr; The two edges intersect (this implies that the 4 nodes are all ordered) {{< tryit "http://universal.grew.fr/?custom=6370168c3a22e" >}}.
+ - `e1 << e2` &rarr; The edge `e1` is covered by `e2`.
+ - `e1 <> e2` &rarr; The two edges are disjoint.
 
 #### Position of a node with respect to an edge
- - `X << e` the node `X` is strictly included between the source and the target of edge `e`.
+ - `X << e` &rarr; The node `X` is strictly included between the source and the target of edge `e`.
 
 ####  Constraints on distance between two nodes
-🆕 in Version 1.16. These constraints impose both `X` and `Y` are ordered nodes
- - `length(X,Y) = 4` the length of the dependency relation is 4 (i.e. there are exactly 3 other nodes between `X` and `Y`), whatever is the relative position of `X` and `Y`
- - `delta(X,Y) = 4` the length of the dependency relation is 4 and `Y`is after `X` in the linear order
- - `delta(X,Y) = -4` the length of the dependency relation is 4 and `Y`is before `X` in the linear order
+[🆕 `1.16.0`] These constraints imply that both `X` and `Y` are ordered nodes.
+ - `length(X,Y) = 4` &rarr; The length of the dependency relation is 4 (i.e. there are exactly 3 other nodes between `X` and `Y`), whatever is the relative position of `X` and `Y`.
+ - `delta(X,Y) = 4` &rarr; The length of the dependency relation is 4 and `Y` is after `X` in the linear order.
+ - `delta(X,Y) = -4` &rarr; The length of the dependency relation is 4 and `Y` is before `X` in the linear order.
 
 In the previous constraints, `=` can be replaced by `<`, `<=`,  `>` or `>=` with an obvious meaning!
 The keywords `length` and `delta` are also [available as clustering keys](../clustering#clustering-on-distance-between-nodes).
@@ -169,9 +169,9 @@ The keywords `length` and `delta` are also [available as clustering keys](../clu
 
 ## Injectivity in nodes matching
 
-By default the matching of nodes is injective, this means that two different nodes in the request are mapped to two different nodes in the graph.
+By default, node matching is injective, meaning that two different nodes in the request are mapped to two different nodes in the graph.
 
-For instance, the request below searches for two different tokens, both having the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.14&pattern=pattern%20{%20X1%20[%20lemma=%22make%22%20];%20X2%20[%20lemma=%22make%22%20]%20}" >}}
+For example, the following request searches for two different tokens, both with the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.14&pattern=pattern%20{%20X1%20[%20lemma=%22make%22%20];%20X2%20[%20lemma=%22make%22%20]%20}" >}}.
 
 ```grew
 pattern { X1 [ lemma="make" ]; X2 [ lemma="make" ] }
@@ -179,7 +179,7 @@ pattern { X1 [ lemma="make" ]; X2 [ lemma="make" ] }
 
 If the node identifier is suffixed by the symbol `$`, the injectify constraint is relaxed.
 A node `X$` can be mapped to any node in the graph (either already mapped by another node of the request or not).
-Note that `X$` is a new name not related to a potential node named `X`.
+Note that `X$` is a new name unrelated to any potential node named `X`.
 
 ### Example
 
@@ -285,7 +285,7 @@ pattern { X1 -[ARG1]-> X; X2 -[ARG1]-> X; X3 -[ARG1]-> X; }
 This request is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
 but there are only 45 different occurrences; each one being reported 6 times with all permutations on `X1`, `X2` and `X3`.
 To avoid this, the constraint `X1.__id__ < X2.__id__` can be used, which imposes an ordering on some internal representation of the nodes and so avoids these permutations.
-**NB**: If a constraint `X1.__id__ < X2.__id__` is used with two non-equivalent nodes, the result is unspecified.
+**Note**: If a constraint `X1.__id__ < X2.__id__` is used with two non-equivalent nodes, the result is unspecified.
 
 
 The request below returns the 45 expected occurrences

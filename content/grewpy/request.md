@@ -16,7 +16,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 55635
+    connected to port: 55490
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.
@@ -127,6 +127,9 @@ corpus.count(req5, clustering_parameter=["{X << Y}"])
 ```
 
     {'Yes': 77, 'No': 1343}
+
+This example corresponds to the whether clustering in Grew-match.
+Note that here curly braces are required around `X << Y` to indicate that whether clustering should be performed instead of key clustering.
 
 ### Two clusterings can be applied
 

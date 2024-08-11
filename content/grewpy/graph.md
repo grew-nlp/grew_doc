@@ -17,11 +17,11 @@ First, we import the `Graph` module from `grewpy`.
 from grewpy import Graph
 ```
 
-    connected to port: 55596
+    connected to port: 55453
 
 ## Build a graph
 
-A graph can be built from its JSON encoding (see [here](../../doc/json) for more info about this format).
+A graph can be built from its JSON encoding (see [here](../../doc/json) for more information on this format).
 
 ```python_alt
 g1_str = """
@@ -241,8 +241,8 @@ g2["2"]
 
 ### `sucs`
 
-Each node is given a list of *successors* decribed by pairs of the target node and the edge label. 
-Edge label are dictionaries (see [here](../../doc/graph/#edges) for details about edge label encoding.)
+Each node is given a list of *successors* described by pairs of the target nodes and the edges label. 
+Edge labels are dictionaries (see [here](../../doc/graph/#edges) for details on edge label encoding.)
 
 ```python_alt
 g1.sucs["A"]
@@ -258,7 +258,7 @@ g2.sucs["4"]
      ('3', Fs_edge({'1': 'aux', '2': 'pass'})),
      ('2', Fs_edge({'1': 'nsubj', '2': 'pass'}))]
 
-Note that a node without successors is not defined the `sucs` dictionary.
+Note that a node with no successor is not defined in the `sucs` dictionary.
 
 ```python_alt
 "3" in g2.sucs
@@ -266,7 +266,7 @@ Note that a node without successors is not defined the `sucs` dictionary.
 
     False
 
-Use `get` function to avoid `KeyError` and safely get the successors:
+Use the `get` function to avoid `KeyError` and safely get the successors:
 
 ```python_alt
 g2.sucs.get("3", [])

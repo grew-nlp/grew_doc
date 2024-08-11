@@ -20,7 +20,7 @@ sent_id = "n01003007"
 graph = corpus[sent_id]
 ```
 
-    connected to port: 55541
+    connected to port: 55918
 
 ## Build the SVG picture for a graph
 
@@ -51,14 +51,12 @@ It is possible to create an image of a graph with highlighted matching, as in th
 To do this, we should specify that we want to keep the _decoration_ of the graph when searching the corpus. The optional argument `deco=True` does exactly that.
 
 ```python_alt
-request = Request.parse ("pattern { N[lemma=question] }")
+request = Request("pattern { N[lemma=question] }")
 matchings = corpus.search(request, deco=True)
 print (matchings)
 ```
 
     [{'sent_id': 'n03009011', 'matching': {'nodes': {'N': '13'}, 'edges': {}}, 'deco': 7}, {'sent_id': 'w01028050', 'matching': {'nodes': {'N': '9'}, 'edges': {}}, 'deco': 6}, {'sent_id': 'n01092025', 'matching': {'nodes': {'N': '21'}, 'edges': {}}, 'deco': 5}, {'sent_id': 'n01057036', 'matching': {'nodes': {'N': '5'}, 'edges': {}}, 'deco': 4}, {'sent_id': 'n01042004', 'matching': {'nodes': {'N': '22'}, 'edges': {}}, 'deco': 3}, {'sent_id': 'n01035004', 'matching': {'nodes': {'N': '17'}, 'edges': {}}, 'deco': 2}, {'sent_id': 'n01019005', 'matching': {'nodes': {'N': '6'}, 'edges': {}}, 'deco': 1}]
-
-    [Request.parse is DEPRECATED] see https://grew.fr/grewpy/upgrade_0.5
 
 Each item in the list has an (abstract) attribute `order` which can be used in further function calls to manage graph decoration.
 

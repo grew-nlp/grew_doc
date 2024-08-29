@@ -22,6 +22,42 @@ Here is an example of rule taken from a gallery page (see [this gallery example 
 
 {{< grew file="/static/doc/rule/example.grs" >}}
 
+# Avoiding Looping Rules
+
+One of the most common problems we can have when using Grew rules is the fact that the rule starts an infinite loop.
+
+For example, the rule `tv` below add a feature `Transitive = Yes` on the verb when there is a `comp:obj` relation from this verb to a noun.
+
+```grew
+rule tv {
+  pattern { X[upos=VERB]; Y[upos=NOUN|PROPN|PRON]; X-[comp:obj]->Y }
+  commands { X.Transitive = Yes }
+}
+```
+
+This rule must to be applied iteratively to correctly handle a sentence with more than one transitive verb with a strategy:
+```grew
+strat main { Onf (tv) }
+```
+
+In this case, you will get very soon the error message:
+```
+"More than 10000 rewriting steps: check for loops or increase max_rules value. Last rules are: […tv, tv, tv, tv, tv, tv, tv, tv, tv, tv]"
+```
+
+This is because there is nothing to prevent the rule from being applied again to the same node after a first application.
+To avoid this, a `without` clause can be added.
+
+```grew
+rule tv {
+  pattern { X[upos=VERB]; Y[upos=NOUN|PROPN|PRON]; X-[comp:obj]->Y }
+  without { X[Transitive = Yes] }
+  commands { X.Transitive = Yes }
+}
+```
+
+See also the [tutorial page about termination](../../tutorial/04_termination) for more details.
+
 # Using lexicons in Grew rules
 
 **Grew** rules can be parametrised by one or several lexicons.

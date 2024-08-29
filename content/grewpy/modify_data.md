@@ -16,7 +16,7 @@ grewpy.set_config("sud") # ud or basic
 corpus = Corpus("SUD_English-PUD")
 ```
 
-    connected to port: 55590
+    connected to port: 64114
 
 ## Access data in a corpus
 
@@ -77,27 +77,33 @@ except TypeError as error_message:
 
     'Corpus' object does not support item assignment
 
-`CorpusDraft` is an object similar to `Corpus` (all methods above can be applied to `CorpusDraft`) but which is mutable.
+`CorpusDraft` is an object similar to `Corpus` but which is mutable.
 Below, we add the feature `Transitive=Yes` to all occurrences of verbs with a direct object.
 
-The `CorpusDraft` named `draft` should be transformed again into a `Corpus` (names `corpus2` below) in order to use the `count` method.
+1. We make the search on `corpus` (an instance of `Corpus`).
+2. The modification is done on a `CorpusDraft` counterpart named `draft`.
+3. The `draft` should be transformed again into a `Corpus` (names `corpus2` below) in order to use the `count` method.
 
 ```python_alt
-draft = CorpusDraft(corpus)
-req7 = Request().pattern("X[upos=VERB]; Y[upos=NOUN]; X-[comp:obj]->Y")
+# step 1
+req7 = Request().pattern("X[upos=VERB]; Y[upos=NOUN|PROPN|PRON]; X-[comp:obj]->Y")
 occurrences = corpus.search(req7)
+
+# step 2
+draft = CorpusDraft(corpus)
 for occ in occurrences:
     sent_id = occ['sent_id']
     verb_node_id = occ['matching']['nodes']['X']
     draft[sent_id][verb_node_id].update({"Transitive": "Yes"})
 
+# step 3
 corpus2 = Corpus(draft)
 corpus2.count(Request("pattern { X[Transitive=Yes] }"))
 ```
 
-    702
+    853
 
-It's possible to modify a whole corpus with a function getting a graph as input.
+It's possible to modify a whole `CorpusDraft` with a function getting a graph as input.
 
 ```python_alt
 def relabel_noun(graph):
@@ -107,6 +113,8 @@ def relabel_noun(graph):
     return graph
 
 draft3 = draft.apply(relabel_noun)
+
+# Again, we need to turn the result into a `Corpus` before using the `count` method.
 corpus3 = Corpus(draft3)
 corpus3.count(Request("pattern { X[upos=N] }"))
 ```
@@ -126,7 +134,7 @@ s = """
 strat main { Onf(tv) }
 
 rule tv {
-  pattern { X[upos=VERB]; Y[upos=NOUN]; X-[comp:obj]->Y }
+  pattern { X[upos=VERB]; Y[upos=NOUN|PROPN|PRON]; X-[comp:obj]->Y }
   without { X[Transitive = Yes] }
   commands { X.Transitive = Yes }
 }
@@ -136,7 +144,7 @@ corpus2bis = grs.apply(corpus)
 corpus2bis.count(Request("pattern { X[Transitive=Yes] }"))
 ```
 
-    702
+    853
 
 For the example, where the upos tag `NOUN` is changed to `N`, this can be done with a GRS:
 

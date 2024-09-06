@@ -75,6 +75,11 @@ The returned value is a list of dict:
 ]
 ```
 
+### `getUserProjects`
+ - `(<string> user_id)`
+
+The returned value is the same as in the `getProjects` service but only with projects where the given `user_id` is in project's `users`. 
+
 ### `eraseProject`
  - `(<string> project_id)`
 

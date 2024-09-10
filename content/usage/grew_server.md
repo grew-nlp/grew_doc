@@ -123,6 +123,21 @@ This service returns the list of existing samples in a given project.
 ]
 ```
 
+In **[⚠️DEV⚠️]**, an additional field reports the tags use in each sample.
+
+```json_alt
+[
+  {
+    "name": "sample",
+    "number_sentences": 2,
+    "number_tokens": 23,
+    "number_trees": 4,
+    "tree_by_user": {"charlie": 1, "bob": 2, "alice": 1},
+    "tags": {"TODO": 2, "IN PROGESS": 3, "DONE": 5}}
+  }
+]
+```
+
 The field `tree_by_user` was added in February 2023 [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758).
 
 ### `eraseSamples`

@@ -37,7 +37,7 @@ The current version of `grewpy` is **0.5.2**. You can verify your version by run
 
 The library is in developement and the documentation is not complete. Feel free to [raise an issue](https://github.com/grew-nlp/grewpy/issues) for any questions.
 
- - A [Grewpy tutorial](grewpy/tutorial) is available with a few examples.
+ - A [Grewpy tutorial](../../grewpy/tutorial) is available with a few examples.
 
  - You can also refer to the automatically generated [grewpy documentation](https://grew.fr/python) for detailed information on the Python library.
 

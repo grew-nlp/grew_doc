@@ -23,13 +23,11 @@ Note that the new punctuation is not attached. It should be attached manually af
 
 ## Splitting a token in sub-tokens and adding a Multi-Word token
 
-UD proposes a mechanism to deal with difficult tokenisation examples (See [UD guidelines](https://universaldependencies.org/format.html#words-tokens-and-empty-nodes)).
-The rule above shows how to split a token into sub tokens, adding a MWT in the structure.
-The first example correspond the the French example contraction _au_ which should be split into _à_ and _le_.
-Note that the rule does not consider the dependency relations, so the output of the rule should be edited for a complete annotation.
-
-First, we consider only the case of _au_ split in _à_ and _le_.
-See **TODO** for a more general rule parametrized by a lexicon.
+UD proposes a mechanism for dealing with difficult tokenisation examples (see [UD guidelines](https://universaldependencies.org/format.html#words-tokens-and-empty-nodes)).
+This mechanism is called a Multi-Word Token (MWT).
+The rule above shows how to split a token into sub tokens by adding a MWT to the structure.
+The first example corresponds to the French contraction _au_, which should be split into _à_ and _le_.
+Note that the rule does not handle the dependency relations, so the output of the rule should be edited for a full annotation.
 
 {{< grew file="/static/doc/rule_gallery/mwt.grs" >}}
 

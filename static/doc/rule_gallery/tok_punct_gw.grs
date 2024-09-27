@@ -5,7 +5,7 @@ strat main { Onf (tok_punct) }
 rule tok_punct {
 	pattern {
 		% The rule applies to any form that ends with one of the punctuation marks: comma, period, exclamation mark, question mark.
-		X [ form = re".+[,.!?]" ]
+		X [ form = re"..+[,.!?]" ]
 		% RegExp explanation: 
 		%  "..*" ➔ a non-empty prefix ("." is any character, "+" means repeated a non-zero number of time)
 		%  "[,.!?]" ➔ the last character is one of the characters we want to split.

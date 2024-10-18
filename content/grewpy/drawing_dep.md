@@ -20,7 +20,7 @@ sent_id = "n01003007"
 graph = corpus[sent_id]
 ```
 
-    connected to port: 55918
+    connected to port: 51125
 
 ## Build the SVG picture for a graph
 

@@ -16,7 +16,7 @@ grewpy.set_config("sud") # ud or basic
 corpus = Corpus("SUD_English-PUD")
 ```
 
-    connected to port: 64114
+    connected to port: 51173
 
 ## Access data in a corpus
 
@@ -112,7 +112,8 @@ def relabel_noun(graph):
             graph[node]['upos'] = 'N'
     return graph
 
-draft3 = draft.apply(relabel_noun)
+draft3 = draft.map(relabel_noun)
+# Note that the map function has replaced the apply function which is deprecated in 0.6
 
 # Again, we need to turn the result into a `Corpus` before using the `count` method.
 corpus3 = Corpus(draft3)
@@ -165,7 +166,7 @@ corpus3bis.count(Request("pattern { X[upos=N] }"))
 
     4036
 
-Similarily to the `CorpusDraft` above, there is a mmodule `GRSDraft` which can be inspected and which is mutable.
+Similarily to the `CorpusDraft` above, there is a module `GRSDraft` which can be inspected and which is mutable.
 
 ```python_alt
 from grewpy import GRSDraft

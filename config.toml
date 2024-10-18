@@ -11,3 +11,9 @@ theme = "hyde"
 
 [markup.goldmark.renderer]
   unsafe= true
+
+[module]
+  [[module.mounts]]
+    excludeFiles = 'grewpy/ud-treebanks-v2.14/*'
+    source = 'content'
+    target = 'content'

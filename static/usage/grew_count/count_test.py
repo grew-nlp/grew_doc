@@ -32,6 +32,8 @@ data={
 }
 '''}
 
-response = requests.request("POST", url, data=data)
+# Set the config to "SUD"
+requests.request("POST", f'{url}/set_config', data={'config': 'sud'})
 
-print(response.text)
+response = requests.request("POST", url, data=data)
+print(response.text, end="") # The `response.text` already contains a newline

@@ -8,9 +8,12 @@ menu = "main"
 # Grew-count web service
 
 The **Grew-count** web service is available on http://count.grew.fr.
-It is still in development and it may evolve in the near future.
 
 With the **Grew-count** web service, it is possible to send a list of **Grew** requests and a list of corpora and to get a TSV file with the number of occurrences of each request in each corpus.
+Corpora available are ones which are used in Grew-match.
+
+Note that if you want to run similar requests on your onw data, you should consider using the [grewpy](../python) library: see an example [here](../../grewpy/multi_corpora_counting).
+
 
 ---
 
@@ -40,6 +43,18 @@ The `requests` parameter must be a JSON string describing a dictionary of reques
 
 Again, the requests are the same as the ones available on **[Grew-match](http://match.grew.fr)**.
 requests syntax can be learned through **Grew-match**'s [tutorial](http://match.grew.fr?tutorial=yes) and some documentation is available on the [request page](../../doc/request).
+
+---
+
+## The `set_config` service
+
+If you want to run requests on UD or SUD data, you should first run the service.
+For instance from Python: 
+```python_alt
+# Set the config to "UD"
+url = "http://count.grew.fr/count"
+requests.request("POST", f'{url}/set_config', data={'config': 'ud'})
+```
 
 ---
 

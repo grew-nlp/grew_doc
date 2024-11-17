@@ -25,8 +25,8 @@ The `corpora` parameter must be a JSON string describing a list of corpora. For 
 
 ```json_alt
 [
-  "SUD_French-PUD@2.14",
-  "SUD_English-PUD@2.14"
+  "SUD_French-PUD@2.15",
+  "SUD_English-PUD@2.15"
 ]
 ```
 

@@ -10,7 +10,7 @@ Categories = ["Development","GoLang"]
 
 # CoNLL-U format
 
-**NB:** The doc given here correspond to **Grew** version 1.16 (linked to **conll** version 1.18.1).
+**NB:** The doc described here corresponds to **Grew** version 1.16 (linked to **conll** version 1.19.1).
 You can check your versions with `opam list | grep grew` and `opam list | grep conll`.
 
 The most common way to store dependency structures is the CoNLL format.
@@ -21,7 +21,7 @@ For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
 Token lines contain 10 fields, separated by tabulations.
 
-The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.14).
+The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.15).
 
 {{< input file="static/doc/conllu/n01118003.conllu" >}}
 
@@ -56,7 +56,7 @@ Hence, the 4 tokens example above produces the 5 nodes graph below:
 
 ![Dependency structure](/doc/conllu/_build/n01118003.svg)
 
-This special node has only the `form` feature defined to be `__0__` and no other feature. In a **Grew** request, to avoid the special node the be matched, one can add a `upos` contraint.
+This special node has only the `form` feature defined as `__0__` and no other feature. In a **Grew** request, to prevent the special node from being matched, one can add a `upos` contraint.
 For instance, with the request `pattern { X [] }` all the 5 nodes of the above graph can be matched, whereas with the request `pattern { X [upos] }` only the 4 nodes associated with real tokens can be matched.
 
 ## Layered features
@@ -65,30 +65,30 @@ Universal Dependency proposes a notion of [layered features](https://universalde
 For instance the French word *votre*  is a possessive determiner, introducing a singular entity but referencing to a plural possessor. 
 In CoNLL feats, this is encoded as `Number=Sing|Number[psor]=Plur`.
 
-Unfortunately, the bracket notation in the feature value name is in conflict with other usages of brackets in **Grew** syntax.
-In **Grew**, the bracket notation is replaced by an alternative one with a double underscore: The (S)UD feature name `Number[psor]` is written `Number__psor`.
+Unfortunately, the bracket notation in the feature value name conflicts with other uses of brackets in **Grew** syntax.
+In **Grew**, the bracket notation is replaced by an alternative notation using double underscore: The (S)UD feature name `Number[psor]` is written `Number__psor`.
 For instance:
 
- * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { X [Number__psor=Plur] }` {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.14&pattern=pattern{X [Number__psor=Plur] }" >}}
+ * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { X [Number__psor=Plur] }` {{< tryit "http://universal.grew.fr/?corpus=UD_French-GSD@2.15&pattern=pattern{X [Number__psor=Plur] }" >}}
  * to udate the feature `Gender[psor]` to `Fem` on node `X`, use the command `X.Gender__psor = Fem`
 
 ## How the `MISC` field is handled by **Grew**?
 
-There are two main problems to deal with the `MISC` field in the existing (S)UD data.
+There are two main problems in dealing with the `MISC` field in the existing (S)UD data.
 
- 1. The content of the `MISC` field is not fully specified and in the UD data, it is used in many different ways and our objective is both:
-   * to be able to access to the content of `MISC` and to change it through rules when it is a regular feature structure
-   * to keep it unchanged in the other cases
- 2. When a **Grew** node contains a feature like `Case=Gen`, there is no canonical way to decide if it must be output in the `FEATS` or in the `MISC` field.
+ 1. The content of the `MISC` field is not fully specified and it is used in many different ways in the UD data, and our aim is both to:
+   - be able to access to the content of `MISC` and to modify it through rules when it is a regular feature structure
+   - leave it unchanged in the other cases
+ 2. When a **Grew** node contains a feature such as `Case=Gen`, there is no canonical way to decide whether it should be output in the `FEATS` field or in the `MISC` field.
 
 To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature, value)* pairs.
 If this is not possible, the raw content is kept in a special feature named `__RAW_MISC__`
-({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.14&pattern=pattern { X [__RAW_MISC__] }" >}}).
+({{< tryit "http://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.15&request=pattern { X [__RAW_MISC__] }" >}}).
 Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
 
- * If the config is `basic` or `sequoia`, all features are written in the `FEATS` field (and the `MISC` field is always `_`);
+ * If the config is `basic` or `sequoia`, all features are written in the `FEATS` field (and the `MISC` CoNLL field is always `_`);
  * If the config is `ud` or `sud`, there is a fixed list of features used in the `FEATS` field (list given at the bottom of this page).
 
 Unfortunately, in practice, the same feature may be used in both fields `FEATS` and `MISC`.
@@ -97,7 +97,7 @@ In order to be able to correctly output the features in the right field, **Grew*
 
 {{< input file="static/doc/conllu/test-12.conllu" >}}
 
-Requests for `Case` in FEATS: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.14&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.14&custom=62cc074a7ebf5" >}}.
+Requests for `Case` in FEATS: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.15&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "http://universal.grew.fr/?corpus=UD_Polish-PUD@2.15&custom=62cc074a7ebf5" >}}.
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
@@ -118,7 +118,7 @@ This includes:
  * typographical or orthographical errors
  * token linked by a `goeswith` relation
 
-See few examples in **SUD_French-GSD** {{< tryit "http://match.grew.fr/?corpus=SUD_French-GSD@latest&custom=5e42842249c10" >}}.
+See few examples in **SUD_French-GSD** {{< tryit "http://match.grew.fr/?corpus=SUD_French-GSD@2.15&custom=5e42842249c10" >}}.
 
 ---
 
@@ -138,10 +138,10 @@ Note that this applies to the examples given in the book "Application of Graph R
 
 ## List of features put in the `FEATS` field
 
-This list in defined in the `conll` library (version 1.18.1).
+This list in defined in the `conll` library (version 1.19.1).
 
 If the config is `ud` or `sud`, the following list of features is used to decide which features should be written into the `FEATS` field.
-The list is based on the data available in UD 2.14 (plus the `Shared` feature specific to SUD):
+The list is based on the data available in UD 2.15 (plus the `Shared` feature specific to SUD):
 
   - `Abbr`
   - `Accomp`
@@ -156,6 +156,7 @@ The list is based on the data available in UD 2.14 (plus the `Shared` feature sp
   - `Animacy[gram]`
   - `Animacy[obj]`
   - `Aspect`
+  - `BasStyle`
   - `Case`
   - `Caus`
   - `Cfm`
@@ -231,6 +232,7 @@ The list is based on the data available in UD 2.14 (plus the `Shared` feature sp
   - `LangId`
   - `Language`
   - `Link`
+  - `Modality`
   - `Mood`
   - `Morph`
   - `Movement`

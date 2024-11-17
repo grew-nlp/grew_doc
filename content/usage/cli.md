@@ -90,7 +90,7 @@ The output is given in JSON format.
 
 With the following files:
 
- * The corpus `UD_French-PUD` version 2.14: `fr_pud-ud-test.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.14/fr_pud-ud-test.conllu?raw=true)
+ * The corpus `UD_French-PUD` version 2.15: `fr_pud-ud-test.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.15/fr_pud-ud-test.conllu?raw=true)
  * A request file with the code below: `dislocated.req`[:link:](/usage/cli/dislocated.req)
 
 {{< grew file="static/usage/cli/dislocated.req" >}}
@@ -132,7 +132,7 @@ produces the following JSON output:
 
 ## With clustering
 
-In both **Mono** and **Multi** modes, if the command line additionally contains one or more arguments (`-key …` or `-whether …`),
+In both **Mono** and **Multi** modes, if the command line additionally contains one or more arguments introduced by `-key`,
 the set of occurrences is clustered recursively according to the given clustering items.
 
 See the [Clustering documentation page](../../doc/clustering) for details of the various clustering items available.
@@ -149,11 +149,11 @@ grew grep -request dislocated.req -key Y.upos -i fr_pud-ud-test.conllu
 
 {{< json file="static/usage/cli/_build/output_grep_key" >}}
 
-With `-whether`, we can cluster the results according to the fact that the relation is left-headed.
-We see that in two cases, the governor `X` is before `Y`.
+If the `-key` argument is surrounded by curly braces, a _whether_ like clustering.
+In the next example, we cluster the results according to the fact that the relation is left-headed.
 
 ```
-grew grep -request dislocated.req -whether "X << Y" -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -key "{X << Y}" -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_whether" >}}
@@ -162,15 +162,15 @@ grew grep -request dislocated.req -whether "X << Y" -i fr_pud-ud-test.conllu
 Finally, several clusterings can be applied one after the other. For example
 
 ```
-grew grep -request dislocated.req -key Y.upos -whether "X << Y" -i fr_pud-ud-test.conllu
+grew grep -request dislocated.req -key Y.upos -key "{ X << Y }" -i fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key_whether" >}}
 
 ### Remarks:
- * any longer sequence of `-key …` or `-whether …` can be used
- * the relative order of clutering items is relevant (try `grew grep -request dislocated.req -whether "X << Y" -key Y.upos -i fr_pud-ud-test.conllu`)
- * it is possible to combine **Multi** mode and clustering: `grew grep -request dislocated.req -key Y.upos -whether "X << Y" -i en_fr_zh.json`
+ * Any longer sequence of `-key …` can be used.
+ * The relative order of clutering items is relevant (try `grew grep -request dislocated.req -key "{ X << Y }" -key Y.upos -i fr_pud-ud-test.conllu`)
+ * It is possible to combine **Multi** mode and clustering: `grew grep -request dislocated.req -key Y.upos -key "{ X << Y }" -i en_fr_zh.json`
 
 ---
 # Count
@@ -194,7 +194,7 @@ The optional `-config` parameter ([see here](#-config)) can also be used.
 
 
 
-TODO: The set of corpora is described in a [JSON file](../../doc/corpora) and must be [compiled](./#compile) before running `grew count`.
+TODO: The set of corpora is described in a [JSON file](../input) and must be [compiled](./#compile) before running `grew count`.
 
 
 ## Example with **Multi** mode, several requests and no clustering
@@ -255,7 +255,7 @@ which corresponds to the table:
 Using a whether clustering, with the request `ADJ_NOUN.req` [:link:](/usage/cli/ADJ_NOUN.req) 
 {{< input file="static/usage/cli/ADJ_NOUN.req" >}}
 
-and the command: `grew count -request ADJ_NOUN.req -whether "A << N" -i en_fr_zh.json -tsv`
+and the command: `grew count -request ADJ_NOUN.req -key "{ A << N }" -i en_fr_zh.json -tsv`
 
 we obtain the TSV file:
 
@@ -283,7 +283,7 @@ which corresponds to the table:
 # Compile
 
 For the Grew-match backend (`grew_match_back`) or for the `grew count` command, it is necessary to first compile corpora.
-For these two usages, sets of corpora are described in a [JSON file](../../doc/corpora).
+For these two usages, sets of corpora are described in a [JSON file](../input).
 
 For compilation, the command is:
 
@@ -295,7 +295,7 @@ The `.marshal` file will only be computed if the corpus has changed since the la
 ---
 # Clean
 
-The commands below removes the `marshal` files produced by the `grew compile` command for the set of corpora described in the [JSON file](../../doc/corpora) `corpora.json`.
+The commands below removes the `marshal` files produced by the `grew compile` command for the set of corpora described in the [JSON file](../input) `corpora.json`.
 
 `grew clean -i <corpora.json>`
 

@@ -14,6 +14,6 @@ theme = "hyde"
 
 [module]
   [[module.mounts]]
-    excludeFiles = 'grewpy/ud-treebanks-v2.14/*'
+    excludeFiles = 'grewpy/ud-treebanks-v2.15/*'
     source = 'content'
     target = 'content'

@@ -16,15 +16,15 @@ from grewpy import Corpus, Request
 grewpy.set_config("ud")
 ```
 
-    connected to port: 50922
+    connected to port: 61380
 
 Below, we define the list of corpora to be used.
-We suppose that there is a (link to) a local folder named `ud-treebanks-v2.14` with data of the corresponding UD release.
+We suppose that there is a (link to) a local folder named `ud-treebanks-v2.15` with data of the corresponding UD release.
 
 Requests are defined by a list of pairs; each pair contains the corpus_id in the previous folder and the request code.
 
 ```python_alt
-folder = "ud-treebanks-v2.14"
+folder = "ud-treebanks-v2.15"
 
 corpus_list = [
   "UD_Arabic-PUD",
@@ -86,6 +86,6 @@ for corpus_id in corpus_list:
     UD_Portuguese-PUD	1227	58
     UD_Russian-PUD	1157	205
     UD_Spanish-PUD	1074	116
-    UD_Swedish-PUD	1252	259
+    UD_Swedish-PUD	1255	259
     UD_Thai-PUD	1618	1
     UD_Turkish-PUD	1233	6

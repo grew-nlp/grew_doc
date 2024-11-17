@@ -1,0 +1,15 @@
+[
+  { 
+    "id": "UD_English-EWT@2.15",
+    "directory": "/Users/guillaum/resources/ud-treebanks-v2.15/UD_English-EWT/",
+    "files": ["en_ewt-ud-dev.conllu", "en_ewt-ud-test.conllu", "en_ewt-ud-train.conllu"]
+  },
+  { 
+    "id": "UD_French-Sequoia@2.15",
+    "directory": "/Users/guillaum/resources/ud-treebanks-v2.15/UD_French-Sequoia/"
+  },
+  { 
+    "id": "UD_Chinese-GSD@2.15",
+    "directory": "/Users/guillaum/resources/ud-treebanks-v2.15/UD_Chinese-GSD/"
+  }
+]

@@ -6,12 +6,12 @@ title = "Tuto • Relation table"
 
 # Building relation tables on your treebank
 
-We call here "relation table" a table like the ones which are available through Grew-match: [example on UD_French-PUD, version 2.14](http://universal.grew.fr/meta/UD_French-PUD@2.14_table.html) (select a relation on the left).
+We call here "relation table" a table like the ones which are available through Grew-match: [example on UD_French-PUD, version 2.14](http://universal.grew.fr/meta/UD_French-PUD@2.15_table.html) (select a relation on the left).
 
 The simplest way to compute this kind of table on your own corpus is to use the Python library [grewpy](../../usage/python).
 It is also possible to do the same with the [Command Line Interface](../../usage/cli).
 
-For this example, we suppose that we have a subfolder `data` which contains the file `fr_pud-ud-test.conllu` (the version 2.14 of the corpus **UD_French-PUD** which can be downloaded [here](https://raw.githubusercontent.com/UniversalDependencies/UD_French-PUD/r2.14/fr_pud-ud-test.conllu)).
+For this example, we suppose that we have a subfolder `data` which contains the file `fr_pud-ud-test.conllu` (the version 2.15 of the corpus **UD_French-PUD** which can be downloaded [here](https://raw.githubusercontent.com/UniversalDependencies/UD_French-PUD/r2.15/fr_pud-ud-test.conllu)).
 
 ```
 .
@@ -30,7 +30,7 @@ The script below loads the corpus and computes the table for the `nsubj` relatio
 {{< python file="/static/tutorial/relation_table/nsubj_table.py" >}}
 
 The output is a nested Python dictonary, the toplevel keys correspond to the `G.upos` and the embedded keys correspond to the `D.upos`.
-For instance, `nsubj_table['VERB']['NOUN']` returns `544` which corresponds to the number of occurrences of the `nsubj` relation from a `VERB` to a `NOUN`:
+For instance, `nsubj_table['VERB']['NOUN']` returns `543` which corresponds to the number of occurrences of the `nsubj` relation from a `VERB` to a `NOUN`:
 
 {{< input file="static/tutorial/relation_table/_build/nsubj_table.out" >}}
 
@@ -51,8 +51,8 @@ In the code above, `all_tables` is a dictionary mapping the possible values of d
 
 ```
 …,
- 'iobj': {'VERB': {'PRON': 35}, 'ADJ': {'ADP': 1}}, 
- 'goeswith': {'NUM': {'X': 1}, 'NOUN': {'X': 1}, 'ADV': {'X': 1}},
+ 'iobj': {'VERB': {'PRON': 39}, 'ADJ': {'ADP': 1}}, 
+ 'goeswith': {'NUM': {'X': 1}, 'NOUN': {'X': 1}, 'ADV': {'X': 1}}, 
 …
 ```
 

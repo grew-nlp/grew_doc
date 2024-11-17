@@ -29,8 +29,6 @@ build:
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/iter
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/ud2sud
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/gallery/update_edge_feature
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/grs/deep_syntax
-	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/grs/parsing
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/02_first_rule
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/03_rules_set
 	@make GREW=${GREW} DEP2PICT=${DEP2PICT} -C static/tutorial/04_termination
@@ -57,8 +55,6 @@ clean:
 	@make -C static/gallery/iter clean
 	@make -C static/gallery/ud2sud clean
 	@make -C static/gallery/update_edge_feature clean
-	@make -C static/grs/deep_syntax clean
-	@make -C static/grs/parsing clean
 	@make -C static/tutorial/02_first_rule clean
 	@make -C static/tutorial/03_rules_set clean
 	@make -C static/tutorial/04_termination clean

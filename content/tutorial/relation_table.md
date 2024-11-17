@@ -6,7 +6,7 @@ title = "Tuto • Relation table"
 
 # Building relation tables on your treebank
 
-We call here "relation table" a table like the ones which are available through Grew-match: [example on UD_French-PUD, version 2.14](http://universal.grew.fr/meta/UD_French-PUD@2.15_table.html) (select a relation on the left).
+We call here "relation table" a table like the ones which are available through Grew-match: [example on UD_French-PUD, version 2.14](https://universal.grew.fr/meta/UD_French-PUD@2.15_table.html) (select a relation on the left).
 
 The simplest way to compute this kind of table on your own corpus is to use the Python library [grewpy](../../usage/python).
 It is also possible to do the same with the [Command Line Interface](../../usage/cli).

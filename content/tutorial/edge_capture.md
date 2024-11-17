@@ -27,7 +27,7 @@ Now, let's change the input graph.
 |----|-----|-----|
 | ![trap](_build/trap.svg) | ![sud_take_a_walk](_build/trap_del_add.svg) | ![trap_change_features](_build/trap_change_features.svg) |
 
-{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/tutorial/edge_capture/trap.conllu&grs=https://grew.fr/tutorial/edge_capture/change_features.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/tutorial/edge_capture/trap.conllu&grs=https://grew.fr/tutorial/edge_capture/change_features.grs" >}}
 
 What happended?
 

@@ -22,10 +22,10 @@ One way to code the transformation is to remove the old edge and add a new one w
 The two rules above make this transformation whithout naming the old edge in the first case and with naming in the second.
 
 {{< grew file="static/tutorial/edge_label/del_add.grs" >}}
-{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/del_add.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/del_add.grs" >}}
 
 {{< grew file="static/tutorial/edge_label/del_add_with_name.grs" >}}
-{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/del_add_with_name.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/del_add_with_name.grs" >}}
 
 ## Modify the existing edge
 
@@ -33,7 +33,7 @@ Another way to encode the transformation is to keep the existing edge and to cha
 The rule above does this with a command  `e.label = "…"` which update the whole label.
 
 {{< grew file="static/tutorial/edge_label/change_whole_label.grs" >}}
-{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/change_whole_label.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/change_whole_label.grs" >}}
 
 **NB**: the quote around `comp:obj@lvc` are required because of the special characters `:` and `@`.
 
@@ -42,6 +42,6 @@ Using the fact that edge labels are encoded as feature structures (see [here](..
 The rule above makes the expected changes in three steps, changing features `1`, `2` and `deep` successively.
 
 {{< grew file="static/tutorial/edge_label/change_features.grs" >}}
-{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/change_features.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/tutorial/edge_label/take_a_walk.conllu&grs=https://grew.fr/tutorial/edge_label/change_features.grs" >}}
 
 **NB** In order to have the expected behavior in the last example, the config must be set to `sud` (with the argument `-config sud` on the command line or with `grewpy.set_config ("sud")` in Python).

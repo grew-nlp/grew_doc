@@ -12,4 +12,4 @@ Description = ""
 
 :warning: The GTK interface is obsolete.
 
-Please use <a href="http://transform.grew.fr">Grew-web (Online Rewriting)</a> instead.
+Please use <a href="https://web.grew.fr">Grew-web (Online Rewriting)</a> instead.

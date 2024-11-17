@@ -19,7 +19,7 @@ This example below splits the tokenisation signs which were kept on the previous
 
 Note that the new punctuation is not attached. It should be attached manually after or with a rule like **TODO**.
 
-{{< tryit "http://web.grew.fr/?corpus=https://grew.fr/doc/rule_gallery/tok_punct.conllu&grs=https://grew.fr/doc/rule_gallery/tok_punct_gw.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/doc/rule_gallery/tok_punct.conllu&grs=https://grew.fr/doc/rule_gallery/tok_punct_gw.grs" >}}
 
 ## Splitting a token in sub-tokens and adding a Multi-Word token
 
@@ -31,5 +31,5 @@ Note that the rule does not handle the dependency relations, so the output of th
 
 {{< grew file="/static/doc/rule_gallery/mwt.grs" >}}
 
-{{< tryit "http://web.grew.fr/?corpus=https://grew.fr/doc/rule_gallery/mwt.conllu&grs=https://grew.fr/doc/rule_gallery/mwt_gw.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/doc/rule_gallery/mwt.conllu&grs=https://grew.fr/doc/rule_gallery/mwt_gw.grs" >}}
 

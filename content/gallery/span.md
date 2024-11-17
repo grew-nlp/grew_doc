@@ -47,7 +47,7 @@ With the grs file [non_injective.grs](../span/non_injective.grs):
 
 {{< grew file="/static/gallery/span/non_injective.grs" >}}
 
-{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/gallery/span/input.conllu&grs=https://grew.fr/gallery/span/non_injective.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/gallery/span/input.conllu&grs=https://grew.fr/gallery/span/non_injective.grs" >}}
 ⚠️ In **Grew-web**, dependency graphs are drawn with dep2pict and loops can not be displayed directly.
 Loops are replaced by special features with a green background and with double brackets.
 See for instance, the final graph computed with the example above:
@@ -60,5 +60,5 @@ With the grs file [injective.grs](../span/injective.grs):
 
 {{< grew file="/static/gallery/span/injective.grs" >}}
 
-{{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/gallery/span/input.conllu&grs=https://grew.fr/gallery/span/injective.grs" >}}
+{{< tryit "https://web.grew.fr/?corpus=https://grew.fr/gallery/span/input.conllu&grs=https://grew.fr/gallery/span/injective.grs" >}}
 

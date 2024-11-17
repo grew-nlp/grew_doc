@@ -30,7 +30,7 @@ The `corpora` parameter must be a JSON string describing a list of corpora. For 
 ]
 ```
 
-The available corpora are the same as the ones available on **[Grew-match](http://match.grew.fr)**, with the same identifiers.
+The available corpora are the same as the ones available on **[Grew-match](https://match.grew.fr)**, with the same identifiers.
 
 The `requests` parameter must be a JSON string describing a dictionary of requests. For instance:
 
@@ -41,8 +41,8 @@ The `requests` parameter must be a JSON string describing a dictionary of reques
 }
 ```
 
-Again, the requests are the same as the ones available on **[Grew-match](http://match.grew.fr)**.
-requests syntax can be learned through **Grew-match**'s [tutorial](http://match.grew.fr?tutorial=yes) and some documentation is available on the [request page](../../doc/request).
+Again, the requests are the same as the ones available on **[Grew-match](https://match.grew.fr)**.
+requests syntax can be learned through **Grew-match**'s [tutorial](https://universal.grew.fr?tutorial=yes) and some documentation is available on the [request page](../../doc/request).
 
 ---
 

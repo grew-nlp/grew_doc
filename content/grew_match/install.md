@@ -10,7 +10,7 @@ menu = "main"
 
 # Local installation of Grew-match
 
-**Grew-match** is available [online](http://match.grew.fr) for a number of corpora (UD, SUD, Parseme…).
+**Grew-match** is available [online](https://match.grew.fr) for a number of corpora (UD, SUD, Parseme…).
 If you want to use **Grew-match** on your own corpus, you have to install it locally, following the instructions on this page.
 
 Please report any problems [here](https://github.com/grew-nlp/grew/issues) in case of trouble.

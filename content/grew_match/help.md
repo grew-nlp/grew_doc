@@ -14,7 +14,7 @@ Categories = ["Development","GoLang"]
 
 **Grew-match** is a one page online web application for searching graph requests in treebanks.
 There are several instances, each one with each own URL.
-The address [`http://match.grew.fr`](http://match.grew.fr) displays a portal with links to instances.
+The address [`https://match.grew.fr`](https://match.grew.fr) displays a portal with links to instances.
 See [below](./#grew-match-instances) for a the list of instances
 
 If you want to run your own instance of Grew-match, see [Local installation of Grew-match](../install).
@@ -32,7 +32,7 @@ Once you have selected an instance,
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
- * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "http://match.grew.fr/?corpus=UD_French-GSD@2.15&pattern=pattern { X -[nsubj]-> Y }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.44% of the corpus`, This means that the first 1000 items were found in 5.44% of the 16,342 sentences of the **UD_French-GSD** corpus.
+ * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&request=pattern { X -[nsubj]-> Y }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.44% of the corpus`, This means that the first 1000 items were found in 5.44% of the 16,342 sentences of the **UD_French-GSD** corpus.
 )
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
@@ -42,7 +42,7 @@ For instance, with the same request as above, we observe 18,974 occcurences of `
 ---
 
 ## Learning syntax
-A [tutorial](http://match.grew.fr/?tutorial=yes) with a progressive sequence of requests is available.
+A [tutorial](https://universal.grew.fr/?tutorial=yes) with a progressive sequence of requests is available.
 You may also explore snippets given on the right of the text area to learn with other examples.
 A more comprehensive documentation is available in the [requests page](../../doc/request).
 
@@ -101,7 +101,7 @@ For these corpora, they are available by default with the enhanced layer and ano
 
 If the default treebank is selected, enhanced dependencies are displayed in blue below the sentence.
 In the pattern, an enhanced dependency can be searched with the prefix `E:`.
-For instance, the pattern below {{< tryit "http://match.grew.fr/?corpus=UD_English-EWT@2.15&pattern=pattern { X -[E:obj]-> Y }%0Dwithout { X -[obj]-> Y }" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
+For instance, the pattern below {{< tryit "https://universal.grew.fr/?corpus=UD_English-EWT@2.15&request=pattern { X -[E:obj]-> Y }%0Dwithout { X -[obj]-> Y }" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
 :
 
 ```grew
@@ -114,11 +114,11 @@ without { X -[obj]-> Y }
 
 # Grew-match instances
 
-## The [`http://universal.grew.fr`](http://universal.grew.fr) instance
+## The [`https://universal.grew.fr`](https://universal.grew.fr) instance
 
-This instance contains the version 2.15 of the [UD](http://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
+This instance contains the version 2.15 of the [UD](https://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
 The top navbar gives access to:
- * **UD 2.15**: The 296 treebanks of the version 2.15 of [UD](http://universaldependencies.org)
+ * **UD 2.15**: The 296 treebanks of the version 2.15 of [UD](https://universaldependencies.org)
  * **SUD 2.15**: The 300 treebanks of the version 2.15 of [SUD](https://surfacesyntacticud.github.io) (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora)
  * **UD Latest**: (with suffix `@dev`) Some UD corpora in their latest version available on `dev` branch on GitHub English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr). These treebanks are updated in at most one hour after a new push is done on GitHub.
  * **SUD Latest**: (with suffix `@latest`) latest version available on GitHub of the native SUD corpora.
@@ -126,13 +126,13 @@ The top navbar gives access to:
  * **SUD Auto**: automatic SUD conversion of some UD treebanks and a few other automatically built SUD treebanks
 
 ## Other instances
-  * [`http://parseme.grew.fr`](http://parseme.grew.fr): MWE annotation from the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
-  * [`http://semantics.grew.fr`](http://semantics.grew.fr): a few available semantic graphbanks
+  * [`https://semantics.grew.fr`](https://semantics.grew.fr): MWE annotation from the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
+  * [`https://semantics.grew.fr`](https://semantics.grew.fr): a few available semantic graphbanks
     * Some freely available data in [AMR](https://amr.isi.edu/)
     * The [PMB](https://pmb.let.rug.nl/) Gold data
-  * [`http://orfeo.grew.fr`](http://orfeo.grew.fr): See [Orfeo project](https://www.projet-orfeo.fr/)
-  * [`http://sequoia.grew.fr`](http://sequoia.grew.fr): Different annotations layers of the [French Sequoia corpus](http://deep-sequoia.inria.fr/)
-  * [`http://naija.grew.fr`](http://naija.grew.fr): See [NaijaSynCor project](http://naijasyncor.huma-num.fr/)
+  * [`https://orfeo.grew.fr`](https://orfeo.grew.fr): See [Orfeo project](https://www.projet-orfeo.fr/)
+  * [`https://sequoia.grew.fr`](https://sequoia.grew.fr): Different annotations layers of the [French Sequoia corpus](http://deep-sequoia.inria.fr/)
+  * [`https://naija.grew.fr`](https://naija.grew.fr): See [NaijaSynCor project](https://naijasyncor.huma-num.fr/)
 
 ---
 

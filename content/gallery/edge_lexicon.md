@@ -6,7 +6,7 @@ With the code from [edge_lexicon.grs](../edge_lexicon/edge_lexicon.grs):
 
 {{< grew file="/static/gallery/edge_lexicon/edge_lexicon.grs" >}}
 
-the `input` graph below is transformed into `output` • {{< tryit "http://transform.grew.fr/?corpus=https://grew.fr/gallery/edge_lexicon/input.json&grs=https://grew.fr/gallery/edge_lexicon/edge_lexicon.grs" >}}
+the `input` graph below is transformed into `output` • {{< tryit "https://web.grew.fr/?corpus=https://grew.fr/gallery/edge_lexicon/input.json&grs=https://grew.fr/gallery/edge_lexicon/edge_lexicon.grs" >}}
 
 | `input` | `output` |
 |---------|----------|

@@ -27,7 +27,7 @@ See [here to subscribe](https://sympa.inria.fr/sympa/info/grew).
 ## A first taste of Grew
 The easiest way to try out **Grew** is to use one of the online interfaces.
 
-  1. [Grew-match](http://match.grew.fr): Online graph matching to search for a given request in a corpus of syntactic structures (a [tutorial](http://match.grew.fr/?tutorial=yes) is available to help learning request syntax).
+  1. [Grew-match](https://match.grew.fr): Online graph matching to search for a given request in a corpus of syntactic structures (a [tutorial](https://universal.grew.fr/?tutorial=yes) is available to help learning request syntax).
   2. [Grew-web](https://web.grew.fr): Online graph rewriting
   2. [Arborator-Grew](https://arborator.github.io/): Tool for online corpus management (this is another tool, using Grew as backend)
 

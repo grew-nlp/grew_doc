@@ -38,7 +38,7 @@ The **Multi** mode is used when the command line argument contains a sequence of
 
 ## JSON description of a set of corpora
 
-Set of corpora are used both for the **[Grew-match](http://match.grew.fr)** online tool and for **Grew**.
+Set of corpora are used both for the **[Grew-match](https://match.grew.fr)** online tool and for **Grew**.
 
 A JSON file encodes a list of corpus.
 Each corpus is described by:

@@ -20,23 +20,23 @@ With the clustering key `X.f`, the matchings are clustered following the value o
 If the feature is not defined for some matchings, a cluster with the value `__undefined__` is added.
 
 #### Examples
-  * List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-LFG@2.15&pattern=pattern { X [upos=AUX] }&clust1_key=X.lemma">}}
-  * List `VerbForm` of `VERB` without `nsubj` in **UD_German-GSD** {{< tryit "https://universal.grew.fr/?corpus=UD_German-GSD@2.15&pattern=pattern { X [upos=VERB] }%0Dwithout { X -[1=nsubj]-> Y }&clust1_key=X.VerbForm">}}
-  * Find the huge number of `form` associated to the lemma _saada_ in **UD_Finnish-FTB**{{< tryit "https://universal.grew.fr/?corpus=UD_Finnish-FTB@2.15&pattern=pattern { X [lemma=\"saada\"] }&clust1_key=X.form">}}
+  * List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-LFG@2.15&request=pattern { X [upos=AUX] }&clust1_key=X.lemma">}}
+  * List `VerbForm` of `VERB` without `nsubj` in **UD_German-GSD** {{< tryit "https://universal.grew.fr/?corpus=UD_German-GSD@2.15&request=pattern { X [upos=VERB] }%0Dwithout { X -[1=nsubj]-> Y }&clust1_key=X.VerbForm">}}
+  * Find the huge number of `form` associated to the lemma _saada_ in **UD_Finnish-FTB**{{< tryit "https://universal.grew.fr/?corpus=UD_Finnish-FTB@2.15&request=pattern { X [lemma=\"saada\"] }&clust1_key=X.form">}}
 
 ### Clustering on a edge feature
 With the clustering key `e.f`, the matchings are clustered following the value of the feature named `f` for the edge `e` present in the (matching part of) main request.
 If for some matchings, the feature is not defined, a cluster is added with the value `__undefined__`.
 
 #### Example
-  * List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "https://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.15&pattern=pattern { e: X -[1=acl]-> Y }&clust1_key=e.2">}}
+  * List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "https://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.15&request=pattern { e: X -[1=acl]-> Y }&clust1_key=e.2">}}
 
 ### Clustering on the full label of an edge
 With the clustering key `e.label`, the matchings are clustered according to the full label of edge `e` present in the (positive part of the) main request.
 **NB** the way the label value is reported depends on the configuration used.
 
 #### Example
-  * List relations used for auxiliaries in **UD_Italian-ParTUT** {{< tryit "https://universal.grew.fr/?corpus=UD_Italian-ParTUT@2.15&pattern=pattern { e:X -> Y; Y [upos=AUX] }&clust1_key=e.label">}}
+  * List relations used for auxiliaries in **UD_Italian-ParTUT** {{< tryit "https://universal.grew.fr/?corpus=UD_Italian-ParTUT@2.15&request=pattern { e:X -> Y; Y [upos=AUX] }&clust1_key=e.label">}}
 
 
 ### Clustering on an edge length
@@ -44,8 +44,8 @@ The clustering key `e.length` makes clusters according to the length of the edge
 the clustering key `e.delta` makes clusters according to the relative positions of the governor and the dependent of the edge `e`.
 
 #### Examples
-  * Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "https://universal.grew.fr/?corpus=UD_Korean-PUD@2.15&pattern=pattern { e: X -[amod]-> Y }&clust1_key=e.length">}}
-  * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "https://universal.grew.fr/?corpus=UD_Naija-NSC@2.15&pattern=pattern { e: X -[nsubj]-> Y }&clust1_key=e.delta">}}
+  * Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "https://universal.grew.fr/?corpus=UD_Korean-PUD@2.15&request=pattern { e: X -[amod]-> Y }&clust1_key=e.length">}}
+  * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "https://universal.grew.fr/?corpus=UD_Naija-NSC@2.15&request=pattern { e: X -[nsubj]-> Y }&clust1_key=e.delta">}}
 
 ### Clustering on distance between nodes
 🆕 in Version 1.16. Similarly to the [new syntax for request](../request#constraints-on-distance-between-two-nodes), it is possible to cluster on the distance between two nodes:
@@ -158,9 +158,9 @@ Note that no curly brackets are needed in the `whether` text area (see examples 
 
 ### Examples
 
-  * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "https://universal.grew.fr/?corpus=UD_Hungarian-Szeged@2.15&pattern=pattern { X -[advcl]-> Y }&whether=X << Y" >}}
-  * In **UD_English-GUM**, how often does the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "https://universal.grew.fr/?corpus=UD_English-GUM@2.15&pattern=pattern { X -[1=expl]-> Y }&whether=X -[1=nsubj]-> S" >}}
+  * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "https://universal.grew.fr/?corpus=UD_Hungarian-Szeged@2.15&request=pattern { X -[advcl]-> Y }&whether=X << Y" >}}
+  * In **UD_English-GUM**, how often does the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "https://universal.grew.fr/?corpus=UD_English-GUM@2.15&request=pattern { X -[1=expl]-> Y }&whether=X -[1=nsubj]-> S" >}}
   * In **UD_French-GSD**, there are 618 left-headed `nsubj` (or subtypes):
-    * How often is it in an interrogative sentences? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&pattern=pattern { X -[1=nsubj]-> Y; X << Y }&whether=P [lemma=%22?%22]" >}} (NB: We approximate interrogative with the presence of "?")
-    * How often is it in an relative clause? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&pattern=pattern { X -[1=nsubj]-> Y; X << Y }&whether=H -[acl:relcl]-> X" >}}
-    * How often is there an expletive subject? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&pattern=pattern { X -[1=nsubj]-> Y; X << Y }&whether=X -[expl:subj]-> E" >}}
+    * How often is it in an interrogative sentences? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=P [lemma=%22?%22]" >}} (NB: We approximate interrogative with the presence of "?")
+    * How often is it in an relative clause? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=H -[acl:relcl]-> X" >}}
+    * How often is there an expletive subject? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=X -[expl:subj]-> E" >}}

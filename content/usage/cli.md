@@ -68,7 +68,7 @@ All arguments are optional:
 ---
 # Grep
 
-This mode corresponds to the command line version of the [Grew-match](http://match.grew.fr) tool.
+This mode corresponds to the command line version of the [Grew-match](https://match.grew.fr) tool.
 Clustering is also available [:link:](./#with-clustering) in the grep mode.
 
 ## Without clustering
@@ -112,7 +112,7 @@ This means that the request described in the file `dislocated.req` has been foun
 Note that there are two other options:
 
  * `-html`: produces a new `html` field in each JSON item with the sentence where words impacted by the request are in a special HTML span with class `highlight`
- * `-dep_dir <directory>`: produces a new file in the `directory` folder with the representation of the sentence with the highlighted part (as in the [Grew-match](http://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format usable with Dep2pict.
+ * `-dep_dir <directory>`: produces a new file in the `directory` folder with the representation of the sentence with the highlighted part (as in the [Grew-match](https://match.grew.fr) tool) and a new field in each JSON item with the filename; the output is in `dep` format usable with Dep2pict.
 
 ### Example with **Multi** input
 
@@ -273,7 +273,7 @@ which corresponds to the table:
 ## Remarks
 
  * Only one request is used in case of clustering.
- * The Request syntax can be learned [here](/doc/request/) or with the online tool **[Grew-match](http://match.grew.fr)**, first with the [tutorial](http://match.grew.fr?tutorial=yes) and then with the snippets given to the right of the text area.
+ * The Request syntax can be learned [here](/doc/request/) or with the online tool **[Grew-match](https://match.grew.fr)**, first with the [tutorial](https://universal.grew.fr?tutorial=yes) and then with the snippets given to the right of the text area.
  * If some corpus is updated, it is necessary to repeat the compilation step.
  * Some requests may take a long time to be searched in corpora.
  * ⚠️ In previous versions (< `1.10`), the TSV table also contains a column with the size of corpora (in number of sentences). This column is no longer available since version `1.10`.

@@ -14,7 +14,7 @@ aliases = [
 
 Requests are used in **Grew** to describe the left part of rewriting rules and in **Grew-match** to describe queries to be executed on corpora.
 
-The syntax of requests in **Grew** can be learned using the [tutorial part](http://match.grew.fr?tutorial=yes) of the [Grew-match](http://match.grew.fr) tool.
+The syntax of requests in **Grew** can be learned using the [tutorial part](https://universal.grew.fr?tutorial=yes) of the [Grew-match](https://match.grew.fr) tool.
 
 ---
 ## Requests syntax
@@ -68,7 +68,7 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * [🆕 `1.16.2`] `Gloss = /.*POSS.*/i` PCRE-style regular expression (the optional suffix `i` is for case-insensitive matching).
 
 ### Anchor nodes
-⚠️ For dependency trees, an anchor node (position 0) is added to the structure (see [here](http://localhost:1313/doc/conllu/#the-anchor-node-at-position-0)).
+⚠️ For dependency trees, an anchor node (position 0) is added to the structure (see [here](../conllu/#the-anchor-node-at-position-0)).
 In **ArboratorGrew**, this node is not displayed but is still taken into account when searching requests or when applying rules.
 
 ### Disjunction in node clause
@@ -78,12 +78,12 @@ Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47),
 (separated by the pipe symbol `|`).
 
 #### Examples
-The following clause selects either a past participle verb or an adjective {{< tryit "http://universal.grew.fr/?request=pattern { X[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
+The following clause selects either a past participle verb or an adjective {{< tryit "https://universal.grew.fr/?request=pattern { X[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
 ```grew
 X [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
 ```
 
-A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "http://universal.grew.fr/?corpus=SUD_French-GSD@2.15&request=pattern { X [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
+A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.15&request=pattern { X [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
 ```grew
 X [upos=ADV, !ExtPos]|[ExtPos=ADV]
 ```
@@ -149,7 +149,7 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
 
 #### Constraints on edges relative positions
 These constraints impose that the source and the target of both edges are ordered).
- - `e1 >< e2` &rarr; The two edges intersect (this implies that the 4 nodes are all ordered) {{< tryit "http://universal.grew.fr/?custom=6370168c3a22e" >}}.
+ - `e1 >< e2` &rarr; The two edges intersect (this implies that the 4 nodes are all ordered) {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@latest&request=pattern { %0A  e1: N1 -[subj]-> M1;%0A  e2: N2 -[comp:obj]-> M2;%0A  e1 >< e2%0A}" >}}.
  - `e1 << e2` &rarr; The edge `e1` is covered by `e2`.
  - `e1 <> e2` &rarr; The two edges are disjoint.
 
@@ -171,7 +171,7 @@ The keywords `length` and `delta` are also [available as clustering keys](../clu
 
 By default, node matching is injective, meaning that two different nodes in the request are mapped to two different nodes in the graph.
 
-For example, the following request searches for two different tokens, both with the same lemma *make* {{<tryit "http://universal.grew.fr/?corpus=UD_English-ParTUT@2.15&pattern=pattern%20{%20X1%20[%20lemma=%22make%22%20];%20X2%20[%20lemma=%22make%22%20]%20}" >}}.
+For example, the following request searches for two different tokens, both with the same lemma *make* {{<tryit "https://universal.grew.fr/?corpus=UD_English-ParTUT@2.15&request=pattern { X1 [ lemma=\"make\" ]; X2 [ lemma=\"make\" ] }" >}}.
 
 ```grew
 pattern { X1 [ lemma="make" ]; X2 [ lemma="make" ] }
@@ -184,18 +184,18 @@ Note that `X$` is a new name unrelated to any potential node named `X`.
 ### Example
 
 In AMR graphs, if we look for a predicate (with `concept=judge-01` in the example) with two arguments `ARG0` and `ARG1`, there are two dictinct cases:
- * two different nodes `A0` and `A1` are respectively `ARG0` and `ARG1` &rarr; 1 occurence {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20X%20[concept=%22judge-01%22];%20X%20-[ARG0]-%3E%20A0;%20X%20-[ARG1]-%3E%20A1;%20}" >}}
+ * two different nodes `A0` and `A1` are respectively `ARG0` and `ARG1` &rarr; 1 occurence {{<tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X [concept=\"judge-01\"]; X -[ARG0]-> A0; X -[ARG1]-> A1; }" >}}
 
 ```grew
 pattern { X [concept="judge-01"]; X -[ARG0]-> A0; X -[ARG1]-> A1; }
 ```
- * the same node `A`is both `ARG0` and `ARG1` &rarr; 4 occurences {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20X%20[concept=%22judge-01%22];%20X%20-[ARG0]-%3E%20A;%20X%20-[ARG1]-%3E%20A;%20}" >}}
+ * the same node `A`is both `ARG0` and `ARG1` &rarr; 4 occurences {{<tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X [concept=\"judge-01\"]; X -[ARG0]-> A; X -[ARG1]-> A; }" >}}
 
 ```grew
 pattern { X [concept="judge-01"]; X -[ARG0]-> A; X -[ARG1]-> A; }
 ```
 
-If we do not require the injectivity on one of the two arguments, then both cases above are returned &rarr; 5 occurences  {{<tryit "http://semantics.grew.fr/?corpus=Little_Prince&request=pattern%20{%20X%20[concept=%22judge-01%22];%20X%20-[ARG0]-%3E%20A;%20X%20-[ARG1]-%3E%20B$;%20}" >}}
+If we do not require the injectivity on one of the two arguments, then both cases above are returned &rarr; 5 occurences  {{<tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X [concept=\"judge-01\"]; X -[ARG0]-> A; X -[ARG1]-> B$; }" >}}
 
 
 ```grew
@@ -211,7 +211,7 @@ For a more complex example with non-injective matching, you can see [this exampl
 As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
 
  * `X -[1=subj]-> Y` the edge must match the edge feature constraints (more examples below).
- * `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "http://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.15&custom=62c833bbcdee9" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
+ * `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "https://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.15&request=pattern { X -[2=\"зад\"]-> Y }" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 
 
@@ -282,14 +282,14 @@ For example, in the request below, the 3 nodes `X1`, `X2` and `X3` are equivalen
 pattern { X1 -[ARG1]-> X; X2 -[ARG1]-> X; X3 -[ARG1]-> X; }
 ```
 
-This request is found 270 times in the Little Prince corpus {{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=5d4d6c143cfa6" >}}
+This request is found 270 times in the Little Prince corpus {{< tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X1 -[ARG1]-> X; X2 -[ARG1]-> X; X3 -[ARG1]-> X; }" >}}
 but there are only 45 different occurrences; each one being reported 6 times with all permutations on `X1`, `X2` and `X3`.
 To avoid this, the constraint `X1.__id__ < X2.__id__` can be used, which imposes an ordering on some internal representation of the nodes and so avoids these permutations.
 **Note**: If a constraint `X1.__id__ < X2.__id__` is used with two non-equivalent nodes, the result is unspecified.
 
 
 The request below returns the 45 expected occurrences
-{{< tryit "http://match.grew.fr/?corpus=Little_Prince&custom=60166c11100f5" >}}
+{{< tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern {%0A  X1 -[ARG1]-> X; X2 -[ARG1]-> X; X3 -[ARG1]-> X;%0A  X1.__id__ < X2.__id__; X2.__id__ < X3.__id__; %0A}%0A" >}}
 
 ```grew
 pattern {

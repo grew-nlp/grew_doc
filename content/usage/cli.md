@@ -285,17 +285,23 @@ which corresponds to the table:
 For the Grew-match backend (`grew_match_back`) or for the `grew count` command, it is necessary to first compile corpora.
 For these two usages, sets of corpora are described in a [JSON file](../input).
 
-For compilation, the command is:
+The files describing the corpora are search in the `CORPUSBANK` folder.
+The `CORPUSBANK` folder can be given as an environment variable `CORPUSBANK` or on the command line with the arg `-CORPUSBANK <folder>`.
 
-`grew compile -i <corpora.json>`
+ - `grew compile`: compiles all corpora described in the corpusbank
+ - `grew compile <PATTERN>`: compiles all corpora described in the corpusbank for which the `id` contains the `PATTERN`
 
-Note that this creates a new file with the extension `.marshal` for each corpus, which is stored in the corpus directory.
-The `.marshal` file will only be computed if the corpus has changed since the last compilation.
+Note that the compilation creates a new folder named `_build_grew` in the mail folder of the corresponding corpus.
+This folder contains a compiled version of the corpus and a fex other files used by **Grew-match**.
 
 ---
+
 # Clean
 
-The commands below removes the `marshal` files produced by the `grew compile` command for the set of corpora described in the [JSON file](../input) `corpora.json`.
+The commands below removes the `marshal` files produced by the `grew compile` command for the set of corpora described in a corpus bank (see [Compile](./#compile) section above).
+
+ - `grew clean`: cleans all corpora described in the corpusbank
+ - `grew clean <PATTERN>`: cleans all corpora described in the corpusbank for which the `id` contains the `PATTERN`
 
 `grew clean -i <corpora.json>`
 

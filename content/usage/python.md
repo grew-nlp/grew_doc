@@ -9,7 +9,7 @@ Tags = ["Development","golang"]
 
 # Grewpy • Python library
 
-:warning: The [previous library](../python_2018) described in the [book published in 2018](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348) is now obsolete. Refer to the documentation on this page for current information. 
+:warning: The [previous library](../python_2018) described in the [book published in 2018](https://www.wiley.com/en-fr/Application+of+Graph+Rewriting+to+Natural+Language+Processing-p-9781119522348) is now obsolete.
 
 ## Install
 
@@ -30,8 +30,8 @@ The expected output is `connected to port: …` (The port number is selected dyn
 
 The current version of `grewpy_backend` is **0.5.4**. You can verify your version by running `opam list | grep grewpy`.
 
-The current version of `grewpy` is **0.5.2**. You can verify your version by running `pip show grewpy`.
-
+The current version of `grewpy` is **0.6.0**. You can verify your version by running `pip show grewpy`.
+View [How to to upgrade to grewpy 0.6](../../grewpy/upgrade_0.6).
 
 ## Usage
 

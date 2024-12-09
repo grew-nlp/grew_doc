@@ -451,6 +451,24 @@ returns the list of relations used in the data/
 
 returns the list of feature names used in the data.
 
+In **[⚠️DEV⚠️]**, the srvice returns two separate lists for FEATS / MISC features (according to the current config).
+```json_alt
+{
+  "FEATS": [
+    "Aspect",
+    "Number",
+    "Number[psor]",
+    "Person",
+    "Polarity",
+    "Tense"
+  ],
+  "MISC": [
+    "AlignBegin",
+    "AlignEnd",
+    "Gloss"
+  ]
+}
+```
 ---
 ---
 

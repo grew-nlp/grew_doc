@@ -225,7 +225,9 @@ The argument `conll_graphs` must be one string with all graphs separated by an e
 ## Search with Grew requests
 
 ### `searchRequestInGraphs`
- - `(<string> project_id, <string> user_ids, <string> request)` returns a list of occurrences.
+The two services below are deprecated and are replaced by [similar ones](./#dev-parameter-sample_ids) with the `sample_ids` parameter.
+
+ - **[❌DEPRECATED❌]** `(<string> project_id, <string> user_ids, <string> request)` returns a list of occurrences.
 
 Given a **Grew** request, a list of users and a project, this service returns a list of occurrences of the request in the project.
 
@@ -245,12 +247,17 @@ Each occurrence is described by a dict
 ```
 
 The same service is avalaible with clustering:
- - `(<string> project_id, <string> user_ids, <string> request, <string> clusters)`
+ - **[❌DEPRECATED❌]** `(<string> project_id, <string> user_ids, <string> request, <string> clusters)`
  where `clusters` is a list of cluster keys, separated by `;`.
  This returns nested dictionaries (the depth being equals to the length of the cluster key list).
  The set of occurrences of the `request` in `project_id` are clustered with the first key of the list;
  each cluster is further clustered recursively with the remaining keys.
  For instance: If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
+
+### **[⚠️DEV⚠️]**: parameter sample_ids
+The `searchRequestInGraphs`service is available with the additional parameter `sample_ids` (See [here](#sample_ids) for the usage of `sample_ids` argument.):
+ - `(<string> project_id, <string> sample_ids, <string> user_ids, <string> request)` returns a list of occurrences.
+ - `(<string> project_id, <string> sample_ids, <string> user_ids, <string> request, <string> clusters)`
 
 ---
 
@@ -451,7 +458,7 @@ returns the list of relations used in the data/
 
 returns the list of feature names used in the data.
 
-In **[⚠️DEV⚠️]**, the srvice returns two separate lists for FEATS / MISC features (according to the current config).
+In **[⚠️DEV⚠️]**, the service returns two separate lists for FEATS / MISC features (according to the current config).
 ```json_alt
 {
   "FEATS": [

@@ -118,27 +118,14 @@ This service returns the list of existing samples in a given project.
     "number_sentences": 2,
     "number_tokens": 23,
     "number_trees": 4,
-    "tree_by_user": {"charlie": 1, "bob": 2, "alice": 1}
-  }
-]
-```
-
-In **[⚠️DEV⚠️]**, an additional field reports the tags use in each sample.
-
-```json_alt
-[
-  {
-    "name": "sample",
-    "number_sentences": 2,
-    "number_tokens": 23,
-    "number_trees": 4,
     "tree_by_user": {"charlie": 1, "bob": 2, "alice": 1},
     "tags": {"TODO": 2, "IN PROGESS": 3, "DONE": 5}}
   }
 ]
 ```
 
-The field `tree_by_user` was added in February 2023 [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758).
+ - The field `tree_by_user` was added in February 2023 [aa8e97a5](https://gitlab.inria.fr/grew/grew_server/-/commit/aa8e97a5c4b4a1f0cecd429f202f67098b999758).
+ - The field `tags` was added in September 2024 [e1591f5a](https://gitlab.inria.fr/grew/grew_server/-/commit/e1591f5ad38a1fc5a64cc3bd342906c1083417fb).
 
 ### `eraseSamples`
  - `(<string> project_id, <string> sample_ids)`
@@ -254,7 +241,7 @@ The same service is avalaible with clustering:
  each cluster is further clustered recursively with the remaining keys.
  For instance: If the length of the cluster keys list is 1, the behaviour is similar the the *clustering* feature available in **Grew-match**.
 
-### **[⚠️DEV⚠️]**: parameter sample_ids
+### **[⚠️DEV⚠️]**: parameter `sample_ids`
 The `searchRequestInGraphs`service is available with the additional parameter `sample_ids` (See [here](#sample_ids) for the usage of `sample_ids` argument.):
  - `(<string> project_id, <string> sample_ids, <string> user_ids, <string> request)` returns a list of occurrences.
  - `(<string> project_id, <string> sample_ids, <string> user_ids, <string> request, <string> clusters)`

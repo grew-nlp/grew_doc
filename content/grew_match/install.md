@@ -10,13 +10,12 @@ menu = "main"
 
 # Local installation of Grew-match
 
-**Grew-match** is available [online](https://match.grew.fr) for a number of corpora (UD, SUD, Parseme…).
-If you want to use **Grew-match** on your own corpus, you have to install it locally, following the instructions on this page.
+**Grew-match** is available [online](https://match.grew.fr) for various corpora (UD, SUD, Parseme, etc.).
+If you wish to use **Grew-match** on your own corpus, follow the instructions on this page for local installation.
 
-Please report any problems [here](https://github.com/grew-nlp/grew/issues) in case of trouble.
+If you encounter any issues, please report them [here](https://github.com/grew-nlp/grew/issues).
 
-You may also consider using [grew_match_quick](https://github.com/grew-nlp/grew_match_quick).
-This a Python script that automatizes the steps depscribed here.
+You may also consider using [grew_match_quick](https://github.com/grew-nlp/grew_match_quick), a Python script that automates the steps depscribed here.
 
 ---
 
@@ -32,14 +31,17 @@ opam install dep2pictlib grew
 ```
 
 ---
-## Step 1: Create a new directory
-Create a new directory where all the necessary files and data will be installed.
-Set the env variable `GREW_MATCH_DIR` to this new folder (see [here](https://www.geeksforgeeks.org/environment-variables-in-linux-unix/) for help about Environment Variables in Linux/Unix).
+## Step 1: Create a New Directory
+Create a new directory for all necessary files and data.
+Set the environment variable `GREW_MATCH_DIR` to this new folder.
+For assistance with environment variables in Linux/Unix, refer to [this guide](https://www.geeksforgeeks.org/environment-variables-in-linux-unix/).
 
-
+```
+mkdir -p $GREW_MATCH_DIR
+```
 ---
 
-## Step 2: Installing data and corpusbank
+## Step 2: Install Data and Corpusbank
 
 For this example, we will install three treebanks in `$GREW_MATCH_DIR/data` :
 
@@ -53,13 +55,13 @@ git clone https://github.com/UniversalDependencies/UD_Spanish-PUD.git
 
 ### Configuring the `corpusbank`
 
-The set of corpora to be served is described in a folder called `corpusbank` which contains JSON files.
+The set of corpora to be served is described in a folder called `corpusbank`, which contains JSON files.
 
 ```
 mkdir $GREW_MATCH_DIR/corpusbank
 ```
 
-In this new folder, add the JSON file `pud.json`:
+In this new folder, create the JSON file `pud.json` with the following content:
 
 ```json_alt
 [
@@ -86,25 +88,27 @@ In this new folder, add the JSON file `pud.json`:
 ```
 
 ### Compiling the corpora
-The following command compiles all the corpora defined in the `corpusbank`. 
-It should be run before the first use and each time a corpus is modified.
+
+Run the following command to compile all the corpora defined in the `corpusbank`.
+This should be executed before the first use and each time a corpus is modified.
+
 
 ```
 grew compile -CORPUSBANK $GREW_MATCH_DIR/corpusbank
 ```
 
 
-## Step 3: Install and configure the backend
+## Step 3: Install and Configure the Backend
 
 
-download the code:
+Download the backend code:
 ```
 cd $GREW_MATCH_DIR
 git clone https://github.com/grew-nlp/grew_match_dream.git
 ```
 
 ### Configuring `grew_match_dream`
-In the `grew_match_dream` folder (`$GREW_MATCH_DIR/grew_match_dream`), edit the file `config.json` with the real `__DIR__` value:
+In the `grew_match_dream` folder (`$GREW_MATCH_DIR/grew_match_dream`), the file `config.json` contains the description below:
 
 ```json_alt
 {
@@ -116,11 +120,12 @@ In the `grew_match_dream` folder (`$GREW_MATCH_DIR/grew_match_dream`), edit the 
 }
 ```
 
-Of course, the port number (4758) can be changed to another value, but it must be the same as the one defined in the `instances.json` file below.
+If you have followed preceding instructions, no modification is needed.
+You can change the port number (4758) to another value, but ensure it matches the one defined in the `instances.json` file below.
 
 
 ## Step 4: Starting the backend
-The command below should be run in the background (or in a separate terminal) so that the backend remains available during use.
+Run the following command in the background (or in a separate terminal) to keep the backend available during use:
 
 ```
 dune exec grew_match_dream config.json
@@ -129,9 +134,9 @@ dune exec grew_match_dream config.json
 ---
 
 
-## Step 5: Install and configure the frontend webpage
+## Step 5: Install and Configure the Frontend Webpage
 
-### Download
+### Download the Frontend Code
 The code for the main Grew-match website itself is available at [`gitlab.inria.fr/grew/grew_match`](https://gitlab.inria.fr/grew/grew_match):
 
 ```
@@ -139,7 +144,9 @@ cd $GREW_MATCH_DIR
 git clone https://gitlab.inria.fr/grew/grew_match.git
 ```
 
-#### Update
+#### Update the Frontend Code
+
+To update the frontend code to the latest version, run:
 
 ```
 cd $GREW_MATCH_DIR/grew_match
@@ -150,12 +157,12 @@ git pull
 
 
 ### Configure `grew_match`
-In the grew-match folder (`$GREW_MATCH_DIR/grew_match`), run:
+In the grew-match folder (`$GREW_MATCH_DIR/grew_match`), create a configuration file by running:
 ```
 cp instance_template.json instance.json
 ```
 
-The `instance.json` file will contains the following code, that you can update:
+The `instance.json` file will contain the following code, which you can update as needed:
 
 ```json_alt
 { 
@@ -174,24 +181,25 @@ The `instance.json` file will contains the following code, that you can update:
 	]
 }
 ```
+ - The `backend` field specifies the URL of the backend service.
+ - The `desc` field describes a list of groups of treebanks, with each group appearing as an item in the top navigation bar of the Grew-match interface.
 
-The `backend` field is obviously the URL of the backend service.
-The `desc` describes a list of groups of treebanks. Each group will be a item in the top navbar in the Grew-match interface.
 
 ## Step 5: Start an http server
 
-With Python 3, you can start a web server with the following commands:
+To start a web server using Python 3, run the following commands:
 
 ```
 cd $GREW_MATCH_DIR/grew_match
 python -m http.server
 ```
 
-:warning: the last command should be kept running while using Grew-match: run it in the background (or in another terminal).
+:warning: the last command should be kept running while using Grew-match.
+You may run it in the background or in a separate terminal.
 
-You can check that the URL [`http://localhost:8000`](http://localhost:8000) shows the Grew-match interface.
+You can verify that the Grew-match interface is accessible at [`http://localhost:8000`](http://localhost:8000).
 
-> The PORT 8000 can be changed to another value (e.g. 12345) with the command `python -m http.server 12345` to start the server and URL [`http://localhost:12345`](http://localhost:12345) to connect.
+> The default PORT is 8000, you can change it to another value (e.g., 12345) with the command `python -m http.server 12345`. In this case, access the interface at [`http://localhost:12345`](http://localhost:12345).
 
 ---
 
@@ -199,9 +207,12 @@ You can check that the URL [`http://localhost:8000`](http://localhost:8000) show
 
 ## Step 6: Grew-match is ready!
 
-You're done! At the URL [`http://localhost:8000`](http://localhost:8000), you should be able to run requests on your corpora. 
- * {{< tryit "http://localhost:8000?corpus=UD_Spanish-PUD&request=%20" >}}: search an empty request (it will only display the trees of the corpus)
- * {{< tryit "http://localhost:8000?corpus=UD_French-PUD&relation=nsubj" >}}: search the `nsubj` relation
+Congratulations! You can now run requests on your corpora at the URL
+[`http://localhost:8000`](http://localhost:8000).
+Here are a couple of example queries:
+
+ * {{< tryit "http://localhost:8000?corpus=UD_Spanish-PUD&request=%20" >}}: Search an empty request (this will display the trees of the corpus)
+ * {{< tryit "http://localhost:8000?corpus=UD_French-PUD&relation=nsubj" >}}: Search the `nsubj` relation
 
 
 Note: Once everything is configured as explained above, you should run the two commands in the background to restart Grew-match:
@@ -213,18 +224,19 @@ Note: Once everything is configured as explained above, you should run the two c
 # Going further
 
 ## After a corpus update
- - Re-compile the corpora again: `grew compile -CORPUSBANK $GREW_MATCH_DIR/corpusbank`
+ - Re-compile the corpora: `grew compile -CORPUSBANK $GREW_MATCH_DIR/corpusbank`
  - Force the backend to reload the new data: `curl --location --request POST 'http://localhost:4758/reload'`
 
 Note: There is no need to restart the Python http server for the frontend.
 
 
 ## Web interface configuration
-If you have a long list of corpora and want to put them in a pane on the left (like for UD treebanks),
-change in `instance.json` the line `"style": "dropdown",` by `"style": "left_pane",`.
+If you have a long list of corpora and prefer to display them in a left pane (similar to UD treebanks),
+modify the `instance.json` file by changing the line:
+ `"style": "dropdown",` to `"style": "left_pane",`.
 
 
 ## More complex examples
 
-For larger examples of corpusbank definition: see [https://github.com/grew-nlp/corpusbank](https://github.com/grew-nlp/corpusbank)
+For larger examples of corpusbank definition: see [https://github.com/grew-nlp/corpusbank](https://github.com/grew-nlp/corpusbank).
 

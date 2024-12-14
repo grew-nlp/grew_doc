@@ -126,7 +126,7 @@ The top navbar gives access to:
  * **SUD Auto**: automatic SUD conversion of some UD treebanks and a few other automatically built SUD treebanks
 
 ## Other instances
-  * [`https://semantics.grew.fr`](https://semantics.grew.fr): MWE annotation from the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
+  * [`https://parseme.grew.fr`](https://parseme.grew.fr): MWE annotation from the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
   * [`https://semantics.grew.fr`](https://semantics.grew.fr): a few available semantic graphbanks
     * Some freely available data in [AMR](https://amr.isi.edu/)
     * The [PMB](https://pmb.let.rug.nl/) Gold data

@@ -34,17 +34,18 @@ opam install dep2pictlib grew
 ---
 ## Step 1: Create a new directory
 Create a new directory where all the necessary files and data will be installed.
-Replace the string `__DIR__` with this new directory throughout this documentation, in commands or parameter files.
+Set the env variable `GREW_MATCH_DIR` to this new folder (see [here](https://www.geeksforgeeks.org/environment-variables-in-linux-unix/) for help about Environment Variables in Linux/Unix).
+
 
 ---
 
 ## Step 2: Installing data and corpusbank
 
-For this example, we will install three treebanks in `__DIR__/data` :
+For this example, we will install three treebanks in `$GREW_MATCH_DIR/data` :
 
 ```
-cd __DIR__
-mkdir data && cd data
+mkdir $GREW_MATCH_DIR/data
+cd $GREW_MATCH_DIR/data
 git clone https://github.com/UniversalDependencies/UD_Arabic-PUD.git
 git clone https://github.com/UniversalDependencies/UD_French-PUD.git
 git clone https://github.com/UniversalDependencies/UD_Spanish-PUD.git
@@ -55,8 +56,7 @@ git clone https://github.com/UniversalDependencies/UD_Spanish-PUD.git
 The set of corpora to be served is described in a folder called `corpusbank` which contains JSON files.
 
 ```
-cd __DIR__
-mkdir corpusbank
+mkdir $GREW_MATCH_DIR/corpusbank
 ```
 
 In this new folder, add the JSON file `pud.json`:
@@ -68,21 +68,20 @@ In this new folder, add the JSON file `pud.json`:
     "config": "ud",
     "lang": "ar",
     "rtl": true,
-    "directory": "__DIR__/data/UD_Arabic-PUD"
+    "directory": "${GREW_MATCH_DIR}/data/UD_Arabic-PUD"
   },
   {
     "id": "UD_French-PUD",
     "config": "ud",
     "lang": "fr",
-    "directory": "__DIR__/data/UD_French-PUD"
+    "directory": "${GREW_MATCH_DIR}/data/UD_French-PUD"
   },
   {
     "id": "UD_Spanish-PUD",
     "config": "ud",
     "lang": "es",
-    "directory": "__DIR__/data/UD_Spanish-PUD"
+    "directory": "${GREW_MATCH_DIR}/data/UD_Spanish-PUD"
   }
-
 ]
 ```
 
@@ -91,7 +90,7 @@ The following command compiles all the corpora defined in the `corpusbank`.
 It should be run before the first use and each time a corpus is modified.
 
 ```
-grew compile -CORPUSBANK __DIR__/corpusbank
+grew compile -CORPUSBANK $GREW_MATCH_DIR/corpusbank
 ```
 
 
@@ -100,24 +99,24 @@ grew compile -CORPUSBANK __DIR__/corpusbank
 
 download the code:
 ```
-cd __DIR__
+cd $GREW_MATCH_DIR
 git clone https://github.com/grew-nlp/grew_match_dream.git
 ```
 
 ### Configuring `grew_match_dream`
-In the `grew_match_dream` folder (`__DIR__/grew_match_dream`), edit the file `config.json` with the real `__DIR__` value:
+In the `grew_match_dream` folder (`$GREW_MATCH_DIR/grew_match_dream`), edit the file `config.json` with the real `__DIR__` value:
 
 ```json_alt
 {
 	"port": 4758,
-	"prefix": "gmd",
-	"corpusbank": "__DIR__/corpusbank",
-	"log": "__DIR__/grew_match_dream/log",
-	"storage": "__DIR__/grew_match_dream/static"
+	"prefix": "grew_match",
+	"corpusbank": "${GREW_MATCH_DIR}/corpusbank",
+	"log": "${GREW_MATCH_DIR}/grew_match_dream/log",
+	"storage": "${GREW_MATCH_DIR}/grew_match_dream/static"
 }
 ```
 
-Of course, the port number (4758) can be changed to another value, but it must be the same as the one defined in the `instance.json` file below.
+Of course, the port number (4758) can be changed to another value, but it must be the same as the one defined in the `instances.json` file below.
 
 
 ## Step 4: Starting the backend
@@ -136,14 +135,14 @@ dune exec grew_match_dream config.json
 The code for the main Grew-match website itself is available at [`gitlab.inria.fr/grew/grew_match`](https://gitlab.inria.fr/grew/grew_match):
 
 ```
-cd __DIR__
+cd $GREW_MATCH_DIR
 git clone https://gitlab.inria.fr/grew/grew_match.git
 ```
 
 #### Update
 
 ```
-cd __DIR__/grew_match
+cd $GREW_MATCH_DIR/grew_match
 git pull
 ```
 
@@ -151,39 +150,40 @@ git pull
 
 
 ### Configure `grew_match`
-In the grew-match folder (`__DIR__/grew_match`), add a `instance.json` file with the following code:
+In the grew-match folder (`$GREW_MATCH_DIR/grew_match`), run:
+```
+cp instance_template.json instance.json
+```
+
+The `instance.json` file will contains the following code, that you can update:
+
 ```json_alt
-{
-	"localhost:8000":
-  { 
-		"backend": "http://localhost:4758/",
-		"instance": "toto.json"
-	}
+{ 
+	"backend": "http://localhost:4758/",
+	"desc": [
+		{
+			"id": "PUD",
+			"mode": "syntax",
+			"style": "dropdown",
+			"corpora": [
+				"UD_Arabic-PUD",
+				"UD_French-PUD",
+				"UD_Spanish-PUD"
+			]
+		}
+	]
 }
 ```
 
-and a file `toto.json` in the subfolder `instances`
-```json_alt
-[
-	{
-		"id": "PUD",
-		"mode": "syntax",
-		"style": "dropdown",
-		"corpora": [
-			"UD_Arabic-PUD",
-			"UD_French-PUD",
-			"UD_Spanish-PUD"
-		]
-	}
-]
-```
+The `backend` field is obviously the URL of the backend service.
+The `desc` describes a list of groups of treebanks. Each group will be a item in the top navbar in the Grew-match interface.
 
 ## Step 5: Start an http server
 
 With Python 3, you can start a web server with the following commands:
 
 ```
-cd __DIR__/grew_match
+cd $GREW_MATCH_DIR/grew_match
 python -m http.server
 ```
 
@@ -199,21 +199,21 @@ You can check that the URL [`http://localhost:8000`](http://localhost:8000) show
 
 ## Step 6: Grew-match is ready!
 
-You're done! At the URL [`http://localhost:8000`](http://localhost:8000), you should be able to make a request on your corpora. 
+You're done! At the URL [`http://localhost:8000`](http://localhost:8000), you should be able to run requests on your corpora. 
  * {{< tryit "http://localhost:8000?corpus=UD_Spanish-PUD&request=%20" >}}: search an empty request (it will only display the trees of the corpus)
  * {{< tryit "http://localhost:8000?corpus=UD_French-PUD&relation=nsubj" >}}: search the `nsubj` relation
 
 
 Note: Once everything is configured as explained above, you should run the two commands in the background to restart Grew-match:
- - `cd __DIR__/grew_match && python -m http.server`
- - `cd __DIR__/grew_match_back && make GMB_PORT=4758 test.opt`
+ - `cd $GREW_MATCH_DIR/grew_match && python -m http.server`
+ - `cd $GREW_MATCH_DIR/grew_match_back && dune exec grew_match_dream config.json`
 
 ---
 
 # Going further
 
 ## After a corpus update
- - Re-compile the corpora again: `grew compile -CORPUSBANK __DIR__/corpusbank`
+ - Re-compile the corpora again: `grew compile -CORPUSBANK $GREW_MATCH_DIR/corpusbank`
  - Force the backend to reload the new data: `curl --location --request POST 'http://localhost:4758/reload'`
 
 Note: There is no need to restart the Python http server for the frontend.

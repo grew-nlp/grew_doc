@@ -26,7 +26,7 @@ Follow the **Grew** [installation instructions](../../usage/install/) (steps 1 a
 Install the required Ocaml libraries:
 
 ```
-opam install ssl ocsipersist-dbm fileutils eliom
+opam install dream
 opam remote add grew "https://opam.grew.fr"
 opam install dep2pictlib grew
 ```
@@ -101,28 +101,31 @@ grew compile -CORPUSBANK __DIR__/corpusbank
 download the code:
 ```
 cd __DIR__
-git clone https://gitlab.inria.fr/grew/grew_match_back.git
+git clone https://github.com/grew-nlp/grew_match_dream.git
 ```
 
-### Configuring `grew_match_back`
-In the grew-match_back folder (`__DIR__/grew_match_back`), edit the file `gmb.conf.in` (lines 28 to 31) with the real `__DIR__` value:
+### Configuring `grew_match_dream`
+In the `grew_match_dream` folder (`__DIR__/grew_match_dream`), edit the file `config.json` with the real `__DIR__` value:
 
+```json_alt
+{
+	"port": 4758,
+	"prefix": "gmd",
+	"corpusbank": "__DIR__/corpusbank",
+	"log": "__DIR__/grew_match_dream/log",
+	"storage": "__DIR__/grew_match_dream/static"
+}
 ```
-  <LOG>__DIR__/grew_match_back/log</LOG>
-  <CORPUSBANK>__DIR__/corpusbank</CORPUSBANK>
-  <RESOURCES>__DIR__/data</RESOURCES>
-  <STORAGE>__DIR__/grew_match_back/static</STORAGE>
-```
+
+Of course, the port number (4758) can be changed to another value, but it must be the same as the one defined in the `instance.json` file below.
+
 
 ## Step 4: Starting the backend
 The command below should be run in the background (or in a separate terminal) so that the backend remains available during use.
 
 ```
-cd __DIR__/grew_match_back
-make GMB_PORT=4758 test.opt
+dune exec grew_match_dream config.json
 ```
-
-Of course, the port number (4758) can be changed to another value, but it must be the same as the one defined in the `instance.json` file below.
 
 ---
 
@@ -151,23 +154,29 @@ git pull
 In the grew-match folder (`__DIR__/grew_match`), add a `instance.json` file with the following code:
 ```json_alt
 {
-	"backend": "http://localhost:4758/",
-	"groups": 
-	[
-		{
-			"id": "PUD",
-			"mode": "syntax",
-			"style": "dropdown",
-			"corpora": [
-				"UD_Arabic-PUD",
-				"UD_French-PUD",
-				"UD_Spanish-PUD"
-			]
-		}
-	]
+	"localhost:8000":
+  { 
+		"backend": "http://localhost:4758/",
+		"instance": "toto.json"
+	}
 }
 ```
 
+and a file `toto.json` in the subfolder `instances`
+```json_alt
+[
+	{
+		"id": "PUD",
+		"mode": "syntax",
+		"style": "dropdown",
+		"corpora": [
+			"UD_Arabic-PUD",
+			"UD_French-PUD",
+			"UD_Spanish-PUD"
+		]
+	}
+]
+```
 
 ## Step 5: Start an http server
 

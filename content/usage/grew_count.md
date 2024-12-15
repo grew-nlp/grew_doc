@@ -7,7 +7,7 @@ menu = "main"
 
 # Grew-count web service
 
-The **Grew-count** web service is available on http://count.grew.fr.
+The **Grew-count** web service is available on https://count.grew.fr.
 
 With the **Grew-count** web service, it is possible to send a list of **Grew** requests and a list of corpora and to get a TSV file with the number of occurrences of each request in each corpus.
 Corpora available are ones which are used in Grew-match.
@@ -19,7 +19,7 @@ Note that if you want to run similar requests on your onw data, you should consi
 
 ## The `count` service
 
-The URL of the main service is http://count.grew.fr/count and it must be called with two POST parameters: `corpora` and `requests`.
+The URL of the main service is https://count.grew.fr/count and it must be called with two POST parameters: `corpora` and `requests`.
 
 The `corpora` parameter must be a JSON string describing a list of corpora. For instance:
 
@@ -52,7 +52,7 @@ If you want to run requests on UD or SUD data, you should first run the service.
 For instance from Python: 
 ```python_alt
 # Set the config to "UD"
-url = "http://count.grew.fr/count"
+url = "https://count.grew.fr/count"
 requests.request("POST", f'{url}/set_config', data={'config': 'ud'})
 ```
 

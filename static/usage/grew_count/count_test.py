@@ -1,6 +1,6 @@
 import requests
 
-url = "http://count.grew.fr/count"
+url = "https://count.grew.fr/count"
 
 data={
 'corpora': '''[

@@ -1,0 +1,19 @@
+rule r {
+  pattern { X1 [form="ho"]; X2 [form="ked"]; X3 [form="-a"]; X1 < X2; X2 < X3 }
+
+  commands {
+  	X1.form = "hoke";
+    X2.form = "da";
+
+    % If data is aligned with a sound file:
+    X2.AlignEnd = X3.AlignEnd;
+
+    % For a clean Conllu output
+    X1.wordform = X1.form;
+    X2.wordform = X2.form;
+
+    % More lines can be added for other features
+
+    del_node X3;            % Finally remove the unnedeed node
+  }
+}

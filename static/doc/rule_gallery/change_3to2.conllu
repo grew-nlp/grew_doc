@@ -1,0 +1,13 @@
+# sent_id = SAB-TXT-OS-00000-02_080-080
+# speaker_id = @02
+# sound_url = https://corporan.huma-num.fr/Archives/media/SAB-TXT-OS-00000-02.WAV/WAV/SAB-TXT-OS-00000-02.WAV
+# sent_timecode = 212160, 212790
+# morphemic_text = kwia ho ked -a .
+# text = kwia hokeda .
+# text_en = The man died.
+1	kwia	kwia	NOUN	_	_	_	_	_	AlignBegin=212160|AlignEnd=212370|GE=people|Gloss=people|nWord=1|RX=[N]
+2	ho	ho	VERB	_	_	_	_	_	AlignBegin=212370|AlignEnd=212440|GE=[go].[PST]|Gloss=go.PST|nWord=2|RX=[V]
+3	ked	ked	AUX	_	_	_	_	_	AlignBegin=212440|AlignEnd=212510|GE=die|Gloss=die|nWord=2|RX=[V]
+4	-a	_	X	_	_	_	_	_	AlignBegin=212510|AlignEnd=212580|GE=[0]|Gloss=-0|nWord=2|RX=[VERB]
+5	.	_	.	_	_	_	_	_	AlignBegin=212580|AlignEnd=212790|Gloss=.|nWord=3
+

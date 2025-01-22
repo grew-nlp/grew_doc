@@ -1,0 +1,24 @@
+rule split_1to2 {
+	pattern {
+		X [ form = "didn't" ]
+	}
+	commands {
+		add_node Y :> X;         % Add a new node (called Y in following commands) directly after X
+		X.form = "did";          % Set the new form on the first sub-token
+		Y.form = "n't";          % Set the new form on the second sub-token
+
+		X.wordform = X.form;     % This line is needed to have a clean Conll output
+
+		% You can then use additional commands for other features
+		% Some examples above:
+		X.upos = AUX;
+		X.lemma = "do";
+
+		Y.upos = PART;
+		Y.lemma = "not";
+
+		% If a feature should move to the new node:
+		Y.Polarity = X.Polarity;
+		del_feat X.Polarity;
+	}
+}

@@ -1,8 +1,8 @@
 +++
-title = "Gallery"
+title = "GRS Gallery"
 +++
 
-# Grew gallery
+# GRS Gallery
 
 This page lists some examples of application of the Grew system for various applications. For more basic examples, please see [Tutorial](../../tutorial/top).
 

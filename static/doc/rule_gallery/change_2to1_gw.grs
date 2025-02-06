@@ -1,0 +1,18 @@
+strat main { Onf (r) }
+% By default, rules are applied with the "Onf" strategies in ArboratorGrew.
+% The above line is not necessary if the rule is used in it.
+
+rule r {
+  pattern { X1 [form="did"]; X2 [form="n't"]; X1 < X2 }
+
+  commands {
+  	X1.form = "didn't";
+
+    % For a clean Conllu output
+    X1.wordform = X1.form;
+
+    % More lines can be added for other features
+
+    del_node X2;            % Finally remove the unnedeed node
+  }
+}

@@ -1,5 +1,5 @@
 strat main { Onf (mwt) }
-% By default, rules are applied with the "Onf" strategies in ArboratorGrew.
+% By default, rules are applied with the "Onf" strategy in ArboratorGrew.
 % The above line is not necessary if the rule is used in it.
 
 rule mwt {

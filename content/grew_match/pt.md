@@ -9,10 +9,14 @@ menu = "none"
 <table style="width:30%; border:none;  margin-left: auto; margin-right: auto;">
 	<tr >
 		<th style="background-color :white; border:none; ">
-			<img src="https://grew.fr/download/pt/Logo_PT.svg" style="height:80px;">
+			<a href="https://pt.grew.fr">
+				<img src="https://grew.fr/download/pt/Logo_PT.svg" style="height:80px;">
+			</a>
 		</th>
 		<th style="background-color :white; border:none; ">
-			<img src="/logo/grew-match.svg"  style="height:60px;">
+			<a href="https://match.grew.fr">
+				<img src="/logo/grew-match.svg"  style="height:60px;">
+			</a>
 		</th>
 	</tr>
 </table>
@@ -31,13 +35,13 @@ It was funded by [COST (European Cooperation in Science and Technology)](https:/
 <table style="width:60%; border:none;  margin-left: auto; margin-right: auto;">
 	<tr >
 		<th style="background-color :white; border:none; ">
-			<img src="/logo/inria.jpg" style="height:60px;">
+			<img src="/logo/ujaen.jpeg"  style="height:110px;">
 		</th>
 		<th style="background-color :white; border:none; ">
 			<img src="/logo/loria.png"  style="height:90px;">
 		</th>
 		<th style="background-color :white; border:none; ">
-			<img src="/logo/ujaen.jpeg"  style="height:90px;">
+			<img src="/logo/inria.jpg" style="height:60px;">
 		</th>
 	</tr>
 </table>

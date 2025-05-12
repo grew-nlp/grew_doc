@@ -4,16 +4,16 @@ title = "grew_server"
 
 # Grew-API for the Arborator-Grew tool
 
-This documentation corresponds to the [Inria GitLab](https://gitlab.inria.fr/grew/grew_server).
-By default the doc applies to branch `master`
+This documentation corresponds to the [GitHub](https://github.com/grew-nlp/arboratorgrew_server).
 
+By default the doc applies to branch `master`.
 New features available only on the Dev server are identified by the flag **[⚠️DEV⚠️]**
 
 Some services or features may be marked with **[❌DEPRECATED❌]**, they will be removed in an upcoming server update.
 
 ---
 
-The Arborator-Grew tool is available on [https://arborator.github.io](https://arborator.github.io).
+The Arborator-Grew tool is available on [https://arborator.grew.fr](https://arborator.grew.fr).
 
 The `grew_server` tool is a web server which manages set of annotated graphs with multiple annotations on the same sentence.
 It is built to be used as an API by the Arborator-Grew graph annotation tool.

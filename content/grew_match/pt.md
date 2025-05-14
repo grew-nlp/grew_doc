@@ -28,6 +28,8 @@ This web application is the result of a collaboration between Bruno Guillaume an
 Its design and query system are Guillaume’s work carried out in the [Sémagramme team](https://team.inria.fr/semagramme/) at [LORIA](https://www.loria.fr/fr/) / [Inria Centre at Université de Lorraine](https://inria.fr/en/inria-centre-universite-lorraine).
 The morphosyntactic tree diagrams are taken from the [Egyptian-UJaen treebank](https://github.com/UniversalDependencies/UD_Egyptian-UJaen/tree/dev) developed by Díaz Hernández at the [University of Jaén](https://www.ujaen.es/).
 
+The images contaning the hieroglyphic text of the Pyramid Texts are from Sethe's work (1908-1922), *Die altägyptischen Pyramidentexte nach den Papierabdrücken und Photographien des Berliner Museums* (4 vols.), Leipzig.
+
 We thank the [CA21167 COST Action](https://www.cost.eu/actions/CA21167/) [UniDive](https://unidive.lisn.upsaclay.fr/) for the Short-Term Scientific Mission Grant.
 It was funded by [COST (European Cooperation in Science and Technology)](https://cost.eu).
  

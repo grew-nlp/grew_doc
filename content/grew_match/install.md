@@ -217,7 +217,7 @@ Here are a couple of example queries:
 
 Note: Once everything is configured as explained above, you should run the two commands in the background to restart Grew-match:
  - `cd $GREW_MATCH_DIR/grew_match && python -m http.server`
- - `cd $GREW_MATCH_DIR/grew_match_back && dune exec grew_match_dream config.json`
+ - `cd $GREW_MATCH_DIR/grew_match_dream && dune exec grew_match_dream config.json`
 
 ---
 

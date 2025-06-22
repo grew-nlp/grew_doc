@@ -297,3 +297,23 @@ pattern {
   X1.__id__ < X2.__id__; X2.__id__ < X3.__id__;
 }
 ```
+
+### Multiple constraints on the same feature
+
+It is not always possible to constrain the same feature of the same node several times in node clauses.
+More specifically, this is not possible if one of the constraints refers to a lexicon or a regular expression.
+
+The following request, for instance, will not be accepted:
+The error message is 'Cannot build a pattern with these constraints'.
+
+```grew
+pattern { X [form=re".*a.*"] }
+pattern { X [form=re".*b.*"] }
+```
+
+If you wish to submit such a request, you should convert one of the constraints into a `with` request item.
+
+```grew
+pattern { X [form=re".*a.*"] }
+with { X [form=re".*b.*"] }
+```

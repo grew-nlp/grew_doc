@@ -129,6 +129,9 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
  - [🆕 `1.16.2`] `X.lemma = /.*ing/i` &rarr; The feature `lemma` of node `X` must follow a case-insensitive PCRE-style regular expression
  - `X.lemma = lexicon.field` &rarr; The feature `lemma` of node `X` must be present in the `field` of the `lexicon`. **Note**: this also reduces the current lexicon to the items for which `field` is equal to `X.lemma`.
 
+Note that disjunction cannot be used in this context.
+You cannot write `X.upos = VERB|AUX`.
+
 #### Constraints on node ordering:
  - `X < Y` &rarr; The node `X` immediately precedes the node `Y`
  - `X << Y` &rarr; The node `X` precedes the node `Y`

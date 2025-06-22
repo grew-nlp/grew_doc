@@ -21,7 +21,7 @@ For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
 Token lines contain 10 fields, separated by tabulations.
 
-The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.15).
+The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.16).
 
 {{< input file="static/doc/conllu/n01118003.conllu" >}}
 
@@ -69,7 +69,7 @@ Unfortunately, the bracket notation in the feature value name conflicts with oth
 In **Grew**, the bracket notation is replaced by an alternative notation using double underscore: The (S)UD feature name `Number[psor]` is written `Number__psor`.
 For instance:
 
- * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { X [Number__psor=Plur] }` {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.15&request=pattern{X [Number__psor=Plur] }" >}}
+ * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { X [Number__psor=Plur] }` {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern{X [Number__psor=Plur] }" >}}
  * to udate the feature `Gender[psor]` to `Fem` on node `X`, use the command `X.Gender__psor = Fem`
 
 ## How the `MISC` field is handled by **Grew**?
@@ -83,7 +83,7 @@ There are two main problems in dealing with the `MISC` field in the existing (S)
 
 To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature, value)* pairs.
 If this is not possible, the raw content is kept in a special feature named `__RAW_MISC__`
-({{< tryit "https://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.15&request=pattern { X [__RAW_MISC__] }" >}}).
+({{< tryit "https://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.16&request=pattern { X [__RAW_MISC__] }" >}}).
 Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
@@ -97,7 +97,7 @@ In order to be able to correctly output the features in the right field, **Grew*
 
 {{< input file="static/doc/conllu/test-12.conllu" >}}
 
-Requests for `Case` in FEATS: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.15&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.15&custom=62cc074a7ebf5" >}}.
+Requests for `Case` in FEATS: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.16&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.16&custom=62cc074a7ebf5" >}}.
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
@@ -118,7 +118,7 @@ This includes:
  * typographical or orthographical errors
  * token linked by a `goeswith` relation
 
-See few examples in **SUD_French-GSD** {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.15&request=pattern { X []; X.form <> X.wordform }" >}}.
+See few examples in **SUD_French-GSD** {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.16&request=pattern { X []; X.form <> X.wordform }" >}}.
 
 ---
 
@@ -141,7 +141,7 @@ Note that this applies to the examples given in the book "Application of Graph R
 This list in defined in the `conll` library (version 1.19.1).
 
 If the config is `ud` or `sud`, the following list of features is used to decide which features should be written into the `FEATS` field.
-The list is based on the data available in UD 2.15 (plus the `Shared` feature specific to SUD):
+The list is based on the data available in UD 2.16 (plus the `Shared` feature specific to SUD):
 
   - `Abbr`
   - `Accomp`

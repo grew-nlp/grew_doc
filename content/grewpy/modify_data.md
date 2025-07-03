@@ -16,7 +16,7 @@ grewpy.set_config("sud") # ud or basic
 corpus = Corpus("SUD_English-PUD")
 ```
 
-    connected to port: 61637
+    connected to port: 57097
 
 ## Access data in a corpus
 
@@ -63,7 +63,7 @@ print([sentence.features[id]['upos'] for id in sentence.features if id != "0"])
 print(sentence.sucs)
 ```
 
-    {'17': [('16', Fs_edge({'1': 'udep', 'deep': 'npmod'}))], '16': [('15', Fs_edge({'1': 'det'}))], '14': [('17', Fs_edge({'1': 'comp', '2': 'pred'}))], '13': [('18', Fs_edge({'1': 'punct'})), ('14', Fs_edge({'1': 'comp', '2': 'aux'})), ('12', Fs_edge({'1': 'subj'})), ('11', Fs_edge({'1': 'punct'})), ('1', Fs_edge({'1': 'udep'}))], '10': [('9', Fs_edge({'1': 'compound'}))], '8': [('10', Fs_edge({'1': 'comp', '2': 'obj'}))], '7': [('8', Fs_edge({'1': 'udep'})), ('6', Fs_edge({'1': 'compound'}))], '6': [('5', Fs_edge({'1': 'mod'}))], '4': [('7', Fs_edge({'1': 'comp', '2': 'obj'})), ('3', Fs_edge({'1': 'subj'}))], '2': [('4', Fs_edge({'1': 'mod', 'deep': 'relcl'}))], '1': [('2', Fs_edge({'1': 'comp', '2': 'obj'}))], '0': [('13', Fs_edge({'1': 'root'}))]}
+    {'17': [('16', FsEdge({'1': 'udep', 'deep': 'npmod'}))], '16': [('15', FsEdge({'1': 'det'}))], '14': [('17', FsEdge({'1': 'comp', '2': 'pred'}))], '13': [('18', FsEdge({'1': 'punct'})), ('14', FsEdge({'1': 'comp', '2': 'aux'})), ('12', FsEdge({'1': 'subj'})), ('11', FsEdge({'1': 'punct'})), ('1', FsEdge({'1': 'udep'}))], '10': [('9', FsEdge({'1': 'compound'}))], '8': [('10', FsEdge({'1': 'comp', '2': 'obj'}))], '7': [('8', FsEdge({'1': 'udep'})), ('6', FsEdge({'1': 'compound'}))], '6': [('5', FsEdge({'1': 'mod'}))], '4': [('7', FsEdge({'1': 'comp', '2': 'obj'})), ('3', FsEdge({'1': 'subj'}))], '2': [('4', FsEdge({'1': 'mod', 'deep': 'relcl'}))], '1': [('2', FsEdge({'1': 'comp', '2': 'obj'}))], '0': [('13', FsEdge({'1': 'root'}))]}
 
 ## Modifying a corpus
 `Corpus` is an abstract object which cannot be modified directly:

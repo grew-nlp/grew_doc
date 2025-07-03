@@ -47,7 +47,7 @@ Each corpus is described by:
   * a `directory` where the files of the corpus are stored (use absolute paths)
   * a `files` field with a list of file names. This field is optional, by default all files with extension `conll`, `conllu`, `cupt` or `orfeo` are loaded.
 
-For instance, the file `en_fr_zh.json` [:link:](/usage/input/en_fr_zh.json) describes 3 corpora from UD 2.15 (of course, directories should be modified to match your local installation).
+For instance, the file `en_fr_zh.json` [:link:](/usage/input/en_fr_zh.json) describes 3 corpora from UD 2.16 (of course, directories should be modified to match your local installation).
 
 {{< json file="static/usage/input/en_fr_zh.json" >}}
 

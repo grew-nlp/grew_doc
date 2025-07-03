@@ -16,7 +16,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 61546
+    connected to port: 57008
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.

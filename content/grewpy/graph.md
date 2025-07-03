@@ -17,7 +17,7 @@ First, we import the `Graph` module from `grewpy`.
 from grewpy import Graph
 ```
 
-    connected to port: 61510
+    connected to port: 56974
 
 ## Build a graph
 
@@ -248,15 +248,15 @@ Edge labels are dictionaries (see [here](../../doc/graph/#edges) for details on 
 g1.sucs["A"]
 ```
 
-    [('B', Fs_edge({'1': 'X'})), ('B', Fs_edge({'1': 'XX'}))]
+    [('B', FsEdge({'1': 'X'})), ('B', FsEdge({'1': 'XX'}))]
 
 ```python_alt
 g2.sucs["4"]
 ```
 
-    [('5', Fs_edge({'1': 'punct'})),
-     ('3', Fs_edge({'1': 'aux', '2': 'pass'})),
-     ('2', Fs_edge({'1': 'nsubj', '2': 'pass'}))]
+    [('5', FsEdge({'1': 'punct'})),
+     ('3', FsEdge({'1': 'aux', '2': 'pass'})),
+     ('2', FsEdge({'1': 'nsubj', '2': 'pass'}))]
 
 Note that a node with no successor is not defined in the `sucs` dictionary.
 

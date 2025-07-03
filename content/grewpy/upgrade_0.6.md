@@ -43,7 +43,7 @@ req = req2                      # force the req change to new value, to simulate
 ## Rename Corpus method `apply` to `map`
 
 The `apply` method is used in `Corpus`, `Grs` and `Graph` to apply a GRS (Graph Rewriting System) to a Corpus or a Graph.
-Unfortunately a method with the same name was available in `CorpusDraft` (but it applies a function toon each graph).
+Unfortunately a method with the same name was available in `CorpusDraft` (but it applies a function to each graph).
 
 In version 0.6, the method `apply` of `CorpusDraft` is renamed to `map` to avoid this confusion.
 

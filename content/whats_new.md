@@ -23,6 +23,9 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 
 ---
 ---
+# Version 1.17 (March 19, 2025)
+ - Review Clustered code for multi-corpus grew-match
+
 
 ## Version 1.16.2 of `grewlib` (July 31, 2024)
  - New syntax for large dominance `X ->> Y` (see [doc](../../doc/request/#constraints-on-large-dominance))

@@ -84,7 +84,7 @@ opam update
 opam upgrade
 ```
 
-The latest version is 1.16. You can check your version with
+The latest version is 1.17. You can check your version with
 
 ```
 opam list | grep grew
@@ -93,7 +93,7 @@ opam list | grep grew
 you should obtain (the third line may not appear if you haven't installed the Python library backend):
 
 ```
-grew                          1.16.0      Grew system
-grewlib                       1.16.2      The main library for the Grew system
-grewpy_backend                0.5.4       The Ocaml backend for the `grewpy` Python lib
+grew                          1.17.0      Grew system
+grewlib                       1.17.0      The main library for the Grew system
+grewpy_backend                0.6.0       The Ocaml backend for the `grewpy` Python lib
 ```

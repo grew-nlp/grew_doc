@@ -10,7 +10,7 @@ Categories = ["Development","GoLang"]
 
 # CoNLL-U format
 
-**NB:** The doc described here corresponds to **Grew** version 1.16 (linked to **conll** version 1.19.1).
+**NB:** The doc described here corresponds to **Grew** version 1.17 (linked to **conll** version 1.19.4).
 You can check your versions with `opam list | grep grew` and `opam list | grep conll`.
 
 The most common way to store dependency structures is the CoNLL format.
@@ -138,7 +138,7 @@ Note that this applies to the examples given in the book "Application of Graph R
 
 ## List of features put in the `FEATS` field
 
-This list in defined in the `conll` library (version 1.19.1).
+This list in defined in the `conll` library (version 1.19.4).
 
 If the config is `ud` or `sud`, the following list of features is used to decide which features should be written into the `FEATS` field.
 The list is based on the data available in UD 2.16 (plus the `Shared` feature specific to SUD):

@@ -314,7 +314,7 @@ This section describes some command line arguments that are common to several co
 ## `-config`
 The config value can be: `ud`, `sud`, `sequoia` or `basic`. The default value is `ud`.
 
-This parameter changes how CoNNL-U and GRS files are interpreted.
+This parameter changes how CoNLL-U and GRS files are interpreted.
 More specifically, it controls:
   * How edge labels are parsed (e.g. taking into account `@` extension in SUD). See [here](../../doc/graph#edges) for a detailed description.
   * How features are stored in CoNLL-U (FEATS column or MISC column). See [here](../../doc/conllu#how-the-misc-field-is-handled-by-grew) for details.

@@ -66,7 +66,7 @@ So the expected encoding of the graph above should contains:
 8	le	_	DET	_	_	9	det	_	_
 ```
 
-These special lines (with index like `7-8`) are encoded in Grew version of graphs with the help of the `textform` features (see [CoNNL-U page](https://grew.fr/doc/conllu/#additional-features-textform-and-wordform)).
+These special lines (with index like `7-8`) are encoded in Grew version of graphs with the help of the `textform` features (see [CoNLL-U page](https://grew.fr/doc/conllu/#additional-features-textform-and-wordform)).
 
 The full rule which produce the expected output is:
 

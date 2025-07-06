@@ -159,7 +159,7 @@ These constraints impose that the source and the target of both edges are ordere
 #### Position of a node with respect to an edge
  - `X << e` &rarr; The node `X` is strictly included between the source and the target of edge `e`.
 
-####  Constraints on distance between two nodes
+#### Constraints on distance between two nodes
 [🆕 `1.16.0`] These constraints imply that both `X` and `Y` are ordered nodes.
  - `length(X,Y) = 4` &rarr; The length of the dependency relation is 4 (i.e. there are exactly 3 other nodes between `X` and `Y`), whatever is the relative position of `X` and `Y`.
  - `delta(X,Y) = 4` &rarr; The length of the dependency relation is 4 and `Y` is after `X` in the linear order.
@@ -270,7 +270,7 @@ In `global` items, constraints of these metadata can be expressed with:
  * `sent_id <> "fr-ud-train_01234" | "fr-ud-train_12345"`: the metadata `sent_id` is different from two given values;
  * `text = re".*\baux\b.*`: the `text` metadata field follows the given regexp (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for regular expressions accepted; in the example, the field must contain the word *aux*).
 
-For corpora described by the CoNLL-U format, available metadata are described before each sentence (see [CoNNL-U doc](https://universaldependencies.org/format.html#sentence-boundaries-and-comments)).
+For corpora described by the CoNLL-U format, available metadata are described before each sentence (see [CoNLL-U doc](https://universaldependencies.org/format.html#sentence-boundaries-and-comments)).
 In the UD or SUD corpora, each sentence contains at least the two metadata `sent_id` and `text`.
 
 ---

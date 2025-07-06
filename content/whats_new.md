@@ -19,7 +19,7 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 
 * More detailed information in files `CHANGES.md` for each sub-project:
 [grewlib](https://github.com/grew-nlp/grewlib/blob/main/CHANGES.md),
-[grew](https://gitlab.inria.fr/grew/grew/blob/master/CHANGES.md).
+[grew](https://github.com/grew-nlp/grew/blob/master/CHANGES.md).
 
 ---
 ---
@@ -96,8 +96,8 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 ---
 
 # Version 1.6 (May 5, 2021)
-  * ⚠️ stop backward compatibility with old feature names `pos`, `cat` and `phon`  (see [CoNNL-U](../../doc/conllu#note-about-conll-feature-values))
-  * add `-columns` argument (see [CoNNL-U Plus](../../doc/conllup#columns-declaration))
+  * ⚠️ stop backward compatibility with old feature names `pos`, `cat` and `phon`  (see [CoNLL-U](../../doc/conllu#note-about-conll-feature-values))
+  * add `-columns` argument (see [CoNLL-U Plus](../../doc/conllup#columns-declaration))
   * fix invalid json output if there is more than one output graph
 
 ---

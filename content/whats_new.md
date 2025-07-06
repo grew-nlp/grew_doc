@@ -23,6 +23,9 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 
 ---
 ---
+# Version 1.18 (July 15, 2025)
+ - Constraint about global structure and metadata are now available in `pattern`, `with` or `without` (see See [request page](../../doc/request/#constraints-on-the-global-properties-of-the-graph).)
+
 # Version 1.17 (March 19, 2025)
  - Review Clustered code for multi-corpus grew-match
 

@@ -145,6 +145,10 @@ pattern { X [upos=NOUN]; Y [upos=NOUN]; X < Y }
 
 we can observe how the bigram NOUN-NOUN is annotated: {{< tryit "https://universal.grew.fr/?corpus=UD_Chinese-GSD@2.16&request=pattern { X [upos=NOUN]; Y [upos=NOUN]; X < Y }&clustering=X <-> Y" >}} on `UD_Chinese-GSD` or {{< tryit "https://universal.grew.fr/?corpus=bUD_English-GUM@2.16&request=pattern { X [upos=NOUN]; Y [upos=NOUN]; X < Y }&clustering=X <-> Y" >}} on `bUD_English-GUM` (`bUD` is the version of the treebank whitout the enhanced dependency layer).
 
+### Clustering on the metadata of the sentences
+[🆕 `1.18.0`] With a clustering key `meta.f`, the results will be clustered acccording to the value of the metadata `f` of the each matched graph.
+{{< tryit "https://universal.grew.fr/?corpus=SUD_Naija-NSC@2.16&request=pattern { X [Person] }&clust1_key=X.Person&clust2_key=meta.speaker_sex" >}}
+
 --- 
 
 ## Clustering with a sub-request (`whether`)

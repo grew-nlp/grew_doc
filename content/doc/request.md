@@ -21,11 +21,12 @@ The syntax of requests in **Grew** can be learned using the [tutorial part](http
 
 A request is defined through 4 different kinds of *request items*.
 
- * Global items (introduced by the keyword `global`) filter structures based on information about the whole graph or its metadata.
- * Matching items (introduced by the keyword `pattern`) describe nodes and relations that must be found in the graph.
- * Positive filtering items (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only those that **follow** the additional graph constraints).
- * Negative filtering items (introduced by the keyword `without`) filter out matchings previously selected by other items (keeping only those that **do not follow** the additional graph constraints).
- 
+ - Matching items (introduced by the keyword `pattern`) describe nodes and relations that must be found in the graph.
+ - Positive filtering items (introduced by the keyword `with`) filter out matchings previously selected by other items (keeping only those that **follow** the additional graph constraints).
+ - Negative filtering items (introduced by the keyword `without`) filter out matchings previously selected by other items (keeping only those that **do not follow** the additional graph constraints).
+ - Global items (introduced by the keyword `global`) filter structures based on information about the whole graph or its metadata.
+   - **Note** Note that since version `1.18.0`, these constraints can also be expressed in `pattern`, `with` or `without` items: see [below](.#constraints-on-the-global-properties-of-the-graph).
+
 The full matching process on a graph is:
 
  * Take a graph and a request as input.
@@ -46,7 +47,7 @@ On a corpus, the graph matching process is repeated on each graph.
 
 ---
 ## Matching and filtering items
-Both matching and filtering items both follow the same syntax.
+Both matching (i.e. `pattern`) and filtering (`without` or `with`) items follow the same syntax.
 They are described by a list of clauses: node clauses, edge clauses and additional constraints.
 
 ### Node clauses
@@ -67,18 +68,11 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression
  * [🆕 `1.16.2`] `Gloss = /.*POSS.*/i` PCRE-style regular expression (the optional suffix `i` is for case-insensitive matching).
 
-### Anchor nodes
-⚠️ For dependency trees, an anchor node (position 0) is added to the structure (see [here](../conllu/#the-anchor-node-at-position-0)).
-In **ArboratorGrew**, this node is not displayed but is still taken into account when searching requests or when applying rules.
-
-### Disjunction in node clause
-⚠️ Since version 1.14
-
-Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47), a node can be matched with a disjunction of feature structures
+#### Disjunction in node clause
+[🆕 `1.14`] Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47), a node can be matched with a disjunction of feature structures
 (separated by the pipe symbol `|`).
 
-#### Examples
-The following clause selects either a past participle verb or an adjective {{< tryit "https://universal.grew.fr/?request=pattern { X[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
+For example, the following clause selects either a past participle verb or an adjective {{< tryit "https://universal.grew.fr/?request=pattern { X[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
 ```grew
 X [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
 ```
@@ -128,6 +122,8 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
  - [🆕 `1.16.2`] `X.lemma = /.*ing/` &rarr; The feature `lemma` of node `X` must follow a PCRE-style regular expression
  - [🆕 `1.16.2`] `X.lemma = /.*ing/i` &rarr; The feature `lemma` of node `X` must follow a case-insensitive PCRE-style regular expression
  - `X.lemma = lexicon.field` &rarr; The feature `lemma` of node `X` must be present in the `field` of the `lexicon`. **Note**: this also reduces the current lexicon to the items for which `field` is equal to `X.lemma`.
+ - [🆕 `1.18.0`] `X.VerbForm = *` or `X.VerbForm` &rarr; The feature `VerbForm` is defined on node `X` whatever is its value
+ - [🆕 `1.18.0`] `!X.VerbForm` &rarr; The feature `VerbForm` is not defined on node `X`
 
 Note that disjunction cannot be used in this context.
 You cannot write `X.upos = VERB|AUX`.
@@ -167,6 +163,28 @@ These constraints impose that the source and the target of both edges are ordere
 
 In the previous constraints, `=` can be replaced by `<`, `<=`,  `>` or `>=` with an obvious meaning!
 The keywords `length` and `delta` are also [available as clustering keys](../clustering#clustering-on-distance-between-nodes).
+
+#### Constraints on the global properties of the graph
+[🆕 `1.18.0`] These contraints are redundant with the ones that can be expressed in the `global` items, but having access to them in matching and filtering items make them usable in `whether` clustering (see [#53](https://github.com/grew-nlp/grew/issues/53)).
+The constaints are written with the `global` prefix. For example: `global.is_tree` or `global.is_not_projective`.
+See [Structure constraints](.#structure-constraints) below for a full list of available values.
+
+#### Constraints on the metadata of the graph
+[🆕 `1.18.0`] As for previous case, these contraints are also redundant with ones that can be expressed in the `global` items.
+The prefix `meta` is used in this case.
+The constraints can have one the these forms:
+- `meta.speaker_birthplace = FCT`: the graph has a metadata `speaker_birthplace` with value `FCT`
+- `meta.speaker_birthplace <> FCT`: the graph has a metadata `speaker_birthplace` with a value different from `FCT`
+- `meta.sent_id = re"BEN_02_.*"`: the graph has a metadata `sent_id` with value following the regexp `BEN_02_.*`
+- `meta.speaker_id` or `meta.speaker_id = *`: the graph has a metadata `speaker_id`, whatever is its value
+- `!meta.speaker_id`: the graph does not have a metadata `speaker_id`
+
+### ⚠️ Traps
+#### Anchor nodes
+For dependency trees, an anchor node (position 0) is added to the structure (see [here](../conllu/#the-anchor-node-at-position-0)).
+In **ArboratorGrew**, this node is not displayed but is still taken into account when searching requests or when applying rules.
+
+👉 if you want to avoid matching the anchor node, just add `upos` to your node clause!
 
 ---
 
@@ -229,7 +247,7 @@ Some examples (with `sud` configuration) are given below.
 | `X -[1=comp, 2=*]-> Y` | the feature `1` is defined with value `comp` and the feature `2` is defined with any value | NO | YES | YES |YES | YES|
 | `X -[comp]-> Y` | the exact label `comp` and nothing else | YES | NO | NO | NO | NO |
 
-### :warning: Matching with atomic labels :warning:
+### ⚠️ Matching with atomic labels ⚠️
 
 It is important to note that from the request point of view, the two clauses `X -[1=comp]-> Y` (first line in the table) and `X -[comp]-> Y` (last line in the table) are not equivalent!
 
@@ -242,6 +260,9 @@ To avoid this ambiguity, the syntax `X -[1=comp, 2]-> Y` in not allowed and you 
 ## Global request
 Global requests let the user express constrains about the structure of the whole graph.
 It is also possible to express constraints about metadata of the graph.
+
+Note that since version `1.18.0`, these constraints can also be expressed in `pattern`, `with` or `without` items.
+See [above](.#constraints-on-the-global-properties-of-the-graph).
 
 ### Structure constraints
 Structure constraints are expressed with a fixed list of keywords.
@@ -275,7 +296,7 @@ In the UD or SUD corpora, each sentence contains at least the two metadata `sent
 
 ---
 
-## Some other tricks
+## 👉 Some other tricks
 
 ### Equivalent nodes
 When two or more nodes are equivalent in a request (i.e. they can be interchanged without altering the meaning of the request), each occurrence of the request in a graph is reported multiple times (up to permutation in the sets of equivalent nodes).

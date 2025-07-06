@@ -136,17 +136,26 @@ dune exec grew_match_dream config.json
 
 ## Step 5: Install and Configure the Frontend Webpage
 
+⚠️ Since July 2025, the code is maintained on GitHub.
+If you have cloned the repo before this date, please run the commands below to update the remote information:
+```
+git remote set-url origin https://github.com/grew-nlp/grew_match.git
+git fetch
+git checkout -b main origin/main
+git branch -d master
+```
+
 ### Download the Frontend Code
-The code for the main Grew-match website itself is available at [`gitlab.inria.fr/grew/grew_match`](https://gitlab.inria.fr/grew/grew_match):
+The code for the main Grew-match website itself is available at [`github.com/grew-nlp/grew_match`](https://github.com/grew-nlp/grew_match):
 
 ```
 cd $GREW_MATCH_DIR
-git clone https://gitlab.inria.fr/grew/grew_match.git
+git clone https://github.com/grew-nlp/grew_match.git
 ```
 
 #### Update the Frontend Code
 
-To update the frontend code to the latest version, run:
+To update the frontend code to the latest version (be sure you have the right repository, see above), run:
 
 ```
 cd $GREW_MATCH_DIR/grew_match
@@ -154,7 +163,6 @@ git pull
 ```
 
 --- 
-
 
 ### Configure `grew_match`
 In the grew-match folder (`$GREW_MATCH_DIR/grew_match`), create a configuration file by running:

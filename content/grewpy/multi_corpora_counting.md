@@ -5,7 +5,7 @@ date: 2024-10-18
 
 [`grewpy` Tutorial](../tutorial)
 
-# Grewpy tutorial: counting requests on a list of corpus
+# Grewpy Tutorial: counting requests on a list of corpus
 
 Download the notebook [here](../multi_corpora_counting.ipynb).
 
@@ -16,7 +16,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("ud")
 ```
 
-    connected to port: 56861
+    connected to port: 62834
 
 Below, we define the list of corpora to be used.
 We suppose that there is a (link to) a local folder named `ud-treebanks-v2.16` with data of the corresponding UD release.
@@ -54,7 +54,7 @@ request_codes = [
 ]
 ```
 
-The code below prints (on `stdout`) TSV data, with one lien for each corpus and one columns for each requet, with the correponding number of occurrences.
+The code below prints (on `stdout`) TSV data, with one line for each corpus and one column for each request, with the correponding number of occurrences.
 
 ```python_alt
 tab='\t'

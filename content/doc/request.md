@@ -166,8 +166,14 @@ The keywords `length` and `delta` are also [available as clustering keys](../clu
 
 #### Constraints on the global properties of the graph
 [🆕 `1.18.0`] These contraints are redundant with the ones that can be expressed in the `global` items, but having access to them in matching and filtering items make them usable in `whether` clustering (see [#53](https://github.com/grew-nlp/grew/issues/53)).
-The constaints are written with the `global` prefix. For example: `global.is_tree` or `global.is_not_projective`.
+The constaints are written with the `global` prefix.
 See [Structure constraints](.#structure-constraints) below for a full list of available values.
+
+| Old syntax | New syntax |
+|------------|------------|
+| `global { is_tree }` |   `pattern { global.is_tree }` |
+
+This new syntax is then available for clustering, for example: 9% of tree are not projective structures in SUD_French-GSD {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.16&request= &clust1_whether=global.is_projective" >}}.
 
 #### Constraints on the metadata of the graph
 [🆕 `1.18.0`] As for previous case, these contraints are also redundant with ones that can be expressed in the `global` items.
@@ -178,6 +184,18 @@ The constraints can have one the these forms:
 - `meta.sent_id = re"BEN_02_.*"`: the graph has a metadata `sent_id` with value following the regexp `BEN_02_.*`
 - `meta.speaker_id` or `meta.speaker_id = *`: the graph has a metadata `speaker_id`, whatever is its value
 - `!meta.speaker_id`: the graph does not have a metadata `speaker_id`
+
+| Old syntax | New syntax |
+|------------|------------|
+| `global { social_context=private }` | `pattern { meta.social_context=private }`  |
+| `global { text=re"And.*" }` | `pattern { meta.text=re"And.*" }`  |
+|  *No syntax for the absence of a meta key*  | `pattern { !meta.speaker }` |
+
+See [here](../clustering#clustering-on-the-metadata-of-the-sentences) for examples of use in clustering.
+
+
+
+
 
 ### ⚠️ Traps
 #### Anchor nodes

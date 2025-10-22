@@ -147,7 +147,8 @@ we can observe how the bigram NOUN-NOUN is annotated: {{< tryit "https://univers
 
 ### Clustering on the metadata of the sentences
 [🆕 `1.18.0`] With a clustering key `meta.f`, the results will be clustered acccording to the value of the metadata `f` of the each matched graph.
-{{< tryit "https://universal.grew.fr/?corpus=SUD_Naija-NSC@2.16&request=pattern { X [Person] }&clust1_key=X.Person&clust2_key=meta.speaker_sex" >}}
+Example:
+ - `speaker_sex` and `Person` use in Naija: {{< tryit "https://universal.grew.fr/?corpus=SUD_Naija-NSC@2.16&request=pattern { X [Person] }&clust1_key=X.Person&clust2_key=meta.speaker_sex" >}}
 
 --- 
 
@@ -162,9 +163,10 @@ Note that no curly brackets are needed in the `whether` text area (see examples 
 
 ### Examples
 
-  * Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "https://universal.grew.fr/?corpus=UD_Hungarian-Szeged@2.16&request=pattern { X -[advcl]-> Y }&whether=X << Y" >}}
-  * In **UD_English-GUM**, how often does the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "https://universal.grew.fr/?corpus=UD_English-GUM@2.16&request=pattern { X -[1=expl]-> Y }&whether=X -[1=nsubj]-> S" >}}
-  * In **UD_French-GSD**, there are 618 left-headed `nsubj` (or subtypes):
-    * How often is it in an interrogative sentences? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=P [lemma=%22?%22]" >}} (NB: We approximate interrogative with the presence of "?")
-    * How often is it in an relative clause? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=H -[acl:relcl]-> X" >}}
-    * How often is there an expletive subject? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=X -[expl:subj]-> E" >}}
+  - Is `advcl` left-headed in **UD_Hungarian-Szeged**? {{< tryit "https://universal.grew.fr/?corpus=UD_Hungarian-Szeged@2.16&request=pattern { X -[advcl]-> Y }&whether=X << Y" >}}
+  - In **UD_English-GUM**, how often does the relation `expl` appear with or without an `nsubj` relation with the same head? {{< tryit "https://universal.grew.fr/?corpus=UD_English-GUM@2.16&request=pattern { X -[1=expl]-> Y }&whether=X -[1=nsubj]-> S" >}}
+  - How often the text starts with "And": {{< tryit "https://universal.grew.fr/?corpus=UD_English-EWT@2.16&request= &clust1_whether=meta.text = re\"And.*\"" >}}.
+  - In **UD_French-GSD**, there are 618 left-headed `nsubj` (or subtypes):
+    - How often is it in an interrogative sentences? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=P [lemma=%22?%22]" >}} (NB: We approximate interrogative with the presence of "?")
+    - How often is it in an relative clause? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=H -[acl:relcl]-> X" >}}
+    - How often is there an expletive subject? {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern { X -[1=nsubj]-> Y; X << Y }&whether=X -[expl:subj]-> E" >}}

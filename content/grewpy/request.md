@@ -16,7 +16,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 57008
+    connected to port: 62989
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.
@@ -91,7 +91,7 @@ corpus.count(req4)
 
     320
 
-### Building a request with the raw Grew syntax
+### Building a request with the Grew syntax
 It is possible to build request directly from the concrete syntax used in Grew-match or in Grew rules.
 The `req4` can be written:
 
@@ -107,13 +107,13 @@ corpus.count(req4bis)
 
     320
 
-### More complex queries are allowed, with results clustering
+### More complex queries are allowed, with result clustering
 See [Clustering](../../doc/clustering) for more documentation.
 Below, we cluster the subject relation, according to the POS of the governor.
 
 ```python_alt
 req5 = Request("pattern {X-[subj]->Y}")
-corpus.count(req5, clustering_parameter=["X.upos"])
+corpus.count(req5, clustering_keys=["X.upos"])
 ```
 
     {'VERB': 826, 'SCONJ': 1, 'PART': 5, 'NOUN': 3, 'AUX': 581, 'ADP': 3, 'ADJ': 1}
@@ -123,39 +123,54 @@ The clustering is done on the relative position of `X` and `Y`.
 It answers to the question: _How many subjects are in a pre-verbal position?_
 
 ```python_alt
-corpus.count(req5, clustering_parameter=["{X << Y}"])
+corpus.count(req5, clustering_keys=["{X << Y}"])
 ```
 
     {'Yes': 77, 'No': 1343}
 
-This example corresponds to the whether clustering in Grew-match.
+This example corresponds to the `whether` clustering in Grew-match.
 Note that here curly braces are required around `X << Y` to indicate that whether clustering should be performed instead of key clustering.
 
 ### Two clusterings can be applied
+The behavior of this feature has changed in version 0.7.
+See [here](upgrade_0.7.md) for more details.
 
 ```python_alt
-corpus.count(req5, clustering_parameter=["{X << Y}","X.upos"])
+corpus.count(req5, clustering_keys=["{X << Y}","X.upos"])
 ```
 
-    {'Yes': {'VERB': 45, 'SCONJ': 1, 'AUX': 30, 'ADP': 1},
-     'No': {'VERB': 781, 'PART': 5, 'NOUN': 3, 'AUX': 551, 'ADP': 2, 'ADJ': 1}}
+    {('Yes', 'VERB'): 45,
+     ('Yes', 'SCONJ'): 1,
+     ('Yes', 'AUX'): 30,
+     ('Yes', 'ADP'): 1,
+     ('No', 'VERB'): 781,
+     ('No', 'PART'): 5,
+     ('No', 'NOUN'): 3,
+     ('No', 'AUX'): 551,
+     ('No', 'ADP'): 2,
+     ('No', 'ADJ'): 1}
 
 ### More than two clusterings are also possible
 
 ```python_alt
-corpus.count(req5, clustering_parameter=["{X << Y}","X.upos", "{X[Number=Sing]}"])
+corpus.count(req5, clustering_keys=["{X << Y}","X.upos", "{X[Number=Sing]}"])
 ```
 
-    {'Yes': {'VERB': {'Yes': 16, 'No': 29},
-      'SCONJ': {'No': 1},
-      'AUX': {'Yes': 21, 'No': 9},
-      'ADP': {'No': 1}},
-     'No': {'VERB': {'Yes': 167, 'No': 614},
-      'PART': {'No': 5},
-      'NOUN': {'Yes': 2, 'No': 1},
-      'AUX': {'Yes': 255, 'No': 296},
-      'ADP': {'No': 2},
-      'ADJ': {'No': 1}}}
+    {('Yes', 'VERB', 'Yes'): 16,
+     ('Yes', 'VERB', 'No'): 29,
+     ('Yes', 'SCONJ', 'No'): 1,
+     ('Yes', 'AUX', 'Yes'): 21,
+     ('Yes', 'AUX', 'No'): 9,
+     ('Yes', 'ADP', 'No'): 1,
+     ('No', 'VERB', 'Yes'): 167,
+     ('No', 'VERB', 'No'): 614,
+     ('No', 'PART', 'No'): 5,
+     ('No', 'NOUN', 'Yes'): 2,
+     ('No', 'NOUN', 'No'): 1,
+     ('No', 'AUX', 'Yes'): 255,
+     ('No', 'AUX', 'No'): 296,
+     ('No', 'ADP', 'No'): 2,
+     ('No', 'ADJ', 'No'): 1}
 
 ### Search occurrences
 Get the list of occurrence of a given request in the corpus
@@ -186,7 +201,7 @@ corpus.search(req6)[3]
 ### As with `count`, we can cluster the results of a `search`
 
 ```python_alt
-result = corpus.search(req6, clustering_parameter=["{X << Y}"])
+result = corpus.search(req6, clustering_keys=["{X << Y}"])
 result.keys()
 ```
 

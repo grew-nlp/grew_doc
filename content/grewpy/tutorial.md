@@ -6,7 +6,7 @@ aliases:
 ---
 
 
-# Grewpy tutorial
+# Grewpy Tutorial
 
 In this tutorial, a few pages show some `grewpy` Python library usages.
 
@@ -14,7 +14,7 @@ Several examples below suppose that the corpus `SUD_English-PUD` is available lo
 
  - [Request module](../request)
  - [Counting requests in several corpora](../multi_corpora_counting)
- - [Drawing data](../drawing_dep)
+ - [Drawing dependency graphs](../drawing_dep)
  - [Modifying data](../modify_data)
  - [Graph module](../graph)
 

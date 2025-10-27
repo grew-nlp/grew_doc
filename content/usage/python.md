@@ -28,10 +28,10 @@ The expected output is `connected to port: …` (The port number is selected dyn
 1. `opam update && opam upgrade grewpy_backend`
 2. `pip install grewpy --upgrade`
 
-The current version of `grewpy_backend` is **0.5.4**. You can verify your version by running `opam list | grep grewpy`.
+The current version of `grewpy_backend` is **0.6.1**. You can verify your version by running `opam list | grep grewpy`.
 
-The current version of `grewpy` is **0.6.0**. You can verify your version by running `pip show grewpy`.
-View [How to to upgrade to grewpy 0.6](../../grewpy/upgrade_0.6).
+The current version of `grewpy` is **0.7.0**. You can verify your version by running `pip show grewpy`.
+View [How to to upgrade to grewpy 0.7](../../grewpy/upgrade_0.6).
 
 ## Usage
 

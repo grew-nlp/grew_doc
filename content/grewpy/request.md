@@ -9,6 +9,8 @@ date: 2024-04-22
 
 Download the notebook [here](../request.ipynb).
 
+**NOTE**: this notebook requires **Grewpy** version 0.7 (see [upgrade info](../../usage/python#upgrade))
+
 ```python_alt
 import grewpy
 from grewpy import Corpus, Request
@@ -16,7 +18,7 @@ from grewpy import Corpus, Request
 grewpy.set_config("sud") # ud or basic
 ```
 
-    connected to port: 62989
+    connected to port: 52742
 
 ## Import data
 The `Corpus` constructor takes a `conllu` file or a directory containing `conllu` files.
@@ -132,8 +134,8 @@ This example corresponds to the `whether` clustering in Grew-match.
 Note that here curly braces are required around `X << Y` to indicate that whether clustering should be performed instead of key clustering.
 
 ### Two clusterings can be applied
-The behavior of this feature has changed in version 0.7.
-See [here](upgrade_0.7.md) for more details.
+The behavior of this feature has changed in **Grewpy** version 0.7.
+See [here](../upgrade_0.7) for more details.
 
 ```python_alt
 corpus.count(req5, clustering_keys=["{X << Y}","X.upos"])

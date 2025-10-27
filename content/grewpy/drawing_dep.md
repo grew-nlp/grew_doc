@@ -18,7 +18,7 @@ grewpy.set_config("sud") # ud or basic
 corpus = Corpus("SUD_English-PUD")
 ```
 
-    connected to port: 63043
+    connected to port: 52794
 
 ## Build the SVG picture for a graph
 

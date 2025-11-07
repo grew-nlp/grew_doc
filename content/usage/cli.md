@@ -71,15 +71,28 @@ All arguments are optional:
 This mode corresponds to the command line version of the [Grew-match](https://match.grew.fr) tool.
 Clustering is also available [:link:](./#with-clustering) in the grep mode.
 
+## Preliminaries
+To test the examples below, you will need to create a local folder called `data` containing three corpora: `UD_Chinese-PUD`, `UD_English-PUD` and `UD_French-PUD` (version 2.16).
+With the commands below, you can create the folder, download the corpora and compile them.
+
+```
+mkdir -p data
+wget https://github.com/UniversalDependencies/UD_French-PUD/raw/refs/tags/r2.16/fr_pud-ud-test.conllu -O data/fr_pud-ud-test.conllu
+wget https://github.com/UniversalDependencies/UD_English-PUD/raw/refs/tags/r2.16/en_pud-ud-test.conllu -O data/en_pud-ud-test.conllu
+wget https://github.com/UniversalDependencies/UD_Chinese-PUD/raw/refs/tags/r2.16/zh_pud-ud-test.conllu -O data/zh_pud-ud-test.conllu
+wget http://grew.fr/usage/cli/en_fr_zh.json -O en_fr_zh.json
+grew compile -i en_fr_zh.json
+```
+
 ## Without clustering
 
 The command is:
 
-`grew grep -request <request_file> -i <input>`
+`grew grep -request <request> -i <input>`
 
 where:
 
-  * `<request_file>` is a file which describes a request
+  * `<request>` is a file or a string which describes a request
   * `<input>` describes the data on which the search is done
     * one corpus (**Mono** mode); in this case, the optional `-config` parameter ([see here](#-config)) can also be used
     * a set of corpora (**Multi** mode)
@@ -88,26 +101,19 @@ The output is given in JSON format.
 
 ### Example with **Mono** input
 
-With the following files:
 
- * The corpus `UD_French-PUD` version 2.16: `fr_pud-ud-test.conllu`[:link:](https://github.com/UniversalDependencies/UD_French-PUD/blob/r2.16/fr_pud-ud-test.conllu?raw=true)
- * A request file with the code below: `dislocated.req`[:link:](/usage/cli/dislocated.req)
-
-{{< grew file="static/usage/cli/dislocated.req" >}}
-
-**NB**: the fact the edge from `X` to `Y` is given an identifier `e` will give the information about this edge in the output (see below).
-
-The command:
+The command below search for all occurrences of the `dislocated` dependency relation in `UD_French-PUD` with the Grew request `pattern { e: X -[dislocated]-> Y }`.
+The fact the edge from `X` to `Y` is given an identifier `e` will give the information about this edge in the output (see below).
 
 ```
-grew grep -request dislocated.req -i fr_pud-ud-test.conllu
+grew grep -request "pattern { e: X -[dislocated]-> Y }" -i data/fr_pud-ud-test.conllu
 ```
 
 produces the following JSON output:
 
 {{< json file="static/usage/cli/_build/output_grep" >}}
 
-This means that the request described in the file `dislocated.req` has been found three times in the corpus, each item giving the sentence identifier and the position of the nodes and the edges matched by the request.
+This means that the request has been found three times in the corpus. Each instance provides the identifier of the sentence and the position of the matched nodes and edges.
 
 Note that there are two other options:
 
@@ -116,13 +122,14 @@ Note that there are two other options:
 
 ### Example with **Multi** input
 
-With the **Mutli** mode data described in the example file `en_fr_zh.json` [:link:](/usage/cli/en_fr_zh.json) (which must be compiled with `grew compile -i en_fr_zh.json`)
+With the **Mutli** mode data described in the example file `en_fr_zh.json` [:link:](/usage/cli/en_fr_zh.json)
+
 {{< json file="static/usage/cli/en_fr_zh.json" >}}
 
 The command:
 
 ```
-grew grep -request dislocated.req -i en_fr_zh.json
+grew grep -request "pattern { e: X -[dislocated]-> Y }" -i en_fr_zh.json
 ```
 
 produces the following JSON output:
@@ -144,7 +151,7 @@ With the same files as in the *without clustering* example above.
 With `-key`, we can cluster the results according to the `upos` of the node `Y` (the dependent).
 
 ```
-grew grep -request dislocated.req -key Y.upos -i fr_pud-ud-test.conllu
+grew grep -request "pattern { e: X -[dislocated]-> Y }" -key Y.upos -i data/fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key" >}}
@@ -153,7 +160,7 @@ If the `-key` argument is surrounded by curly braces, a _whether_ like clusterin
 In the next example, we cluster the results according to the fact that the relation is left-headed.
 
 ```
-grew grep -request dislocated.req -key "{X << Y}" -i fr_pud-ud-test.conllu
+grew grep -request "pattern { e: X -[dislocated]-> Y }" -key "{X << Y}" -i data/fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_whether" >}}
@@ -162,18 +169,20 @@ grew grep -request dislocated.req -key "{X << Y}" -i fr_pud-ud-test.conllu
 Finally, several clusterings can be applied one after the other. For example
 
 ```
-grew grep -request dislocated.req -key Y.upos -key "{ X << Y }" -i fr_pud-ud-test.conllu
+grew grep -request "pattern { e: X -[dislocated]-> Y }" -key Y.upos -key "{ X << Y }" -i data/fr_pud-ud-test.conllu
 ```
 
 {{< json file="static/usage/cli/_build/output_grep_key_whether" >}}
 
 ### Remarks:
  * Any longer sequence of `-key …` can be used.
- * The relative order of clutering items is relevant (try `grew grep -request dislocated.req -key "{ X << Y }" -key Y.upos -i fr_pud-ud-test.conllu`)
- * It is possible to combine **Multi** mode and clustering: `grew grep -request dislocated.req -key Y.upos -key "{ X << Y }" -i en_fr_zh.json`
+ * The order in which the items are clustered is relevant. Try `grew grep -request "pattern { e: X -[dislocated]-> Y }" -key "{ X << Y }" -key Y.upos -i data/fr_pud-ud-test.conllu`
+ * It is possible to combine **Multi** mode and clustering: `grew grep -request "pattern { e: X -[dislocated]-> Y }" -key Y.upos -key "{ X << Y }" -i en_fr_zh.json`
 
 ---
 # Count
+
+Preliminaries: same a for [`grep`](./#grep) section above.
 
 This mode computes corpus statistics based on **Grew-match** style requests.
 
@@ -193,82 +202,63 @@ This is the case for:
 The optional `-config` parameter ([see here](#-config)) can also be used.
 
 
-
-TODO: The set of corpora is described in a [JSON file](../input) and must be [compiled](./#compile) before running `grew count`.
-
-
 ## Example with **Multi** mode, several requests and no clustering
 Each request is described in a separate file.
-With the two following 1-line files:
 
- * `ADJ_NOUN_pre.req` [:link:](/usage/cli/ADJ_NOUN_pre.req) {{< grew file="static/usage/cli/ADJ_NOUN_pre.req" >}}
- * `ADJ_NOUN_post.req` [:link:](/usage/cli/ADJ_NOUN_post.req) {{< grew file="static/usage/cli/ADJ_NOUN_post.req" >}}
+Here, we use the two following 1-line files:
 
-and the Multi mode file `en_fr_zh.json` [:link:](/usage/cli/en_fr_zh.json)
-{{< input file="static/usage/cli/en_fr_zh.json" >}}
+ * `AN.req` [:link:](/usage/cli/AN.req) {{< grew file="static/usage/cli/AN.req" >}}
+ * `NA.req` [:link:](/usage/cli/NA.req) {{< grew file="static/usage/cli/NA.req" >}}
 
-After compiling the corpora: `grew compile -i en_fr_zh.json`
-
-The command `grew count -request ADJ_NOUN_pre.req -request ADJ_NOUN_post.req -i en_fr_zh.json`
+The command
+```
+grew count -request AN.req -request NA.req -i en_fr_zh.json
+```
 outputs the JSON data:
 
 {{< json file="static/usage/cli/_build/output_count.json" >}}
 
-And, with `-tsv` option: `grew count -request ADJ_NOUN_pre.req -request ADJ_NOUN_post.req -i en_fr_zh.json -tsv`
+And, with `-tsv` option:
+```
+grew count -request AN.req -request NA.req -i en_fr_zh.json -tsv
+```
 
 {{< input file="static/usage/cli/_build/output_count.tsv" >}}
 
 which corresponds to the table:
 
-| Corpus | ADJ_NOUN | NOUN_ADJ |
+| Corpus | AN | NA |
 |------------|-------------|----------|
-| UD_English-PUD | 1114 | 12 |
-| UD_French-PUD | 423 | 935 |
-| UD_Chinese-PUD | 364 | 0 |
+| UD_English-PUD | 1117 | 9 |
+| UD_French-PUD | 422 | 935 |
+| UD_Chinese-PUD | 363 | 0 |
 
 We can then observe that in the annotations of the 3 corpora in use:
 
  * in French, there is a weak preference for the position of the adjective after the noun (68.9%)
- * in English, there is a strong preference for placing the adjective before the noun (98.9%)
+ * in English, there is a strong preference for placing the adjective before the noun (99.2%)
  * in Chinese, there is a **very** strong preference for adjective position before the noun (100%)
 
 ## Example with **Multi** mode, one request and a key clustering of the output
 
 Using the same data as in the previous example, the following command:
 
-`grew count -request ADJ_NOUN_pre.req -key N.Number -i en_fr_zh.json -tsv`
+`grew count -request AN.req -key N.Number -i en_fr_zh.json -tsv`
 
-produces the TSV file:
+produces the [TSV file](/usage/cli/_build/output_count_key.tsv):
 
 {{< input file="static/usage/cli/_build/output_count_key.tsv" >}}
 
-which corresponds to the table:
-
-| Corpus | Plur | Sing | undefined |
-|------------|-------------|----------|----|
-| UD_English-PUD | 392 | 722 | 0 |
-| UD_French-PUD | 178 | 245 | 0 |
-| UD_Chinese-PUD | 0 | 0 | 364 |
-
 ## Example with **Multi** mode, one request and a whether clustering of the output
 
-Using a whether clustering, with the request `ADJ_NOUN.req` [:link:](/usage/cli/ADJ_NOUN.req) 
-{{< input file="static/usage/cli/ADJ_NOUN.req" >}}
+With the command:
+```
+grew count -request "pattern { A[upos=ADJ]; N[upos=NOUN]; N -[amod]-> A; }" -key "{ A << N }" -i en_fr_zh.json -tsv
+```
 
-and the command: `grew count -request ADJ_NOUN.req -key "{ A << N }" -i en_fr_zh.json -tsv`
-
-we obtain the TSV file:
+we obtain the [TSV file](/usage/cli/_build/output_count_whether.tsv):
 
 {{< input file="static/usage/cli/_build/output_count_whether.tsv" >}}
-
-which corresponds to the table:
-
-| Corpus | No | Yes |
-|------------|-------------|----------|
-| UD_English-PUD | 12 | 1114 |
-| UD_French-PUD | 935 | 423 |
-| UD_Chinese-PUD | 0 | 364 |
-
 
 ## Remarks
 

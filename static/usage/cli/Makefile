@@ -1,10 +1,10 @@
 GREW?=grew
 
 run:
- 	mkdir -p data
- 	wget https://github.com/UniversalDependencies/UD_French-PUD/raw/refs/tags/r2.16/fr_pud-ud-test.conllu -O data/fr_pud-ud-test.conllu
- 	wget https://github.com/UniversalDependencies/UD_English-PUD/raw/refs/tags/r2.16/en_pud-ud-test.conllu -O data/en_pud-ud-test.conllu
- 	wget https://github.com/UniversalDependencies/UD_Chinese-PUD/raw/refs/tags/r2.16/zh_pud-ud-test.conllu -O data/zh_pud-ud-test.conllu
+	mkdir -p data
+	wget https://github.com/UniversalDependencies/UD_French-PUD/raw/refs/tags/r2.16/fr_pud-ud-test.conllu -O data/fr_pud-ud-test.conllu
+	wget https://github.com/UniversalDependencies/UD_English-PUD/raw/refs/tags/r2.16/en_pud-ud-test.conllu -O data/en_pud-ud-test.conllu
+	wget https://github.com/UniversalDependencies/UD_Chinese-PUD/raw/refs/tags/r2.16/zh_pud-ud-test.conllu -O data/zh_pud-ud-test.conllu
 	${GREW} compile -CORPUSBANK .
 	${GREW} grep -request "pattern { e: X -[dislocated]-> Y }" -i data/fr_pud-ud-test.conllu \
 		> _build/output_grep
@@ -24,7 +24,7 @@ run:
 		> _build/output_count_key.json
 	${GREW} count -request AN.req -key N.Number -i en_fr_zh.json -tsv \
 		> _build/output_count_key.tsv
-	${GREW} count -request ADJ_NOUN.req -key "{A << N}" -i en_fr_zh.json -tsv \
+	${GREW} count -request "pattern { A[upos=ADJ]; N[upos=NOUN]; N -[amod]-> A; }" -key "{ A << N }" -i en_fr_zh.json -tsv \
 		> _build/output_count_whether.tsv
 
 clean:

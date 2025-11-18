@@ -1,4 +1,5 @@
 # sent_id = n01118003
+# parallel_id = pud/n01118003
 # text = Drop the mic.
 1	Drop	drop	VERB	VB	VerbForm=Inf	0	root	0:root	_
 2	the	the	DET	DT	Definite=Def|PronType=Art	3	det	3:det	_

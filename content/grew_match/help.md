@@ -32,12 +32,12 @@ Once you have selected an instance,
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
- * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.16&request=pattern { X -[nsubj]-> Y }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.44% of the corpus`, This means that the first 1000 items were found in 5.44% of the 16,342 sentences of the **UD_French-GSD** corpus.
+ * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.17&request=pattern { X -[nsubj]-> Y }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.28% of the corpus`, This means that the first 1000 items were found in 5.28% of the 16,342 sentences of the **UD_French-GSD** corpus.
 )
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
 With `count`, all the solutions are computed, but, it is not possible to visualize annotation examples.
-For instance, with the same request as above, we observe 18,974 occcurences of `nsubj`.
+For instance, with the same request as above, we observe 18,977 occcurences of `nsubj`.
 
 ---
 
@@ -101,7 +101,7 @@ For these corpora, they are available by default with the enhanced layer and ano
 
 If the default treebank is selected, enhanced dependencies are displayed in blue below the sentence.
 In the pattern, an enhanced dependency can be searched with the prefix `E:`.
-For instance, the pattern below {{< tryit "https://universal.grew.fr/?corpus=UD_English-EWT@2.16&request=pattern { X -[E:obj]-> Y }%0Dwithout { X -[obj]-> Y }" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
+For instance, the pattern below {{< tryit "https://universal.grew.fr/?corpus=UD_English-EWT@2.17&request=pattern { X -[E:obj]-> Y }%0Dwithout { X -[obj]-> Y }" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
 :
 
 ```grew
@@ -116,10 +116,10 @@ without { X -[obj]-> Y }
 
 ## The [`https://universal.grew.fr`](https://universal.grew.fr) instance
 
-This instance contains the version 2.16 of the [UD](https://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
+This instance contains the version 2.17 of the [UD](https://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
 The top navbar gives access to:
- * **UD 2.16**: The 319 treebanks of the version 2.16 of [UD](https://universaldependencies.org)
- * **SUD 2.16**: The 326 treebanks of the version 2.16 of [SUD](https://surfacesyntacticud.github.io) (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora)
+ * **UD 2.17**: The 339 treebanks of the version 2.17 of [UD](https://universaldependencies.org) and 46 _bUD_ corpora (basic UD: for corpora with Enhanced UD, a version only with basic UD is available)
+ * **SUD 2.17**: The 338 treebanks of the version 2.17 of [SUD](https://surfacesyntacticud.github.io), 8 mSUD and 2 pSUD treebanks (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora and the extension mSUD and mSUD)
  * **UD Latest**: (with suffix `@dev`) Some UD corpora in their latest version available on `dev` branch on GitHub English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr). These treebanks are updated in at most one hour after a new push is done on GitHub.
  * **SUD Latest**: (with suffix `@latest`) latest version available on GitHub of the native SUD corpora.
  * **UD Auto**: (with suffix `@conv`) automatic UD conversion of SUD-native treebanks

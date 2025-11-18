@@ -72,14 +72,14 @@ This mode corresponds to the command line version of the [Grew-match](https://ma
 Clustering is also available [:link:](./#with-clustering) in the grep mode.
 
 ## Preliminaries
-To test the examples below, you will need to create a local folder called `data` containing three corpora: `UD_Chinese-PUD`, `UD_English-PUD` and `UD_French-PUD` (version 2.16).
+To test the examples below, you will need to create a local folder called `data` containing three corpora: `UD_Chinese-PUD`, `UD_English-PUD` and `UD_French-PUD` (version 2.17).
 With the commands below, you can create the folder, download the corpora and compile them.
 
 ```
 mkdir -p data
-wget https://github.com/UniversalDependencies/UD_French-PUD/raw/refs/tags/r2.16/fr_pud-ud-test.conllu -O data/fr_pud-ud-test.conllu
-wget https://github.com/UniversalDependencies/UD_English-PUD/raw/refs/tags/r2.16/en_pud-ud-test.conllu -O data/en_pud-ud-test.conllu
-wget https://github.com/UniversalDependencies/UD_Chinese-PUD/raw/refs/tags/r2.16/zh_pud-ud-test.conllu -O data/zh_pud-ud-test.conllu
+wget https://github.com/UniversalDependencies/UD_French-PUD/raw/refs/tags/r2.17/fr_pud-ud-test.conllu -O data/fr_pud-ud-test.conllu
+wget https://github.com/UniversalDependencies/UD_English-PUD/raw/refs/tags/r2.17/en_pud-ud-test.conllu -O data/en_pud-ud-test.conllu
+wget https://github.com/UniversalDependencies/UD_Chinese-PUD/raw/refs/tags/r2.17/zh_pud-ud-test.conllu -O data/zh_pud-ud-test.conllu
 wget http://grew.fr/usage/cli/en_fr_zh.json -O en_fr_zh.json
 grew compile -i en_fr_zh.json
 ```

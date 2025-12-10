@@ -20,9 +20,9 @@ See [here to subscribe](https://sympa.inria.fr/sympa/info/grew).
 
 ## News
 
+ - **2025/11/18:** Version **1.19** of `grewlib` and `grew`. See [What's new](/whats_new/) for changes.
  - **2025/10/27:** Version **0.7.1** of `grewpy`. See [How to to upgrade to grewpy 0.7](../grewpy/upgrade_0.7)
  - **2025/07/15:** Version **1.18** of `grewlib` and `grew`. See [What's new](/whats_new/) for changes.
- - **2025/03/19:** Version **1.17** of `grewlib` and `grew`. See [What's new](/whats_new/) for changes.
 
 ## A first taste of Grew
 The easiest way to try out **Grew** is to use one of the online interfaces.

@@ -152,6 +152,18 @@ Example:
 
 --- 
 
+## Clustering with key tuples
+
+[🆕 `1.19.0`] Any tuple of clustering keys, as defined above, can be used.
+The clusters are then all possible value tuples.
+ - List triples (upos of governor, dependency relation, upos of dependent) in **UD_English-LittlePrince**: {{< tryit "https://universal.grew.fr/?corpus=UD_English-LittlePrince@2.17&count=pattern { e: X -[^root|punct]-> Y }&clust1_key=(X.upos,e.label,Y.upos)" >}}
+ - Cases of inconsitencies of couples (Gender, Number) in UD_French-ParTUT: {{< tryit "https://universal.grew.fr/?corpus=UD_French-ParTUT@2.17&request=pattern { X -[amod]-> Y; X[Gender, Number]; Y[Gender, Number] }%0Awithout { X.Number = Y.Number; X.Gender = Y.Gender }&clust1_key=(X.Gender, X.Number)&clust2_key=(Y.Gender, Y.Number)" >}}
+
+pattern { X -[amod]-> Y; X[Gender, Number]; Y[Gender, Number] }
+without { X.Number = Y.Number; X.Gender = Y.Gender }
+
+--- 
+
 ## Clustering with a sub-request (`whether`)
 
 A `whether` sub-request contains a list of clauses (as in `pattern`, `without` or `with` constructions).

@@ -26,7 +26,7 @@ In **GrewPT**, each sentence of the Pyramid Texts is represented in a morphosynt
 
 This web application is the result of a collaboration between Bruno Guillaume and Roberto Antonio Díaz Hernández during a Short-Term Scientific Mission.
 Its design and query system are Guillaume’s work carried out in the [Sémagramme team](https://team.inria.fr/semagramme/) at [LORIA](https://www.loria.fr/fr/) / [Inria Centre at Université de Lorraine](https://inria.fr/en/inria-centre-universite-lorraine).
-The morphosyntactic tree diagrams are taken from the [Egyptian-UJaen treebank](https://github.com/UniversalDependencies/UD_Egyptian-UJaen/tree/dev) developed by Díaz Hernández at the [University of Jaén](https://www.ujaen.es/).
+The morphosyntactic tree diagrams are taken from the [UD_Egyptian-PC treebank](https://github.com/UniversalDependencies/UD_Egyptian-PC/tree/dev) developed by Díaz Hernández at the [University of Jaén](https://www.ujaen.es/).
 
 The images contaning the hieroglyphic text of the Pyramid Texts are from Sethe's work (1908-1922), *Die altägyptischen Pyramidentexte nach den Papierabdrücken und Photographien des Berliner Museums* (4 vols.), Leipzig.
 

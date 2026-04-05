@@ -100,6 +100,8 @@ grew compile -CORPUSBANK $GREW_MATCH_DIR/corpusbank
 
 ## Step 3: Install and Configure the Backend
 
+⚠️ In April 2026, default branch was renamed on github (from `master` to `main`).
+If you have cloned the repo before this date, you should remove your local `grew_match_dream` folder and clone a fresh one.
 
 Download the backend code:
 ```
@@ -123,7 +125,6 @@ In the `grew_match_dream` folder (`$GREW_MATCH_DIR/grew_match_dream`), the file 
 If you have followed preceding instructions, no modification is needed.
 You can change the port number (4758) to another value, but ensure it matches the one defined in the `instances.json` file below.
 
-
 ## Step 4: Starting the backend
 Run the following command in the background (or in a separate terminal) to keep the backend available during use:
 
@@ -135,15 +136,6 @@ dune exec grew_match_dream config.json
 
 
 ## Step 5: Install and Configure the Frontend Webpage
-
-⚠️ Since July 2025, the code is maintained on GitHub.
-If you have cloned the repo before this date, please run the commands below to update the remote information:
-```
-git remote set-url origin https://github.com/grew-nlp/grew_match.git
-git fetch
-git checkout -b main origin/main
-git branch -d master
-```
 
 ### Download the Frontend Code
 The code for the main Grew-match website itself is available at [`github.com/grew-nlp/grew_match`](https://github.com/grew-nlp/grew_match):

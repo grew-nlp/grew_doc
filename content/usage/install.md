@@ -49,7 +49,7 @@ apt-get install wget m4 unzip librsvg2-bin curl bubblewrap
 
 Run: 
   - `opam init`
-  - `opam switch create 5.2.1` Install a recent version of Ocaml (5.2.1 was released on 2024-11-18)
+  - `opam switch create 5.2.1` Install a recent version of Ocaml (5.2.1 was released on 2024-11-18, any more recent version should also be ok).
   - `eval $(opam env)` or start a new terminal
 
 Check that `ocaml` is installed with `ocamlc -v`.
@@ -84,7 +84,7 @@ opam update
 opam upgrade
 ```
 
-The latest version is 1.17. You can check your version with
+The latest version is 1.20. You can check your version with
 
 ```
 opam list | grep grew
@@ -93,7 +93,7 @@ opam list | grep grew
 you should obtain (the third line may not appear if you haven't installed the Python library backend):
 
 ```
-grew                          1.17.0      Grew system
-grewlib                       1.17.0      The main library for the Grew system
-grewpy_backend                0.6.1       The Ocaml backend for the `grewpy` Python lib
+grew                          1.20.0      Grew system
+grewlib                       1.20.0      The main library for the Grew system
+grewpy_backend                0.6.2       The Ocaml backend for the `grewpy` Python lib
 ```

@@ -23,6 +23,10 @@ The third component `z` is linked to bug fixes and may vary across sub-projects.
 
 ---
 ---
+### Version 1.20 (April 26, 2026)
+ - new clustering keys proj_size, cont_proj_size, constituent_size and height
+ - handling of shared metadata (see https://grew.fr/spoken-language-guidelines/workgroups/spoken-data/treebank_structure.html)
+
 ### Version 1.19 (November 18, 2025)
  - Tuples of clustering keys are available (see [Clustering page](../../doc/clustering#clustering-with-key-tuples)).
 

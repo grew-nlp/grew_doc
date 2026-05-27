@@ -12,12 +12,12 @@ Categories = ["Development","GoLang"]
 
 ---
 
-**Grew-match** is a one page online web application for searching graph requests in treebanks.
-There are several instances, each one with each own URL.
-The address [`https://match.grew.fr`](https://match.grew.fr) displays a portal with links to instances.
-See [below](./#grew-match-instances) for a the list of instances
+**Grew-match** is a one-page online web application for searching graph requests in treebanks.
+There are several instances, each one with its own URL.
+The address [`https://match.grew.fr`](https://match.grew.fr) displays a portal with links to these instances.
+See [below](./#grew-match-instances) for a the list of instances.
 
-If you want to run your own instance of Grew-match, see [Local installation of Grew-match](../install).
+If you want to run your own Grew-match instance, see [Local installation of Grew-match](../install).
 
 ---
 
@@ -25,19 +25,19 @@ If you want to run your own instance of Grew-match, see [Local installation of G
 Once you have selected an instance,
 
  1. Select the corpus on which you want to search:
-    * with the top navbar, select the collection (subset of corpora)
-    * with the left pane, select the corpora on which the request will be executed
- 1. Enter the search request in the text area (you may use some snippets on the right of the text area)
+    - Use the top navigation bar to select the collection (a subset of corpora)
+    - Use the left pane to select the corpora on which the request will be executed
+ 1. Enter the search request in the text area. You can use the snippets on the right of the text area)
  1. Click on `Search` or `Count`
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
  * Else, the computation stops after the first 1000 occurences computed.
- For instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.17&request=pattern { X -[nsubj]-> Y }" >}}, the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.28% of the corpus`, This means that the first 1000 items were found in 5.28% of the 16,342 sentences of the **UD_French-GSD** corpus.
+ For instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.18&request=pattern { X -[nsubj]-> Y }" >}}, the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.28% of the corpus`, This means that the first 1000 items were found in 5.28% of the 16,342 sentences of the **UD_French-GSD** corpus.
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
 With `count`, all the solutions are computed, but, it is not possible to visualize annotation examples.
-For instance, with the same request as above, we observe 18,977 occcurences of `nsubj`: {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.17&count=pattern { X -[nsubj]-> Y }" >}}.
+For instance, with the same request as above, we observe 18,980 occcurences of `nsubj`: {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.18&count=pattern { X -[nsubj]-> Y }" >}}.
 
 ---
 
@@ -49,14 +49,15 @@ A more comprehensive documentation is available in the [requests page](../../doc
 ---
 
 ## Clustering the occurrences
-In addition to the main request, it is possible to make some clustering on the set of occurrences returned by this request.
+In addition to the main request, it is possible to perform clustering on the set of occurrences returned by this request.
 
-When a clustering key is used, the set of occurrences (or the first 1000 occurrences if `Search` is used) is split in subsets depending of the key value.
-Each possible value is presented as a button with the size of the associated subset; the button gives access to the corresponding occurrences (in `Search` mode).
+When a clustering key is used, the set of occurrences (or the first 1,000 occurrences if `Search` is selected) is divided into subsets according of the key value.
+Each possible value is presented as a button showing the size of the associated subset.
+The button provides access to the corresponding occurrences (in `Search` mode).
 
-When a `whether` sub-request is used, matching are split in two clusters `Yes` and `No`.
+When a `whether` sub-request is used, the results are split in two clusters `Yes` and `No`.
 
-See [clustering documentation page](../../doc/clustering) for syntax and examples of usage.
+See the [clustering documentation page](../../doc/clustering) for syntax and examples of usage.
 
 ---
 
@@ -85,23 +86,23 @@ The fields 2, 3, 4 and 5 of CoNLL-U files are considered as features with the fo
 
 For instance:
 
-  * searching for the word _is_ &rarr; `pattern { X [form="is"] }`
-  * searching for the lemma _be_ &rarr;  `pattern { X [lemma="be"] }`
+  - searching for the word _is_ &rarr; `pattern { X [form="is"] }` {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { X [form=\"is\"] }" >}}
+  - searching for the lemma _be_ &rarr;  `pattern { X [lemma="be"] }` {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { X [lemma=\"be\"] }" >}}
 
 For other features, defined in CoNLL-U fields `FEATS` (col 6) and `MISC` (col 10), the name of the feature can be used directly with exceptions:
-  * for layered features: see [here](../../doc/conllu#layered-features)
-  * for irregular used of `MISC` field: see [here](../../doc/conllu#how-the-misc-field-is-handled-by-grew)
+  - for layered features: see [here](../../doc/conllu#layered-features)
+  - for irregular used of `MISC` field: see [here](../../doc/conllu#how-the-misc-field-is-handled-by-grew)
 
 
 ---
 
 ## Enhanced dependencies
-In the UD framework, a few corpora are also provided with another annotation layer ([Enhanced dependencies](https://universaldependencies.org/u/overview/enhanced-syntax.html)).
-For these corpora, they are available by default with the enhanced layer and another corpora (with prefix `bUD`, for "basic" UD) is also available
+In the UD framework, a few corpora are also provided with an additional annotation layer called [Enhanced dependencies](https://universaldependencies.org/u/overview/enhanced-syntax.html).
+These corpora are available by default with the enhanced layer and another corpus (with prefix `bUD`, for "basic" UD) is also available.
 
-If the default treebank is selected, enhanced dependencies are displayed in blue below the sentence.
+If the default treebank is selected, the enhanced dependencies are displayed in blue below the sentence.
 In the pattern, an enhanced dependency can be searched with the prefix `E:`.
-For instance, the pattern below {{< tryit "https://universal.grew.fr/?corpus=UD_English-EWT@2.17&request=pattern { X -[E:obj]-> Y }%0Dwithout { X -[obj]-> Y }" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a non-enhanced counterpart:
+For example, the following pattern {{< tryit "https://universal.grew.fr/?corpus=UD_English-EWT@2.18&request=pattern { X -[E:obj]-> Y }%0Dwithout { X -[obj]-> Y }" >}} searches for an enhanced `obl` relation in **UD_English-EWT** without a basic (i.e. non-enhanced) counterpart:
 :
 
 ```grew
@@ -116,26 +117,26 @@ without { X -[obj]-> Y }
 
 ## The [`https://universal.grew.fr`](https://universal.grew.fr) instance
 
-This instance contains the version 2.17 of the [UD](https://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks and a few more recent versions synchronised with GitHub data.
-The top navbar gives access to:
- * **UD 2.17**: The 339 treebanks of the version 2.17 of [UD](https://universaldependencies.org) and 46 _bUD_ corpora (basic UD: for corpora with Enhanced UD, a version only with basic UD is available)
- * **SUD 2.17**: The 338 treebanks of the version 2.17 of [SUD](https://surfacesyntacticud.github.io), 8 mSUD and 2 pSUD treebanks (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora and the extension mSUD and mSUD)
- * **UD Latest**: (with suffix `@dev`) Some UD corpora in their latest version available on `dev` branch on GitHub English, French, Irish and Portuguese). If you want to access to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr). These treebanks are updated in at most one hour after a new push is done on GitHub.
- * **SUD Latest**: (with suffix `@latest`) latest version available on GitHub of the native SUD corpora.
- * **UD Auto**: (with suffix `@conv`) automatic UD conversion of SUD-native treebanks
- * **SUD Auto**: automatic SUD conversion of some UD treebanks and a few other automatically built SUD treebanks
+This instance contains the version 2.18 of the [UD](https://universaldependencies.org) and the [SUD](https://surfacesyntacticud.github.io/) treebanks, as well as a few more recent versions synchronised with the GitHub data.
+The top navigation bar provides access to:
+ - **UD 2.18**: The 353 treebanks of the version 2.18 of [UD](https://universaldependencies.org) and 47 _bUD_ corpora (basic UD: for corpora with Enhanced UD, a version only with basic UD is available)
+ - **SUD 2.18**: The 352 treebanks of the version 2.18 of [SUD](https://surfacesyntacticud.github.io), 8 mSUD and 2 pSUD treebanks (see page [SUD data](https://surfacesyntacticud.github.io/data/) for more details about SUD corpora and the extensions mSUD and pSUD)
+ - **UD Latest**: Some UD corpora in their latest version available on `dev` branch on GitHub (with suffix `@dev`). Currently, some English, French, Irish and Portuguese are available. If you want to access in Grew-match to the `dev` branch of another UD treebank, please [contact us](mailto:Bruno.Guillaume@inria.fr). These treebanks are updated immediately after each new push done on GitHub.
+ - **SUD Latest**: Latest version available on GitHub of the native SUD corpora (with suffix `@latest`).
+ - **UD Auto**: Automatic UD conversion of SUD-native treebanks (with suffix `@conv`).
+ - **SUD Auto**: Automatic SUD conversion of some UD treebanks and a few other automatically built SUD treebanks
 
 ## Other instances
-  * [`https://parseme.grew.fr`](https://parseme.grew.fr): MWE annotation from the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
-  * [`https://semantics.grew.fr`](https://semantics.grew.fr): a few available semantic graphbanks
-    * Some freely available data in [AMR](https://amr.isi.edu/)
-    * The [PMB](https://pmb.let.rug.nl/) Gold data
-  * [`https://orfeo.grew.fr`](https://orfeo.grew.fr): See [Orfeo project](https://www.projet-orfeo.fr/)
-  * [`https://sequoia.grew.fr`](https://sequoia.grew.fr): Different annotations layers of the [French Sequoia corpus](http://deep-sequoia.inria.fr/)
-  * [`https://naija.grew.fr`](https://naija.grew.fr): See [NaijaSynCor project](https://naijasyncor.huma-num.fr/)
+  - [`https://parseme.grew.fr`](https://parseme.grew.fr): MWE annotation from the [Parseme project](https://gitlab.com/parseme/corpora/wikis/home)
+  - [`https://semantics.grew.fr`](https://semantics.grew.fr): a few available semantic graphbanks
+    - Some freely available data in [AMR](https://github.com/flipz357/AMR-World/)
+    - The [PMB](https://pmb.let.rug.nl/) Gold data
+  - [`https://orfeo.grew.fr`](https://orfeo.grew.fr): See [Orfeo project](https://www.ortolang.fr/market/corpora/cefc-orfeo/)
+  - [`https://sequoia.grew.fr`](https://sequoia.grew.fr): Different annotations layers of the [French Sequoia corpus](http://deep-sequoia.inria.fr/)
+  - [`https://naija.grew.fr`](https://naija.grew.fr): See [NaijaSynCor project](https://naijasyncor.huma-num.fr/)
 
 ---
 
 # Contact
-For any remark or request, you can either contact [me](mailto:Bruno.Guillaume@loria.fr?subject=Grew-match) or open an issue on [GitHub](https://github.com/grew-nlp/grew/issues).
+For any remark or request, you can either contact [us](mailto:Bruno.Guillaume@loria.fr?subject=Grew-match) or open an issue on [GitHub](https://github.com/grew-nlp/grew/issues).
 

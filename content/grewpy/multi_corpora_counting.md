@@ -19,12 +19,12 @@ grewpy.set_config("ud")
     connected to port: 63481
 
 Below, we define the list of corpora to be used.
-We suppose that there is a (link to) a local folder named `ud-treebanks-v2.17` with data of the corresponding UD release.
+We suppose that there is a (link to) a local folder named `ud-treebanks-v2.18` with data of the corresponding UD release.
 
 Requests are defined by a list of pairs; each pair contains the corpus_id in the previous folder and the request code.
 
 ```python_alt
-folder = "ud-treebanks-v2.17"
+folder = "ud-treebanks-v2.18"
 
 corpus_list = [
   "UD_Arabic-PUD",

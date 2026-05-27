@@ -2,9 +2,9 @@ GREW?=grew
 
 run:
 	mkdir -p data
-	wget https://github.com/UniversalDependencies/UD_French-PUD/raw/refs/tags/r2.17/fr_pud-ud-test.conllu -O data/fr_pud-ud-test.conllu
-	wget https://github.com/UniversalDependencies/UD_English-PUD/raw/refs/tags/r2.17/en_pud-ud-test.conllu -O data/en_pud-ud-test.conllu
-	wget https://github.com/UniversalDependencies/UD_Chinese-PUD/raw/refs/tags/r2.17/zh_pud-ud-test.conllu -O data/zh_pud-ud-test.conllu
+	wget https://github.com/UniversalDependencies/UD_French-PUD/raw/refs/tags/r2.18/fr_pud-ud-test.conllu -O data/fr_pud-ud-test.conllu
+	wget https://github.com/UniversalDependencies/UD_English-PUD/raw/refs/tags/r2.18/en_pud-ud-test.conllu -O data/en_pud-ud-test.conllu
+	wget https://github.com/UniversalDependencies/UD_Chinese-PUD/raw/refs/tags/r2.18/zh_pud-ud-test.conllu -O data/zh_pud-ud-test.conllu
 	${GREW} compile -CORPUSBANK .
 	${GREW} grep -request "pattern { e: X -[dislocated]-> Y }" -i data/fr_pud-ud-test.conllu \
 		> _build/output_grep

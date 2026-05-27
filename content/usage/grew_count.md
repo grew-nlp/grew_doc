@@ -25,8 +25,8 @@ The `corpora` parameter must be a JSON string describing a list of corpora. For 
 
 ```json_alt
 [
-  "SUD_French-PUD@2.17",
-  "SUD_English-PUD@2.17"
+  "SUD_French-PUD@2.18",
+  "SUD_English-PUD@2.18"
 ]
 ```
 
@@ -61,7 +61,7 @@ requests.request("POST", f'{url}/set_config', data={'config': 'ud'})
 ## Example of usage with Python
 
 The web service can be called with Python's `requests` library.
-The code below ([Download](count_test.py)) shows a way to call the web service with the two requests above and with the 20 PUD corpora of SUD 2.17.
+The code below ([Download](count_test.py)) shows a way to call the web service with the two requests above and with the 20 PUD corpora of SUD 2.18.
 
 {{< python file="static/usage/grew_count/count_test.py" >}}
 

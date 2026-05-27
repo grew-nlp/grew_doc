@@ -32,12 +32,12 @@ Once you have selected an instance,
 
 With `Search`: 
  * If the number of matches is below 1000, the number of items is displayed,
- * Else, the computation stops after the first 1000 occurences  computed (for instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.17&request=pattern { X -[nsubj]-> Y }" >}}, and the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.28% of the corpus`, This means that the first 1000 items were found in 5.28% of the 16,342 sentences of the **UD_French-GSD** corpus.
-)
+ * Else, the computation stops after the first 1000 occurences computed.
+ For instance, if you search for a `nsubj` relation in the **UD_French-GSD** corpus {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.17&request=pattern { X -[nsubj]-> Y }" >}}, the amount of corpus used to find the first 1000 items is reported like in `More than 1000 results found in 5.28% of the corpus`, This means that the first 1000 items were found in 5.28% of the 16,342 sentences of the **UD_French-GSD** corpus.
  * Items are displayed by batches of size 10; if you want to see the next 10 items, click on `More results`.
 
 With `count`, all the solutions are computed, but, it is not possible to visualize annotation examples.
-For instance, with the same request as above, we observe 18,977 occcurences of `nsubj`.
+For instance, with the same request as above, we observe 18,977 occcurences of `nsubj`: {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.17&count=pattern { X -[nsubj]-> Y }" >}}.
 
 ---
 

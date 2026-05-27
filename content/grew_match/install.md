@@ -159,26 +159,27 @@ git pull
 ### Configure `grew_match`
 In the grew-match folder (`$GREW_MATCH_DIR/grew_match`), create a configuration file by running:
 ```
-cp instance_template.json instance.json
+cp config_template.json config.json
 ```
 
-The `instance.json` file will contain the following code, which you can update as needed:
+The `config.json` file will contain the following code, which you can update as needed:
 
 ```json_alt
-{ 
-	"backend": "http://localhost:4758/",
-	"desc": [
-		{
-			"id": "PUD",
-			"mode": "syntax",
-			"style": "dropdown",
-			"corpora": [
-				"UD_Arabic-PUD",
-				"UD_French-PUD",
-				"UD_Spanish-PUD"
-			]
-		}
-	]
+{
+  "snippets_url": "https://raw.githubusercontent.com/grew-nlp/corpusbank/refs/heads/main/grew_match_snippets/",
+  "backend": "http://localhost:4758/",
+  "desc": [
+    {
+      "id": "PUD",
+      "mode": "syntax",
+      "style": "dropdown",
+      "corpora": [
+        "UD_Arabic-PUD",
+        "UD_French-PUD",
+        "UD_Spanish-PUD"
+      ]
+    }
+  ]
 }
 ```
  - The `backend` field specifies the URL of the backend service.
@@ -232,7 +233,7 @@ Note: There is no need to restart the Python http server for the frontend.
 
 ## Web interface configuration
 If you have a long list of corpora and prefer to display them in a left pane (similar to UD treebanks),
-modify the `instance.json` file by changing the line:
+modify the `config.json` file by changing the line:
  `"style": "dropdown",` to `"style": "left_pane",`.
 
 

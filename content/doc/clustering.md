@@ -6,10 +6,10 @@ There is a general clustering mechanism in **Grew** that can be used in various 
 
 ## Where it can be used?
 
- * In **Grew-match**, below the main textarea where the request is written, it is possible to describe either one or two clustering items
- * With the command line argument, in `grep` or `count` mode, clustering can be performed.
+  - In **Grew-match**, below the main textarea where the request is written, it is possible to describe either one or two clustering items (only one in multi-treebank mode)
+  - With the command line argument, in `grep` or `count` mode, clustering can be performed.
  Details and examples can be found [here for `grep`](../../usage/cli#with-clustering) and [here for `count`](../../usage/cli#example-with-multi-mode-one-request-and-a-key-clustering-of-the-output)
- * Using Python library **Grewpy**, in the functions [`Corpus.count`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.count) and [`Corpus.search`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.search)
+  - Using Python library **Grewpy**, in the functions [`Corpus.count`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.count) and [`Corpus.search`](https://grew.fr/python/grewpy.html#grewpy.corpus.Corpus.search)
 
 --- 
 
@@ -20,16 +20,16 @@ With the clustering key `X.f`, the matchings are clustered following the value o
 If the feature is not defined for some matchings, a cluster with the value `__undefined__` is added.
 
 #### Examples
-  * List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-LFG@2.18&request=pattern { X [upos=AUX] }&clust1_key=X.lemma">}}
-  * List `VerbForm` of `VERB` without `nsubj` in **UD_German-GSD** {{< tryit "https://universal.grew.fr/?corpus=UD_German-GSD@2.18&request=pattern { X [upos=VERB] }%0Dwithout { X -[1=nsubj]-> Y }&clust1_key=X.VerbForm">}}
-  * Find the huge number of `form` associated to the lemma _saada_ in **UD_Finnish-FTB**{{< tryit "https://universal.grew.fr/?corpus=UD_Finnish-FTB@2.18&request=pattern { X [lemma=\"saada\"] }&clust1_key=X.form">}}
+  - List lemmas of auxiliaries in **UD_Polish-LFG** {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-LFG@2.18&request=pattern { X [upos=AUX] }&clust1_key=X.lemma">}}
+  - List `VerbForm` of `VERB` without `nsubj` in **UD_German-GSD** {{< tryit "https://universal.grew.fr/?corpus=UD_German-GSD@2.18&request=pattern { X [upos=VERB] }%0Dwithout { X -[1=nsubj]-> Y }&clust1_key=X.VerbForm">}}
+  - Find the huge number of `form` associated to the lemma _saada_ in **UD_Finnish-FTB**{{< tryit "https://universal.grew.fr/?corpus=UD_Finnish-FTB@2.18&request=pattern { X [lemma=\"saada\"] }&clust1_key=X.form">}}
 
 ### Clustering on a edge feature
 With the clustering key `e.f`, the matchings are clustered following the value of the feature named `f` for the edge `e` present in the (matching part of) main request.
 If for some matchings, the feature is not defined, a cluster is added with the value `__undefined__`.
 
 #### Example
-  * List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "https://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.18&request=pattern { e: X -[1=acl]-> Y }&clust1_key=e.2">}}
+  - List sub-relations used with `acl` relation in **UD_Swedish-Talbanken** {{< tryit "https://universal.grew.fr/?corpus=UD_Swedish-Talbanken@2.18&request=pattern { e: X -[1=acl]-> Y }&clust1_key=e.2">}}
 
 ### Clustering on the full label of an edge
 With the clustering key `e.label`, the matchings are clustered according to the full label of edge `e` present in the (positive part of the) main request.
@@ -38,17 +38,21 @@ With the clustering key `e.label`, the matchings are clustered according to the 
 #### Example
   * List relations used for auxiliaries in **UD_Italian-ParTUT** {{< tryit "https://universal.grew.fr/?corpus=UD_Italian-ParTUT@2.18&request=pattern { e:X -> Y; Y [upos=AUX] }&clust1_key=e.label">}}
 
+### Clustering on the metadata of the sentences
+With a clustering key `meta.f`, the results will be clustered acccording to the value of the metadata `f` of the each matched graph.
+Example:
+ - `speaker_sex` and `Person` use in Naija: {{< tryit "https://universal.grew.fr/?corpus=SUD_Naija-NSC@2.18&request=pattern { X [Person] }&clust1_key=X.Person&clust2_key=meta.speaker_sex" >}}
 
 ### Clustering on an edge length
 The clustering key `e.length` makes clusters according to the length of the edge `e`;
 the clustering key `e.delta` makes clusters according to the relative positions of the governor and the dependent of the edge `e`.
 
 #### Examples
-  * Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "https://universal.grew.fr/?corpus=UD_Korean-PUD@2.18&request=pattern { e: X -[amod]-> Y }&clust1_key=e.length">}}
-  * Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "https://universal.grew.fr/?corpus=UD_Naija-NSC@2.18&request=pattern { e: X -[nsubj]-> Y }&clust1_key=e.delta">}}
+  - Observe the length of the `amod` relation in **UD_Korean-PUD**{{< tryit "https://universal.grew.fr/?corpus=UD_Korean-PUD@2.18&request=pattern { e: X -[amod]-> Y }&clust1_key=e.length">}}
+  - Observe the relative positions of `nsubj` related tokens in **UD_Naija-NSC** {{< tryit "https://universal.grew.fr/?corpus=UD_Naija-NSC@2.18&request=pattern { e: X -[nsubj]-> Y }&clust1_key=e.delta">}}
 
 ### Clustering on distance between nodes
-🆕 in Version 1.16. Similarly to the [new syntax for request](../request#constraints-on-distance-between-two-nodes), it is possible to cluster on the distance between two nodes:
+Similarly to the [new syntax for request](../request#constraints-on-distance-between-two-nodes), it is possible to cluster on the distance between two nodes:
  - `length(X,Y)` absolute distance between `X` and `Y` {{< tryit "https://universal.grew.fr/?corpus=UD_Galician-PUD@2.18&request=pattern { X -[amod]-> Y }&clustering=length(X,Y)" >}}
  - `delta(X,Y)` relative distance between `X` and `Y` {{< tryit "https://universal.grew.fr/?corpus=UD_Galician-PUD@2.18&request=pattern { X -[amod]-> Y }&clustering=delta(X,Y)" >}}
 
@@ -57,13 +61,14 @@ For example, you can cluster on the relative distance between a subject and an o
 
 ### Clustering of continuous numeric features
 As suggested in [#28](https://github.com/grew-nlp/grew/issues/28), in case of continuous numeric feature, it is sensible to cluster by value intervals.
- * `X.feat[gap=g]` will cluster the values of X.feat by packs of size g
- * `X.feat[gap=g, min=a, max=b]` will cluster the values between a and b by pack of size g, with two packs for all values < a and > b.
+  - `X.feat[gap=g]` will cluster the values of X.feat by packs of size g
+  - `X.feat[gap=g, min=a, max=b]` will cluster the values between a and b by pack of size g, with two packs for all values < a and > b.
 
 #### Example
-The Naija treebank has a version with prosodic information.
+The Naija treebank has a version **pSUD_Naija-NSC** with prosodic information.
+The following request reports the duration of the syllable *wO~* with interval clusters.
 
-{{< tryit "https://naija.grew.fr/?corpus=SUD_Naija-NSC-prosody&request=pattern { S [SylForm = \"wO~\", Duration] }&clustering=S.Duration[gap=100]" >}} on `UD_Naija-NSC` with clustering key `S.Duration[gap=100]` and request:
+{{< tryit "https://universal.grew.fr/?corpus=pSUD_Naija-NSC@2.18&request=pattern { S [SylForm = \"wO~\", Duration] }&clustering=S.Duration[gap=100]" >}} on **UD_Naija-NSC** with clustering key `S.Duration[gap=100]` and request:
 ```grew
 pattern { S [SylForm = "wO~", Duration] }
 ```
@@ -145,22 +150,19 @@ pattern { X [upos=NOUN]; Y [upos=NOUN]; X < Y }
 
 we can observe how the bigram NOUN-NOUN is annotated: {{< tryit "https://universal.grew.fr/?corpus=UD_Chinese-GSD@2.18&request=pattern { X [upos=NOUN]; Y [upos=NOUN]; X < Y }&clustering=X <-> Y" >}} on `UD_Chinese-GSD` or {{< tryit "https://universal.grew.fr/?corpus=bUD_English-GUM@2.18&request=pattern { X [upos=NOUN]; Y [upos=NOUN]; X < Y }&clustering=X <-> Y" >}} on `bUD_English-GUM` (`bUD` is the version of the treebank whitout the enhanced dependency layer).
 
-### Clustering on the metadata of the sentences
-[🆕 `1.18.0`] With a clustering key `meta.f`, the results will be clustered acccording to the value of the metadata `f` of the each matched graph.
-Example:
- - `speaker_sex` and `Person` use in Naija: {{< tryit "https://universal.grew.fr/?corpus=SUD_Naija-NSC@2.18&request=pattern { X [Person] }&clust1_key=X.Person&clust2_key=meta.speaker_sex" >}}
-
 --- 
 
 ## Clustering with key tuples
 
-[🆕 `1.19.0`] Any tuple of clustering keys, as defined above, can be used.
+Any tuple of clustering keys, as defined above, can be used.
 The clusters are then all possible value tuples.
  - List triples (upos of governor, dependency relation, upos of dependent) in **UD_English-LittlePrince**: {{< tryit "https://universal.grew.fr/?corpus=UD_English-LittlePrince@2.18&count=pattern { e: X -[^root|punct]-> Y }&clust1_key=(X.upos,e.label,Y.upos)" >}}
- - Cases of inconsitencies of couples (Gender, Number) in UD_French-ParTUT: {{< tryit "https://universal.grew.fr/?corpus=UD_French-ParTUT@2.18&request=pattern { X -[amod]-> Y; X[Gender, Number]; Y[Gender, Number] }%0Awithout { X.Number = Y.Number; X.Gender = Y.Gender }&clust1_key=(X.Gender, X.Number)&clust2_key=(Y.Gender, Y.Number)" >}}
+ - Cases of inconsitencies of couples (Gender, Number) in **UD_French-ParTUT**: {{< tryit "https://universal.grew.fr/?corpus=UD_French-ParTUT@2.18&request=pattern { X -[amod]-> Y; X[Gender, Number]; Y[Gender, Number] }%0Awithout { X.Number = Y.Number; X.Gender = Y.Gender }&clust1_key=(X.Gender, X.Number)&clust2_key=(Y.Gender, Y.Number)" >}}
 
+```grew
 pattern { X -[amod]-> Y; X[Gender, Number]; Y[Gender, Number] }
 without { X.Number = Y.Number; X.Gender = Y.Gender }
+```
 
 --- 
 

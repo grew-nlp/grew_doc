@@ -109,7 +109,7 @@ It is possible to use the `+` symbol for string concatenation:
 X.f = Y.f + "/" + Y.lemma
 ~~~
 
-:new: in version 1.8: A [Python like slicing](https://www.w3schools.com/python/python_strings_slicing.asp) can be added in the right-hand side of the updating command.
+A [Python like slicing](https://www.w3schools.com/python/python_strings_slicing.asp) can be added in the right-hand side of the updating command.
 ~~~grew
 X.f = Y.f[1:]          % copy `Y.f` on node `X`, skipping the first character
 X.f = Y.f[:-1] + X.f   % prepend `Y.f` (without the last character) to `X.f`
@@ -119,10 +119,33 @@ X.f = Y.f[:-1] + X.f   % prepend `Y.f` (without the last character) to `X.f`
 
 ---
 
+## Add or update a sentence metadata
+
+:new: in version 1.21 (July 2026)
+
+The following commands update the sentence metadata `key` to the value `new_value`.
+If this metadata key do not exist on the sentence, it is added.
+
+~~~grew
+meta.key = "new_value"    % give a new value
+~~~
+
+---
+
 ## Remove a node feature
 
 ~~~grew
 del_feat X.f
+~~~
+
+---
+
+## Remove a sentence metadata
+
+:new: in version 1.21 (July 2026)
+
+~~~grew
+del_meta key
 ~~~
 
 ---

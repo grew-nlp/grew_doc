@@ -17,8 +17,8 @@ The table below shows which are the modes compatible with each subcommand.
 
 |             | `transform` | `grep` | `count` | `compile` | `clean` |
 |:-----------:|:-----------:|:---------:|:---------:|:---------:|:---------:|
-| **Mono**    |     ✅      |     ✅     |     ✅ (🆕 in `1.10`)      |     ❌     |     ❌     |
-| **Multi**   |     ❌      |     ✅ (🆕 in `1.10`)     |     ✅     |     ✅     |     ✅     |
+| **Mono**    |     ✅      |     ✅     |     ✅       |     ❌     |     ❌     |
+| **Multi**   |     ❌      |     ✅     |     ✅     |     ✅     |     ✅     |
 
 The **Multi** mode is also use in **Grew-match** to describe the set of corpora on which one can request.
 

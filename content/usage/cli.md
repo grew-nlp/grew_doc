@@ -31,8 +31,8 @@ The table below shows what are the accepted input modes for the main subcommands
 
 |             | `transform` | `grep` | `count` | `compile` | `clean` |
 |:-----------:|:-----------:|:---------:|:---------:|:---------:|:---------:|
-| **Mono**    |     ✅      |     ✅     |     ✅ (🆕 in `1.10`)      |     ❌     |     ❌     |
-| **Multi**   |     ❌      |     ✅ (🆕 in `1.10`)     |     ✅     |     ✅     |     ✅     |
+| **Mono**    |     ✅      |     ✅     |     ✅       |     ❌     |     ❌     |
+| **Multi**   |     ❌      |     ✅      |     ✅     |     ✅     |     ✅     |
 
 The table below shows what are the ouptut mode modes for the 3 main subcommands (`compile` and `clean` does not have any output).
 
@@ -195,7 +195,7 @@ By default, it returns a JSON describing several embedded dictionaries, counting
 
 If the output dimension is 2, the statistics can be printed as a TSV table.
 This is the case for:
- * **Mono** mode, any number of requests, 1 clustering item (🆕 in `1.10`)
+ * **Mono** mode, any number of requests, 1 clustering item
  * **Multi** mode, any number of requests, no clustering items &rarr; a TSV table is built with the number of occurrences for each request in each corpus.
  * **Multi** mode, 1 request, 1 clustering item &rarr; a TSV table is built with the results of the clustering (with corpora on lines and values of the cluster key in rows).
 

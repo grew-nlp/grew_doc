@@ -40,7 +40,7 @@ The full matching process on a graph is:
 On a corpus, the graph matching process is repeated on each graph.
 
 ### Remarks
- * If there is more than one matching `pattern` items, the union is taken into account.
+ * If there is more than one matching `pattern` items, the union of the clauses is taken into account (i.e. `pattern { X [upos=VERB] } pattern { Y [upos=NOUN] }` is equivalent to `pattern { X [upos=VERB]; Y [upos=NOUN] }`)
  * If there is more than one filtering (`without` or `with`) items, there are all interpreted independently.
  * The order of items in a request are irrelevant.
  * It there is no matching item (`pattern`), there is a trivial matching which is the empty function.
@@ -66,10 +66,10 @@ The clause above illustrates the syntax of constraint that can be expressed, in 
  * `!Person` requires that the feature `Person` is not defined
  * `form = "être"` quotes are required when non-ASCII characters are used
  * `lemma = re"s.*"` the prefix `re` before a string declares a regular expression
- * [🆕 `1.16.2`] `Gloss = /.*POSS.*/i` PCRE-style regular expression (the optional suffix `i` is for case-insensitive matching).
+ * `Gloss = /.*POSS.*/i` PCRE-style regular expression (the optional suffix `i` is for case-insensitive matching).
 
 #### Disjunction in node clause
-[🆕 `1.14`] Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47), a node can be matched with a disjunction of feature structures
+Following the feature request [#47](https://github.com/grew-nlp/grew/issues/47), a node can be matched with a disjunction of feature structures
 (separated by the pipe symbol `|`).
 
 For example, the following clause selects either a past participle verb or an adjective {{< tryit "https://universal.grew.fr/?request=pattern { X[upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ] }" >}}:
@@ -119,21 +119,33 @@ These constraints do not bind new elements in the graph, but must be fulfilled (
  - `X.lemma <> Y.lemma` &rarr; The `lemma` of nodes `X` and `Y` must be different
  - `X.lemma = "constant"` &rarr; The feature `lemma` of node `X` must be equal to the value `constant`
  - `X.lemma = re".*ing"` &rarr; The feature `lemma` of node `X` must follow a regular expression (see [here](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Str.html#VALregexp) for accepted regular expressions)
- - [🆕 `1.16.2`] `X.lemma = /.*ing/` &rarr; The feature `lemma` of node `X` must follow a PCRE-style regular expression
- - [🆕 `1.16.2`] `X.lemma = /.*ing/i` &rarr; The feature `lemma` of node `X` must follow a case-insensitive PCRE-style regular expression
+ - `X.lemma = /.*ing/` &rarr; The feature `lemma` of node `X` must follow a PCRE-style regular expression
+ - `X.lemma = /.*ing/i` &rarr; The feature `lemma` of node `X` must follow a case-insensitive PCRE-style regular expression
  - `X.lemma = lexicon.field` &rarr; The feature `lemma` of node `X` must be present in the `field` of the `lexicon`. **Note**: this also reduces the current lexicon to the items for which `field` is equal to `X.lemma`.
- - [🆕 `1.18.0`] `X.VerbForm = *` or `X.VerbForm` &rarr; The feature `VerbForm` is defined on node `X` whatever is its value
- - [🆕 `1.18.0`] `!X.VerbForm` &rarr; The feature `VerbForm` is not defined on node `X`
+ - `X.VerbForm = *` or `X.VerbForm` &rarr; The feature `VerbForm` is defined on node `X` whatever is its value
+ - `!X.VerbForm` &rarr; The feature `VerbForm` is not defined on node `X`
 
-Note that disjunction cannot be used in this context.
-You cannot write `X.upos = VERB|AUX`.
+Note that disjunction can not be used in this context.
+You can not write `X.upos = VERB|AUX`.
+
+
+#### Inequalities on numeric features values
+If a feature value is numeric, inequalities can be used. An example:
+  - {{< tryit "https://universal.grew.fr/?corpus=pSUD_French-Rhapsodie@2.18&request=pattern { X [SylForm]; X.Duration > 1000 }" >}}: syllables with a duration of more than one second in `pSUD_French-Rhapsodie`.
+
+#### Inequalities on the number of outgoing edges
+[:new: in 1.21 (July 2026)]
+
+The pseudo feature `__out__` can be used on a node to talk about the number of outgoing edges starting from `X`.
+
+ - Examples of `VERB` with more than 10 outgoing edges in `bUD_English-EWT@2.18`: {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { X[upos=VERB]; X.__out__ > 10 }&clust1_key=X.__out__" >}}
 
 #### Constraints on node ordering:
  - `X < Y` &rarr; The node `X` immediately precedes the node `Y`
  - `X << Y` &rarr; The node `X` precedes the node `Y`
 
 #### Constraints on large dominance
- - [🆕 `1.16.2`]  `X ->> Y`: there is a path, regardless of its length, from `X` to `Y` (see [#49](https://github.com/grew-nlp/grew/issues/49)).
+ - `X ->> Y`: there is a path, regardless of its length, from `X` to `Y` (see [#49](https://github.com/grew-nlp/grew/issues/49)).
    - {{< tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X [concept = \"see-01\"]; Y [concept = \"name\"]; X ->> Y }" >}} on AMR
    - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }" >}} on `bUD_English-EWT@2.18` &rarr; Find a `VERB` that dominates a relative pronoun.
    - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }%0Awithout { V2 [upos=VERB]; V1 ->> V2; V2 ->> P; }" >}} on `bUD_English-EWT@2.18` &rarr; Find a `VERB` that dominates a relative pronoun without another `VERB` on the path.
@@ -156,7 +168,7 @@ These constraints impose that the source and the target of both edges are ordere
  - `X << e` &rarr; The node `X` is strictly included between the source and the target of edge `e`.
 
 #### Constraints on distance between two nodes
-[🆕 `1.16.0`] These constraints imply that both `X` and `Y` are ordered nodes.
+These constraints imply that both `X` and `Y` are ordered nodes.
  - `length(X,Y) = 4` &rarr; The length of the dependency relation is 4 (i.e. there are exactly 3 other nodes between `X` and `Y`), whatever is the relative position of `X` and `Y`.
  - `delta(X,Y) = 4` &rarr; The length of the dependency relation is 4 and `Y` is after `X` in the linear order.
  - `delta(X,Y) = -4` &rarr; The length of the dependency relation is 4 and `Y` is before `X` in the linear order.
@@ -165,7 +177,7 @@ In the previous constraints, `=` can be replaced by `<`, `<=`,  `>` or `>=` with
 The keywords `length` and `delta` are also [available as clustering keys](../clustering#clustering-on-distance-between-nodes).
 
 #### Constraints on the global properties of the graph
-[🆕 `1.18.0`] These contraints are redundant with the ones that can be expressed in the `global` items, but having access to them in matching and filtering items make them usable in `whether` clustering (see [#53](https://github.com/grew-nlp/grew/issues/53)).
+These contraints are redundant with the ones that can be expressed in the `global` items, but having access to them in matching and filtering items make them usable in `whether` clustering (see [#53](https://github.com/grew-nlp/grew/issues/53)).
 The constaints are written with the `global` prefix.
 See [Structure constraints](.#structure-constraints) below for a full list of available values.
 
@@ -176,7 +188,7 @@ See [Structure constraints](.#structure-constraints) below for a full list of av
 This new syntax is then available for clustering, for example: 9% of tree are not projective structures in SUD_French-GSD {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.18&request= &clust1_whether=global.is_projective" >}}.
 
 #### Constraints on the metadata of the graph
-[🆕 `1.18.0`] As for previous case, these contraints are also redundant with ones that can be expressed in the `global` items.
+As for previous case, these contraints are also redundant with ones that can be expressed in the `global` items.
 The prefix `meta` is used in this case.
 The constraints can have one the these forms:
 - `meta.speaker_birthplace = FCT`: the graph has a metadata `speaker_birthplace` with value `FCT`

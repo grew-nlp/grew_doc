@@ -5,7 +5,6 @@ DEP2PICT=dep2pict
 selfdoc:
 	@echo " * make start --> run locally the server"
 	@echo " * make stop  --> stop the server"
-	@echo " * make lchn  --> install on the production server"
 	@echo " * make build --> build the website	"
 
 start:

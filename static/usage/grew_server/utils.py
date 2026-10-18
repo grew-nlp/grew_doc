@@ -15,7 +15,7 @@ def print_ko(msg):
 if (len(sys.argv) > 1 and sys.argv[1] == "prod"):
     server = 'http://arborator.grew.fr'
 elif (len(sys.argv) > 1 and sys.argv[1] == "dev"):
-    server = 'http://arborator-dev.grew.fr'
+    server = 'https://arborator-preprod.grew.fr'
 else:
     server = 'http://localhost:8080'
 

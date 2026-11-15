@@ -77,7 +77,7 @@ For example, the following clause selects either a past participle verb or an ad
 X [upos=VERB, VerbForm=Part, Tense=Past]|[upos=ADJ]
 ```
 
-A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.18&request=pattern { X [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
+A node with either a `upos` `ADV` (and no `ExtPos`) or an `ExtPos` `ADV` can be searched with {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.19&request=pattern { X [upos=ADV, !ExtPos]|[ExtPos=ADV] }" >}}:
 ```grew
 X [upos=ADV, !ExtPos]|[ExtPos=ADV]
 ```
@@ -131,14 +131,14 @@ You can not write `X.upos = VERB|AUX`.
 
 #### Inequalities on numeric features values
 If a feature value is numeric, inequalities can be used. An example:
-  - {{< tryit "https://universal.grew.fr/?corpus=pSUD_French-Rhapsodie@2.18&request=pattern { X [SylForm]; X.Duration > 1000 }" >}}: syllables with a duration of more than one second in `pSUD_French-Rhapsodie`.
+  - {{< tryit "https://universal.grew.fr/?corpus=pSUD_French-Rhapsodie@2.19&request=pattern { X [SylForm]; X.Duration > 1000 }" >}}: syllables with a duration of more than one second in `pSUD_French-Rhapsodie`.
 
 #### Inequalities on the number of outgoing edges
 [:new: in 1.21 (July 2026)]
 
 The pseudo feature `__out__` can be used on a node to talk about the number of outgoing edges starting from `X`.
 
- - Examples of `VERB` with more than 10 outgoing edges in `bUD_English-EWT@2.18`: {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { X[upos=VERB]; X.__out__ > 10 }&clust1_key=X.__out__" >}}
+ - Examples of `VERB` with more than 10 outgoing edges in `bUD_English-EWT@2.19`: {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.19&request=pattern { X[upos=VERB]; X.__out__ > 10 }&clust1_key=X.__out__" >}}
 
 #### Constraints on node ordering:
  - `X < Y` &rarr; The node `X` immediately precedes the node `Y`
@@ -147,8 +147,8 @@ The pseudo feature `__out__` can be used on a node to talk about the number of o
 #### Constraints on large dominance
  - `X ->> Y`: there is a path, regardless of its length, from `X` to `Y` (see [#49](https://github.com/grew-nlp/grew/issues/49)).
    - {{< tryit "https://semantics.grew.fr/?corpus=Little_Prince&request=pattern { X [concept = \"see-01\"]; Y [concept = \"name\"]; X ->> Y }" >}} on AMR
-   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }" >}} on `bUD_English-EWT@2.18` &rarr; Find a `VERB` that dominates a relative pronoun.
-   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.18&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }%0Awithout { V2 [upos=VERB]; V1 ->> V2; V2 ->> P; }" >}} on `bUD_English-EWT@2.18` &rarr; Find a `VERB` that dominates a relative pronoun without another `VERB` on the path.
+   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.19&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }" >}} on `bUD_English-EWT@2.19` &rarr; Find a `VERB` that dominates a relative pronoun.
+   - {{< tryit "https://universal.grew.fr/?corpus=bUD_English-EWT@2.19&request=pattern { V1 [upos=VERB]; V1 ->> P; P[upos=PRON, PronType=Rel] }%0Awithout { V2 [upos=VERB]; V1 ->> V2; V2 ->> P; }" >}} on `bUD_English-EWT@2.19` &rarr; Find a `VERB` that dominates a relative pronoun without another `VERB` on the path.
 
 #### Constraints on in or out edges on bound nodes:
  - `* -[nsubj]-> Y` &rarr; There is an incoming edge with label `nsubj` with target `Y`. **Note**: the source node of the incoming edge is not bound; it can be equals to any other node (bound or not).
@@ -185,7 +185,7 @@ See [Structure constraints](.#structure-constraints) below for a full list of av
 |------------|------------|
 | `global { is_tree }` |   `pattern { global.is_tree }` |
 
-This new syntax is then available for clustering, for example: 9% of tree are not projective structures in SUD_French-GSD {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.18&request= &clust1_whether=global.is_projective" >}}.
+This new syntax is then available for clustering, for example: 9% of tree are not projective structures in SUD_French-GSD {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.19&request= &clust1_whether=global.is_projective" >}}.
 
 #### Constraints on the metadata of the graph
 As for previous case, these contraints are also redundant with ones that can be expressed in the `global` items.
@@ -222,7 +222,7 @@ In **ArboratorGrew**, this node is not displayed but is still taken into account
 
 By default, node matching is injective, meaning that two different nodes in the request are mapped to two different nodes in the graph.
 
-For example, the following request searches for two different tokens, both with the same lemma *make* {{<tryit "https://universal.grew.fr/?corpus=UD_English-ParTUT@2.18&request=pattern { X1 [ lemma=\"make\" ]; X2 [ lemma=\"make\" ] }" >}}.
+For example, the following request searches for two different tokens, both with the same lemma *make* {{<tryit "https://universal.grew.fr/?corpus=UD_English-ParTUT@2.19&request=pattern { X1 [ lemma=\"make\" ]; X2 [ lemma=\"make\" ] }" >}}.
 
 ```grew
 pattern { X1 [ lemma="make" ]; X2 [ lemma="make" ] }
@@ -262,7 +262,7 @@ For a more complex example with non-injective matching, you can see [this exampl
 As label edges are internally represented by feature structures (see [here](../graph#edges)), it is possible to match them with a standard unification mechanism, similar to the one used for feature structures in nodes.
 
  * `X -[1=subj]-> Y` the edge must match the edge feature constraints (more examples below).
- * `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "https://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.18&request=pattern { X -[2=\"зад\"]-> Y }" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
+ * `X -[2="зад"]-> Y` the edge must match the edge feature constraints with non-ASCII characters {{< tryit "https://universal.grew.fr/?corpus=UD_Bulgarian-BTB@2.19&request=pattern { X -[2=\"зад\"]-> Y }" >}} (see [#36](https://gitlab.inria.fr/grew/libcaml-grew/-/issues/36)).
 
 
 

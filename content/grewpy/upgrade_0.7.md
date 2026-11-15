@@ -17,12 +17,12 @@ The first is removed and only `clustering_keys` is now available.
 
 ### Example
 
-We look at the relation `comp:cleft` in `SUD_French-GSD@2.18` and want to observe the POS of the governor and dependent of this relation.
-We suppose that a local folder named `SUD_French-GSD@2.18` is available in the current directory (data can be downloaded from [GitHub](https://github.com/surfacesyntacticud/SUD_French-GSD/archive/refs/tags/r2.18.zip)).
+We look at the relation `comp:cleft` in `SUD_French-GSD@2.19` and want to observe the POS of the governor and dependent of this relation.
+We suppose that a local folder named `SUD_French-GSD@2.19` is available in the current directory (data can be downloaded from [GitHub](https://github.com/surfacesyntacticud/SUD_French-GSD/archive/refs/tags/r2.19.zip)).
 
 ```python_alt
 from grewpy import Corpus, Request
-corpus = Corpus("SUD_French-GSD@2.18")
+corpus = Corpus("SUD_French-GSD@2.19")
 request = Request ("pattern { X -[comp:cleft]-> Y }")
 print (corpus.count (request, clustering_keys=["X.upos", "Y.upos"]))
 ```
@@ -41,7 +41,7 @@ This corresponds to the default behavior before grewpy version 0.7 and with `gre
 
 ```python_alt
 from grewpy import Corpus, Request
-corpus = Corpus("SUD_French-GSD@2.18")
+corpus = Corpus("SUD_French-GSD@2.19")
 request = Request ("pattern { X -[comp:cleft]-> Y }")
 print (corpus.count (request, flat=False, clustering_keys=["X.upos", "Y.upos"]))
 ```

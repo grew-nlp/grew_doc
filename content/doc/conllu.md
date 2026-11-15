@@ -21,7 +21,7 @@ For a sentence, some metadata are given in lines beginning by `#`.
 The rest of the lines described the tokens of the structure.
 Token lines contain 10 fields, separated by tabulations.
 
-The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.18).
+The file [`n01118003.conllu`](/doc/conllu/n01118003.conllu) is an example of CoNLL-U data taken form the corpus `UD_English-PUD` (version 2.19).
 
 {{< input file="static/doc/conllu/n01118003.conllu" >}}
 
@@ -69,7 +69,7 @@ Unfortunately, the bracket notation in the feature value name conflicts with oth
 In **Grew**, the bracket notation is replaced by an alternative notation using double underscore: The (S)UD feature name `Number[psor]` is written `Number__psor`.
 For instance:
 
- * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { X [Number__psor=Plur] }` {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.18&request=pattern{X [Number__psor=Plur] }" >}}
+ * to match a feature `Number[psor]=Plur` in a **Grew** request: `pattern { X [Number__psor=Plur] }` {{< tryit "https://universal.grew.fr/?corpus=UD_French-GSD@2.19&request=pattern{X [Number__psor=Plur] }" >}}
  * to udate the feature `Gender[psor]` to `Fem` on node `X`, use the command `X.Gender__psor = Fem`
 
 ## How the `MISC` field is handled by **Grew**?
@@ -83,7 +83,7 @@ There are two main problems in dealing with the `MISC` field in the existing (S)
 
 To deal with the first problem, at parsing time, **Grew** tries to split the `MISC` field into a set of *(feature, value)* pairs.
 If this is not possible, the raw content is kept in a special feature named `__RAW_MISC__`
-({{< tryit "https://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.18&request=pattern { X [__RAW_MISC__] }" >}}).
+({{< tryit "https://universal.grew.fr/?corpus=UD_Old_East_Slavic-Birchbark@2.19&request=pattern { X [__RAW_MISC__] }" >}}).
 Doing this, it is possible to keep the `MISC` field unchanged during rewriting.
 
 For the second problem, the handling of the `MISC` features depends on the config used (option `-config` on Grew CLI).
@@ -97,7 +97,7 @@ In order to be able to correctly output the features in the right field, **Grew*
 
 {{< input file="static/doc/conllu/test-12.conllu" >}}
 
-Requests for `Case` in FEATS: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.18&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.18&custom=62cc074a7ebf5" >}}.
+Requests for `Case` in FEATS: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.19&custom=62cc09453ad04" >}} and for `Case` in MISC: {{< tryit "https://universal.grew.fr/?corpus=UD_Polish-PUD@2.19&custom=62cc074a7ebf5" >}}.
 
 ## Additional features `textform` and `wordform`
 In order to deal with several places where text data present in the original sentence and the corresponding linguistic unit are different, a systematic use of the two features `textform` and `wordform` was proposed in [#683](https://github.com/UniversalDependencies/docs/issues/683).
@@ -118,7 +118,7 @@ This includes:
  * typographical or orthographical errors
  * token linked by a `goeswith` relation
 
-See few examples in **SUD_French-GSD** {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.18&request=pattern { X []; X.form <> X.wordform }" >}}.
+See few examples in **SUD_French-GSD** {{< tryit "https://universal.grew.fr/?corpus=SUD_French-GSD@2.19&request=pattern { X []; X.form <> X.wordform }" >}}.
 
 ---
 
@@ -141,235 +141,246 @@ Note that this applies to the examples given in the book "Application of Graph R
 This list in defined in the `conll` library (version 1.19.8).
 
 If the config is `ud` or `sud`, the following list of features is used to decide which features should be written into the `FEATS` field.
-The list is based on the data available in UD 2.18 (plus the `Shared` feature specific to SUD):
+The list is based on the data available in UD 2.19 (plus the `Shared` feature specific to SUD):
 
-  - `Abbr`
-  - `Accomp`
-  - `AdjType`
-  - `AdpType`
-  - `Advlz`
-  - `AdvType`
-  - `Agglutination`
-  - `Also`
-  - `Analyt`
-  - `Animacy`
-  - `Animacy[gram]`
-  - `Animacy[obj]`
-  - `Aspect`
-  - `Aspect[add]`
-  - `Assoc`
-  - `BadStyle`
-  - `Case`
-  - `Case[stack]`
-  - `Caus`
-  - `Cfm`
-  - `Clas`
-  - `Class`
-  - `CleftType`
-  - `Clitic`
-  - `Clusivity`
-  - `Clusivity[obj]`
-  - `Clusivity[p]`
-  - `Clusivity[psor]`
-  - `Clusivity[subj]`
-  - `Compound`
-  - `Comt`
-  - `Conces`
-  - `ConjType`
-  - `Conjug`
-  - `Connegative`
-  - `Contrast`
-  - `Contv`
-  - `ConvType`
-  - `Corf`
-  - `Decl`
-  - `Definite`
-  - `Definitizer`
-  - `Degree`
-  - `Deixis`
-  - `Deixis[psor]`
-  - `DeixisRef`
-  - `Delib`
-  - `Deo`
-  - `Derivation`
-  - `Determ`
-  - `Detrans`
-  - `Dev`
-  - `Dialect`
-  - `Dist`
-  - `Dyn`
-  - `Echo`
-  - `Emph`
-  - `Emphatic`
-  - `Encl`
-  - `Epenthesis`
-  - `Ergative`
-  - `Evident`
-  - `Excl`
-  - `ExtPos`
-  - `Fact`
-  - `False`
-  - `Foc`
-  - `Focus`
-  - `FocusType`
-  - `Foreign`
-  - `Form`
-  - `Fragment`
-  - `Gender`
-  - `Gender[abs]`
-  - `Gender[cs]`
-  - `Gender[dat]`
-  - `Gender[erg]`
-  - `Gender[io]`
-  - `Gender[lo]`
-  - `Gender[obj]`
-  - `Gender[po]`
-  - `Gender[psor]`
-  - `Gender[refl]`
-  - `Gender[ro]`
-  - `Gender[subj]`
-  - `HebBinyan`
-  - `HebExistential`
-  - `Hnfc`
-  - `Hort`
-  - `Htp`
-  - `Hum`
-  - `Human`
-  - `Hyph`
-  - `Imprs`
-  - `Incorp`
-  - `InfForm`
-  - `InflClass`
-  - `InflClass[nominal]`
-  - `InfStruct`
-  - `Int`
-  - `Intens`
-  - `Intense`
-  - `Intension`
-  - `Irr`
-  - `LangId`
-  - `Language`
-  - `Link`
-  - `LongForm`
-  - `Modal`
-  - `Modality`
-  - `Mood`
-  - `Morph`
-  - `Movement`
-  - `Mutation`
-  - `NameType`
-  - `NCount`
-  - `NegationType`
-  - `Neutral`
-  - `Nisba`
-  - `Nmzr`
-  - `Nominal`
-  - `Nomzr`
-  - `NonFoc`
-  - `NounBase`
-  - `NounClass`
-  - `NounClass[iobj]`
-  - `NounClass[obj]`
-  - `NounClass[psed]`
-  - `NounClass[psor]`
-  - `NounType`
-  - `Number`
-  - `Number[abs]`
-  - `Number[cs]`
-  - `Number[dat]`
-  - `Number[erg]`
-  - `Number[grnd]`
-  - `Number[io]`
-  - `Number[iobj]`
-  - `Number[lo]`
-  - `Number[obj]`
-  - `Number[p]`
-  - `Number[po]`
-  - `Number[psed]`
-  - `Number[psor]`
-  - `Number[refl]`
-  - `Number[ro]`
-  - `Number[subj]`
-  - `NumForm`
-  - `NumType`
-  - `NumValue`
-  - `Obl`
-  - `Orth`
-  - `PartForm`
-  - `PartType`
-  - `PartTypeQpm`
-  - `Pcl`
-  - `Person`
-  - `Person[abs]`
-  - `Person[cs]`
-  - `Person[dat]`
-  - `Person[erg]`
-  - `Person[grnd]`
-  - `Person[io]`
-  - `Person[iobj]`
-  - `Person[lo]`
-  - `Person[obj]`
-  - `Person[p]`
-  - `Person[po]`
-  - `Person[psed]`
-  - `Person[psor]`
-  - `Person[refl]`
-  - `Person[ro]`
-  - `Person[subj]`
-  - `Polarity`
-  - `Polite`
-  - `Polite[abs]`
-  - `Polite[dat]`
-  - `Polite[erg]`
-  - `Position`
-  - `Poss`
-  - `Possessed`
-  - `Pred`
-  - `Prefix`
-  - `PrepCase`
-  - `PrepForm`
-  - `Priv`
-  - `PronClass`
-  - `PronType`
-  - `Proper`
-  - `Prp`
-  - `PunctSide`
-  - `PunctType`
-  - `Purp`
-  - `RcpType`
-  - `Reach`
-  - `Recip`
-  - `Red`
-  - `Redup`
-  - `Referent`
-  - `Reflex`
-  - `Reflex[obj]`
-  - `Reflex[subj]`
-  - `Rel`
-  - `Reln`
-  - `RelType`
-  - `Report`
-  - `Speech`
-  - `StatPrep`
-  - `Strength`
-  - `Style`
-  - `Subcat`
-  - `SubForm`
-  - `SubGender`
-  - `Subord`
-  - `Subordinative`
-  - `Tense`
-  - `Top`
-  - `Trans`
-  - `Tv`
-  - `Typo`
-  - `Uninflect`
-  - `Valency`
-  - `Variant`
-  - `Ventive`
-  - `VerbClass`
-  - `VerbForm`
-  - `VerbStem`
-  - `VerbType`
-  - `Voice`
-  - `Voice[add]`
+ - `Abbr`
+ - `Accomp`
+ - `AdjType`
+ - `AdpType`
+ - `AdvType`
+ - `Advlz`
+ - `Agglutination`
+ - `Also`
+ - `Analyt`
+ - `Animacy`
+ - `Animacy[gram]`
+ - `Animacy[obj]`
+ - `Aspect`
+ - `Aspect[add]`
+ - `Assoc`
+ - `BadStyle`
+ - `Case`
+ - `Case[dsauf]`
+ - `Case[sauf]`
+ - `Case[stack]`
+ - `Case[stackb]`
+ - `Caus`
+ - `Cfm`
+ - `Clas`
+ - `Class`
+ - `CleftType`
+ - `Clitic`
+ - `Clusivity`
+ - `Clusivity[obj]`
+ - `Clusivity[p]`
+ - `Clusivity[psor]`
+ - `Clusivity[subj]`
+ - `Compound`
+ - `Comt`
+ - `Conces"`
+ - `ConjType`
+ - `Conjug`
+ - `ConvType`
+ - `Connegative`
+ - `Contrast`
+ - `Contv`
+ - `Corf`
+ - `Decl`
+ - `Definite`
+ - `Definitizer`
+ - `Degree`
+ - `Deixis"`
+ - `DeixisRef`
+ - `Deixis[psor]`
+ - `Delib`
+ - `Deo`
+ - `Derivation`
+ - `Determ`
+ - `Detrans`
+ - `Dev`
+ - `Dialect`
+ - `Dist`
+ - `Dyn`
+ - `Echo`
+ - `Emph"`
+ - `Emphatic`
+ - `Encl`
+ - `Epenthesis`
+ - `Ergative`
+ - `Evident`
+ - `Excl`
+ - `ExtPos`
+ - `Fact`
+ - `False`
+ - `Foc`
+ - `Focus`
+ - `FocusType`
+ - `Foreign`
+ - `Form`
+ - `Fragment`
+ - `Gender"`
+ - `Gender[abs]`
+ - `Gender[app]`
+ - `Gender[cs]`
+ - `Gender[dat]`
+ - `Gender[erg]`
+ - `Gender[io]`
+ - `Gender[lo]`
+ - `Gender[obj]`
+ - `Gender[po]`
+ - `Gender[psor]`
+ - `Gender[refl]`
+ - `Gender[ro]`
+ - `Gender[spkr]`
+ - `Gender[subj]"`
+ - `HebBinyan`
+ - `HebExistential`
+ - `Hnfc`
+ - `Hort`
+ - `Htp`
+ - `Hum`
+ - `Human`
+ - `Hyph"`
+ - `Imprs`
+ - `Impersonal`
+ - `Incorp`
+ - `InfForm`
+ - `InflClass`
+ - `InflClass[nominal]`
+ - `Int`
+ - `InfStruct`
+ - `Intens`
+ - `Intense`
+ - `Intension"`
+ - `Irr`
+ - `LangId`
+ - `Language`
+ - `Link`
+ - `Log`
+ - `LongForm`
+ - `Modal`
+ - `Modality`
+ - `Mood`
+ - `Morph`
+ - `Movement`
+ - `Mutation`
+ - `NameType`
+ - `NCount`
+ - `NegationType"`
+ - `Neutral`
+ - `Nizba`
+ - `Nmzr`
+ - `Nominal`
+ - `Nomzr`
+ - `NonFoc`
+ - `NounBase`
+ - `NounClass`
+ - `NounClass[iobj]`
+ - `NounClass[obj]`
+ - `NounClass[psed]`
+ - `NounClass[psor]`
+ - `NounType`
+ - `Number`
+ - `Number[abs]`
+ - `Number[app]`
+ - `Number[dsauf]`
+ - `Number[sauf]`
+ - `Number[cs]`
+ - `Number[dat]`
+ - `Number[erg]`
+ - `Number[grnd]`
+ - `Number[io]`
+ - `Number[iobj]`
+ - `Number[lo]`
+ - `Number[obj]`
+ - `Number[p]`
+ - `Number[po]`
+ - `Number[psed]`
+ - `Number[psor]`
+ - `Number[refl]`
+ - `Number[ro]`
+ - `Number[subj]"`
+ - `NumForm`
+ - `NumType`
+ - `NumValue`
+ - `Obl`
+ - `Orth`
+ - `PartForm`
+ - `PartType`
+ - `PartTypeQpm`
+ - `Pcl`
+ - `Person`
+ - `Person[abs]`
+ - `Person[app]`
+ - `Person[cs]`
+ - `Person[dat]`
+ - `Person[erg]`
+ - `Person[grnd]`
+ - `Person[io]`
+ - `Person[iobj]`
+ - `Person[lo]`
+ - `Person[obj]`
+ - `Person[po]`
+ - `Person[psed]`
+ - `Person[psor]`
+ - `Person[refl]`
+ - `Person[ro]`
+ - `Person[subj]"`
+ - `Polarity`
+ - `Polite`
+ - `Polite[abs]`
+ - `Polite[dat]`
+ - `Polite[erg]`
+ - `Position`
+ - `Poss`
+ - `Possessed`
+ - `Pred"`
+ - `Prefix`
+ - `PrepCase`
+ - `PrepForm`
+ - `Priv`
+ - `PronClass`
+ - `PronType`
+ - `Proper`
+ - `Prp`
+ - `PunctSide`
+ - `PunctType`
+ - `Purp`
+ - `RcpType`
+ - `Reach`
+ - `Recip`
+ - `Red`
+ - `Redup`
+ - `Referent"`
+ - `Reflex`
+ - `Reflex[obj]`
+ - `Reflex[subj]`
+ - `Rel`
+ - `Reln`
+ - `RelType`
+ - `Report`
+ - `Speech`
+ - `StatPrep`
+ - `Strength`
+ - `Style`
+ - `Subcat`
+ - `SubForm`
+ - `SubGender`
+ - `Subord"`
+ - `Subordinative`
+ - `Tense`
+ - `Top`
+ - `Trans`
+ - `Tv`
+ - `Typo`
+ - `Uninflect`
+ - `Valency`
+ - `Variant`
+ - `Ventive`
+ - `VerbClass`
+ - `VerbForm`
+ - `VerbStem`
+ - `VerbType`
+ - `Voice`
+ - `Voice[add]`
+ - `Shared`
